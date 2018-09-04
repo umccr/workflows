@@ -42,3 +42,52 @@ sudo sed -i "s/ECS_CLUSTER=\"default\"/ECS_CLUSTER=$AWS_CLUSTER_ARN/" /etc/defau
 # Restart systemd/docker service
 
 sudo systemctl restart docker-container@ecs-agent.service
+
+# now create a wrapper script to run the tool inside the job container
+# this will be made available to the job container via the job definition (volume/mount)
+# and will run the actual tool (wrapped in pre/post-processing steps)
+sudo mkdir /opt/container
+
+sudo tee /opt/container/umccrise-wrapper.sh << 'END'
+#!/bin/bash
+set -euxo pipefail
+
+export AWS_REGION=ap-southeast-2
+
+echo "INPUT tarball: $S3_INPUT_OBJ"
+
+cmd="aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/ /work/refdata"
+echo "PULL reference data from S3 bucket: $cmd"
+eval "$cmd"
+
+ls -al /work/refdata
+ls -al /work/refdata/Hsapiens/GRCh37/PCGR/*databundle*.tgz
+parallel --version
+
+#cmd="parallel 'tar xvfz {} -C `dirname {}`' ::: /work/refdata/Hsapiens/GRCh37/PCGR/*databundle*.tgz"
+cmd="tar xvfz /work/refdata/Hsapiens/GRCh37/PCGR/*.tgz"
+echo "UNPACK the PCGR reference dataset: $cmd"
+eval "$cmd"
+
+cmd="aws s3 cp s3://umccr-umccrise-dev/${S3_INPUT_OBJ} /work/bcbio_project"
+echo "FETCH input tarball (bcbio results) from S3 bucket: $cmd"
+eval "$cmd"
+
+cmd="tar xvfz /work/bcbio_project/${S3_INPUT_OBJ}"
+echo "UNPACK input tarball: $cmd"
+eval "$cmd"
+
+cmd="umccrise /work/bcbio_project/${S3_INPUT_OBJ%.tar.gz} -o /work/output_dir --pcgr /work/refdata/Hsapiens/GRCh37/PCGR --ref-fasta /work/refdata/Hsapiens/GRCh37/seq/GRCh37.fa --truth-regions /work/refdata/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed"
+echo "RUN umccrise" $cmd"
+eval "$cmd"
+
+cmd="tar cvfz ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz /work/output_dir/*"
+echo "PACK up the output: $cmd"
+eval "$cmd"
+
+cmd="aws s3 cp ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz s3://umccr-umccrise-dev/"
+echo "COPY the output to S3 bucket: $cmd"
+eval "$cmd"
+END
+
+sudo chmod 755 /opt/container/umccrise-wrapper.sh
