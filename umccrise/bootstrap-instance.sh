@@ -52,42 +52,45 @@ sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 #!/bin/bash
 set -euxo pipefail
 
-export AWS_REGION=ap-southeast-2
+# make sure we don't have anything left over from previous runs
+rm -rf /work/*
+
+mkdir -p /work/{bcbio_project,output,panel_of_normals,pcgr,seq,tmp,validation}
 
 echo "INPUT tarball: $S3_INPUT_OBJ"
 
-cmd="aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/ /work/refdata"
-echo "PULL reference data from S3 bucket: $cmd"
-eval "$cmd"
+echo "PULL ref FASTA from S3 bucket"
+aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/seq/ /work/seq/
 
-ls -al /work/refdata
-ls -al /work/refdata/Hsapiens/GRCh37/PCGR/*databundle*.tgz
-parallel --version
+echo "PULL panel of normals from S3 bucket"
+aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/GRCh37/ /work/panel_of_normals/
 
-#cmd="parallel 'tar xvfz {} -C `dirname {}`' ::: /work/refdata/Hsapiens/GRCh37/PCGR/*databundle*.tgz"
-cmd="tar xvfz /work/refdata/Hsapiens/GRCh37/PCGR/*.tgz"
-echo "UNPACK the PCGR reference dataset: $cmd"
-eval "$cmd"
+echo "PULL truth_regions from S3 bucket"
+aws s3 cp --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed /work/validation/truth_regions.bed
 
-cmd="aws s3 cp s3://umccr-umccrise-dev/${S3_INPUT_OBJ} /work/bcbio_project"
-echo "FETCH input tarball (bcbio results) from S3 bucket: $cmd"
-eval "$cmd"
+echo "PULL PCGR reference data from S3 bucket"
+aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/PCGR/ /work/tmp/
 
-cmd="tar xvfz /work/bcbio_project/${S3_INPUT_OBJ}"
-echo "UNPACK input tarball: $cmd"
-eval "$cmd"
+echo "UNPACK the PCGR reference dataset"
+tar xfz /work/tmp/*databundle*.tgz --directory=/work/pcgr
 
-cmd="umccrise /work/bcbio_project/${S3_INPUT_OBJ%.tar.gz} -o /work/output_dir --pcgr /work/refdata/Hsapiens/GRCh37/PCGR --ref-fasta /work/refdata/Hsapiens/GRCh37/seq/GRCh37.fa --truth-regions /work/refdata/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed"
-echo "RUN umccrise" $cmd"
-eval "$cmd"
+echo "FETCH input tarball (bcbio results) from S3 bucket"
+aws s3 cp --no-progress s3://umccr-umccrise-dev/${S3_INPUT_OBJ} /work/tmp/
 
-cmd="tar cvfz ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz /work/output_dir/*"
-echo "PACK up the output: $cmd"
-eval "$cmd"
+echo "UNPACK input tarball"
+tar xfz /work/tmp/${S3_INPUT_OBJ} --directory=/work/bcbio_project
 
-cmd="aws s3 cp ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz s3://umccr-umccrise-dev/"
-echo "COPY the output to S3 bucket: $cmd"
-eval "$cmd"
+echo "REMOVE temp data"
+rm -rf /work/tmp
+
+echo "RUN umccrise"
+umccrise /work/bcbio_project/${S3_INPUT_OBJ%.tar.gz} -o /work/output --pcgr /work/pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+
+echo "PACK up the output"
+tar cfz ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz /work/output/*
+
+echo "COPY the output to S3 bucket"
+aws s3 cp ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz s3://umccr-umccrise-dev/
 END
 
 sudo chmod 755 /opt/container/umccrise-wrapper.sh
