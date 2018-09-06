@@ -43,9 +43,11 @@ sudo sed -i "s/ECS_CLUSTER=\"default\"/ECS_CLUSTER=$AWS_CLUSTER_ARN/" /etc/defau
 
 sudo systemctl restart docker-container@ecs-agent.service
 
-# now create a wrapper script to run the tool inside the job container
-# this will be made available to the job container via the job definition (volume/mount)
-# and will run the actual tool (wrapped in pre/post-processing steps)
+# Now create a wrapper script to run the tool inside the job container
+# It can define pre/post processing steps around the actual tool inside
+# the container, without having to bake this behaviour into the container itself.
+# The job definition makes it available to the container (volume/mount)
+# and defines how to call it (command).
 sudo mkdir /opt/container
 
 sudo tee /opt/container/umccrise-wrapper.sh << 'END'
@@ -53,11 +55,12 @@ sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 set -euxo pipefail
 
 # make sure we don't have anything left over from previous runs
+# TODO: Could tweak that to keep refdata that does not change and save on download time
 rm -rf /work/*
 
 mkdir -p /work/{bcbio_project,output,panel_of_normals,pcgr,seq,tmp,validation}
 
-echo "INPUT tarball: $S3_INPUT_OBJ"
+echo "INPUT bcbio results dir: $S3_INPUT_DIR"
 
 echo "PULL ref FASTA from S3 bucket"
 aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/seq/ /work/seq/
@@ -73,24 +76,22 @@ aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/PCGR/ 
 
 echo "UNPACK the PCGR reference dataset"
 tar xfz /work/tmp/*databundle*.tgz --directory=/work/pcgr
-
-echo "FETCH input tarball (bcbio results) from S3 bucket"
-aws s3 cp --no-progress s3://umccr-umccrise-dev/${S3_INPUT_OBJ} /work/tmp/
-
-echo "UNPACK input tarball"
-tar xfz /work/tmp/${S3_INPUT_OBJ} --directory=/work/bcbio_project
+ln -s /work/pcgr/data /pcgr/data
 
 echo "REMOVE temp data"
 rm -rf /work/tmp
 
+echo "FETCH input (bcbio results) from S3 bucket"
+aws s3 sync --no-progress s3://umccr-umccrise-dev/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
+
 echo "RUN umccrise"
-umccrise /work/bcbio_project/${S3_INPUT_OBJ%.tar.gz} -o /work/output --pcgr /work/pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+umccrise /work/bcbio_project/$S3_INPUT_DIR -o /work/output --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
 
 echo "PACK up the output"
-tar cfz ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz /work/output/*
+tar cfz ${S3_INPUT_DIR}-output.tar.gz /work/output/*
 
 echo "COPY the output to S3 bucket"
-aws s3 cp ${S3_INPUT_OBJ%.tar.gz}-output.tar.gz s3://umccr-umccrise-dev/
+aws s3 cp ${S3_INPUT_DIR}-output.tar.gz s3://umccr-umccrise-dev/
 END
 
 sudo chmod 755 /opt/container/umccrise-wrapper.sh
