@@ -54,6 +54,19 @@ sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 #!/bin/bash
 set -euxo pipefail
 
+# TODO: could parallelise some of the setup steps
+#       i.e. download and unpack all ref data in parallel
+
+# TODO: make the source and destination bucket configurable (and possibly the reference data bucket)
+#       Possibly the full input/output path (including the bucket name)
+
+avail_cpus=1
+if test ! -z $1; then
+	avail_cpus=$1
+fi
+
+echo "Using  $avail_cpus CPUs."
+
 # make sure we don't have anything left over from previous runs
 # TODO: Could tweak that to keep refdata that does not change and save on download time
 rm -rf /work/*
@@ -85,7 +98,7 @@ echo "FETCH input (bcbio results) from S3 bucket"
 aws s3 sync --no-progress s3://umccr-umccrise-dev/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
 echo "RUN umccrise"
-umccrise /work/bcbio_project/$S3_INPUT_DIR -o /work/output --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+umccrise /work/bcbio_project/$S3_INPUT_DIR -j $avail_cpus -o /work/output --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
 
 echo "PACK up the output"
 tar cfz ${S3_INPUT_DIR}-output.tar.gz /work/output/*
