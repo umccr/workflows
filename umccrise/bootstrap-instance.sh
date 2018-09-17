@@ -59,7 +59,7 @@ set -euxo pipefail
 # TODO: make the source and destination bucket configurable (and possibly the reference data bucket)
 #       Possibly the full input/output path (including the bucket name)
 
-TIMESTAMP="$(date +'%Y-%m-%d_%H-%M-%S')"
+TIMESTAMP="$(date --utc +%FT%TZ)"
 
 echo "Processing $S3_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from $S3_REFDATA_BUCKET"
 
