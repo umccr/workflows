@@ -54,11 +54,14 @@ sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 #!/bin/bash
 set -euxo pipefail
 
-# TODO: could parallelise some of the setup steps
+# TODO: could parallelise some of the setup steps?
 #       i.e. download and unpack all ref data in parallel
-
 # TODO: make the source and destination bucket configurable (and possibly the reference data bucket)
 #       Possibly the full input/output path (including the bucket name)
+
+TIMESTAMP="$(date --utc +%FT%TZ)"
+
+echo "Processing $S3_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from $S3_REFDATA_BUCKET"
 
 avail_cpus=1
 if test ! -z $1; then
@@ -72,20 +75,19 @@ echo "Using  $avail_cpus CPUs."
 rm -rf /work/*
 
 mkdir -p /work/{bcbio_project,output,panel_of_normals,pcgr,seq,tmp,validation}
-
-echo "INPUT bcbio results dir: $S3_INPUT_DIR"
+mkdir -p /work/output/${S3_INPUT_DIR}
 
 echo "PULL ref FASTA from S3 bucket"
-aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/seq/ /work/seq/
+aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/seq/ /work/seq/
 
 echo "PULL panel of normals from S3 bucket"
-aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/GRCh37/ /work/panel_of_normals/
+aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/GRCh37/ /work/panel_of_normals/
 
 echo "PULL truth_regions from S3 bucket"
-aws s3 cp --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed /work/validation/truth_regions.bed
+aws s3 cp --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed /work/validation/truth_regions.bed
 
 echo "PULL PCGR reference data from S3 bucket"
-aws s3 sync --no-progress s3://umccr-umccrise-refdata-dev/Hsapiens/GRCh37/PCGR/ /work/tmp/
+aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/PCGR/ /work/tmp/
 
 echo "UNPACK the PCGR reference dataset"
 tar xfz /work/tmp/*databundle*.tgz --directory=/work/pcgr
@@ -95,16 +97,12 @@ echo "REMOVE temp data"
 rm -rf /work/tmp
 
 echo "FETCH input (bcbio results) from S3 bucket"
-aws s3 sync --no-progress s3://umccr-umccrise-dev/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
+aws s3 sync --no-progress s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
 echo "RUN umccrise"
-umccrise /work/bcbio_project/$S3_INPUT_DIR -j $avail_cpus -o /work/output --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+umccrise /work/bcbio_project/${S3_INPUT_DIR} -j $avail_cpus -o /work/output/${S3_INPUT_DIR} --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
 
-echo "PACK up the output"
-tar cfz ${S3_INPUT_DIR}-output.tar.gz /work/output/*
-
-echo "COPY the output to S3 bucket"
-aws s3 cp ${S3_INPUT_DIR}-output.tar.gz s3://umccr-umccrise-dev/
+aws s3 sync /work/output/${S3_INPUT_DIR} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${TIMESTAMP}
 END
 
 sudo chmod 755 /opt/container/umccrise-wrapper.sh
