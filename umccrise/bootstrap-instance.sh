@@ -54,28 +54,24 @@ sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 #!/bin/bash
 set -euxo pipefail
 
+# NOTE: this setup is NOT setup for multiple jobs per instance. With multiple jobs running in parallel
+# on the same instance there could be issues related to shared volume/disk space, shared memeory space, etc
+
 # TODO: could parallelise some of the setup steps?
 #       i.e. download and unpack all ref data in parallel
-# TODO: make the source and destination bucket configurable (and possibly the reference data bucket)
-#       Possibly the full input/output path (including the bucket name)
 
-TIMESTAMP="$(date --utc +%FT%TZ)"
+timestamp="$(date --utc +%FT%TZ)"
 
-echo "Processing $S3_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from $S3_REFDATA_BUCKET"
+echo "Processing $S3_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from ${S3_REFDATA_BUCKET}"
 
-avail_cpus=1
-if test ! -z $1; then
-	avail_cpus=$1
-fi
+avail_cpus="${1:-1}"
+echo "Using  ${avail_cpus} CPUs."
 
-echo "Using  $avail_cpus CPUs."
-
-# make sure we don't have anything left over from previous runs
-# TODO: Could tweak that to keep refdata that does not change and save on download time
-rm -rf /work/*
+# create a job specific output directory
+job_output_dir=/work/output/${S3_INPUT_DIR}_${timestamp}
 
 mkdir -p /work/{bcbio_project,output,panel_of_normals,pcgr,seq,tmp,validation}
-mkdir -p /work/output/${S3_INPUT_DIR}
+mkdir -p "${job_output_dir}"
 
 echo "PULL ref FASTA from S3 bucket"
 aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/seq/ /work/seq/
@@ -100,9 +96,14 @@ echo "FETCH input (bcbio results) from S3 bucket"
 aws s3 sync --no-progress s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
 echo "RUN umccrise"
-umccrise /work/bcbio_project/${S3_INPUT_DIR} -j $avail_cpus -o /work/output/${S3_INPUT_DIR} --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
 
-aws s3 sync /work/output/${S3_INPUT_DIR} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${TIMESTAMP}
+aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp}
+
+echo "Cleaning up..."
+rm -rf "${job_output_dir}"
+
+echo "All done."
 END
 
 sudo chmod 755 /opt/container/umccrise-wrapper.sh
