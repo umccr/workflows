@@ -70,8 +70,7 @@ echo "Using  ${avail_cpus} CPUs."
 # create a job specific output directory
 job_output_dir=/work/output/${S3_INPUT_DIR}_${timestamp}
 
-mkdir -p /work/{bcbio_project,output,panel_of_normals,pcgr,seq,tmp,validation}
-mkdir -p "${job_output_dir}"
+mkdir -p /work/{bcbio_project,${job_output_dir},panel_of_normals,pcgr,seq,tmp,validation}
 
 echo "PULL ref FASTA from S3 bucket"
 aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/seq/ /work/seq/
@@ -82,11 +81,14 @@ aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/GRCh37/ /work/panel_of_norma
 echo "PULL truth_regions from S3 bucket"
 aws s3 cp --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed /work/validation/truth_regions.bed
 
-echo "PULL PCGR reference data from S3 bucket"
+echo "PULL PCGR reference data for GRCh37 from S3 bucket"
 aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/PCGR/ /work/tmp/
 
-echo "UNPACK the PCGR reference dataset"
-tar xfz /work/tmp/*databundle*.tgz --directory=/work/pcgr
+echo "PULL PCGR reference data for hg38 from S3 bucket"
+aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/hg38/PCGR/ /work/tmp/
+
+echo "UNPACK the PCGR reference datasets"
+ls /work/tmp/*databundle*.tgz | xargs -i tar xzf {} --directory /work/pcgr/
 ln -s /work/pcgr/data /pcgr/data
 
 echo "REMOVE temp data"
