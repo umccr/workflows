@@ -52,7 +52,8 @@ sudo mkdir /opt/container
 
 sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 #!/bin/bash
-set -euxo pipefail
+# DEBUG: removed for debugging to prevent script exit on failed commands
+#set -euxo pipefail
 
 # NOTE: this setup is NOT setup for multiple jobs per instance. With multiple jobs running in parallel
 # on the same instance there could be issues related to shared volume/disk space, shared memeory space, etc
@@ -98,7 +99,11 @@ echo "FETCH input (bcbio results) from S3 bucket"
 aws s3 sync --no-progress s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
 echo "RUN umccrise"
-umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals pcgr
+
+# DEBUG: sleep forever to allow manual investigation of the state at this point
+sleep infinity
+
 
 aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp}
 
