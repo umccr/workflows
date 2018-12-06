@@ -72,33 +72,14 @@ job_output_dir=/work/output/${S3_INPUT_DIR}-${timestamp}
 
 mkdir -p /work/{bcbio_project,${job_output_dir},panel_of_normals,pcgr,seq,tmp,validation}
 
-echo "PULL ref FASTA from S3 bucket"
-aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/seq/ /work/seq/
-
-echo "PULL panel of normals from S3 bucket"
-aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/GRCh37/ /work/panel_of_normals/
-
-echo "PULL truth_regions from S3 bucket"
-aws s3 cp --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/validation/giab-NA12878/truth_regions.bed /work/validation/truth_regions.bed
-
-echo "PULL PCGR reference data for GRCh37 from S3 bucket"
-aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/GRCh37/PCGR/ /work/tmp/
-
-echo "PULL PCGR reference data for hg38 from S3 bucket"
-aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/Hsapiens/hg38/PCGR/ /work/tmp/
-
-echo "UNPACK the PCGR reference datasets"
-ls /work/tmp/*databundle*.tgz | xargs -i tar xzf {} --directory /work/pcgr/
-ln -s /work/pcgr/data /pcgr/data
-
-echo "REMOVE temp data"
-rm -rf /work/tmp
+echo "PULL ref data from S3 bucket"
+aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/genomes/ /genomes
 
 echo "FETCH input (bcbio results) from S3 bucket"
 aws s3 sync --no-progress s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
 echo "RUN umccrise"
-umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --pcgr /pcgr --ref-fasta /work/seq/GRCh37.fa --truth-regions /work/validation/truth_regions.bed --panel-of-normals /work/panel_of_normals
+umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir}
 
 aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp}
 
