@@ -35,7 +35,11 @@ sudo mkfs.btrfs -f "$AWS_DEV"
 sudo echo -e "$AWS_DEV\t/mnt\tbtrfs\tdefaults\t0\t0" | sudo tee -a /etc/fstab
 sudo mount -a
 
-# Move docker storage to bigger volume
+# Hard purge docker (meta)data and move docker storage to bigger volume
+# XXX: Not the most efficient way to do this.
+sudo systemctl stop docker
+sudo rm -rf /var/lib/docker && sudo mkdir -p /var/lib/docker
+sudo systemctl start docker # recreate basic docker overlay structure under /var/lib/docker
 sudo systemctl stop docker
 sudo mv /var/lib/docker /mnt/varlibdocker
 sudo ln -sf /mnt/varlibdocker /var/lib/docker
