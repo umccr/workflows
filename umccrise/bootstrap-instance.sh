@@ -36,10 +36,10 @@ sudo echo -e "$AWS_DEV\t/mnt\tbtrfs\tdefaults\t0\t0" | sudo tee -a /etc/fstab
 sudo mount -a
 
 # Move docker storage to bigger volume
-sudo systemctl docker stop
+sudo systemctl stop docker
 sudo mv /var/lib/docker /mnt/varlibdocker
-ln -sf /mnt/varlibdocker /var/lib/docker
-sudo systemctl docker start
+sudo ln -sf /mnt/varlibdocker /var/lib/docker
+sudo systemctl start docker
 
 # Inject current AWS Batch underlying ECS cluster ID since the latter is dynamic. Match the computing environment with $STACK we are provisioning
 AWS_CLUSTER_ARN=$(aws ecs list-clusters --region "$AWS_REGION" --output json --query 'clusterArns' | jq -r .[] | grep "$STACK" | awk -F "/" '{ print $2 }')
