@@ -82,10 +82,10 @@ job_output_dir=/work/output/${S3_INPUT_DIR}-${timestamp}
 mkdir -p /work/{bcbio_project,${job_output_dir},panel_of_normals,pcgr,seq,tmp,validation}
 
 echo "PULL ref data from S3 bucket"
-aws s3 sync --no-progress s3://${S3_REFDATA_BUCKET}/genomes/ /genomes
+aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes
 
 echo "FETCH input (bcbio results) from S3 bucket"
-aws s3 sync --no-progress s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
+aws s3 sync --quiet s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
 echo "RUN umccrise"
 umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir}
