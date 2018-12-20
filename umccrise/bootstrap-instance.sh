@@ -10,7 +10,7 @@ export AWS_DEV="/dev/xvdb" # XXX: Hardcoded for now since instance metadata is n
 export AWS_AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
 export AWS_REGION=${AWS_AZ::-1}
 export AWS_INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-export AWS_VOL_TYPE="st1"
+export AWS_VOL_TYPE="gp2"
 export AWS_VOL_SIZE="500" # in GB
 
 # Create a 500GB ST1 volume and fetch its ID
