@@ -87,6 +87,9 @@ aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes
 echo "FETCH input (bcbio results) from S3 bucket"
 aws s3 sync --quiet s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
 
+echo "umccrise version:"
+umccrise --version
+
 echo "RUN umccrise"
 umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv
 
