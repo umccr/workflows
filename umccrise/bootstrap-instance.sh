@@ -108,22 +108,22 @@ mkdir -p /work/{bcbio_project,${job_output_dir},panel_of_normals,pcgr,seq,tmp,va
 
 
 echo "PULL ref data from S3 bucket"
-duration=$(aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes)
+duration=$(timer aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes)
 publish S3PullRefGenome $duration
 
 echo "PULL input (bcbio results) from S3 bucket"
-duration=$(aws s3 sync --quiet s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR})
+duration=$(timer aws s3 sync --quiet s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR})
 publish S3PullInput $duration
 
 echo "umccrise version:"
 umccrise --version
 
 echo "RUN umccrise"
-duration=$(umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv)
+duration=$(timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv)
 publish RunUMCCRISE $duration
 
 echo "PUSH results"
-duration=$(aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp})
+duration=$(timer aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp})
 publish S3PushResults $duration
 
 echo "Cleaning up..."
