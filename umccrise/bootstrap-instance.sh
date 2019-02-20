@@ -69,7 +69,32 @@ set -euxo pipefail
 # TODO: could parallelise some of the setup steps?
 #       i.e. download and unpack all ref data in parallel
 
+export AWS_DEFAULT_REGION="ap-southeast-2"
+CLOUDWATCH_NAMESPACE="UMCCRISE"
+INSTANCE_TYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type/)
+AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id/)
+
+function timer { # arg?: command + args
+    start_time="$(date +%s)"
+    $@
+    end_time="$(date +%s)"
+    echo "$(( $end_time - $start_time ))"
+}
+
+function publish { #arg 1: metric name, arg 2: value
+    aws cloudwatch put-metric-data \
+    --metric-name ${1} \
+    --namespace $CLOUDWATCH_NAMESPACE \
+    --unit Seconds \
+    --value ${2} \
+    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID}
+}
+
+
+
+
 timestamp="$(date +%s)"
+instance_type="$(curl http://169.254.169.254/latest/meta-data/instance-type/)"
 
 echo "Processing $S3_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from ${S3_REFDATA_BUCKET}"
 
@@ -81,19 +106,25 @@ job_output_dir=/work/output/${S3_INPUT_DIR}-${timestamp}
 
 mkdir -p /work/{bcbio_project,${job_output_dir},panel_of_normals,pcgr,seq,tmp,validation}
 
-echo "PULL ref data from S3 bucket"
-aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes
 
-echo "FETCH input (bcbio results) from S3 bucket"
-aws s3 sync --quiet s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}
+echo "PULL ref data from S3 bucket"
+duration=$(aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes)
+publish S3PullRefGenome $duration
+
+echo "PULL input (bcbio results) from S3 bucket"
+duration=$(aws s3 sync --quiet s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR})
+publish S3PullInput $duration
 
 echo "umccrise version:"
 umccrise --version
 
 echo "RUN umccrise"
-umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv
+duration=$(umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv)
+publish RunUMCCRISE $duration
 
-aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp}
+echo "PUSH results"
+duration=$(aws s3 sync ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp})
+publish S3PushResults $duration
 
 echo "Cleaning up..."
 rm -rf "${job_output_dir}"
