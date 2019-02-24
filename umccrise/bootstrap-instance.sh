@@ -24,6 +24,9 @@ aws ec2 wait volume-in-use --region "$AWS_REGION" --volume-ids "$VOL_ID" --filte
 # Make sure attached volume is removed post instance termination
 aws ec2 modify-instance-attribute --region "$AWS_REGION" --instance-id "$AWS_INSTANCE" --block-device-mappings "[{\"DeviceName\": \"$AWS_DEV\",\"Ebs\":{\"DeleteOnTermination\":true}}]"
 
+#Check if snap is installed, if so update amazon ssm agent
+[[ $(command -v snap) > /dev/null ]] && snap refresh amazon-ssm-agent --classic
+
 # Wait for $AWS_DEV to show up on the OS level. The above aws "ec2 wait" command is not reliable:
 # ERROR: mount check: cannot open /dev/xvdb: No such file or directory
 #
@@ -73,6 +76,7 @@ export AWS_DEFAULT_REGION="ap-southeast-2"
 CLOUDWATCH_NAMESPACE="UMCCRISE"
 INSTANCE_TYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type/)
 AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id/)
+UMCCRISE_VERSION=$(umccrise --version)
 
 function timer { # arg?: command + args
     start_time="$(date +%s)"
@@ -87,7 +91,7 @@ function publish { #arg 1: metric name, arg 2: value
     --namespace $CLOUDWATCH_NAMESPACE \
     --unit Seconds \
     --value ${2} \
-    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID}
+    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID}, UMCCRISE_VERSION=${UMCCRISE_VERSION}
 }
 
 
