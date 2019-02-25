@@ -24,9 +24,6 @@ aws ec2 wait volume-in-use --region "$AWS_REGION" --volume-ids "$VOL_ID" --filte
 # Make sure attached volume is removed post instance termination
 aws ec2 modify-instance-attribute --region "$AWS_REGION" --instance-id "$AWS_INSTANCE" --block-device-mappings "[{\"DeviceName\": \"$AWS_DEV\",\"Ebs\":{\"DeleteOnTermination\":true}}]"
 
-#Check if snap is installed, if so update amazon ssm agent
-[[ $(command -v snap) > /dev/null ]] && snap refresh amazon-ssm-agent --classic
-
 # Wait for $AWS_DEV to show up on the OS level. The above aws "ec2 wait" command is not reliable:
 # ERROR: mount check: cannot open /dev/xvdb: No such file or directory
 #
@@ -54,6 +51,11 @@ sudo sed -i "s/ECS_CLUSTER=\"default\"/ECS_CLUSTER=$AWS_CLUSTER_ARN/" /etc/defau
 
 # Restart systemd/docker service
 sudo systemctl restart docker-container@ecs-agent.service
+
+#Check if snap is installed, if so update amazon ssm agent
+set +e
+snap refresh amazon-ssm-agent --classic
+set -e
 
 # Now create a wrapper script to run the tool inside the job container
 # It can define pre/post processing steps around the actual tool inside
