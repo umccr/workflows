@@ -14,7 +14,9 @@ export AWS_VOL_TYPE="gp2"
 export AWS_VOL_SIZE="500" # in GB
 
 # Create a 500GB ST1 volume and fetch its ID
-VOL_ID=$(sudo aws ec2 create-volume --region "$AWS_REGION" --availability-zone "$AWS_AZ" --encrypted --size "$AWS_VOL_SIZE" --volume-type "$AWS_VOL_TYPE" | jq -r .VolumeId)
+VOL_ID=$(sudo aws ec2 create-volume --region "$AWS_REGION" --availability-zone "$AWS_AZ" --encrypted --size "$AWS_VOL_SIZE" --volume-type "$AWS_VOL_TYPE" --tag-specifications 'ResourceType=volume,Tags=[{Key=Name,Value=batch}]' | jq -r .VolumeId)
+
+
 
 # Wait for the volume to become available (block) and then attach it to the instance
 aws ec2 wait volume-available --region "$AWS_REGION" --volume-ids "$VOL_ID" --filters Name=status,Values=available
@@ -78,7 +80,7 @@ export AWS_DEFAULT_REGION="ap-southeast-2"
 CLOUDWATCH_NAMESPACE="UMCCRISE"
 INSTANCE_TYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type/)
 AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id/)
-UMCCRISE_VERSION=$(umccrise --version)
+UMCCRISE_VERSION=$(umccrise --version | sed 's/umccrise, version //') #get rid of unnecessary version text
 
 function timer { # arg?: command + args
     start_time="$(date +%s)"
@@ -93,9 +95,15 @@ function publish { #arg 1: metric name, arg 2: value
     --namespace $CLOUDWATCH_NAMESPACE \
     --unit Seconds \
     --value ${2} \
-    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID}, UMCCRISE_VERSION=${UMCCRISE_VERSION}
+    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID},UMCCRISE_VERSION=${UMCCRISE_VERSION},S3_INPUT="${S3_DATA_BUCKET}/${S3_INPUT_DIR}",S3_REFDATA_BUCKET=${S3_REFDATA_BUCKET}
 }
 
+sig_handler() {
+    exit_status=$?  # Eg 130 for SIGINT, 128 + (2 == SIGINT)
+    echo "Trapped signal $exit_status. Exiting."
+    exit "$exit_status"
+}
+trap sig_handler INT HUP TERM QUIT EXIT
 
 
 
@@ -114,7 +122,7 @@ mkdir -p /work/{bcbio_project,${job_output_dir},panel_of_normals,pcgr,seq,tmp,va
 
 
 echo "PULL ref data from S3 bucket"
-timer aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /genomes
+timer aws s3 sync --quiet s3://${S3_REFDATA_BUCKET}/genomes/ /work/genomes
 publish S3PullRefGenome $duration
 
 echo "PULL input (bcbio results) from S3 bucket"
@@ -125,7 +133,7 @@ echo "umccrise version:"
 umccrise --version
 
 echo "RUN umccrise"
-timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv
+timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv --genomes /work/genomes
 publish RunUMCCRISE $duration
 
 echo "PUSH results"
