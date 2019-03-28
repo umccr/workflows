@@ -106,12 +106,14 @@ function timer { # arg?: command + args
 }
 
 function publish { #arg 1: metric name, arg 2: value
+    disk_space=$(df  | grep "/mnt$" | awk '{print $3}')
+
     aws cloudwatch put-metric-data \
     --metric-name ${1} \
     --namespace $CLOUDWATCH_NAMESPACE \
     --unit Seconds \
     --value ${2} \
-    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID},UMCCRISE_VERSION=${UMCCRISE_VERSION},S3_INPUT="${S3_DATA_BUCKET}/${S3_INPUT_DIR}",S3_REFDATA_BUCKET=${S3_REFDATA_BUCKET},CONTAINER_VCPUS=${CONTAINER_VCPUS},CONTAINER_MEM=${CONTAINER_MEM}
+    --dimensions InstanceType=${INSTANCE_TYPE},AMIID=${AMI_ID},UMCCRISE_VERSION=${UMCCRISE_VERSION},S3_INPUT="${S3_DATA_BUCKET}/${S3_INPUT_DIR}",S3_REFDATA_BUCKET=${S3_REFDATA_BUCKET},CONTAINER_VCPUS=${CONTAINER_VCPUS},CONTAINER_MEM=${CONTAINER_MEM},DISK_SPACE=${disk_space}
 }
 
 sig_handler() {
