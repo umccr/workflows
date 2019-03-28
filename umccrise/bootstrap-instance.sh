@@ -94,9 +94,11 @@ set -euxo pipefail
 
 export AWS_DEFAULT_REGION="ap-southeast-2"
 CLOUDWATCH_NAMESPACE="UMCCRISE"
+CONTAINER_MOUNT_POINT="/work"
 INSTANCE_TYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type/)
 AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id/)
 UMCCRISE_VERSION=$(umccrise --version | sed 's/umccrise, version //') #get rid of unnecessary version text
+
 
 function timer { # arg?: command + args
     start_time="$(date +%s)"
@@ -106,7 +108,7 @@ function timer { # arg?: command + args
 }
 
 function publish { #arg 1: metric name, arg 2: value
-    disk_space=$(df  | grep "/mnt$" | awk '{print $3}')
+    disk_space=$(df  | grep "${CONTAINER_MOUNT_POINT}$" | awk '{print $3}')
 
     aws cloudwatch put-metric-data \
     --metric-name ${1} \
