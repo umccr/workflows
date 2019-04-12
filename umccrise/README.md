@@ -163,11 +163,12 @@ We generate a portable mini-version of the BAM file by subsetting it to key canc
 
 ## Key cancer genes
 
-For reporting and variant prioritization, we prepared a UMCCR cancer key genes set. It's build of off several sources:
+For reporting and variant prioritization, we prepared a [UMCCR cancer key genes set](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/make_umccr_cancer_genes.Rmd). It's build of off several sources:
 
 * Cancermine with at least 2 publication with at least 3 citations,
 * NCG known cancer genes,
 * Tier 1 COSMIC Cancer Gene Census (CGC),
+* CACAO hotspot genes (curated from ClinVar, CiViC, cancerhotspots),
 * At least 2 matches in the following 5 sources and 8 clinical panels:
    * Cancer predisposition genes (CPSR list),
    * COSMIC Cancer Gene Census (tier 2),
@@ -183,14 +184,6 @@ For reporting and variant prioritization, we prepared a UMCCR cancer key genes s
    * Foundation Heme, 
    * Vogelstein.
  
-The result is a list of 1144 genes.
+The result is a list of 1248 genes.
 
 
-
-
-
-
-
-
-
-*
