@@ -46,7 +46,7 @@ Umccrise post-processes somatic variants in order to remove most of the artefact
 
 The idea is to simply bring germline variants in cancer predisposition genes:
 
-1. Take passing "ensemble" somatic VCF from bcbio. "Ensemble" has variants supported by at least 2 of 3 callers (we use strelka2, vardict,, and mutect2),
+1. Take passing "ensemble" somatic VCF from bcbio. "Ensemble" has variants supported by at least 2 of 3 callers (we use strelka2, vardict, and mutect2),
 2. Sort VCF by coordinate, extract PASS calls,
 3. Subset variants to a list of ~200 cancer predisposition genes, which is build by [CPSR](https://github.com/sigven/cpsr) from 3 curated sources: TCGA pan-cancer study, COSMIC CGC, and Norwegian Cancer Genomics Consortium.
 4. Report variants using CPSR, which classifies variants in the context of cancer predisposition, by overlapping with ClinVar pathogenic and VUS variants and GnomAD rare variants. It also ranks variants according pathogenicity score by ACMG and cancer-specific criteria.
@@ -62,8 +62,8 @@ The idea is to report gene fusions, exon deletions, high impact and LoF events i
    * require split or paired reads support at least 5x,
    * for low frequency variants (<10% at both breakpoints), require read support 10x,
    * require paired reads support to be higher than split read support for BND events
-4. Annotate effect of the calls with [SnpEff](http://snpeff.sourceforge.net/SnpEff_manual.html) based on the Ensembl gene model, based on terms [Sequence ontology](http://www.sequenceontology.org).
-5. Subset annotations to [APPRIS principal transcripts](http://appris.bioinfo.cnio.es/#/), keeping one princila isoform per gene.
+4. Annotate variants impact using [SnpEff](http://snpeff.sourceforge.net/SnpEff_manual.html) according to the Ensembl gene model and [Sequence ontology](http://www.sequenceontology.org) terminology.
+5. Subset annotations to [APPRIS principal transcripts](http://appris.bioinfo.cnio.es/#/), keeping one main isoform per gene.
 6. Use variants as a guidance for PURPLE CNV calling (see below). PURPLE will adjust and recover breakpoints at copy number transitions, and adjust AF based on copy number, purity and ploidy.
 7. Prioritize variants with [simple_sv_annotation](https://github.com/vladsaveliev/simple_sv_annotation) on a 4 tier system - 1 (high) - 2 (moderate) - 3 (low) - 4 (no interest):
     * exon loss
@@ -85,7 +85,7 @@ The idea is to report gene fusions, exon deletions, high impact and LoF events i
     * LoF or HIGH impact in a tumor suppressor
        * on cancer gene list (2)
        * other TS gene (3)
-    * other (4)
+    * other (4)    
 8. Report tiered variants in the UMCCR cancer report.
 
 
@@ -94,35 +94,37 @@ The idea is to report gene fusions, exon deletions, high impact and LoF events i
 The idea is to report significant CNV changes in key cancer genes and disruptions in tumor suppressors. And also calculate sample purity and ploidy profile.
 
 We almost entirely rely on Hartwig's [PURPLE]([https://github.com/hartwigmedical/hmftools/tree/master/purity-ploidy-estimator](https://github.com/hartwigmedical/hmftools/tree/master/purity-ploidy-estimator) workflow in this step. The PURPLE pipeline outlines as follows:
-	 * Calculate B-allele frequencies (BAF) using AMBER subworkflow,
-	 * Calculate read depth ratios using COBALT subworkflow,
-	 * Perform segmentation (uses structural variant breakpoints for better guidance),
-	 * Estimate the purity and copy number profile (uses somatic variants for better fitting), 
-	 * Plot a circos plot that visualizes the CN/ploidy profile, as well as somatic variants, SVs, and BAFs,
-	 * Rescue structural variants in copy number transitions and filter single breakends,
-	 * Estimate overall tumor samples purity range,
-	 * Determine gender, 
-	 * Report QC status of the sample, that will fail if the structural variants do not correspond to CN transitions, and gender is inconsistently called from BAFs and from the coverage.
 
-From PURPLE output, we report in the cancer report:
-    * Circos plot
-    * Minimal and maximal copy numbers in key cancer genes, that indicate amplifications/deletions as well as CN transitions that should match SVs.
-    * QC status
-	 * We also use Purity to adjust coverage reporting thresholds.  
+   * Calculate B-allele frequencies (BAF) using AMBER subworkflow,
+   * Calculate read depth ratios using COBALT subworkflow,
+   * Perform segmentation (uses structural variant breakpoints for better guidance),
+   * Estimate the purity and copy number profile (uses somatic variants for better fitting), 
+   * Plot a circos plot that visualizes the CN/ploidy profile, as well as somatic variants, SVs, and BAFs,
+   * Rescue structural variants in copy number transitions and filter single breakends,
+   * Estimate overall tumor samples purity range,
+   * Determine gender, 
+   * Report QC status of the sample, that will fail if the structural variants do not correspond to CN transitions, and gender is inconsistently called from BAFs and from the coverage.
+
+From the PURPLE output, we report in the cancer report:
+
+   * Circos plot
+   * Minimal and maximal copy numbers in key cancer genes, that indicate amplifications/deletions as well as CN transitions that should match SVs.
+   * QC status
+	* We also use Purity to adjust coverage reporting thresholds.  
 
 
 ## MultiQC
 
 MultiQC aggregates QC from different tools. We report the following:
-
-* Sample contamination level (for both tumor and normal) and tumor/normal concordance (by Conpair)
-* Ancestry and sex (by Peddy)
-* Mapping QC: the number of mapped reads, paired reads, secondary or duplicated alignments, average coverage (using samtools stats and mosdepth in bcbio)
-* Viral DNA content (in bcbio)
-* Number of pre- and post-filtered SNPs and indels (by Umccrise) which indicates germline leakage
-* Coverage profile by goleft
-* Variants QC for filtered germline and somatic variants (by bcftools)
-* Reads QC (by FastQC)
+	
+	* Sample contamination level (for both tumor and normal) and tumor/normal concordance (by Conpair)
+	* Ancestry and sex (by Peddy)
+	* Mapping QC: the number of mapped reads, paired reads, secondary or duplicated alignments, average coverage (using samtools stats and mosdepth in bcbio)
+	* Viral DNA content (in bcbio)
+	* Number of pre- and post-filtered SNPs and indels (by Umccrise) which indicates germline leakage
+	* Coverage profile by goleft
+	* Variants QC for filtered germline and somatic variants (by bcftools)
+	* Reads QC (by FastQC)
 
 We also include reference "good" samples in the background for comparison.
 
@@ -163,23 +165,23 @@ We generate a portable mini-version of the BAM file by subsetting it to key canc
 
 For reporting and variant prioritization, we prepared a UMCCR cancer key genes set. It's build of off several sources:
 
-- Cancermine with at least 2 publication with at least 3 citations,
-- NCG known cancer genes,
-- Tier 1 COSMIC Cancer Gene Census (CGC),
-- At least 2 matches in the following 5 sources and 8 clinical panels:
-   - Cancer predisposition genes (CPSR list),
-   - COSMIC Cancer Gene Cencus (tier 2),
-   - AZ300, 
-   - Familial Cancer, 
-   - OncoKB annotated,
-   - MSKC-IMPACT, 
-   - MSKC-Heme, 
-   - PMCC-CCP, 
-   - Illumina-TS500, 
-   - TEMPUS, 
-   - Foundation One, 
-   - Foundation Heme, 
-   - Vogelstein.
+* Cancermine with at least 2 publication with at least 3 citations,
+* NCG known cancer genes,
+* Tier 1 COSMIC Cancer Gene Census (CGC),
+* At least 2 matches in the following 5 sources and 8 clinical panels:
+   * Cancer predisposition genes (CPSR list),
+   * COSMIC Cancer Gene Cencus (tier 2),
+   * AZ300, 
+   * Familial Cancer, 
+   * OncoKB annotated,
+   * MSKC-IMPACT, 
+   * MSKC-Heme, 
+   * PMCC-CCP, 
+   * Illumina-TS500, 
+   * TEMPUS, 
+   * Foundation One, 
+   * Foundation Heme, 
+   * Vogelstein.
  
 The result is a list of 1144 genes.
 
@@ -191,4 +193,4 @@ The result is a list of 1144 genes.
 
 
 
-
+*
