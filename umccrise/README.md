@@ -31,7 +31,7 @@ Umccrise post-processes somatic variants in order to remove most of the artefact
 	*  Additionally rescue all driver mutations ([Intogen](https://www.intogen.org/)); [mutation hotspots](http://cancerhotspots.org/]); [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/) likely pathogenic or uncertain; COSMIC hits >=10; TCGA pancancer hits>=5; ICGC PCAWG hits >= 3 (all annotated by PCGR).
 	*  For all non-rescued variants, apply LCR, PoN, depth and AF filters:
 		* Remove AF<10%,
-		* Remove common GnomAD (max population AF>=1%),
+		* Remove common GnomAD (max population AF>=1%), add into the germline set (see below),
 		* Remove panel of normal hits>=5,
 		* Remove indels in "bad promoter" regions,
 		* Remove variants overlapping the ENCODE blacklist,
@@ -46,10 +46,11 @@ Umccrise post-processes somatic variants in order to remove most of the artefact
 
 The idea is to simply bring germline variants in cancer predisposition genes:
 
-1. Take passing "ensemble" somatic VCF from [bcbio](https://github.com/umccr/workflows/tree/master/bcbio). "Ensemble" has variants supported by at least 2 of 3 callers (we use strelka2, vardict, and mutect2),
-2. Sort VCF by coordinate, extract PASS calls,
-3. Subset variants to a list of ~200 cancer predisposition genes, which is build by [CPSR](https://github.com/sigven/cpsr) from 3 curated sources: [TCGA](https://www.ncbi.nlm.nih.gov/pubmed/29625052) pan-cancer study, [COSMIC CGC](https://cancer.sanger.ac.uk/census), and [Norwegian Cancer Genomics Consortium](http://cancergenomics.no/).
-4. Report variants using CPSR, which classifies variants in the context of cancer predisposition, by overlapping with [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/) pathogenic and VUS variants and GnomAD rare variants. It also ranks variants according pathogenicity score by ACMG and cancer-specific criteria.
+1. Take passing "ensemble" somatic VCF from [bcbio](https://github.com/umccr/workflows/tree/master/bcbio). "Ensemble" has variants supported by at least 2 of 3 callers (we use strelka2, vardict, and mutect2).
+2. Sort VCF by coordinate, extract PASS calls.
+3. Add variants from somatic calling filtered as common GnomAD.
+4. Subset variants to a list of ~200 cancer predisposition genes, which is build by [CPSR](https://github.com/sigven/cpsr) from 3 curated sources: [TCGA](https://www.ncbi.nlm.nih.gov/pubmed/29625052) pan-cancer study, [COSMIC CGC](https://cancer.sanger.ac.uk/census), and [Norwegian Cancer Genomics Consortium](http://cancergenomics.no/).
+5. Report variants using CPSR, which classifies variants in the context of cancer predisposition, by overlapping with [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/) pathogenic and VUS variants and GnomAD rare variants. It also ranks variants according pathogenicity score by ACMG and cancer-specific criteria.
 
 
 ## Structural variants
