@@ -17,6 +17,14 @@ sudo tee /opt/container/umccrise-wrapper.sh << 'END'
 #!/bin/bash
 set -euxo pipefail
 
+# NOTE: This script expects the following variables to be set on the environment
+# - S3_INPUT_DIR      : The bcbio directory (S3 prefix) for which to run UMCCRise
+# - S3_DATA_BUCKET    : The S3 bucket that holds the above data
+# - S3_REFDATA_BUCKET : The S3 bucket for the reference data expected by UMCCRise
+# - CONTAINER_VCPUS   : The number of vCPUs to assign to the container (for metric logging only)
+# - CONTAINER_MEM     : The memory to assign to the container (for metric logging only)
+
+
 # NOTE: this setup is NOT setup for multiple jobs per instance. With multiple jobs running in parallel
 # on the same instance there could be issues related to shared volume/disk space, shared memeory space, etc
 
