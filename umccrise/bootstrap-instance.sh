@@ -4,78 +4,9 @@ set -euxo pipefail
 
 export STACK="umccrise"
 export INSTANCE_TYPE=$(curl -s http://169.254.169.254/latest/meta-data/instance-type/)
-### 
 
-if [[ $INSTANCE_TYPE =~ ^m5\..* ]]; then
-    export AWS_DEV="/dev/sdf" 
-elif [[ $INSTANCE_TYPE =~ ^m4\..* ]]; then
-    export AWS_DEV="/dev/xvdb" 
-else
-    echo -e "Detected unsupported instance type ${INSTANCE_TYPE}.\nWe'll give this a whirl anyway. Defaulting AWS_DEV to /dev/xvdb."
-    export AWS_DEV="/dev/xvdb" 
-fi
-
-# AWS instance introspection
-export AWS_AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
-export AWS_REGION=${AWS_AZ::-1}
-export AWS_INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-export AWS_VOL_TYPE="gp2"
-export AWS_VOL_SIZE="500" # in GB
-
-# Create a 500GB ST1 volume and fetch its ID
-VOL_ID=$(sudo aws ec2 create-volume --region "$AWS_REGION" --availability-zone "$AWS_AZ" --encrypted --size "$AWS_VOL_SIZE" --volume-type "$AWS_VOL_TYPE" --tag-specifications 'ResourceType=volume,Tags=[{Key=Name,Value=batch}]' | jq -r .VolumeId)
-
-# Wait for the volume to become available (block) and then attach it to the instance
-aws ec2 wait volume-available --region "$AWS_REGION" --volume-ids "$VOL_ID" --filters Name=status,Values=available
-aws ec2 attach-volume --region "$AWS_REGION" --device "$AWS_DEV" --instance-id "$AWS_INSTANCE" --volume-id "$VOL_ID"
-aws ec2 wait volume-in-use --region "$AWS_REGION" --volume-ids "$VOL_ID" --filters Name=attachment.device,Values="$AWS_DEV"
-
-# Make sure attached volume is removed post instance termination
-aws ec2 modify-instance-attribute --region "$AWS_REGION" --instance-id "$AWS_INSTANCE" --block-device-mappings "[{\"DeviceName\": \"$AWS_DEV\",\"Ebs\":{\"DeleteOnTermination\":true}}]"
-
-# Wait for $AWS_DEV to show up on the OS level. The above aws "ec2 wait" command is not reliable:
-# ERROR: mount check: cannot open /dev/xvdb: No such file or directory
-#
-# XXX: Find a better way to do this :/
-sleep 10
-
-#This is pretty ugly, but required (for now) to leverage the new m5 instance types 
-if [[ $INSTANCE_TYPE =~ ^m5\..* ]]; then
-    hdparm -z /dev/nvme1n1
-    mkfs.btrfs -f /dev/nvme1n1
-    sudo echo -e "/dev/nvme1n1\t/mnt\tbtrfs\tdefaults\t0\t0" | sudo tee -a /etc/fstab
-else
-    mkfs.btrfs -f "$AWS_DEV"
-    sudo echo -e "$AWS_DEV\t/mnt\tbtrfs\tdefaults\t0\t0" | sudo tee -a /etc/fstab
-fi
-
-# Format/mount
-
-sudo mount -a
-
-# Hard purge docker (meta)data and move docker storage to bigger volume
-# XXX: Not the most efficient way to do this.
-sudo systemctl stop docker
-sudo rm -rf /var/lib/docker && sudo mkdir -p /var/lib/docker
-sudo systemctl start docker # recreate basic docker overlay structure under /var/lib/docker
-sudo systemctl stop docker
-sudo mv /var/lib/docker /mnt/varlibdocker
-sudo ln -sf /mnt/varlibdocker /var/lib/docker
-sudo systemctl start docker
-
-# Inject current AWS Batch underlying ECS cluster ID since the latter is dynamic. Match the computing environment with $STACK we are provisioning
-AWS_CLUSTER_ARN=$(aws ecs list-clusters --region "$AWS_REGION" --output json --query 'clusterArns' | jq -r .[] | grep "$STACK" | awk -F "/" '{ print $2 }')
-sudo sed -i "s/ECS_CLUSTER=\"default\"/ECS_CLUSTER=$AWS_CLUSTER_ARN/" /etc/default/ecs
-
-# Restart systemd/docker service
-sudo systemctl restart docker-container@ecs-agent.service
-
-#Check if snap is installed, if so update amazon ssm agent
-set +e
-snap refresh amazon-ssm-agent --classic
-set -e
-
-# Now create a wrapper script to run the tool inside the job container
+################################################################################
+# Put a wrapper script in place to run the tool inside the job container
 # It can define pre/post processing steps around the actual tool inside
 # the container, without having to bake this behaviour into the container itself.
 # The job definition makes it available to the container (volume/mount)
@@ -167,3 +98,84 @@ echo "All done."
 END
 
 sudo chmod 755 /opt/container/umccrise-wrapper.sh
+
+
+################################################################################
+# Create and mount a data volumn
+
+if [[ $INSTANCE_TYPE =~ ^m5\..* ]]; then
+    export AWS_DEV="/dev/sdf" 
+elif [[ $INSTANCE_TYPE =~ ^m4\..* ]]; then
+    export AWS_DEV="/dev/xvdb" 
+else
+    echo -e "Detected unsupported instance type ${INSTANCE_TYPE}.\nWe'll give this a whirl anyway. Defaulting AWS_DEV to /dev/xvdb."
+    export AWS_DEV="/dev/xvdb" 
+fi
+
+# AWS instance introspection
+export AWS_AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+export AWS_REGION=${AWS_AZ::-1}
+export AWS_INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+export AWS_VOL_TYPE="gp2"
+export AWS_VOL_SIZE="500" # in GB
+
+# Create a 500GB ST1 volume and fetch its ID
+VOL_ID=$(sudo aws ec2 create-volume --region "$AWS_REGION" --availability-zone "$AWS_AZ" --encrypted --size "$AWS_VOL_SIZE" --volume-type "$AWS_VOL_TYPE" --tag-specifications 'ResourceType=volume,Tags=[{Key=Name,Value=batch}]' | jq -r .VolumeId)
+
+# Wait for the volume to become available (block) and then attach it to the instance
+aws ec2 wait volume-available --region "$AWS_REGION" --volume-ids "$VOL_ID" --filters Name=status,Values=available
+aws ec2 attach-volume --region "$AWS_REGION" --device "$AWS_DEV" --instance-id "$AWS_INSTANCE" --volume-id "$VOL_ID"
+aws ec2 wait volume-in-use --region "$AWS_REGION" --volume-ids "$VOL_ID" --filters Name=attachment.device,Values="$AWS_DEV"
+
+# Make sure attached volume is removed post instance termination
+aws ec2 modify-instance-attribute --region "$AWS_REGION" --instance-id "$AWS_INSTANCE" --block-device-mappings "[{\"DeviceName\": \"$AWS_DEV\",\"Ebs\":{\"DeleteOnTermination\":true}}]"
+
+# Wait for $AWS_DEV to show up on the OS level. The above aws "ec2 wait" command is not reliable:
+# ERROR: mount check: cannot open /dev/xvdb: No such file or directory
+#
+# XXX: Find a better way to do this :/
+sleep 10
+
+#This is pretty ugly, but required (for now) to leverage the new m5 instance types 
+if [[ $INSTANCE_TYPE =~ ^m5\..* ]]; then
+    hdparm -z /dev/nvme1n1
+    mkfs.btrfs -f /dev/nvme1n1
+    sudo echo -e "/dev/nvme1n1\t/mnt\tbtrfs\tdefaults\t0\t0" | sudo tee -a /etc/fstab
+else
+    mkfs.btrfs -f "$AWS_DEV"
+    sudo echo -e "$AWS_DEV\t/mnt\tbtrfs\tdefaults\t0\t0" | sudo tee -a /etc/fstab
+fi
+
+# Format/mount
+
+sudo mount -a
+
+
+################################################################################
+# Hard purge docker (meta)data and move docker storage to bigger volume
+# XXX: Not the most efficient way to do this.
+sudo systemctl stop docker
+sudo rm -rf /var/lib/docker && sudo mkdir -p /var/lib/docker
+sudo systemctl start docker # recreate basic docker overlay structure under /var/lib/docker
+sudo systemctl stop docker
+sudo mv /var/lib/docker /mnt/varlibdocker
+sudo ln -sf /mnt/varlibdocker /var/lib/docker
+sudo systemctl start docker
+
+
+################################################################################
+# Inject current AWS Batch underlying ECS cluster ID since the latter is dynamic. Match the computing environment with $STACK we are provisioning
+# Note: this will fail in environments where no cluster exists, i.e. in debug/test environments
+AWS_CLUSTER_ARN=$(aws ecs list-clusters --region "$AWS_REGION" --output json --query 'clusterArns' | jq -r .[] | grep "$STACK" | awk -F "/" '{ print $2 }')
+if [[ ! -z "$AWS_CLUSTER_ARN" ]]; then
+  sudo sed -i "s/ECS_CLUSTER=\"default\"/ECS_CLUSTER=$AWS_CLUSTER_ARN/" /etc/default/ecs
+fi
+
+# Restart systemd/docker service
+sudo systemctl restart docker-container@ecs-agent.service
+
+#Check if snap is installed, if so update amazon ssm agent
+set +e
+snap refresh amazon-ssm-agent --classic
+set -e
+
