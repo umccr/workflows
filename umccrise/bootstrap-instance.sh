@@ -96,7 +96,7 @@ timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_out
 publish RunUMCCRISE $duration
 
 echo "PUSH results"
-timer aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrise_${timestamp}
+timer aws s3 sync --delete --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrised
 publish S3PushResults $duration
 
 echo "Cleaning up..."
