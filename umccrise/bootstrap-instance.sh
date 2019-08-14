@@ -125,9 +125,9 @@ export AWS_AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availa
 export AWS_REGION=${AWS_AZ::-1}
 export AWS_INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 export AWS_VOL_TYPE="gp2"
-export AWS_VOL_SIZE="500" # in GB
+export AWS_VOL_SIZE="1000" # in GB
 
-# Create a 500GB ST1 volume and fetch its ID
+# Create volume and fetch its ID
 VOL_ID=$(sudo aws ec2 create-volume --region "$AWS_REGION" --availability-zone "$AWS_AZ" --encrypted --size "$AWS_VOL_SIZE" --volume-type "$AWS_VOL_TYPE" --tag-specifications 'ResourceType=volume,Tags=[{Key=Name,Value=batch}]' | jq -r .VolumeId)
 
 # Wait for the volume to become available (block) and then attach it to the instance
