@@ -17,14 +17,15 @@ set -euxo pipefail
 # NOTE: This script expects the following variables to be set on the environment
 S3_DATA_BUCKET=umccr-primary-data-prod/Patients
 S3_WGS_INPUT_DIR=PM3056445/WGS/2019-08-09/umccrised/PM3056445__MDX190101_DNA052297-T
-SAMPLE_BASE=${S3_WGS_INPUT_DIR##*/}
+SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
+SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
-# Preparing umccrise data variables
-PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv)
-PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv)
-STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.cnv)
+# Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
+PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
+PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
+STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.tsv | awk '{print $4}')
 
 export AWS_DEFAULT_REGION="ap-southeast-2"
 CONTAINER_MOUNT_POINT="/work"
@@ -32,24 +33,24 @@ CONTAINER_MOUNT_POINT="/work"
 echo "Processing $S3_WTS_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from ${S3_REFDATA_BUCKET}"
 
 # create a job specific output directory
-job_output_dir=/work/output/
+job_output_dir=/work/output
 
 echo "PULL ref data from S3 bucket"
-aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/ /work/ref_data/
+aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/ /work/ref_data
 
 echo "PULL input (bcbio WTS results) from S3 bucket"
-aws s3 sync --only-show-errors --exclude=salmon/* --exclude qc/* --excude *.bam s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/
+aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/MDX190102_RNA010943
 
 echo "PULL umccrise data from S3 bucket"
-aws s3 sync --only-show-errors ${PCGR} /work/umccrise/pcgr/
-aws s3 sync --only-show-errors ${PURPLE} /work/umccrise/purple/
-aws s3 sync --only-show-errors ${STRUCTURAL} /work/umccrise/structural/
+aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr
+aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple
+aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural
 
 echo "RUN WTS-report"
-Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_BASE}  --dataset paad  --count_file /work/WTS_data/kallisto/abundance.tsv --report_dir /work/output/  --umccrise /work/umccrise/ --ref_data_dir /work/ref_data/
+Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --count_file /work/WTS_data/${SAMPLE_WTS_BASE}/kallisto/abundance.tsv --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 
 echo "PUSH results"
-aws s3 sync --delete --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/WTS-report
+aws s3 sync --delete --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/${SAMPLE_WTS_BASE}
 
 echo "Cleaning up..."
 rm -rf "${job_output_dir}"
@@ -57,4 +58,4 @@ rm -rf "${job_output_dir}"
 echo "All done."
 END
 
-sudo chmod 755 /opt/container/umccrise-wrapper.sh
+sudo chmod 755 /opt/container/WTS-report-wrapper.sh
