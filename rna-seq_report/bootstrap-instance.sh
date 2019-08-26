@@ -8,11 +8,10 @@ set -euxo pipefail
 # the container, without having to bake this behaviour into the container itself.
 # The job definition makes it available to the container (volume/mount)
 # and defines how to call it (command).
-sudo mkdir /opt/container
+mkdir /opt/container
 
-sudo tee /opt/container/WTS-report-wrapper.sh << 'END'
+tee /opt/container/WTS-report-wrapper.sh << 'END'
 #!/bin/bash
-set -euxo pipefail
 
 # NOTE: This script expects the following variables to be set on the environment
 S3_DATA_BUCKET=umccr-primary-data-prod/Patients
@@ -21,6 +20,9 @@ SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
 SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
+
+#test awscli
+pip install awscli
 
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
 PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
@@ -39,7 +41,7 @@ echo "PULL ref data from S3 bucket"
 aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/ /work/ref_data
 
 echo "PULL input (bcbio WTS results) from S3 bucket"
-aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/MDX190102_RNA010943
+aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/${SAMPLE_WTS_BASE}
 
 echo "PULL umccrise data from S3 bucket"
 aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr
@@ -58,4 +60,4 @@ rm -rf "${job_output_dir}"
 echo "All done."
 END
 
-sudo chmod 755 /opt/container/WTS-report-wrapper.sh
+chmod 755 /opt/container/WTS-report-wrapper.sh
