@@ -38,7 +38,7 @@ echo "Processing $S3_WTS_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from $
 job_output_dir=/work/output
 
 echo "PULL ref data from S3 bucket"
-aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/ /work/ref_data
+aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/ /work/WTS_ref_data
 
 echo "PULL input (bcbio WTS results) from S3 bucket"
 aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/${SAMPLE_WTS_BASE}
@@ -61,3 +61,6 @@ echo "All done."
 END
 
 chmod 755 /opt/container/WTS-report-wrapper.sh
+
+# run the script inside the container
+sh /opt/container/WTS-report-wrapper.sh
