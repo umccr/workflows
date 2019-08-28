@@ -21,9 +21,6 @@ S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
 SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
-#test awscli
-pip install awscli
-
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
 PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
 PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
