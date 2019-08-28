@@ -49,7 +49,7 @@ aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/$
 aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural
 
 echo "RUN WTS-report"
-Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --count_file /work/WTS_data/${SAMPLE_WTS_BASE}/kallisto/abundance.tsv --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
+Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 
 echo "PUSH results"
 aws s3 sync --delete --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/${SAMPLE_WTS_BASE}
