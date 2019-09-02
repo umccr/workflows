@@ -2,14 +2,6 @@
 # credit where is due: https://aws.amazon.com/blogs/compute/building-high-throughput-genomic-batch-workflows-on-aws-batch-layer-part-3-of-4/
 set -euxo pipefail
 
-# Install and start docker service
-sudo yum update -y
-sudo amazon-linux-extras install docker -y
-sudo service docker start
-
-# Add the ssm-user to the docker group 
-sudo usermod -a -G docker ssm-user
-
 ################################################################################
 # Put a wrapper script in place to run the tool inside the job container
 # It can define pre/post processing steps around the actual tool inside
