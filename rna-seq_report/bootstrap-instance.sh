@@ -8,9 +8,9 @@ set -euxo pipefail
 # the container, without having to bake this behaviour into the container itself.
 # The job definition makes it available to the container (volume/mount)
 # and defines how to call it (command).
-mkdir /opt/container
+sudo mkdir /opt/container
 
-tee /opt/container/WTS-report-wrapper.sh << 'END'
+sudo tee /opt/container/WTS-report-wrapper.sh << 'END'
 #!/bin/bash
 
 # NOTE: This script expects the following variables to be set on the environment
@@ -60,5 +60,16 @@ END
 
 sudo chmod 755 /opt/container/WTS-report-wrapper.sh
 
+# Install and start docker service
+sudo yum update -y
+sudo amazon-linux-extras install docker -y
+sudo service docker start
+
+# Add the ssm-user to the docker group 
+sudo usermod -a -G docker ssm-user
+
 # run the script inside the container
-sh /opt/container/WTS-report-wrapper.sh
+docker run --rm -v /opt/container/WTS-report-wrapper.sh:/work/bootstrap.sh umccr/wtsreport:0.1.2 /work/bootstrap.sh
+
+# clean-up directory
+sudo rm -r /opt/container/
