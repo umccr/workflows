@@ -3,7 +3,8 @@ import os
 import boto3
 
 def lambda_handler(event, context):
-    # TODO implement
+    print("Received event: " + json.dumps(event, indent=2))
+
     batch_client = boto3.client('batch')
     s3 = boto3.client('s3')
     
@@ -13,8 +14,9 @@ def lambda_handler(event, context):
     data_wts = os.path.dirname(data_wts_date_dir)
     data_dir = os.path.dirname(os.path.dirname(data_wts))+"/"
     job_name = data_bucket + "---" + data_wts_date_dir.replace('/', '_').replace('.', '_')
+    job_definition = os.environ.get('JOBDEF')
+    refdata_bucket = os.environ.get('REFDATA_BUCKET')
 
-    #print(f"bucket:{data_bucket}, data_dir:{data_dir}, data_wts_dir:{data_wts_dir}")
     #construct WTS results path
     data_intermediate = data_wts_date_dir+"final/"
     response1 = s3.list_objects(Bucket=data_bucket, Prefix=data_intermediate, Delimiter='/')
@@ -49,4 +51,28 @@ def lambda_handler(event, context):
                 if val.split(("/"))[-2].startswith(sample_id):
                     data_wgs_dir = val
     
-    return data_wts_dir, data_wgs_dir
+    container_overrides['environment'] = [
+        {'name': 'S3_INPUT_WTS_DIR', 'value': result_wts_dir},
+        {'name': 'S3_INPUT_WGS_DIR', 'value': result_wgs_dir}
+        {'name': 'S3_DATA_BUCKET', 'value': data_bucket},
+        {'name': 'S3_REFDATA_BUCKET', 'value': refdata_bucket}
+    ]
+
+    print("jobName: " + job_name)
+    print("containerOverrides: ")
+    print(container_overrides)
+    print("jobDefinition: ")
+    print(job_definition)
+    response = batch_client.submit_job(
+        containerOverrides=container_overrides,
+        jobDefinition=job_definition,
+        jobName=job_name,
+        jobQueue=job_queue
+    )
+
+    # Log response from AWS Batch
+    print("Response: " + json.dumps(response, indent=2))
+    # Return the jobId
+    event['jobId'] = response['jobId']
+    return event
+    
