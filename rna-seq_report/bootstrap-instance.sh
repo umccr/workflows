@@ -14,12 +14,14 @@ sudo tee /opt/container/WTS-report-wrapper.sh << 'END'
 #!/bin/bash
 
 # NOTE: This script expects the following variables to be set on the environment
-S3_DATA_BUCKET=umccr-primary-data-prod/Patients
-S3_WGS_INPUT_DIR=PM3056445/WGS/2019-08-09/umccrised/PM3056445__MDX190101_DNA052297-T
-SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
-S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
-SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
+#S3_DATA_BUCKET=umccr-primary-data-prod/Patients
+#S3_WGS_INPUT_DIR=PM3056445/WGS/2019-08-09/umccrised/PM3056445__MDX190101_DNA052297-T
+#S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
+# Will need to change this to a different variable, once we have a reference bucker in place for the WTS-reports.
 S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
+
+SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
+SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
 PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
@@ -67,9 +69,3 @@ sudo service docker start
 
 # Add the ssm-user to the docker group 
 sudo usermod -a -G docker ssm-user
-
-# run the script inside the container
-docker run --rm -v /opt/container/WTS-report-wrapper.sh:/work/bootstrap.sh umccr/wtsreport:0.1.2 /work/bootstrap.sh
-
-# clean-up directory
-sudo rm -r /opt/container/

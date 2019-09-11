@@ -75,4 +75,3 @@ def lambda_handler(event, context):
     # Return the jobId
     event['jobId'] = response['jobId']
     return event
-    
