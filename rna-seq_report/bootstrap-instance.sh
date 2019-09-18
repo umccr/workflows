@@ -63,9 +63,9 @@ END
 sudo chmod 755 /opt/container/WTS-report-wrapper.sh
 
 # Install and start docker service
-sudo yum update -y
-sudo amazon-linux-extras install docker -y
-sudo service docker start
+#sudo yum update -y
+#sudo amazon-linux-extras install docker -y
+#sudo service docker start
 
 # Add the ssm-user to the docker group 
-sudo usermod -a -G docker ssm-user
+#sudo usermod -a -G docker ssm-user
