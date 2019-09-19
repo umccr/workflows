@@ -17,16 +17,19 @@ sudo tee /opt/container/WTS-report-wrapper.sh << 'END'
 #S3_DATA_BUCKET=umccr-primary-data-prod/Patients
 #S3_WGS_INPUT_DIR=PM3056445/WGS/2019-08-09/umccrised/PM3056445__MDX190101_DNA052297-T
 #S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
-# Will need to change this to a different variable, once we have a reference bucker in place for the WTS-reports.
+# Will need to change this to a different variable, once we have a reference bucket in place for the WTS-reports.
 S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
+# Extracting sample names from container parameters passed by lambda function
 SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
+echo "SAMPLE_WGS_BASE: ${SAMPLE_WGS_BASE} SAMPLE_WTS_BASE: ${SAMPLE_WTS_BASE}"
 
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
 PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
 PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
 STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.tsv | awk '{print $4}')
+echo "PCGR: ${PCGR} PURPLE: ${PURPLE} STRUCTURAL: ${STRUCTURAL}"
 
 export AWS_DEFAULT_REGION="ap-southeast-2"
 CONTAINER_MOUNT_POINT="/work"
@@ -43,16 +46,16 @@ echo "PULL input (bcbio WTS results) from S3 bucket"
 aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/${SAMPLE_WTS_BASE}
 
 echo "PULL umccrise data from S3 bucket"
-aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
-aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple/
-aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural/
+aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
+aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple/
+aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural/
 
 echo "RUN WTS-report"
 #docker run --rm -v /work:/work umccr/wtsreport:0.1.2 Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 
 echo "PUSH results"
-aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_REFDATA_BUCKET}/${SAMPLE_WTS_BASE}
+aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/
 
 echo "Cleaning up..."
 rm -rf "${job_output_dir}"
