@@ -18,7 +18,7 @@ sudo tee /opt/container/WTS-report-wrapper.sh << 'END'
 #S3_WGS_INPUT_DIR=PM3056445/WGS/2019-08-09/umccrised/PM3056445__MDX190101_DNA052297-T
 #S3_WTS_INPUT_DIR=PM3056445/WTS/2019-08-12/final/MDX190102_RNA010943
 # Will need to change this to a different variable, once we have a reference bucket in place for the WTS-reports.
-S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
+# S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
 # Extracting sample names from container parameters passed by lambda function
 SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
