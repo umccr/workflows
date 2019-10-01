@@ -26,8 +26,7 @@ SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 echo "SAMPLE_WGS_BASE: ${SAMPLE_WGS_BASE} SAMPLE_WTS_BASE: ${SAMPLE_WTS_BASE}"
 
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
-if [ ! -z "$S3_WGS_INPUT_DIR" ]
-then
+if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
     PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
     STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.tsv | awk '{print $4}')
@@ -57,11 +56,10 @@ aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structur
 echo "RUN WTS-report"
 #docker run --rm -v /work:/work umccr/wtsreport:0.1.2 Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 #check if umccrise results input is provided or not
-if [ ! -z "$S3_WGS_INPUT_DIR" ]
-then
-    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
+if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
+    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset ${DATASET}  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 else
-    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir} --ref_data_dir /work/WTS_ref_data
+    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset ${DATASET}  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir} --ref_data_dir /work/WTS_ref_data
 fi
 
 echo "PUSH results"
