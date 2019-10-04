@@ -12,6 +12,7 @@ sudo mkdir /opt/container
 
 sudo tee /opt/container/WTS-report-wrapper.sh << 'END'
 #!/bin/bash
+set -euxo pipefail
 
 # NOTE: This script expects the following variables to be set on the environment
 #S3_DATA_BUCKET=umccr-primary-data-prod/Patients
@@ -58,9 +59,9 @@ echo "RUN WTS-report"
 #docker run --rm -v /work:/work umccr/wtsreport:0.1.2 Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 #check if umccrise results input is provided or not
 if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
-    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset ${DATASET}  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
+    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset ${REF_DATASET}  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
 else
-    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset ${DATASET}  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir} --ref_data_dir /work/WTS_ref_data
+    Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset ${REF_DATASET}  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir} --ref_data_dir /work/WTS_ref_data
 fi
 
 echo "PUSH results"
