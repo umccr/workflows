@@ -26,8 +26,8 @@ SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 echo "SAMPLE_WGS_BASE: ${SAMPLE_WGS_BASE} SAMPLE_WTS_BASE: ${SAMPLE_WTS_BASE}"
 
-# Prepare s3 output directory from WTS results input directory
-S3_OUTPUT_PATH=dirname $(dirname ${S3_WTS_INPUT_DIR})
+# Prepare s3 output directory from WTS results input directory (go two levels up)
+S3_OUTPUT_PATH=$(dirname $(dirname ${S3_WTS_INPUT_DIR}))
 echo "S3_OUTPUT_PATH: ${S3_OUTPUT_PATH}"
 
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
