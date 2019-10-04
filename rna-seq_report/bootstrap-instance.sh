@@ -33,6 +33,7 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     echo "PCGR: ${PCGR} PURPLE: ${PURPLE} STRUCTURAL: ${STRUCTURAL}"
 else
     echo "Umccrise results on WGS data for the sample are not available"
+fi
 
 export AWS_DEFAULT_REGION="ap-southeast-2"
 CONTAINER_MOUNT_POINT="/work"
