@@ -25,6 +25,10 @@ SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
 echo "SAMPLE_WGS_BASE: ${SAMPLE_WGS_BASE} SAMPLE_WTS_BASE: ${SAMPLE_WTS_BASE}"
 
+# Prepare s3 output directory from WTS results input directory
+S3_OUTPUT_PATH=dirname $(dirname ${S3_WTS_INPUT_DIR})
+echo "S3_OUTPUT_PATH: ${S3_OUTPUT_PATH}"
+
 # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
 if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
@@ -63,7 +67,7 @@ else
 fi
 
 echo "PUSH results"
-aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/wts-report
+aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_OUTPUT_PATH}/wts-report
 
 echo "Cleaning up..."
 rm -rf "${job_output_dir}"
