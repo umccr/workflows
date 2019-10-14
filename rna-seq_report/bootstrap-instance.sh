@@ -21,6 +21,10 @@ set -euxo pipefail
 # Will need to change this to a different variable, once we have a reference bucket in place for the WTS-reports.
 # S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
+# Get rid of the trailing slash if exists in the input paths
+S3_WGS_INPUT_DIR=${S3_WGS_INPUT_DIR%/}
+S3_WTS_INPUT_DIR=${S3_WTS_INPUT_DIR%/}
+
 # Extracting sample names from container parameters passed by lambda function
 SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
