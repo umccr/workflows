@@ -26,8 +26,7 @@ set -euxo pipefail
 # - CONTAINER_MEM     : The memory to assign to the container (for metric logging only)
 
 # For backwards compatibility
-if test -z "$S3_RESULT_BUCKET"
-then
+if [ ! -n "${S3_RESULT_BUCKET+1}" ]; then
     S3_RESULT_BUCKET="$S3_DATA_BUCKET"
 fi
 
