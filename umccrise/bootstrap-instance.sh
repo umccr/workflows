@@ -20,10 +20,16 @@ set -euxo pipefail
 # NOTE: This script expects the following variables to be set on the environment
 # - S3_INPUT_DIR      : The bcbio directory (S3 prefix) for which to run UMCCRise
 # - S3_DATA_BUCKET    : The S3 bucket that holds the above data
+# - S3_RESULT_BUCKET  : The S3 bucket that recieves the result data
 # - S3_REFDATA_BUCKET : The S3 bucket for the reference data expected by UMCCRise
 # - CONTAINER_VCPUS   : The number of vCPUs to assign to the container (for metric logging only)
 # - CONTAINER_MEM     : The memory to assign to the container (for metric logging only)
 
+# For backwards compatibility
+if test -z "$S3_RESULT_BUCKET"
+then
+    S3_RESULT_BUCKET="$S3_DATA_BUCKET"
+fi
 
 # NOTE: this setup is NOT setup for multiple jobs per instance. With multiple jobs running in parallel
 # on the same instance there could be issues related to shared volume/disk space, shared memeory space, etc
@@ -96,7 +102,7 @@ timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_out
 publish RunUMCCRISE $duration
 
 echo "PUSH results"
-timer aws s3 sync --delete --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/umccrised
+timer aws s3 sync --delete --only-show-errors ${job_output_dir} s3://${S3_RESULT_BUCKET}/${S3_INPUT_DIR}/umccrised
 publish S3PushResults $duration
 
 echo "Cleaning up..."
