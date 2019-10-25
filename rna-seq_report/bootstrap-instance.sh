@@ -38,7 +38,7 @@ echo "S3_OUTPUT_PATH: ${S3_OUTPUT_PATH}"
 if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
     PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
-    STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta-pass.tsv | awk '{print $4}')
+    STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.tsv | awk '{print $4}')
     echo "PCGR: ${PCGR} PURPLE: ${PURPLE} STRUCTURAL: ${STRUCTURAL}"
 else
     echo "Umccrise results on WGS data for the sample are not available"
