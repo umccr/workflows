@@ -52,8 +52,9 @@ echo "Processing $S3_WTS_INPUT_DIR in bucket $S3_DATA_BUCKET with refdata from $
 # create a job specific output directory
 job_output_dir=/work/output
 
+# supposes reference data exists in '/WTS-report/data' inside the reference data bucket
 echo "PULL ref data from S3 bucket"
-aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/ /work/WTS_ref_data
+aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/WTS-report/data /work/WTS_ref_data
 
 echo "PULL input (bcbio WTS results) from S3 bucket"
 aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/${SAMPLE_WTS_BASE}
