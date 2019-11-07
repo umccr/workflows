@@ -21,28 +21,40 @@ set -euxo pipefail
 # Will need to change this to a different variable, once we have a reference bucket in place for the WTS-reports.
 # S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
-# Get rid of the trailing slash if exists in the input paths
-S3_WGS_INPUT_DIR=${S3_WGS_INPUT_DIR%/}
-S3_WTS_INPUT_DIR=${S3_WTS_INPUT_DIR%/}
-
-# Extracting sample names from container parameters passed by lambda function
-SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
-SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
-echo "SAMPLE_WGS_BASE: ${SAMPLE_WGS_BASE} SAMPLE_WTS_BASE: ${SAMPLE_WTS_BASE}"
-
-# Prepare s3 output directory from WTS results input directory (go two levels up)
-S3_OUTPUT_PATH=$(dirname $(dirname ${S3_WTS_INPUT_DIR}))
-echo "S3_OUTPUT_PATH: ${S3_OUTPUT_PATH}"
-
-# Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
+# Preparing WGS input data - exists
 if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
+    # Get rid of the trailing slash if exists in the input path
+    S3_WGS_INPUT_DIR=${S3_WGS_INPUT_DIR%/}
+
+    Extracting sample name from WGS container parameter passed by lambda function
+    SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
+
+    # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
     PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
     PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
     STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.tsv | awk '{print $4}')
     echo "PCGR: ${PCGR} PURPLE: ${PURPLE} STRUCTURAL: ${STRUCTURAL}"
+
+    echo "PULL umccrise data from S3 bucket"
+    aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
+    aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple/
+    aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural/                                                          
+
 else
     echo "Umccrise results on WGS data for the sample are not available"
 fi
+
+# Preapring WTS input data and directories
+
+# Get rid of the trailing slash if exists in the input paths
+S3_WTS_INPUT_DIR=${S3_WTS_INPUT_DIR%/}
+
+# Extracting sample name from WTS container parameter passed by lambda function
+SAMPLE_WTS_BASE=${S3_WTS_INPUT_DIR##*/}
+
+# Prepare s3 output directory from WTS results input directory (go two levels up)
+S3_OUTPUT_PATH=$(dirname $(dirname ${S3_WTS_INPUT_DIR}))
+echo "S3_OUTPUT_PATH: ${S3_OUTPUT_PATH}"
 
 export AWS_DEFAULT_REGION="ap-southeast-2"
 CONTAINER_MOUNT_POINT="/work"
@@ -58,11 +70,6 @@ aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/WTS-report/data /work/W
 
 echo "PULL input (bcbio WTS results) from S3 bucket"
 aws s3 sync --only-show-errors --exclude="salmon/*" --exclude "qc/*" --exclude "*.bam" s3://${S3_DATA_BUCKET}/${S3_WTS_INPUT_DIR}/ /work/WTS_data/${SAMPLE_WTS_BASE}
-
-echo "PULL umccrise data from S3 bucket"
-aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
-aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple/
-aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural/
 
 echo "RUN WTS-report"
 #docker run --rm -v /work:/work umccr/wtsreport:0.1.2 Rscript /rmd_files/RNAseq_report.R --sample_name ${SAMPLE_WTS_BASE} --dataset paad  --bcbio_rnaseq /work/WTS_data/${SAMPLE_WTS_BASE} --report_dir ${job_output_dir}  --umccrise /work/umccrise/${SAMPLE_WGS_BASE} --ref_data_dir /work/WTS_ref_data
