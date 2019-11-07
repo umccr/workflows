@@ -21,6 +21,9 @@ set -euxo pipefail
 # Will need to change this to a different variable, once we have a reference bucket in place for the WTS-reports.
 # S3_REFDATA_BUCKET=umccr-misc-temp/WTS-report/data
 
+# Set S3_WGS_INPUT_DIR to an empty string if it is not set in the trigger lambda
+S3_WGS_INPUT_DIR=${S3_WGS_INPUT_DIR:-}
+
 # Preparing WGS input data - exists
 if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     # Get rid of the trailing slash if exists in the input path
