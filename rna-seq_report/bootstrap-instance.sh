@@ -29,7 +29,7 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     # Get rid of the trailing slash if exists in the input path
     S3_WGS_INPUT_DIR=${S3_WGS_INPUT_DIR%/}
 
-    Extracting sample name from WGS container parameter passed by lambda function
+    # Extracting sample name from WGS container parameter passed by lambda function
     SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 
     # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
