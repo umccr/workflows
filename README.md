@@ -19,18 +19,21 @@ UMCCR production workflows
 * Explain umccr_cancer_genes.hg38.transcript.bed
 * Explain umccr_cancer_genes.latest.genes
 
-**Snippets:**
+#### Standard Chromosomes only
 
+Variants are being called for [chr1-22/X/Y/MT only](https://bcbio-nextgen.readthedocs.io/en/latest/contents/configuration.html#analysis-regions), i.e., limited to the standard chromosomes:
 
 > `      exclude_regions: [altcontigs]`
 
-Variants are being called for [chr1-22/X/Y/MT only](https://bcbio-nextgen.readthedocs.io/en/latest/contents/configuration.html#analysis-regions), i.e., limited to the standard chromosomes. We avoid [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions.
+ We avoid [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions.
 
-### Variant Blocklist
+#### Variant Blocklist
+
+We also avoid regions in the [ENCODE 'blocklist'](https://github.com/Boyle-Lab/Blacklist) [hg38-blacklist.v2.bed.gz](https://github.com/Boyle-Lab/Blacklist/tree/master/lists) for SNV calling only:
 
 > `      variant_regions: hg38_noalt_noBlacklist.bed`
 
-We also avoid regions in the [ENCODE 'blocklist'](https://github.com/Boyle-Lab/Blacklist) [hg38-blacklist.v2.bed.gz](https://github.com/Boyle-Lab/Blacklist/tree/master/lists) of anomalous regions. This not only improves overall precision of our calls but also speeds up the variant calling process.
+This not only improves overall precision of our calls but also speeds up the variant calling process.
 
 > hg38_noalt_noBlacklist.bed was supposed to be the result of bedtools subtract of hg38_noalt and the corresponding file in https://github.com/Boyle-Lab/Blacklist/tree/master/lists
 
