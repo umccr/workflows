@@ -167,7 +167,6 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 
 We are not calling variants for regions contained in the [blocklist](#variant-blocklist). The following genes from the _UMCCR Cancer Gene List_ (1) overlap (completely or partially) one or more blocklist regions:
 
-
 | Chromosome | Start     | Stop      | Gene   |
 |:----------:|----------:|----------:|--------|
 | chr3       | 36993331  | 37050918  | MLH1   |
@@ -188,11 +187,20 @@ We are not calling variants for regions contained in the [blocklist](#variant-bl
 | chrX       | 1462571   | 1537107   | P2RY8  |
 | chrX       | 67544035  | 67730619  | AR     |
 
+**Todo:**
+
+* [ ] Check for overlap between this blocklist table and the [SAGE Hotspots](#4.-SAGE-Hotspots)
+
 #### UMCCR Cancer Gene List and Segmental Duplications
 
+Many of our genes of interest overlap with regions of segmental duplication (in both GRCh37 and hg38) which can [make alignment and variant calling tricky](https://blog.goldenhelix.com/why-you-should-care-about-segmental-duplications/). We rely on data from the [Segmental Duplication Database](http://humanparalogy.gs.washington.edu/) (hg38 data from <http://humanparalogy.gs.washington.edu/build38/data/>, downloaded 2019-11-05) at WashU to flag problematic genes and gene regions. Some genes - such as U2AF1 - are completely duplicated, but for the majority of our target genes the impact is limited to intronic InDels that are difficult to resolve.
 
+The overlap between the retrieved segmental duplication regions and APPRIS cannonical transcripts (xx confirm) is [generated automatically](https://github.com/umccr/genes/blob/master/scripts/intersect_superdup.md) and results are listed on [Github](https://github.com/umccr/genes/blob/master/superdups/hg38_cod_dup.tsv). We will rely on coverage statistics generated from our panel of normal (xx Add link) to identify problematic regions in more detail. 
 
+**Todo:**
 
+* [ ] Restrict overlap to APPRIS canonical transcripts to harmonize across document (if not already the case)
+* [ ] Looking at IGV I am not sure that https://github.com/umccr/genes/blob/master/superdups/hg38_cod_dup.tsv is really just coding; most regions seem to be intronic? Need to grab BED file to confirm
 
 
 ## ToDo
