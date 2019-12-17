@@ -16,7 +16,7 @@ UMCCR production workflows
 
 > `      exclude_regions: [altcontigs]`
 
-Variants are being called for chr1-22/X/Y/MT only, i.e., limited to the standard chromosomes. We avoid [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions.
+Variants are being called for [chr1-22/X/Y/MT only](https://bcbio-nextgen.readthedocs.io/en/latest/contents/configuration.html#analysis-regions), i.e., limited to the standard chromosomes. We avoid [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions.
 
 > `      variant_regions: hg38_noalt_noBlacklist.bed`
 
@@ -34,7 +34,7 @@ We also avoid regions in the [ENCODE 'blocklist'](https://github.com/Boyle-Lab/B
 
 ## Gene Lists
 
-### UMCCR Cancer Gene List
+### 1. UMCCR Cancer Gene List
 
 UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. The core list is [automatically generated](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
 
@@ -57,22 +57,63 @@ UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key gene
   * Foundation Heme, 
   * Vogelstein.
 
-Gene lists for all (xx most) of these can be found in the [sources](https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur) folder.
+Gene lists for all (xx most) of these sources can be found in the [sources](https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur) folder. The combined list contains [1250 genes](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.2019-07-31.tsv). 
 
-The result is a list of 1248 genes. All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/); for now the latest gene list can be found in [Github](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). 
+All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/); for now the latest gene list can be found in [Github](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). 
+
+> Also rebuild the BED files to contain only canonical transcripts (Vlad)
 
 **Todo:**
 
 * [ ] Distinguish between / clean up https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources vs https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur
 * [ ] Add missing gene lists to `sources` folder (e.g., Vogelstein)
-* [ ] Provide URLs, verions for all gene lists in `sources` folder
+* [ ] Provide URLs, verions for all gene lists in `sources` folder; some information at https://trello.com/c/7j3KFMiL/184-umccr-cancer-genes?menu=filter&filter=member:oliverhofmann
 * [ ] Move cancer gene list code to UMCCR / workflow repos
 
+### 2.  Custom Cancer Predisposition Gene List
 
-* List all current gene panels used throughout the workflows
-* Document / links to https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources
-* See https://trello.com/c/ZN52jqqs/421-workflow-add-gene-lists-to-panelapp
+To assess predisposition to cancer we use CPSR's [Cancer Predisposition Genes](https://github.com/sigven/cpsr#cancer-predisposition-genes), a virtual panel based on the union of:
 
+* 152 genes that were curated and established within TCGA’s pan-cancer study ([TCGA_PANCAN_18, Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
+* 107 protein-coding genes that has been manually curated in COSMIC’s [CGC_86, Cancer Gene Census v90](https://cancer.sanger.ac.uk/census),
+* 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium (NCGC, <http://cancergenomics.no>)
+
+The combination of the three sources resulted in a non-redundant set of [213 protein-coding genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) of relevance for predisposition to tumor development. We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future. 
+
+**Todo:**
+
+* [ ] Version predisposition gene list (via PanelApp if possible)
+
+
+### 3. 
+
+### 4. 
+
+### 5. 
+
+### Gene List Usage
+
+* CPSR uses the "2. Custom Cancer Predisposition Gene List"
+
+
+Cancer Report: Annotations are subset vs APPRIS (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.fze4hyo5pnhg). Need the principal transcript list somewhere searchable and pinned to the current umccrise version 
+Cancer Report: UMCCR gene list.
+Cancer Report: Known fusion pairs via HMF https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownFusionPairs.csv 
+Cancer Report: Known promiscuous fusion genes via HMF. Can be traced to https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownPromiscuousFive.csv and https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownPromiscuousThree.csv. 
+Cancer Report: FusionCatcher known pairs. Needs a link or we need to host the currently used known pair set.
+Cancer Report: Structural variants references oncogene, tsgene annotation. Source of that gene list (or source of the annotation for the gene list if identical to the ones above)?
+UMCCR Gene CNV Calls: UMCCR genes.
+MultiQC Coverage:  UMCCR genes.
+Cancer Report: CDS of UMCCR genes.
+SAGE: targets a list of coding regions and known hotspots outlined above (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.vjse6x9bo39c). Generate a list of genes (and ideally hotspots). 
+SAGE: low quality sites are flagged (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.od59cxu28mr9). Need overlap of this list against our own cancer gene lists from above - at least vs the UMCCR genes.
+
+
+
+* [ ] List all current gene panels used throughout the workflows
+* [ ] Document / links to https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources
+* [ ] See https://trello.com/c/ZN52jqqs/421-workflow-add-gene-lists-to-panelapp
+* [ ] See https://trello.com/c/JOBhtZIE/374-workflow-unify-gene-list-information
 
 
 
