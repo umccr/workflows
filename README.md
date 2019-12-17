@@ -7,7 +7,7 @@ UMCCR production workflows
 * bcbio intro
 * link to YAML
 * bcbio notes from https://app.slack.com/docs/T025SCF7W/FM38J7UHE
-* Links to the exact hg38 build used
+* Links to the exact hg38 build used; in particular explore ALT contig issue
 * Explain umccr_cancer_genes.hg38.transcript.bed
 * Explain umccr_cancer_genes.latest.genes
 
@@ -17,6 +17,8 @@ UMCCR production workflows
 > `      exclude_regions: [altcontigs]`
 
 Variants are being called for [chr1-22/X/Y/MT only](https://bcbio-nextgen.readthedocs.io/en/latest/contents/configuration.html#analysis-regions), i.e., limited to the standard chromosomes. We avoid [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions.
+
+### Variant Blocklist
 
 > `      variant_regions: hg38_noalt_noBlacklist.bed`
 
@@ -140,14 +142,14 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 ### Gene List Usage
 
 * bcbio SV prioritization: `umccr_cancer_genes.latest.genes` (xx Clarify interaction with umccrise)
-* MultiQC: "1. UMCCR Cancer Gene List" for coverage assessment (General Statistics table) (xx canonical transcripts only?)
-* CPSR: "2. Custom Cancer Predisposition Gene List" for tier assessment
-* Cancer Report: "1. UMCCR Cancer Gene List" (xx for which tables, sets?)
-* Cancer Report: CDS of "1. UMCCR Cancer Gene List" for SNV Allelic Frequencies in Key Genes CDS
-* Cancer Report: "1. UMCCR Cancer Gene List" for UMCCR Gene CNV Calls table
+* MultiQC: _UMCCR Cancer Gene List_ (1) for coverage assessment (General Statistics table) (xx canonical transcripts only?)
+* CPSR: _Custom Cancer Predisposition Gene List_ (2) for tier assessment
+* Cancer Report: _UMCCR Cancer Gene List_ (1) (xx for which tables, sets?)
+* Cancer Report: CDS of _UMCCR Cancer Gene List_ (1) for SNV Allelic Frequencies in Key Genes CDS
+* Cancer Report: _UMCCR Cancer Gene List_ (1) for UMCCR Gene CNV Calls table
 * Cancer Report: (xx known fusion pairs?)
-* SAGE: "4. SAGE Hotspots" to rescue low allelic frequency somatic calls in key sites
-* SAGE: "5. Low Quality Sites" (xx is this really during the SAGE step? How are low quality site annotations used (check workflow doc)?)
+* SAGE: _SAGE Hotspots_ (4) to rescue low allelic frequency somatic calls in key sites
+* SAGE: _Low Quality Sites_ (5) (xx is this really during the SAGE step? How are low quality site annotations used (check workflow doc)?)
 
 **Todo:**
 
@@ -160,6 +162,40 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 
 ### Cancer Genes with incomplete coverage in hg38
 
-* Document https://trello.com/c/6nTsNLnZ/461-debug-mapq0-issues
+
+#### UMCCR Cancer Gene List and the Blocklist
+
+We are not calling variants for regions contained in the [blocklist](variant-blocklist). The following genes from the _UMCCR Cancer Gene List_ (1) overlap (completely or partially) one or more blocklist regions:
+
+
+| Chromosome | Start     | Stop      | Gene   |
+|:----------:|----------:|----------:|--------|
+| chr3       | 36993331  | 37050918  | MLH1   |
+| chr3       | 49683946  | 49689053  | MST1   |
+| chr3       | 78597239  | 79767815  | ROBO1  |
+| chr3       | 89107523  | 89482134  | EPHA3  |
+| chr3       | 195746764 | 195812277 | MUC4   |
+| chr3       | 195746764 | 195812277 | MUC4   |
+| chr6       | 292096    | 351355    | DUSP22 |
+| chr7       | 152134928 | 152436005 | KMT2C  |
+| chr9       | 214864    | 465259    | DOCK8  |
+| chr12      | 280128    | 389454    | KDM5A  |
+| chr12      | 113057689 | 113098028 | DTX1   |
+| chr12      | 124324414 | 124535603 | NCOR2  |
+| chr18      | 47831550  | 47931146  | SMAD2  |
+| chr18      | 52340171  | 53535899  | DCC    |
+| chrX       | 1190489   | 1212750   | CRLF2  |
+| chrX       | 1462571   | 1537107   | P2RY8  |
+| chrX       | 67544035  | 67730619  | AR     |
+
+#### UMCCR Cancer Gene List and Segmental Duplications
+
+
+
+
+
+
+## ToDo
+
 * Add info from https://trello.com/c/suFTZWRF/420-workflow-test-cancer-gene-list-overlap-with-blacklist
 
