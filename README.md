@@ -137,7 +137,7 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 **Todo:**
 
 * [ ] Add source links (hosted if needed), versions for all lists above
-* [ ] Generate overlap of 5. vs 1., then add to [section below](Cancer-Genes-with-incomplete-coverage-in-hg38)
+* [ ] Generate overlap of 5. vs 1., then add to [section below](#Cancer-Genes-with-incomplete-coverage-in-hg38)
 
 ### Gene List Usage
 
@@ -165,7 +165,7 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 
 #### UMCCR Cancer Gene List and the Blocklist
 
-We are not calling variants for regions contained in the [blocklist](variant-blocklist). The following genes from the _UMCCR Cancer Gene List_ (1) overlap (completely or partially) one or more blocklist regions:
+We are not calling variants for regions contained in the [blocklist](#variant-blocklist). The following genes from the _UMCCR Cancer Gene List_ (1) overlap (completely or partially) one or more blocklist regions:
 
 
 | Chromosome | Start     | Stop      | Gene   |
