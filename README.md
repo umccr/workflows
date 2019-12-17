@@ -61,13 +61,16 @@ Gene lists for all (xx most) of these sources can be found in the [sources](http
 
 All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/); for now the latest gene list can be found in [Github](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). 
 
-> Also rebuild the BED files to contain only canonical transcripts (Vlad) (which I think results in `umccr_cancer_genes.hg38.transcript.bed`)
+> Also rebuild the BED files to contain only canonical transcripts (Vlad) (xx which I think results in `umccr_cancer_genes.hg38.transcript.bed` ?)
+
+Genomic coordinates are further subset to cannonical transcripts using [APPRIS](http://appris.bioinfo.cnio.es/#/). (xx source?)
 
 **Todo:**
 
 * [ ] Distinguish between / clean up https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources vs https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur
 * [ ] Add missing gene lists to `sources` folder (e.g., Vogelstein)
 * [ ] Provide URLs, verions for all gene lists in `sources` folder; some information at https://trello.com/c/7j3KFMiL/184-umccr-cancer-genes?menu=filter&filter=member:oliverhofmann
+* [ ] Need APPRIS principal transcript list somewhere (versioned, referenced in umccrise)
 * [ ] Move cancer gene list code to UMCCR / workflow repos
 
 ### 2. Custom Cancer Predisposition Gene List
@@ -90,6 +93,7 @@ The combination of the three sources resulted in a non-redundant set of [213 pro
 #### 3.1 Known Fusion Pairs
 
 Known [fusion pairs](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownFusionPairs.csv) provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
+
 #### 3.2 Known Promiscuous Fusion Genes
 
 Known promiscuous fusion genes ([5' list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownPromiscuousFive.csv), [3' list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownPromiscuousThree.csv)) provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
@@ -116,18 +120,15 @@ Additional known fusions from FusionCatcher generated from a [host of databases]
 * Cancer Report: "1. UMCCR Cancer Gene List" (xx for which tables, sets?)
 * Cancer Report: CDS of "1. UMCCR Cancer Gene List" for SNV Allelic Frequencies in Key Genes CDS
 * Cancer Report: "1. UMCCR Cancer Gene List" for UMCCR Gene CNV Calls table
-
-Cancer Report: known fusion pairs
+* Cancer Report: (xx known fusion pairs?)
 
 **Todo:**
 
 * [ ] Confirm coverage is based on `umccr_cancer_genes.hg38.transcript.bed`
 * [ ] Clarify bcbio's `svprioritize` vs umccrise handling
 * [ ] Where are we using 3.1 - 3.3 precisely? _Not_ used for bcbio's svprioritize step
+* [ ] Cancer Report: Structural Variants table references oncogene, tsgene annotation. From which gene list is this coming from?
 
-Cancer Report: Structural variants references oncogene, tsgene annotation. Source of that gene list (or source of the annotation for the gene list if identical to the ones above)?
-
-Cancer Report: Annotations are subset vs APPRIS (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.fze4hyo5pnhg). Need the principal transcript list somewhere searchable and pinned to the current umccrise version 
 
 SAGE: targets a list of coding regions and known hotspots outlined above (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.vjse6x9bo39c). Generate a list of genes (and ideally hotspots). 
 
