@@ -2,6 +2,8 @@
 
 UMCCR production workflows
 
+[TOC]
+
 ## Preprocessing Workflow
 
 * bcl2fastq
@@ -55,29 +57,38 @@ This not only improves overall precision of our calls but also speeds up the var
 
 ### Callable regions
 
-* Determine the callable regions, starting with the variant_regions file provided (in this case excluding the ALT regions of the reference genome), cleaning the BED file and creating merged, indexed regions (bedtools, tabix and Co).
-* Repeat the same process for the coverage regions, and set svregions to variant_regions if not defined otherwise.
-* Run mosdepth to determine which of the variant_regions have NO COVERAGE (0 reads), LOW_COVERAGE (1-3 reads) or are CALLABLE (4 reads or more). We are excluding reads with SAM FLAG 1804 (unmapped reads, mate unmapped, not primary alignment, fails QC check, marked duplicate) and require a non-zero mapping quality. The result is a quantitized BED file with regions of the same coverage level merged into single regions.
-
-* If no variant_regions have been provided use the CALLABLE regions as variant_regions proxy
+* Determine the callable regions, starting with the `variant_regions` file provided (in this case excluding the ALT regions of the reference genome), cleaning the BED file and creating merged, indexed regions (`bedtools`, `tabix` and Co).
+* Repeat the same process for the `coverage` regions, and set `svregions` to `variant_regions` if not defined otherwise.
+* Run `mosdepth` to determine which of the `variant_regions` have `NO COVERAGE` (0 reads), `LOW_COVERAGE` (1-3 reads) or are `CALLABLE` (4 reads or more). We are excluding reads with SAM FLAG `1804` (unmapped reads, mate unmapped, not primary alignment, fails QC check, marked duplicate) and **require a non-zero mapping quality** (note the impact on ALT regions, [segmental duplications](#UMCCR-Cancer-Gene-List-and-Segmental-Duplications)). The result is a quantitized BED file with regions of the same coverage level merged into single regions.
+* If no `variant_regions` have been provided use the `CALLABLE` regions as `variant_regions` proxy
 * Repeat for SV regions; also repeat for the coverage regions but write, for each region, the number of bases covered at 1, 5, 10, 20, 50, 100, 250, 500, 1000, 5000, 10000 or 50000 reads.
-* Intersect all non-callable (nblock) regions from all samples in a batch, producing a global set of callable regions (batch-analysis_blocks.bed).
+* Intersect all non-callable (`nblock)` regions from all samples in a batch, producing a global set of callable regions (`batch-analysis_blocks.bed`).
+
+**Todo:**
+
+* [ ] Remove sections not applicable given our config?
 
 ### Alignment post-processing
 
-* Generate samtools stats for the final BAMs
-* Prepare a BED file for 'baited' regions for cnvkit. This does not really apply, but we still generate target and anti target regions for WGS CNV calls. The average size for the targets is set to 250 nucleotides based on variant_regions.
-* Antitargets uses the batch-analysis_blocks.bed merged file that includes all samples from the cohort
-* ?Still not sure how I feel about this. I'd like to generate reproducible results regardless of whether I call a sample alone or together with other samples. In our use case the batch equals the person so all samples are related, further confounding the issue?
-* Create new mosdepth coverage statistics for both target and anti-target regions using the same SAM FLAG settings as before
-* Target/antitarget regions are also annotated with ref-transcripts, sorted and cleaned up
-* Finally, generate a copy-number reference using cnvkit reference, calculating GC-content and repeat-masked proportion of each region
-* We do the cnvkit segmentation and prep upstream of SV so that it can feed into multiple SV callers and we don't need to keep recalculating.
+* Generate `samtools stats` for the final BAMs
+* Prepare a BED file for 'baited' regions for `cnvkit`. This does not really apply, but we still generate target and anti target regions for WGS CNV calls. The average size for the targets is set to 250 nucleotides based on variant_regions.
+* Antitargets uses the `batch-analysis_blocks.bed` merged file that includes all samples from the cohort
+
+> _Still not sure how I feel about this. I'd like to generate reproducible results regardless of whether I call a sample alone or together with other samples. In our use case the batch equals the person so all samples are related, further confounding the issue?_
+
+* Create new `mosdepth` coverage statistics for both target and anti-target regions using the same SAM FLAG settings as before
+* Target/antitarget regions are also annotated with `ref-transcripts`, sorted and cleaned up
+* Finally, generate a copy-number reference using `cnvkit reference`, calculating GC-content and repeat-masked proportion of each region
+* We do the `cnvkit` segmentation and prep upstream of SV so that it can feed into multiple SV callers and we don't need to keep recalculating.
+
+**Todo:**
+
+* [ ] Remove pretty much everything? Is there anything left in the post-processing stage for cases where we do not call CNVs with bcbio?
 
 ### Variant calling
 
-* Variant calls are limited to CALLABLE regions (i.e., exclude LOW_COVERAGE). 
-* Use bedtools subtract to remove low-complexity regions (if remove_lcr is set to true) from the callable regions.
+* Variant calls are limited to `CALLABLE` regions (i.e., **exclude** `LOW_COVERAGE`). 
+* Use `bedtools subtract` to remove low-complexity regions (if `remove_lcr` is set to `true`) from the callable regions.
 
 #### Vardict: Germline
 
