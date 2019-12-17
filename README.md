@@ -138,7 +138,24 @@ This not only improves overall precision of our calls but also speeds up the var
 
 ## Reporting structure
 
-* Go over standard umccrise outputs, link to current SEQC-II report samples
+* PCGR containing small somatic variants (SNPs and indels) classified according to ACMG guidelines, and MSI status of the sample.
+* CPSR containing small germline variants (SNPs and indels) in cancer predisposition genes, ranked by ACMG guidelines and cancer-specific criteria.
+* CACAO for tumor sample, reporting coverage for clinically actionable and pathogenic loci in cancer
+* CACAO for normal sample, reporting coverage in likely pathogenic variants cancer predisposition protein-coding genes
+* MultiQC report with QC stats and plots
+* UMCCR cancer report containing:
+  * Somatic mutation profile (global and in umccr genes),
+Mutational signatures (by the MutationalPatterns R package),
+  * Structural variants,
+  * Copy number variants,
+  * PURPLE QC status,
+  * Circos plot
+
+**Todo:**
+
+* [ ] Subheadings per report with some additional pointers and descriptions (where not already detailed in the report)
+* [ ] Link to current SEQC-II report samples
+
 
 ## Gene Lists
 
@@ -173,6 +190,8 @@ All gene lists are in the process of being migrated to the [Australian PanelApp 
 
 Genomic coordinates are further subset to cannonical transcripts using [APPRIS](http://appris.bioinfo.cnio.es/#/). (xx source?)
 
+> Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
+
 **Todo:**
 
 * [ ] Distinguish between / clean up https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources vs https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur
@@ -194,7 +213,10 @@ The combination of the three sources resulted in a non-redundant set of [213 pro
 **Todo:**
 
 * [ ] Version predisposition gene list (via PanelApp if possible)
-* [ ] Explore adding PMCC Mol Path germline list
+* [ ] Explore adding PMCC Mol Path germline list:
+
+> ALK, APC, ASXL1, ATM, BAP1, BCORL1, BLM, BRCA1, BRCA2, BRIP1, CBL, CDC73, CDH1, CDK4, CDKN1B, CDKN2A, CEBPA, CHEK2, CYLD, DICER1, DNMT3A, EGFR, ERCC2, FANCA, FANCC, FANCG, FH, FLCN, FUBP1, GATA2, GNAS, HRAS, IDH1, JAK2, KIT, LZTR1, MEN1, MET, MLH1, MRE11A, MSH2, MSH6, MUTYH, NF1, NF2, PALB2, PDGFRA, PMS2, POLD1, POLE, PRKAR1A, PTCH1, PTEN, PTPN11, RB1, RET, RUNX1, SDHA, SDHB, SDHC, SDHD, SF3B1, SMAD4, SMARCA4, SMARCB1, STAT3, STK11, SUFU, TERT, TET2, TP53, TSC1, TSC2, U2AF1, VHL, WT1.
+
 
 ### 3. Fusion Gene lists
 
@@ -295,7 +317,7 @@ We are not calling variants for regions contained in the [blocklist](#variant-bl
 
 **Todo:**
 
-* [ ] Check for overlap between this blocklist table and the [SAGE Hotspots](#4.-SAGE-Hotspots)
+* [ ] Check for overlap between this blocklist table and the [SAGE Hotspots](#4-SAGE-Hotspots)
 
 #### UMCCR Cancer Gene List and Segmental Duplications
 
