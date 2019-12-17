@@ -77,8 +77,8 @@ Genomic coordinates are further subset to cannonical transcripts using [APPRIS](
 
 To assess predisposition to cancer we use CPSR's [Cancer Predisposition Genes](https://github.com/sigven/cpsr#cancer-predisposition-genes), a virtual panel based on the union of:
 
-* 152 genes that were curated and established within TCGA’s pan-cancer study ([TCGA_PANCAN_18, Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
-* 107 protein-coding genes that has been manually curated in COSMIC’s [CGC_86, Cancer Gene Census v90](https://cancer.sanger.ac.uk/census),
+* 152 genes that were curated and established within TCGA’s pan-cancer study (TCGA_PANCAN_18 [Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
+* 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census) (CGC_86),
 * 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium (NCGC, <http://cancergenomics.no>)
 
 The combination of the three sources resulted in a non-redundant set of [213 protein-coding genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) of relevance for predisposition to tumor development. We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future. 
@@ -108,9 +108,34 @@ Additional known fusions from FusionCatcher generated from a [host of databases]
 * [ ] Version fusion lists
 * [ ] Move to UMCCR / workflow repo
 
-### 4. 
+### 4. SAGE Hotspots
 
-### 5. 
+A list of genomic coordinates to rescue low AF somatic variant calls in well-known key sites of cancer genes based on:
+
+* Cancer Genome Interpreter 
+* CIViC - Clinical interpretations of variants in cancer
+* OncoKB - Precision Oncology Knowledge Base
+
+**Todo:**
+
+* [ ] Generate a list of genes (and ideally hotspot coordinates, protein impact) for 4.1 
+
+### 5. Low Quality Sites
+
+Variants are flagged if they overlap with a list of low-quality sites / regions based on:
+
+* GiaB (xx low?) confidence regions,
+* GnomAD whole genome common variants (max population frequency > 1%),
+* Low complexity regions (Heng Li's)
+* LCR, low and high GC regions, self-chain and bad promoter regions (GA4GH),
+* ENCODE blacklist, (xx why - we are excluding variant calls from these?)
+* Segmental duplication regions (UCSC),
+* UMCCR panel of normals, build from tumor-only mutect2 calls from ~200 normal samples
+
+**Todo:**
+
+* [ ] Add source links (hosted if needed), versions for all lists above
+* [ ] Generate overlap of 5. vs 1., then add to [section below](Cancer-Genes-with-incomplete-coverage-in-hg38)
 
 ### Gene List Usage
 
@@ -121,6 +146,8 @@ Additional known fusions from FusionCatcher generated from a [host of databases]
 * Cancer Report: CDS of "1. UMCCR Cancer Gene List" for SNV Allelic Frequencies in Key Genes CDS
 * Cancer Report: "1. UMCCR Cancer Gene List" for UMCCR Gene CNV Calls table
 * Cancer Report: (xx known fusion pairs?)
+* SAGE: "4. SAGE Hotspots" to rescue low allelic frequency somatic calls in key sites
+* SAGE: "5. Low Quality Sites" (xx is this really during the SAGE step? How are low quality site annotations used (check workflow doc)?)
 
 **Todo:**
 
@@ -128,22 +155,12 @@ Additional known fusions from FusionCatcher generated from a [host of databases]
 * [ ] Clarify bcbio's `svprioritize` vs umccrise handling
 * [ ] Where are we using 3.1 - 3.3 precisely? _Not_ used for bcbio's svprioritize step
 * [ ] Cancer Report: Structural Variants table references oncogene, tsgene annotation. From which gene list is this coming from?
+* [ ] Harmonize gene list naming in reports, add gene list versions
 
+---
 
-SAGE: targets a list of coding regions and known hotspots outlined above (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.vjse6x9bo39c). Generate a list of genes (and ideally hotspots). 
-
-SAGE: low quality sites are flagged (see https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#bookmark=id.od59cxu28mr9). Need overlap of this list against our own cancer gene lists from above - at least vs the UMCCR genes.
-
-
-
-* [ ] List all current gene panels used throughout the workflows
-* [ ] Document / links to https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources
 * [ ] See https://trello.com/c/ZN52jqqs/421-workflow-add-gene-lists-to-panelapp
 * [ ] See https://trello.com/c/JOBhtZIE/374-workflow-unify-gene-list-information
-* [ ] Harmonize gene list naming in reports
-
-
-
 
 ### Cancer Genes with incomplete coverage in hg38
 
