@@ -104,7 +104,7 @@ Additional known fusions from FusionCatcher generated from a [host of databases]
 
 (xx Needs a link or we need to host the currently used known pair set.)
 
-* [ ] Provide sources for all fusion lists
+* [ ] Provide sources for all fusion lists. One source is https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX but it's not stable and there seems to be no way to retrieve older lists
 * [ ] Version fusion lists
 * [ ] Move to UMCCR / workflow repo
 
@@ -156,11 +156,7 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 * [ ] Where are we using 3.1 - 3.3 precisely? _Not_ used for bcbio's svprioritize step
 * [ ] Cancer Report: Structural Variants table references oncogene, tsgene annotation. From which gene list is this coming from?
 * [ ] Harmonize gene list naming in reports, add gene list versions
-
----
-
-* [ ] See https://trello.com/c/ZN52jqqs/421-workflow-add-gene-lists-to-panelapp
-* [ ] See https://trello.com/c/JOBhtZIE/374-workflow-unify-gene-list-information
+* [ ] Check for overlap with [Hartwig key gene list](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FPatient-Reporting)
 
 ### Cancer Genes with incomplete coverage in hg38
 
