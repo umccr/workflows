@@ -92,46 +92,59 @@ This not only improves overall precision of our calls but also speeds up the var
 
 #### Vardict: Germline
 
-* Call with vardict-java with an AF threshold of 10% (-f 0.1), ignoring reads with a mapping quality less than 10 (-Q 10), SAM FLAG x700 (-F 0x700, alignment is not primary, read is a duplicate, or fails vendor QC checks).
-* Test for strand bias (teststrandbias.R)
-* ?Neither the manual nor the paper explain exactly how strand bias is calculated, or what serves as a cutoff for PASS/No Pass?
-* Convert from VarDict's format to VCF (var2vcf_valid.pl) keeping all variants at the same position (-A), again filtering for AF (-f 0.1) and keeping only variant calls with QUAL >= 0
-* ?Why do we filter for AF again? And why remove QUAL 0 variant calls instead of setting the filter flag?
+* Call with `vardict-java` with an AF threshold of 10% (`-f 0.1`), ignoring reads with a mapping quality less than 10 (`-Q 10`), SAM FLAG x700 (`-F 0x700`, alignment is not primary, read is a duplicate, or fails vendor QC checks).
+* Test for strand bias (`teststrandbias.R`)
+
+> _Neither the manual nor the paper explain exactly how strand bias is calculated, or what serves as a cutoff for PASS/No Pass?_
+
+* Convert from VarDict's format to VCF (`var2vcf_valid.pl`) keeping all variants at the same position (`-A`), again filtering for AF (`-f 0.1`) and keeping only variant calls with `QUAL >= 0`
+
+> _Why do we filter for AF again? And why remove QUAL 0 variant calls instead of setting the filter flag?_
+
 * Variants are then sorted and zipped / indexed
 
 #### Strelka2: Germline
 
-* ?Strelka2 seems to be using different regions; commands start by referencing raw region BED files and make use of a -ploidy.vcf - unclear where they are generated?
 * Configure the germline workflow given the callable regions and ploidy information for the region and call with default parameters
-* ?I am not seeing any filtering for AF or other parameters for Strelka (e.g., strand bias, variant quality); also not seeing any flags to exclude duplicated or low quality reads. I suppose Strelka2 does that by default?
+
+> _Strelka2 seems to be using different regions; commands start by referencing `raw` region BED files and make use of a `-ploidy.vcf` - unclear where they are generated?_
+> _I am not seeing any filtering for AF or other parameters for Strelka (e.g., strand bias, variant quality); also not seeing any flags to exclude duplicated or low quality reads. I suppose Strelka2 does that by default?_
 
 #### Haplotype Caller: Germline
 
-* Haplotype Caller runs with default parameters. For germline, ploidy is set to 2 (1 for Y), calling within the intersection of the BAM and each region.
-* ?Caller disables NotDuplicateReadFilter (which removes duplicate reads prior to calls)?
+* Haplotype Caller runs with default parameters. For germline, `ploidy` is set to `2` (1 for Y), calling within the intersection of the BAM and each region.
+
+> _Caller disables NotDuplicateReadFilter (which removes duplicate reads prior to calls)?_
+
 * Calls are annotated with a ton of different metrics (MappingQualityRankSumTest, MappingQualityZero, QualByDepth, ReadPosRankSumTest, RMSMappingQuality, BaseQualityRankSumTest, FisherStrand, MappingQuality, DepthPerAlleleBySample, Coverage, ClippingRankSumTest, DepthPerSampleHC)
-* ?Again, no filtering of calls at this stage?
+
+> _Again, no filtering of calls at this stage?_
 
 #### Mutect2 caller: Somatic
 
-* Mirrors the haplotype caller settings, calling at the intersection of BAM file and BED regions with ploidy 2 (1 for Y)
+* Mirrors the haplotype caller settings, calling at the intersection of BAM file and BED regions with `ploidy 2` (1 for Y)
 * Also disables the duplicated read filter
-* ?Is this the recommended setting? Ploidy 1 for germline, 2 for somatic?
 * Again, annotated with a lot of different metrics: ClippingRankSumTest, DepthPerSampleHC, MappingQualityRankSumTest, MappingQualityZero, QualByDepth, ReadPosRankSumTest, RMSMappingQuality,  FisherStrand, MappingQuality, DepthPerAlleleBySample, Coverage
-* Unlike Haplotype Caller this stage includes a filtering stage using FilterMutectCalls. See [GATK description of filters](https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.6.0/org_broadinstitute_hellbender_tools_walkers_mutect_FilterMutectCalls.php).
+* Unlike Haplotype Caller this stage includes a filtering stage using `FilterMutectCalls`. See [GATK description of filters](https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.6.0/org_broadinstitute_hellbender_tools_walkers_mutect_FilterMutectCalls.php).
 
 #### Vardict caller: Somatic
 
-* Also uses vardict-java with a AF cutoff of 10% (-f 0.1), ignoring reads with a mapping quality less than 10 (-Q 10), SAM FLAG x700 (-F 0x700, alignment is not primary, read is a duplicate, or fails vendor QC checks).
-* ?Instead of piping results into a strand bias check they get passed to testsomatic.R. Unclear what that actually does? Does that include a strand bias test?
-* Convert from VarDict's format to VCF (var2vcf_paired.pl) using lenient calls (p-value 0.9, 4.25 mismatches allowed, somatic calls only). 
-* ?Why do we filter for AF again? And why remove QUAL 0 variant calls instead of setting the filter flag?
+* Also uses `vardict-java` with a AF cutoff of 10% (`-f 0.1`), ignoring reads with a mapping quality less than 10 (`-Q 10`), SAM FLAG x700 (`-F 0x700`, alignment is not primary, read is a duplicate, or fails vendor QC checks).
+* Instead of piping results into a strand bias check they get passed to `testsomatic.R`. 
+
+> _Unclear what that actually does? Does that include a strand bias test?_
+
+* Convert from VarDict's format to VCF (`var2vcf_paired.pl`) using lenient calls (p-value 0.9, 4.25 mismatches allowed, somatic calls only). 
+
+> _Why do we filter for AF again? And why remove QUAL 0 variant calls instead of setting the filter flag?_
 
 #### Strelka2 Caller: Somatic
 
 * Merge overlapping regions in target file 
-* ?Why is this only required here, but not for other callers?
-* Set up and run workflow (configureStrelkaSomaticWorkflow.py) using default parameters
+
+> _Why is this only required here, but not for other callers?_
+
+* Set up and run workflow (`configureStrelkaSomaticWorkflow.py`) using default parameters
 * Fix header with Picard
 
 ### Variant Ensemble calling
