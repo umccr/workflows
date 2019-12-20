@@ -210,8 +210,6 @@ Gene lists for all (xx most) of these sources can be found in the [sources](http
 
 All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/); for now the latest gene list can be found in [Github](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). 
 
-> Also rebuild the BED files to contain only canonical transcripts (Vlad) (xx which I think results in `umccr_cancer_genes.hg38.transcript.bed` ?)
-
 Genomic coordinates are further subset to cannonical transcripts using [APPRIS](http://appris.bioinfo.cnio.es/#/). (xx source?)
 
 > Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
@@ -220,9 +218,10 @@ Genomic coordinates are further subset to cannonical transcripts using [APPRIS](
 
 * [ ] Distinguish between / clean up https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources vs https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur
 * [ ] Add missing gene lists to `sources` folder (e.g., Vogelstein)
-* [ ] Provide URLs, verions for all gene lists in `sources` folder; some information at https://trello.com/c/7j3KFMiL/184-umccr-cancer-genes?menu=filter&filter=member:oliverhofmann
-* [ ] Need APPRIS principal transcript list somewhere (versioned, referenced in umccrise)
+* [ ] Provide more details for `sources` folder; some information at https://trello.com/c/7j3KFMiL/184-umccr-cancer-genes?menu=filter&filter=member:oliverhofmann (eventually: versions or download date)
+* [ ] Add various BED files to repo (transcripts, cancer list, etc.)
 * [ ] Move cancer gene list code to UMCCR / workflow repos
+* [ ] Make sure `latest` [gene pointer](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes) is correct
 
 ### 2. Custom Cancer Predisposition Gene List
 
@@ -237,7 +236,8 @@ The combination of the three sources resulted in a non-redundant set of [213 pro
 **Todo:**
 
 * [ ] Version predisposition gene list (via PanelApp if possible)
-* [ ] Explore adding PMCC Mol Path germline list:
+* [ ] Split / highlight manually added genes
+* [ ] Add PMCC Mol Path germline list to PanelApp:
 
 > ALK, APC, ASXL1, ATM, BAP1, BCORL1, BLM, BRCA1, BRCA2, BRIP1, CBL, CDC73, CDH1, CDK4, CDKN1B, CDKN2A, CEBPA, CHEK2, CYLD, DICER1, DNMT3A, EGFR, ERCC2, FANCA, FANCC, FANCG, FH, FLCN, FUBP1, GATA2, GNAS, HRAS, IDH1, JAK2, KIT, LZTR1, MEN1, MET, MLH1, MRE11A, MSH2, MSH6, MUTYH, NF1, NF2, PALB2, PDGFRA, PMS2, POLD1, POLE, PRKAR1A, PTCH1, PTEN, PTPN11, RB1, RET, RUNX1, SDHA, SDHB, SDHC, SDHD, SF3B1, SMAD4, SMARCA4, SMARCB1, STAT3, STK11, SUFU, TERT, TET2, TP53, TSC1, TSC2, U2AF1, VHL, WT1.
 
@@ -314,7 +314,6 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 
 ### Cancer Genes with incomplete coverage in hg38
 
-
 #### UMCCR Cancer Gene List and the Blocklist
 
 We are not calling variants for regions contained in the [blocklist](#variant-blocklist). The following genes from the _UMCCR Cancer Gene List_ (1) overlap (completely or partially) one or more blocklist regions:
@@ -351,6 +350,17 @@ The overlap between the retrieved segmental duplication regions and APPRIS canno
 
 > ABRAXAS1, ACTB, ACTG1, AFF3, ANKRD11, APOBEC3B, ARHGAP5, ARID3B, BCL2L12, BCLAF1, BCR, BMPR1A, BRAF, BRCA1, BTG1, CDC42, CDK8, CHEK2, CTNND1, CUX1, CYP2C8, CYP2D6, DCUN1D1, DICER1, DIS3L2, DNAJB1, E2F3, EIF1AX, EIF4E, EP400, FAM47C, FANCD2, FCGR2B, FEN1, FGF7, FKBP9, FLG, FLT1, FOXO3, GBA, GNAQ, GPC5, GTF2I, H3F3B, H3F3C, HIST2H3A, HIST2H3C, HIST2H3D, HLA-A, HMGA1, IGF2BP2, IL6ST, KAT7, KMT2C, KRAS, MAP2K4, MGAM, MKI67, MLLT10, MLLT6, MSN, MST1, MUC4, NBEA, NCOA4, NCOR1, NF1, NFE2L3, NOTCH2, NUTM2A, NUTM2B, PAFAH1B2, PCBP1, PDE4DIP, PDPK1, PIGA, PIK3CA, PIK3CD, PLAGL2, PMS2, POLH, PPFIBP1, PPP4R2, PRDM9, PRKCI, PRSS1, PTEN, PTP4A1, RAD21, RANBP2, RCC2, RECQL, RGPD3, RPL22, RPS6KB1, RRAS2, S100A7, SBDS, SDHA, SET, SHQ1, SIN3A, SIRPA, SMG1, SNX29, SOX2, SP140, SPECC1, SRSF3, SSX1, SSX2, SSX4, STAT5A, STAT5B, STK19, STRN, SUZ12, TAF15, TBL1XR1, TCEA1, TERF2IP, THRAP3, TOP1, TPM3, TPM4, TPMT, TRIP11, USP6, USP8, WRN, XIAP, YES1, ZNF479, ICOSLG, KMT5A, MUC1, ROBO2, U2AF1, UHRF1
 
+### ALT Handling
+
+Write up chr6 issue, CLIC1 example, https://www.biorxiv.org/content/10.1101/868570v1.full.pdf, Heng Li, GATK post
+
+https://www.ncbi.nlm.nih.gov/grc/human?filters=chr:13#current-regions
+
+https://software.broadinstitute.org/gatk/blog?id=8180
+
+https://github.com/lh3/bwa/blob/master/README-alt.md
+
+> I think UK biobank forgot the .alt file so bwa-mem didn't adjust scores (which happens during mapping; step 1 in the link you posted above). We have that file in the bcbio distribution so we're all good.
 
 **Todo:**
 
