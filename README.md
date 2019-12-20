@@ -236,7 +236,10 @@ To assess predisposition to cancer we use CPSR's [Cancer Predisposition Genes](h
 * 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census) (CGC_86),
 * 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium (NCGC, <http://cancergenomics.no>)
 
-The combination of the three sources resulted in a non-redundant set of [213 protein-coding genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) of relevance for predisposition to tumor development. We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future. 
+The combination of the three sources resulted in a non-redundant set of [209 protein-coding genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) of relevance for predisposition to tumor development (gene list accurate as of 2019-Dec-20). We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future.
+
+UMCCR have included the following 8 genes to this list, bringing the total to 209 + 8 = 217 genes:
+TNFRSF6, KLLN, MAP3K6, NEK1, NTRK1, RAD54L, RHNO1, RTEL1 (gene list accurate as of 2019-Dec-20).
 
 **Todo:**
 
