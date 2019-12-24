@@ -84,7 +84,7 @@ else
 fi
 
 echo "PUSH results"
-aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_DATA_BUCKET}/${S3_OUTPUT_PATH}/wts-report
+aws s3 sync --only-show-errors ${job_output_dir} s3://${S3_RESULT_BUCKET}/${S3_OUTPUT_PATH}/wts-report
 
 echo "Cleaning up..."
 rm -rf "${job_output_dir}"
