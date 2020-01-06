@@ -226,6 +226,7 @@ All gene lists are in the process of being migrated to the [Australian PanelApp 
 * [ ] Add various BED files to repo (transcripts, cancer list, etc.)
 * [ ] Move cancer gene list code to UMCCR / workflow repos
 * [ ] Make sure `latest` [gene pointer](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes) is correct
+* [ ] Add links to PanelApp for each gene list, joint panel
 
 ### 2. Custom Cancer Predisposition Gene List
 
