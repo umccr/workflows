@@ -185,12 +185,14 @@ Mutational signatures (by the MutationalPatterns R package),
 
 ### 1. UMCCR Cancer Gene List
 
-UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. The core list is [automatically generated](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
+UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. 
+The [core list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv) 
+is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
 
 * [Cancermine](http://bionlp.bcgsc.ca/cancermine/) with at least 2 publications with at least 3 citations - 280 genes
 * [NCG known cancer genes](http://ncg.kcl.ac.uk/cancer_genes.php#known) - 711 genes
 * [Tier 1 COSMIC Cancer Gene Census](https://cancer.sanger.ac.uk/cosmic/census?tier=1) (CGC) - 576 genes
-* [UMCCR internal manually added genes](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/sources/umccr.txt) - 1 gene
+* [UMCCR internal manually added genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/umccr.txt) - 1 gene
 * Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release), [CiViC](https://civicdb.org/) (data obtained May 3rd 2019), [cancerhotspots](https://www.cancerhotspots.org/) (v2)) - 1 gene
 * At least 2 matches in the following five databases and eight clinical panels (xx which is which):
   * Cancer predisposition genes, [CPSR panel0](https://github.com/sigven/cpsr) - 216 genes, which consists of:
@@ -211,7 +213,13 @@ UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key gene
   * Foundation Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 592 genes
   * Vogelstein (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 125 genes
 
-Gene lists for all (xx most) of these sources can be found in the [sources](https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur) folder. The combined list contains [1250 genes](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.tsv). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). Genomic coordinates are further subset to cannonical transcripts using [APPRIS](http://appris.bioinfo.cnio.es/#/). (xx source?)
+Gene lists for all (xx most) of these sources can be found in the [sources](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources) folder. 
+The combined list contains [1250 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv). 
+A BED file with transcript and coding regions coordinates is [generated from the latest gene list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/Snakefile) 
+using coordinates from ENSEMBL. 
+Transcript IDs for coordinate choice are selected using principal transcript annotations in [APPRIS](http://appris.bioinfo.cnio.es/#/). 
+The APPRIS transcript IDs are downloaded from the APPRIS website, and stored in [this repo](https://github.com/umccr/workflows/blob/master/transcripts/). 
+Chosen principal transcripts for each cancer gene are also added into the final generated gene table under the columns PRINCIPAL_hg19 and PRINCIPAL_hg38.
 
 All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/).
 
@@ -220,12 +228,7 @@ All gene lists are in the process of being migrated to the [Australian PanelApp 
 
 **Todo:**
 
-* [ ] Distinguish between / clean up https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources vs https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur
-* [ ] Add missing gene lists to `sources` folder (e.g., Vogelstein)
 * [ ] Provide more details for `sources` folder; some information at https://trello.com/c/7j3KFMiL/184-umccr-cancer-genes?menu=filter&filter=member:oliverhofmann (eventually: versions or download date)
-* [ ] Add various BED files to repo (transcripts, cancer list, etc.)
-* [ ] Move cancer gene list code to UMCCR / workflow repos
-* [ ] Make sure `latest` [gene pointer](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes) is correct
 
 ### 2. Custom Cancer Predisposition Gene List
 
@@ -253,15 +256,19 @@ TNFRSF6, KLLN, MAP3K6, NEK1, NTRK1, RAD54L, RHNO1, RTEL1 (gene list accurate as 
 
 #### 3.1 Known Fusion Pairs
 
-Known [fusion pairs](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownFusionPairs.csv) provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
+Known [fusion pairs](https://github.com/umccr/workflows/blob/master/genes/fusions/knownFusionPairs.csv) 
+provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
 
 #### 3.2 Known Promiscuous Fusion Genes
 
-Known promiscuous fusion genes ([5' list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownPromiscuousFive.csv), [3' list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/fusions/knownPromiscuousThree.csv)) provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
+Known promiscuous fusion genes ([5' list](https://github.com/umccr/workflows/blob/master/genes/fusions/knownPromiscuousFive.csv), 
+[3' list](https://github.com/umccr/workflows/blob/master/genes/fusions/knownPromiscuousThree.csv)) 
+provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
 
 #### 3.3 FusionCatcher Known Pairs
 
-Additional known fusions from FusionCatcher generated from a [host of databases](https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md#23---genomic-databases).
+Additional [known fusions from FusionCatcher](https://github.com/umccr/workflows/blob/master/genes/fusions/fusioncatcher_pairs.txt) generated from a 
+[host of databases](https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md#23---genomic-databases).
 
 (xx Needs a link or we need to host the currently used known pair set.)
 

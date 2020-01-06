@@ -217,8 +217,8 @@ genes_hmf %>% filter(symbol %>% str_detect("SMU"))
 Annotating with APPRIS canonical transcripts:
 
 ```{r add_appris}
-appris_hg19 = read_tsv("~/git/bed_annotation/bed_annotation/ensembl/hg19/appris_data.principal.txt", col_names = c('appris_symbol', 'ensg', 'enst', 'tr_name', 'annotation'))
-appris_hg38 = read_tsv("~/git/bed_annotation/bed_annotation/ensembl/hg38/appris_data.principal.txt", col_names = c('appris_symbol', 'ensg', 'enst', 'tr_name', 'annotation'))
+appris_hg19 = read_tsv("../transcripts/appris_data.principal.hg19.txt", col_names = c('appris_symbol', 'ensg', 'enst', 'tr_name', 'annotation'))
+appris_hg38 = read_tsv("../transcripts/appris_data.principal.hg38.txt", col_names = c('appris_symbol', 'ensg', 'enst', 'tr_name', 'annotation'))
 
 appris_hg19_sum = appris_hg19 %>% 
   filter(str_detect(annotation, 'PRINCIPAL')) %>% 
