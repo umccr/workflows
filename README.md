@@ -193,29 +193,28 @@ UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key gene
 * [UMCCR internal manually added genes](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/sources/umccr.txt) - 1 gene
 * Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release), [CiViC](https://civicdb.org/) (data obtained May 3rd 2019), [cancerhotspots](https://www.cancerhotspots.org/) (v2)) - 1 gene
 * At least 2 matches in the following five databases and eight clinical panels (xx which is which):
-  * Cancer predisposition genes,[CPSR panel0](https://github.com/sigven/cpsr) - 216 genes, which consists of:
+  * Cancer predisposition genes, [CPSR panel0](https://github.com/sigven/cpsr) - 216 genes, which consists of:
     * A list of 152 genes that were curated and established within TCGA’s pan-cancer study ([Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
     * A list of 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census),
     * A list of 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium ([http://cancergenomics.no](http://cancergenomics.no/))
   * Hartwig Medical Foundation [list of known fusions](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX) - 439 genes
   * AZ300 (AstraZeneca cancer genes list) - 300 genes
-  * PMCC-CCP - 404 genes
+  * PMCC-CCP - 404 genes (xx Received via.. Andrew Fellows?)
   * COSMIC Cancer Gene Census ([tier 2](https://cancer.sanger.ac.uk/cosmic/census?tier=2)) - 147 genes
-  * Familial Cancer - 126 genes
+  * Familial Cancer - 126 genes (xx do we have a source for this?)
   * [Illumina-TS500](https://emea.illumina.com/content/dam/illumina-marketing/documents/products/datasheets/trusight-oncology-500-data-sheet-1170-2018-010.pdf) - 523 genes
   * [TEMPUS](https://www.tempus.com/wp-content/uploads/2018/12/xT-Gene-List_120618.pdf) - 594 genes
-  * [OncoKB annotated](https://www.oncokb.org/cancerGenes)) - 579 genes
+  * [OncoKB annotated](https://www.oncokb.org/cancerGenes) - 579 genes
   * MSKC-IMPACT (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 468 genes
   * MSKC-Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 400 genes
   * Foundation One (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 322 genes 
   * Foundation Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 592 genes
   * Vogelstein (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 125 genes
 
-Gene lists for all (xx most) of these sources can be found in the [sources](https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur) folder. The combined list contains [1250 genes](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.2019-07-31.tsv). 
+Gene lists for all (xx most) of these sources can be found in the [sources](https://github.com/vladsaveliev/NGS_Utils/tree/master/ngs_utils/reference_data/key_genes/sources/arthur) folder. The combined list contains [1250 genes](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.tsv). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). Genomic coordinates are further subset to cannonical transcripts using [APPRIS](http://appris.bioinfo.cnio.es/#/). (xx source?)
 
-All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/); for now the latest gene list can be found in [Github](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes). A BED file with gene and transcript coordinates is [generated from the latest gene list](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/Snakefile) using coordinates from (xx Unclear. RefSeq version? ENSEMBL version?). 
+All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/).
 
-Genomic coordinates are further subset to cannonical transcripts using [APPRIS](http://appris.bioinfo.cnio.es/#/). (xx source?)
 
 > Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
 
