@@ -1,0 +1,402 @@
+---
+title: "Cancer genes"
+output: html_notebook
+---
+```{r set-options, echo=FALSE, cache=FALSE}
+```
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(stringi)
+library(readr)
+library(purrr)
+library(crayon)
+library(knitr)
+```
+
+```{r lists}
+# umccr_arthur <- read_tsv(str_c(folder, "sources/umccr_cancer_genes.20181112.txt"), col_names = c('symbol', 'sources'))
+# genes <- umccr %>% 
+#   separate_rows(sources, sep = "\\|") %>% 
+#   filter(sources != 'AZ800') %>% 
+#   bind_rows(az300 %>% mutate(sources = "AZ300"))
+
+predispose   <- read_tsv(str_c(folder, "sources/pcgr_predispose_genes.txt"), col_names = c('symbol'))
+az300        <- read_tsv(str_c(folder, "sources/az_key_genes.300.txt"), col_names = c('symbol'))
+cacao        <- read_tsv(str_c(folder, "sources/cacao.txt"), col_names = c('symbol'))
+umccr        <- read_tsv(str_c(folder, "sources/umccr.txt"), col_names = c('symbol'))
+genes <- predispose %>% mutate(sources = "CPSR_panel0") %>%
+  bind_rows(az300 %>% mutate(sources = "AZ300")) %>%
+  bind_rows(cacao %>% mutate(sources = "CACAO")) %>%
+  bind_rows(umccr %>% mutate(sources = "UMCCR"))
+
+for (panel in c("PMCC", "TS500", "TEMPUS", "familial_cancer")) {
+  df <- read_tsv(str_c(folder, "sources/", panel, '.genes'), col_names = c("symbol"))
+  genes <- genes %>% bind_rows(df %>% mutate(sources = panel))
+}
+```
+
+```{r ncg}
+# http://ncg.kcl.ac.uk/
+ngc_tsgonco  <- read_tsv(str_c(folder, "sources/NCG6_tsgoncogene.tsv"))
+genes_ngc <- genes %>% 
+  bind_rows(ngc_tsgonco %>% 
+              mutate(sources = "NGC_known",
+                     ngc_og = NCG6_oncogene == 1,
+                     ngc_ts = NCG6_tsg == 1,
+                     ngc_fu = str_detect(cgc_annotation, "fusion")) %>% 
+              dplyr::select(symbol, sources, starts_with("ngc_")))
+
+ngc_cancer   <- read_tsv(str_c(folder, "sources/NCG6_cancergenes.tsv"))
+
+ngc_cancer_other <- ngc_cancer %>% 
+  filter(type != "Known Cancer") %>% 
+  group_by(symbol) %>%
+  summarise(
+    ngc_n = dplyr::n(),
+    type = str_c(unique(type), collapse=", "), 
+    cancer_type = str_c(unique(cancer_type), collapse=", "), 
+    primary_site = str_c(unique(primary_site), collapse=", "), 
+    method = str_c(unique(method), collapse=", ")
+  ) %>% 
+  arrange(desc(ngc_n)) %>% 
+  filter(ngc_n >= 3)
+
+genes_ngc <- genes_ngc %>% 
+  bind_rows(ngc_cancer_other %>% 
+              mutate(sources = "NGC_other") %>% 
+              dplyr::select(symbol, sources, ngc_n))
+
+genes_ngc %>% filter(sources == "NGC_known")
+```
+
+```{r cancermine}
+cancermine   <- read_tsv(str_c(folder, "sources/cancermine_collated.tsv"))
+
+cancermine_prep <- cancermine %>% 
+  mutate(symbol = gene_normalized,
+         cm_cite = citation_count,
+         cm_og = role == "Oncogene",
+         cm_ts = role == "Tumor_Suppressor",
+         cm_driver = role == "Driver") %>% 
+  filter(citation_count >= 3 | symbol == "SMURF1") %>% 
+  dplyr::select(symbol, starts_with("cm_")) %>% 
+  group_by(symbol) %>% 
+  summarise(sources = "cancermine",
+            cm_pub = dplyr::n(),
+            cm_total_cite = sum(cm_cite),
+            cm_og = mean(cm_og),
+            cm_ts = mean(cm_ts),
+            cm_driver = mean(cm_driver)) %>% 
+  filter(cm_pub >= 2)
+# cancermine_prep %>% arrange(cm_pub, cm_total_cite)
+
+genes_cm <- genes_ngc %>% 
+  bind_rows(cancermine_prep)
+
+genes_cm %>% filter(sources == "cancermine")
+```
+
+```{r oncokb}
+oncokb       <- read_tsv(str_c(folder, "sources/oncoKB_cancerGeneList.txt"))
+oncokb_prep <- oncokb %>%
+  dplyr::transmute(
+    symbol = `Hugo Symbol`,
+    oncokb = ifelse(`OncoKB Annotated` == "Yes", T, F),
+    msk_impact = ifelse(`MSK-IMPACT` == "Yes", T, F),    
+    msk_heme = ifelse(`MSK-HEME` == "Yes", T, F),    
+    foundation_one = ifelse(`FOUNDATION ONE` == "Yes", T, F),    
+    foundation_one_heme = ifelse(`FOUNDATION ONE HEME` == "Yes", T, F),    
+    vogelstein = ifelse(`Vogelstein` == "Yes", T, F)
+  ) %>% 
+  gather(key = "sources", value = "yes", -symbol) %>% 
+  filter(yes) %>% 
+  dplyr::select(-yes)
+
+oncokb_prep %>% filter(sources == "oncoKB")
+
+genes_ok <- genes_cm %>% bind_rows(oncokb_prep)
+```
+
+```{r cosmic}
+cosmic <- read_tsv(str_c(folder, "sources/CancerGeneCensus_Tier1.tsv")) %>% bind_rows(
+          read_tsv(str_c(folder, "sources/CancerGeneCensus_Tier2.tsv")))
+cosmic_prep <- cosmic %>% 
+  dplyr::transmute(
+    symbol = `Gene Symbol`,
+    sources = ifelse(Tier == 1, 'cosmic1', 'cosmic2'),
+    cos_germ = Germline == "yes",
+    cos_ts = `Role in Cancer` == 'TSG',
+    cos_og = `Role in Cancer` == 'oncogene',
+    cos_fu = `Role in Cancer` == 'fusion')
+
+genes_cos <- genes_ok %>% bind_rows(cosmic_prep)
+genes_cos %>% filter(str_detect(sources, "cosmic"))
+```
+
+```{r tsg}
+tsgene_ts <- read_tsv(str_c(folder, "sources/arthur/TSGene2-oncogenes.genes"), col_names = c('symbol'))
+tsgene_og <- read_tsv(str_c(folder, "sources/arthur/TSGene2-tumour-suppressors.genes"), col_names = c('symbol'))
+genes_tsg <- genes_cos %>% mutate(
+  tsg_ts = symbol %in% tsgene_ts,
+  tsg_og = symbol %in% tsgene_og
+)
+genes_tsg
+```
+
+```{r hmf_fusions}
+hmf_pairs = read_csv("../fusions/knownFusionPairs.csv", quote = '"')
+hmf_prom_head = read_csv("../fusions/knownPromiscuousFive.csv", quote = '"')
+hmf_prom_tail = read_csv("../fusions/knownPromiscuousThree.csv", quote = '"')
+hmf_fus_genes = union_all(
+    hmf_pairs %>% dplyr::select(symbol = T_gene),
+    hmf_pairs %>% dplyr::select(symbol = H_gene),
+    hmf_prom_head %>% dplyr::select(symbol = gene),
+    hmf_prom_tail %>% dplyr::select(symbol = gene)
+  ) %>% 
+  distinct() %>% 
+  mutate(
+    sources = 'HMF_fusions',
+    hmf_fu = T     
+  )
+
+genes_hmf <- genes_tsg %>% bind_rows(hmf_fus_genes)
+```
+Counting each source:
+
+```{r}
+all_genes = genes_hmf
+all_genes %>% count(sources)
+```
+
+```{r summarise}
+genes_sum <- all_genes %>%
+  group_by(symbol) %>%
+  summarise(
+    n = dplyr::n(),
+    sources = str_c(sources, collapse = "|"),
+    ngc = str_detect(sources, "NGC_known"),
+    cosm1 = str_detect(sources, "cosmic1"),
+    cancermine = str_detect(sources, "cancermine"),
+    cacao = str_detect(sources, "CACAO"),
+    umccr = str_detect(sources, "UMCCR"),
+    germ = any(cos_germ, na.rm = T) | str_detect(sources, "CPSR"),
+    
+    ngc_ts = any(ngc_ts, na.rm = T),
+    cm_ts = sum(cm_ts, na.rm = T),
+    cos_ts = any(cos_ts, na.rm = T),
+    tsg_ts = any(tsg_ts, na.rm = T),
+
+    ngc_og = any(ngc_og, na.rm = T),
+    cm_og = sum(cm_og, na.rm = T),
+    cos_og = any(cos_og, na.rm = T),
+    tsg_og = any(tsg_og, na.rm = T),
+
+    driver = sum(cm_driver, na.rm = T),
+    cos_fu = any(cos_fu, na.rm = T),
+    hmf_fu = any(hmf_fu, na.rm = T),
+    ngc_fu = any(ngc_fu, na.rm = T)
+  ) %>%
+  mutate(
+    tumorsuppressor = ngc_ts | cm_ts > 0 | cos_ts | tsg_ts,
+    oncogene = ngc_og | cm_og > 0 | cos_og | tsg_og,
+    fusion = hmf_fu | cos_fu | ngc_fu
+  ) %>% 
+  mutate(
+    tier1 = ngc | cosm1 | cancermine | cacao | umccr | driver | n >= 4,  # well curated cancer genes
+    is_key = tier1 | germ | n >= 2       # + not so confident + predisposition + known fusions
+  ) %>% 
+  select(-ends_with("_og"), -ends_with("_ts"), -starts_with("ngc_"))
+
+genes_hmf %>% filter(symbol %>% str_detect("SMU"))
+```
+
+Annotating with APPRIS canonical transcripts:
+
+```{r add_appris}
+appris_hg19 = read_tsv("../transcripts/appris_data.principal.hg19.txt", col_names = c('appris_symbol', 'ensg', 'enst', 'tr_name', 'annotation'))
+appris_hg38 = read_tsv("../transcripts/appris_data.principal.hg38.txt", col_names = c('appris_symbol', 'ensg', 'enst', 'tr_name', 'annotation'))
+
+appris_hg19_sum = appris_hg19 %>% 
+  filter(str_detect(annotation, 'PRINCIPAL')) %>% 
+  group_by(appris_symbol) %>% 
+  summarise(PRINCIPAL_hg19 = str_c(enst, collapse = ','))
+
+appris_hg38_sum = appris_hg38 %>% 
+  filter(str_detect(annotation, 'PRINCIPAL')) %>% 
+  group_by(appris_symbol) %>% 
+  summarise(PRINCIPAL_hg38 = str_c(enst, collapse = ','))
+
+genes_sum_appris = genes_sum %>% 
+  left_join(appris_hg19_sum, by = c('symbol' = 'appris_symbol')) %>% 
+  left_join(appris_hg38_sum, by = c('symbol' = 'appris_symbol'))
+
+# checking genes that miss the canonical transcript:
+genes_sum_appris %>% filter(is.na(PRINCIPAL_hg19), is_key)
+# 33 genes
+genes_sum_appris %>% filter(is.na(PRINCIPAL_hg38), is_key)
+# 31 genes
+genes_sum_appris %>% filter(is.na(PRINCIPAL_hg19) & is.na(PRINCIPAL_hg38), is_key)
+# 14 genes
+```
+
+Comparing to the previous version:
+
+```{r compare_to_previous}
+prev = read_tsv("archive/umccr_cancer_genes.2019-07-31.tsv")
+
+(added   <- genes_sum_appris %>% filter(is_key, !symbol %in% prev$symbol))
+(removed <- genes_sum_appris %>% filter(symbol %in% prev$symbol, !is_key))
+
+# play around:
+genes_sum_appris %>% filter(is_key) %>% filter(tier1)
+genes_sum_appris %>% filter(is_key) %>% filter(cosm1 & cancermine & !ngc)  # 0
+genes_sum_appris %>% filter(is_key) %>% filter(ngc) %>% arrange(desc(n))
+genes_sum_appris %>% filter(is_key & !tumorsuppressor & !oncogene & !fusion & !germ) %>% arrange(desc(n))
+genes_sum_appris %>% filter(cos_fu & !hmf_fu)
+```
+
+Writing results to the latest files and to the archive:
+
+```{r write_results}
+library(lubridate)
+# tsv with metadata:
+genes_sum_appris %>% filter(is_key) %>% select(-is_key) %>% write_tsv(str_c("archive/umccr_cancer_genes.", lubridate::today(), ".tsv", sep = ""))
+genes_sum_appris %>% filter(is_key) %>% select(-is_key) %>% write_tsv(str_c("umccr_cancer_genes.latest.tsv", sep = ""))
+# plain list of genes:
+genes_sum_appris %>% filter(is_key) %>% .$symbol %>% write_lines(str_c("archive/umccr_cancer_genes.", lubridate::today(), ".genes", sep = ""))
+genes_sum_appris %>% filter(is_key) %>% .$symbol %>% write_lines(str_c("umccr_cancer_genes.latest.genes", sep = ""))
+# plain list of only tumor suppressor genes:
+genes_sum_appris %>% filter(tumorsuppressor) %>% .$symbol %>% write_lines(str_c("archive/umccr_cancer_genes.tsgenes.", lubridate::today(), ".genes", sep = ""))
+genes_sum_appris %>% filter(tumorsuppressor) %>% .$symbol %>% write_lines(str_c("umccr_cancer_genes.tsgenes.latest.genes", sep = ""))
+```
+
+
+
+
+
+
+```{r compare_to_arthurs_list, eval = F}
+added <- genes_sum %>% filter(keep, !symbol %in% umccr$symbol)
+removed <- genes_sum %>% filter(symbol %in% umccr$symbol, !keep)
+
+predispose %>% mutate(
+  umccr = symbol %in% genes_sum$symbol
+)
+
+# # exlore sources of added genes
+# genes4 %>% filter(symbol %in% added$symbol) %>% arrange(symbol)
+# 
+# # exlore sources of removed genes
+# genes4 %>% filter(symbol %in% removed$symbol) %>% arrange(symbol)
+added
+removed
+```
+Checking how much value AZ300 brings. 11 genes.
+
+```{r checking_az300, eval = F}
+genes_sum %>% filter(str_detect(sources, "AZ300"), n == 2) %>% select(sources, symbol, n, is_key) 
+# is_key  n  
+# <lgl>   <int>
+# FALSE  	41	
+```
+
+Comparing COSMIC germline and PCGR predispose: PCGR includes _all_ COSMIC germline genes
+
+```{r germline, eval = F}
+genes_tsg %>%
+  group_by(symbol) %>%
+  summarise(
+    cos_germ = any(cos_germ, na.rm = T),
+    predispose = any(str_detect(sources, "predispose"))
+  ) %>% count(cos_germ, predispose)
+```
+
+```{r eval = F}
+genes_sum %>% 
+  filter(symbol == "MYC") %>% 
+  select(-tsg_ts, -tsg_og, -cm_driver)
+```
+```{r}
+  # group_by(symbol) %>% 
+  # summarise(
+  #   n = dplyr::n(),
+  #   cm_ts = str_c(cm_ts),
+  #   cm_og = str_c(cm_og),
+  #   ngc_og = ngc_og,
+  #   ngc_ts = ngc_ts,
+  #   ngc_fu = ngc_fu)
+
+# Selecing:
+# - Cancermine (we pre-selected at least 2 publications with at least 3 citations)
+# - NGC_known
+# - CancerGeneCensus_Tier1
+# - At least in 2 of of clinical panels: MSKC-IMPACT, MSKC-HEME, PMCC, TS500, TEMPUS, FoundationONE, FoundationHEME
+# - At least 2 sources from CancerGeneCensus_Tier2, AZ300, OncoKB-Annotated, FamilialCancer, Oncogenes, TumourSuppressors
+genes4 %>% count(sources, sort = T)
+# Annotating:
+# - oncogene if ngc_og or mc_og >= 0.1
+# - tumor_suppressor if ngc_ts or cm_ts >= 0.1
+# - fusion if ngc_fu
+genes4 %>% count(ngc_ts)
+# The result is a list of 1387 genes:
+#   - 1114 genes in at least one clinical panel
+#   - 194 genes in database that are not in any of used clinical panel
+#   - 79 genes in ensemble (2+) lists that are not included above
+
+# | any(cm_og, na.rm = T) | any(cm_og, na.rm = T))
+```
+
+```{r}
+genes_sum %>% count(cm_ts > 0, ngc_ts, tsg_ts)
+genes_sum %>% filter(cm_ts > 0, ngc_ts, tsg_ts)
+genes_sum %>% count(cm_og > 0, ngc_og, tsg_og)
+genes_sum %>% filter(symbol == 'BRCA1')
+```
+
+```{r eval = F}
+cancermine_oncogene <- cancermine %>% filter(role == "Oncogene")
+ncg_oncogene <- ngc_tsgonco %>% filter(NCG6_oncogene == 1)
+cancermine_oncogene
+ncg_oncogene
+```
+
+```{r eval = F}
+ngc_cancer$symbol %>% unique() %>% length()
+```
+
+```{r eval = F}
+ngc_tsgonco$symbol %>% unique() %>% length()
+```
+
+```{r eval = F}
+dplyr::intersect(umccr, unique(ngc_cancer$symbol)) %>% unique() %>% length()
+```
+```{r eval = F}
+dplyr::intersect(umccr, ngc_tsgonco$symbol %>% unique()) %>% unique() %>% length()
+```
+```{r eval = F}
+dplyr::setdiff(unique(ngc_tsgonco$symbol), umccr) %>% unique()
+```
+
+```{r eval = F}
+ngc_cancer_collapsed <- ngc_cancer %>% 
+  group_by(symbol) %>%
+  summarise(
+    n = dplyr::n(),
+    type = str_c(unique(type), collapse=", "), 
+    cancer_type = str_c(unique(cancer_type), collapse=", "), 
+    primary_site = str_c(unique(primary_site), collapse=", "), 
+    method = str_c(unique(method), collapse=", ")
+  )
+
+ngc_cancer_collapsed %>% filter(symbol %in% umccr) %>% arrange(desc(n)) %>% filter(n <= 8)
+```
+
+
+```{r eval = F}
+ngc_cancer %>% filter(symbol == "MKL1")
+```

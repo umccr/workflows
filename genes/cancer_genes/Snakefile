@@ -1,0 +1,48 @@
+from os.path import join, splitext, isfile, basename
+from pybedtools import BedTool
+from ngs_utils.logger import info
+from ngs_utils.reference_data import get_key_genes_set
+from ngs_utils.key_genes_utils import get_genes_from_file
+
+
+gene_list_file = config.get('gene_list')
+if gene_list_file is None:
+    gene_names = get_key_genes_set()
+    input_tsv = 'umccr_cancer_genes.latest.tsv'
+    output_bed = 'umccr_cancer_genes.{genome}.{featuretype}.bed'
+else:
+    gene_names = get_genes_from_file(gene_list_file)
+    input_tsv = gene_list_file
+    output_bed = basename(splitext(gene_list_file)[0]) + '.{genome}.{featuretype}.bed'
+
+
+GENOMES = ['GRCh37', 'hg38']
+
+
+rule all:
+    input:
+        expand(output_bed, genome=GENOMES, featuretype=['transcript', 'coding']),
+        input_tsv.replace('.tsv', '.genes'),
+
+
+rule make_gene_list:
+    input:
+        input_tsv,
+    output:
+        input_tsv.replace('.tsv', '.genes'),
+    shell:
+        'cut -f1 {input} | tail -n+2 > {output}'
+
+
+rule extract_transcripts:
+    input:
+        genes_file = input_tsv,
+    output:
+        bed = output_bed,
+    params:
+        features = lambda wc: 'CDS,stop_codon' if wc.featuretype == 'coding' else 'transcript'
+    shell:
+        'generate_bed.py -g {wildcards.genome} --key-genes --features {params.features} --biotypes "" '
+        ' | sort -k1,1V -k2,2n'
+        ' | bedtools merge -c 4 -o distinct -i -'
+        ' > {output.bed}'
