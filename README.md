@@ -187,7 +187,7 @@ UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key gene
 * At least 2 matches in the following five databases and eight clinical panels:
     * Cancer predisposition genes, [CPSR panel0](https://github.com/sigven/cpsr#cancer-predisposition-genes) - [216 genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) obtained from:
         * A list of 152 genes that were curated and established within TCGA’s pan-cancer study ([Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
-        * A list of 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census),
+        * A list of 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v86](https://cancer.sanger.ac.uk/census) (all genes annotated as Hallmark and Germline),
         * A list of 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium ([http://cancergenomics.no](http://cancergenomics.no/))
     * Hartwig Medical Foundation [list of known fusions](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX) - 439 genes
     * AZ300 (AstraZeneca cancer genes list) - [300 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/az_key_genes.300.txt)
