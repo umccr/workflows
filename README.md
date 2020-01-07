@@ -245,6 +245,11 @@ UMCCR have included the following 8 genes to this list, bringing the total to 20
 
 We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future.
 
+**Questions:**
+
+* [ ] Numbers don't add up - what's the final count _with_ the UMCCR additions? 
+* [ ] Where are UMCCR additions coming from? Can curate in PanelApp. 
+
 **Todo:**
 
 * [ ] Add PMCC Mol Path germline list to PanelApp: `ALK, APC, ASXL1, ATM, BAP1, BCORL1, BLM, BRCA1, BRCA2, BRIP1, CBL, CDC73, CDH1, CDK4, CDKN1B, CDKN2A, CEBPA, CHEK2, CYLD, DICER1, DNMT3A, EGFR, ERCC2, FANCA, FANCC, FANCG, FH, FLCN, FUBP1, GATA2, GNAS, HRAS, IDH1, JAK2, KIT, LZTR1, MEN1, MET, MLH1, MRE11A, MSH2, MSH6, MUTYH, NF1, NF2, PALB2, PDGFRA, PMS2, POLD1, POLE, PRKAR1A, PTCH1, PTEN, PTPN11, RB1, RET, RUNX1, SDHA, SDHB, SDHC, SDHD, SF3B1, SMAD4, SMARCA4, SMARCB1, STAT3, STK11, SUFU, TERT, TET2, TP53, TSC1, TSC2, U2AF1, VHL, WT1`
@@ -268,11 +273,15 @@ provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
 Additional [known fusions from FusionCatcher](https://github.com/umccr/workflows/blob/master/genes/fusions/fusioncatcher_pairs.txt) generated from a 
 [host of databases](https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md#23---genomic-databases).
 
-(xx Needs a link or we need to host the currently used known pair set.)
+
+**Questions:**
+
+* [ ] How is https://github.com/umccr/workflows/blob/master/genes/fusions/compare.R being used?
+
+**Todo:**
 
 * [ ] Provide sources for all fusion lists. One source is https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX but it's not stable and there seems to be no way to retrieve older lists
 * [ ] Version fusion lists
-* [ ] Move to UMCCR / workflow repo
 
 ### 4. SAGE Hotspots
 
