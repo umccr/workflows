@@ -31,7 +31,7 @@ We are using CPSR's list of known cancer predisposition genes (retrieved from <h
 
 ```{r import_cpsr}
 # Point to the original CPSR predisposition genes retrieved from https://github.com/sigven/cpsr/blob/master/predisposition.md
-cpsr <- here('genelists', 'cpsr.tsv')
+cpsr <- here('genes', 'predisposition_genes', 'sources', 'cpsr.tsv')
 
 # Split into data frames by source and adjust column to a PanelApp 
 # template (GEL, private communication)
@@ -108,6 +108,6 @@ cpsr_sources <- cpsr_sources %>%
 # Group by source and export to CSV
 cpsr_sources %>%
   nest(-source) %>%
-  pwalk(~write_tsv(x = .y, path = here('genelists', paste0(.x, '.tsv'))))
+  pwalk(~write_tsv(x = .y, path = here('genes', 'predisposition_genes', 'panelapp', paste0(.x, '.tsv'))))
 ```
 

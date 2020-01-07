@@ -235,9 +235,9 @@ using coordinates from ENSEMBL. Transcript IDs for coordinate choices are select
 
 To assess predisposition to cancer we use CPSR's [Cancer Predisposition Genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) (Panel 0), a virtual panel of 216 genes based on the union of:
 
-* 152 genes that were curated and established within TCGA’s pan-cancer study (TCGA_PANCAN_18 [Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
-* 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census) (CGC_86),
-* 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium (NCGC, <http://cancergenomics.no>)
+* [152 genes](https://github.com/umccr/workflows/blob/master/genes/predisposition_genes/panelapp/TCGA_PANCAN_2018.tsv) that were curated and established within TCGA’s pan-cancer study (TCGA_PANCAN_18 [Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
+* [107 protein-coding genes](https://github.com/umccr/workflows/blob/master/genes/predisposition_genes/panelapp/CGC_86.tsv) that has been manually curated in COSMIC’s [Cancer Gene Census v86](https://cancer.sanger.ac.uk/census) (CGC_86),
+* [148 protein-coding genes](https://github.com/umccr/workflows/blob/master/genes/predisposition_genes/panelapp/NCGC.tsv) established by experts within the Norwegian Cancer Genomics Consortium (NCGC, <http://cancergenomics.no>)
 
 UMCCR have included the following 8 genes to this list, bringing the total to 209 + 8 = 217 genes:
 
@@ -245,12 +245,8 @@ UMCCR have included the following 8 genes to this list, bringing the total to 20
 
 We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future.
 
-
 **Todo:**
 
-* [ ] Check final gene count
-* [ ] Version predisposition gene list (via PanelApp if possible)
-* [ ] Split / highlight manually added genes
 * [ ] Add PMCC Mol Path germline list to PanelApp: `ALK, APC, ASXL1, ATM, BAP1, BCORL1, BLM, BRCA1, BRCA2, BRIP1, CBL, CDC73, CDH1, CDK4, CDKN1B, CDKN2A, CEBPA, CHEK2, CYLD, DICER1, DNMT3A, EGFR, ERCC2, FANCA, FANCC, FANCG, FH, FLCN, FUBP1, GATA2, GNAS, HRAS, IDH1, JAK2, KIT, LZTR1, MEN1, MET, MLH1, MRE11A, MSH2, MSH6, MUTYH, NF1, NF2, PALB2, PDGFRA, PMS2, POLD1, POLE, PRKAR1A, PTCH1, PTEN, PTPN11, RB1, RET, RUNX1, SDHA, SDHB, SDHC, SDHD, SF3B1, SMAD4, SMARCA4, SMARCB1, STAT3, STK11, SUFU, TERT, TET2, TP53, TSC1, TSC2, U2AF1, VHL, WT1`
 
 

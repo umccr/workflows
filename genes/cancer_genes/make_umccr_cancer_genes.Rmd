@@ -1,6 +1,8 @@
 ---
 title: "Cancer genes"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 ```{r set-options, echo=FALSE, cache=FALSE}
 ```
