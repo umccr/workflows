@@ -1,153 +1,153 @@
 Entity Name	Entity type	Gene Symbol	Sources	Level4	Level3	Level2	Model_Of_Inheritance	Phenotypes	Omim	Orphanet	HPO	Publications	Description	Flagged	GEL_Status	UserRatings_Green_amber_red	version	ready	Mode of pathogenicity	EnsemblId(GRch37)	EnsemblId(GRch38)	HGNC	Position Chromosome	Position GRCh37 Start	Position GRCh37 End	Position GRCh38 Start	Position GRCh38 End	STR Repeated Sequence	STR Normal Repeats	STR Pathogenic Repeats	Region Haploinsufficiency Score	Region Triplosensitivity Score	Region Required Overlap Percentage	Region Variant Type	Region Verbose Name
-ABCB11	gene	ABCB11	TCGA_PANCAN_2018				Other	Crigler-Najjar syndrome, type II					ATP binding cassette subfamily B member 11																						
-ALK	gene	ALK	TCGA_PANCAN_2018				Other	Neuroblastoma					ALK receptor tyrosine kinase																						
-APC	gene	APC	TCGA_PANCAN_2018				Other	Familial adenomatous polyposis 1					APC, WNT signaling pathway regulator																						
-ATM	gene	ATM	TCGA_PANCAN_2018				Other	Ataxia-telangiectasia syndrome					ATM serine/threonine kinase																						
-ATR	gene	ATR	TCGA_PANCAN_2018				Other	Seckel syndrome; Cutaneous telangiectasia and cancer syndrome, familial					ATR serine/threonine kinase																						
-AXIN2	gene	AXIN2	TCGA_PANCAN_2018				Other	Oligodontia-colorectal cancer syndrome					axin 2																						
-BAP1	gene	BAP1	TCGA_PANCAN_2018				Other	Tumor susceptibility linked to germline BAP1 mutations; BAP1 Cancer Syndrome					BRCA1 associated protein 1																						
-BLM	gene	BLM	TCGA_PANCAN_2018				Other	Bloom syndrome					Bloom syndrome RecQ like helicase																						
-BMPR1A	gene	BMPR1A	TCGA_PANCAN_2018				Other	Juvenile polyposis syndrome					bone morphogenetic protein receptor type 1A																						
-BRAF	gene	BRAF	TCGA_PANCAN_2018				Other	Noonan syndrome 7; LEOPARD syndrome 3					B-Raf proto-oncogene, serine/threonine kinase																						
-BRCA1	gene	BRCA1	TCGA_PANCAN_2018				Other	Hereditary breast and ovarian cancer syndrome					BRCA1, DNA repair associated																						
-BRCA2	gene	BRCA2	TCGA_PANCAN_2018				Other	Hereditary breast and ovarian cancer syndrome; Fanconi anemia, complementation group D1					BRCA2, DNA repair associated																						
-BRIP1	gene	BRIP1	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group J					BRCA1 interacting protein C-terminal helicase 1																						
-BUB1B	gene	BUB1B	TCGA_PANCAN_2018				Other	Mosaic variegated aneuploidy syndrome					BUB1 mitotic checkpoint serine/threonine kinase B																						
-CBL	gene	CBL	TCGA_PANCAN_2018				Other	Noonan syndrome					Cbl proto-oncogene																						
-CDC73	gene	CDC73	TCGA_PANCAN_2018				Other	Hyperparathyroidism 2					cell division cycle 73																						
-CDH1	gene	CDH1	TCGA_PANCAN_2018				Other	Hereditary diffuse gastric cancer					cadherin 1																						
-CDK4	gene	CDK4	TCGA_PANCAN_2018				Other	Hereditary cutaneous melanoma; Cutaneous malignant melanoma 3					cyclin dependent kinase 4																						
-CDKN1B	gene	CDKN1B	TCGA_PANCAN_2018				Other	Multiple endocrine neoplasia, type 4					cyclin dependent kinase inhibitor 1B																						
-CDKN1C	gene	CDKN1C	TCGA_PANCAN_2018				Other	Beckwith-Wiedemann syndrome					cyclin dependent kinase inhibitor 1C																						
-CDKN2A	gene	CDKN2A	TCGA_PANCAN_2018				Other	Hereditary cutaneous melanoma					cyclin dependent kinase inhibitor 2A																						
-CEBPA	gene	CEBPA	TCGA_PANCAN_2018				Other	Acute myeloid leukemia					CCAAT enhancer binding protein alpha																						
-CHEK2	gene	CHEK2	TCGA_PANCAN_2018				Other	Familial cancer of breast					checkpoint kinase 2																						
-COL7A1	gene	COL7A1	TCGA_PANCAN_2018				Other	Epidermolysis bullosa					collagen type VII alpha 1 chain																						
-CTR9	gene	CTR9	TCGA_PANCAN_2018				Other	NA					CTR9 homolog, Paf1/RNA polymerase II complex component																						
-CYLD	gene	CYLD	TCGA_PANCAN_2018				Other	Spiegler-Brooke syndrome					CYLD lysine 63 deubiquitinase																						
-DDB2	gene	DDB2	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, group E					damage specific DNA binding protein 2																						
-DICER1	gene	DICER1	TCGA_PANCAN_2018				Other	Pleuropulmonary blastoma; DICER1 syndrome					dicer 1, ribonuclease III																						
-DIS3L2	gene	DIS3L2	TCGA_PANCAN_2018				Other	Renal hamartomas nephroblastomatosis and fetal gigantism					DIS3 like 3'-5' exoribonuclease 2																						
-DKC1	gene	DKC1	TCGA_PANCAN_2018				Other	Dyskeratosis congenita X-linked					dyskerin pseudouridine synthase 1																						
-DOCK8	gene	DOCK8	TCGA_PANCAN_2018				Other	Hyperimmunoglobulin E recurrent infection syndrome, autosomal recessive					dedicator of cytokinesis 8																						
-DROSHA	gene	DROSHA	TCGA_PANCAN_2018				Other	NA					drosha ribonuclease III																						
-EGFR	gene	EGFR	TCGA_PANCAN_2018				Other	NA					epidermal growth factor receptor																						
-ELANE	gene	ELANE	TCGA_PANCAN_2018				Other	Severe congenital neutropenia autosomal dominant					elastase, neutrophil expressed																						
-EPCAM	gene	EPCAM	TCGA_PANCAN_2018				Other	Hereditary nonpolyposis colorectal cancer type 8					epithelial cell adhesion molecule																						
-ERCC1	gene	ERCC1	TCGA_PANCAN_2018				Other	Cerebrooculofacioskeletal syndrome 4					ERCC excision repair 1, endonuclease non-catalytic subunit																						
-ERCC2	gene	ERCC2	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, group D					ERCC excision repair 2, TFIIH core complex helicase subunit																						
-ERCC3	gene	ERCC3	TCGA_PANCAN_2018				Other	Xeroderma Pigmentosum, Complementation Group B					ERCC excision repair 3, TFIIH core complex helicase subunit																						
-ERCC4	gene	ERCC4	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, group F; Fanconi anemia, complementation group Q					ERCC excision repair 4, endonuclease catalytic subunit																						
-ERCC5	gene	ERCC5	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, group G					ERCC excision repair 5, endonuclease																						
-ETV6	gene	ETV6	TCGA_PANCAN_2018				Other	Thrombocytopenia 5					ETS variant 6																						
-EXT1	gene	EXT1	TCGA_PANCAN_2018				Other	Chondrosarcoma					exostosin glycosyltransferase 1																						
-EXT2	gene	EXT2	TCGA_PANCAN_2018				Other	Multiple exostoses type 2					exostosin glycosyltransferase 2																						
-FAH	gene	FAH	TCGA_PANCAN_2018				Other	NA					fumarylacetoacetate hydrolase																						
-FANCA	gene	FANCA	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group A					Fanconi anemia complementation group A																						
-FANCC	gene	FANCC	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group C					Fanconi anemia complementation group C																						
-FANCD2	gene	FANCD2	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group D2					Fanconi anemia complementation group D2																						
-FANCE	gene	FANCE	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group E					Fanconi anemia complementation group E																						
-FANCF	gene	FANCF	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group F					Fanconi anemia complementation group F																						
-FANCG	gene	FANCG	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group G					Fanconi anemia complementation group G																						
-FANCI	gene	FANCI	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group I					Fanconi anemia complementation group I																						
-FANCL	gene	FANCL	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group L					Fanconi anemia complementation group L																						
-FANCM	gene	FANCM	TCGA_PANCAN_2018				Other	NA					Fanconi anemia complementation group M																						
-FAS	gene	FAS	TCGA_PANCAN_2018				Other	Autoimmune lymphoproliferative syndrome					Fas cell surface death receptor																						
-FH	gene	FH	TCGA_PANCAN_2018				Other	Multiple cutaneous leiomyomas					fumarate hydratase																						
-FLCN	gene	FLCN	TCGA_PANCAN_2018				Other	Birt-Hogg-Dub syndrome					folliculin																						
-GATA2	gene	GATA2	TCGA_PANCAN_2018				Other	Dendritic cell, monocyte, B lymphocyte, and natural killer lymphocyte deficiency					GATA binding protein 2																						
-GBA	gene	GBA	TCGA_PANCAN_2018				Other	NA					glucosylceramidase beta																						
-GJB2	gene	GJB2	TCGA_PANCAN_2018				Other	NA					gap junction protein beta 2																						
-GPC3	gene	GPC3	TCGA_PANCAN_2018				Other	Simpson-Golabi-Behmel syndrome					glypican 3																						
-HFE	gene	HFE	TCGA_PANCAN_2018				Other	Hereditary hemochromatosis					homeostatic iron regulator																						
-HMBS	gene	HMBS	TCGA_PANCAN_2018				Other	NA					hydroxymethylbilane synthase																						
-HNF1A	gene	HNF1A	TCGA_PANCAN_2018				Other	Hepatic adenomas, familial					HNF1 homeobox A																						
-HRAS	gene	HRAS	TCGA_PANCAN_2018				Other	Costello syndrome					HRas proto-oncogene, GTPase																						
-ITK	gene	ITK	TCGA_PANCAN_2018				Other	Lymphoproliferative syndrome 1					IL2 inducible T cell kinase																						
-JMJD1C	gene	JMJD1C	TCGA_PANCAN_2018				Other	NA					jumonji domain containing 1C																						
-KIT	gene	KIT	TCGA_PANCAN_2018				Other	Gastrointestinal stroma tumor					KIT proto-oncogene receptor tyrosine kinase																						
-KRAS	gene	KRAS	TCGA_PANCAN_2018				Other	Noonan syndrome 3; RAS-associated autoimmune leukoproliferative disorder					KRAS proto-oncogene, GTPase																						
-LMO1	gene	LMO1	TCGA_PANCAN_2018				Other	Neuroblastoma, susceptibility to, 7					LIM domain only 1																						
-MAP2K1	gene	MAP2K1	TCGA_PANCAN_2018				Other	NA					mitogen-activated protein kinase kinase 1																						
-MAP2K2	gene	MAP2K2	TCGA_PANCAN_2018				Other	NA					mitogen-activated protein kinase kinase 2																						
-MAX	gene	MAX	TCGA_PANCAN_2018				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					MYC associated factor X																						
-MEN1	gene	MEN1	TCGA_PANCAN_2018				Other	Multiple endocrine neoplasia, type 1					menin 1																						
-MET	gene	MET	TCGA_PANCAN_2018				Other	Renal cell carcinoma, papillary, 1					MET proto-oncogene, receptor tyrosine kinase																						
-MITF	gene	MITF	TCGA_PANCAN_2018				Other	Hereditary cutaneous melanoma					melanogenesis associated transcription factor																						
-MLH1	gene	MLH1	TCGA_PANCAN_2018				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutL homolog 1																						
-MPL	gene	MPL	TCGA_PANCAN_2018				Other	Inherited predisposition to essential thrombocythemia					MPL proto-oncogene, thrombopoietin receptor																						
-MSH2	gene	MSH2	TCGA_PANCAN_2018				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 2																						
-MSH6	gene	MSH6	TCGA_PANCAN_2018				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 6																						
-MTAP	gene	MTAP	TCGA_PANCAN_2018				Other	Diaphyseal medullary stenosis with malignant fibrous histiocytoma					methylthioadenosine phosphorylase																						
-MUTYH	gene	MUTYH	TCGA_PANCAN_2018				Other	MYH-associated polyposis					mutY DNA glycosylase																						
-NBN	gene	NBN	TCGA_PANCAN_2018				Other	Microcephaly, normal intelligence and immunodeficiency					nibrin																						
-NF1	gene	NF1	TCGA_PANCAN_2018				Other	Neurofibromatosis, type 1					neurofibromin 1																						
-NF2	gene	NF2	TCGA_PANCAN_2018				Other	Neurofibromatosis, type 2					neurofibromin 2																						
-NHP2	gene	NHP2	TCGA_PANCAN_2018				Other	Dyskeratosis congenita, autosomal recessive 2					NHP2 ribonucleoprotein																						
-NOP10	gene	NOP10	TCGA_PANCAN_2018				Other	Dyskeratosis congenita autosomal recessive 1					NOP10 ribonucleoprotein																						
-NRAS	gene	NRAS	TCGA_PANCAN_2018				Other	NA; Epidermal nevus; Congenital giant melanocytic nevus; RAS-associated autoimmune leukoproliferative disorder; Noonan syndrome 6; Rasopathy					NRAS proto-oncogene, GTPase																						
-NTHL1	gene	NTHL1	TCGA_PANCAN_2018				Other	Familial adenomatous polyposis 3					nth like DNA glycosylase 1																						
-PALB2	gene	PALB2	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group N					partner and localizer of BRCA2																						
-PAX5	gene	PAX5	TCGA_PANCAN_2018				Other	Leukemia, acute lymphoblastic, susceptibility to, 3					paired box 5																						
-PDGFRA	gene	PDGFRA	TCGA_PANCAN_2018				Other	Gastrointestinal stroma tumor					platelet derived growth factor receptor alpha																						
-PHOX2B	gene	PHOX2B	TCGA_PANCAN_2018				Other	Neuroblastoma 2					paired like homeobox 2b																						
-PMS1	gene	PMS1	TCGA_PANCAN_2018				Other	Familial colorectal cancer					PMS1 homolog 1, mismatch repair system component																						
-PMS2	gene	PMS2	TCGA_PANCAN_2018				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					PMS1 homolog 2, mismatch repair system component																						
-POLD1	gene	POLD1	TCGA_PANCAN_2018				Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase delta 1, catalytic subunit																						
-POLE	gene	POLE	TCGA_PANCAN_2018				Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase epsilon, catalytic subunit																						
-POLH	gene	POLH	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, variant type					DNA polymerase eta																						
-POT1	gene	POT1	TCGA_PANCAN_2018				Other	Melanoma, cutaneous malignant, susceptibility to, 10					protection of telomeres 1																						
-PRDM9	gene	PRDM9	TCGA_PANCAN_2018				Other	NA					PR/SET domain 9																						
-PRF1	gene	PRF1	TCGA_PANCAN_2018				Other	Hemophagocytic lymphohistiocytosis, familial, 2					perforin 1																						
-PRKAR1A	gene	PRKAR1A	TCGA_PANCAN_2018				Other	Carney complex					protein kinase cAMP-dependent type I regulatory subunit alpha																						
-PRSS1	gene	PRSS1	TCGA_PANCAN_2018				Other	Hereditary pancreatitis					serine protease 1																						
-PTCH1	gene	PTCH1	TCGA_PANCAN_2018				Other	Gorlin syndrome					patched 1																						
-PTEN	gene	PTEN	TCGA_PANCAN_2018				Other	PTEN hamartoma tumor syndrome; Cowden syndrome 1					phosphatase and tensin homolog																						
-PTPN11	gene	PTPN11	TCGA_PANCAN_2018				Other	Noonan syndrome					protein tyrosine phosphatase, non-receptor type 11																						
-RAD51C	gene	RAD51C	TCGA_PANCAN_2018				Other	Fanconi anemia, complementation group O					RAD51 paralog C																						
-RAD51D	gene	RAD51D	TCGA_PANCAN_2018				Other	Breast-ovarian cancer, familial 4					RAD51 paralog D																						
-RAF1	gene	RAF1	TCGA_PANCAN_2018				Other	LEOPARD syndrome 2; Noonan syndrome 5					Raf-1 proto-oncogene, serine/threonine kinase																						
-RB1	gene	RB1	TCGA_PANCAN_2018				Other	Osteosarcoma; Retinoblastoma					RB transcriptional corepressor 1																						
-RECQL	gene	RECQL	TCGA_PANCAN_2018				Other	NA					RecQ like helicase																						
-RECQL4	gene	RECQL4	TCGA_PANCAN_2018				Other	Rothmund-Thomson syndrome					RecQ like helicase 4																						
-RET	gene	RET	TCGA_PANCAN_2018				Other	Multiple endocrine neoplasia, type 2a; Multiple endocrine neoplasia, type 2b; Familial medullary thyroid carcinoma					ret proto-oncogene																						
-RHBDF2	gene	RHBDF2	TCGA_PANCAN_2018				Other	Howel-Evans syndrome					rhomboid 5 homolog 2																						
-RMRP	gene	RMRP	TCGA_PANCAN_2018				Other	Metaphyseal chondrodysplasia, McKusick type					RNA component of mitochondrial RNA processing endoribonuclease																						
-RUNX1	gene	RUNX1	TCGA_PANCAN_2018				Other	Familial platelet disorder with associated myeloid malignancy					runt related transcription factor 1																						
-SBDS	gene	SBDS	TCGA_PANCAN_2018				Other	Shwachman syndrome					SBDS, ribosome maturation factor																						
-SDHA	gene	SDHA	TCGA_PANCAN_2018				Other	Paragangliomas 5					succinate dehydrogenase complex flavoprotein subunit A																						
-SDHAF2	gene	SDHAF2	TCGA_PANCAN_2018				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					succinate dehydrogenase complex assembly factor 2																						
-SDHB	gene	SDHB	TCGA_PANCAN_2018				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex iron sulfur subunit B																						
-SDHC	gene	SDHC	TCGA_PANCAN_2018				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit C																						
-SDHD	gene	SDHD	TCGA_PANCAN_2018				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit D																						
-SERPINA1	gene	SERPINA1	TCGA_PANCAN_2018				Other	Alpha-1-antitrypsin deficiency					serpin family A member 1																						
-SETBP1	gene	SETBP1	TCGA_PANCAN_2018				Other	Schinzel-Giedion syndrome					SET binding protein 1																						
-SH2B3	gene	SH2B3	TCGA_PANCAN_2018				Other	NA					SH2B adaptor protein 3																						
-SH2D1A	gene	SH2D1A	TCGA_PANCAN_2018				Other	Lymphoproliferative syndrome 1, X-linked					SH2 domain containing 1A																						
-SHOC2	gene	SHOC2	TCGA_PANCAN_2018				Other	Noonan syndrome-like disorder with loose anagen hair 1					SHOC2, leucine rich repeat scaffold protein																						
-SLC25A13	gene	SLC25A13	TCGA_PANCAN_2018				Other	NA					solute carrier family 25 member 13																						
-SMAD4	gene	SMAD4	TCGA_PANCAN_2018				Other	Juvenile polyposis syndrome					SMAD family member 4																						
-SMARCA4	gene	SMARCA4	TCGA_PANCAN_2018				Other	Rhabdoid tumor predisposition syndrome 2					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4																						
-SMARCB1	gene	SMARCB1	TCGA_PANCAN_2018				Other	Rhabdoid tumor predisposition syndrome 1					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1																						
-SMARCE1	gene	SMARCE1	TCGA_PANCAN_2018				Other	Meningioma, familial					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily e, member 1																						
-SOS1	gene	SOS1	TCGA_PANCAN_2018				Other	Noonan syndrome					SOS Ras/Rac guanine nucleotide exchange factor 1																						
-SPRTN	gene	SPRTN	TCGA_PANCAN_2018				Other	Ruijs-Aalfs syndrome					SprT-like N-terminal domain																						
-SRY	gene	SRY	TCGA_PANCAN_2018				Other	Gonadoblastoma					sex determining region Y																						
-STAT3	gene	STAT3	TCGA_PANCAN_2018				Other	Hyper IgE Syndrome, Autosomal Dominant					signal transducer and activator of transcription 3																						
-STK11	gene	STK11	TCGA_PANCAN_2018				Other	Peutz-Jeghers syndrome					serine/threonine kinase 11																						
-SUFU	gene	SUFU	TCGA_PANCAN_2018				Other	Medulloblastoma; Meningioma, familial					SUFU negative regulator of hedgehog signaling																						
-TERT	gene	TERT	TCGA_PANCAN_2018				Other	Dyskeratosis congenita autosomal dominant					telomerase reverse transcriptase																						
-TGFBR1	gene	TGFBR1	TCGA_PANCAN_2018				Other	Multiple self healing squamous epithelioma					transforming growth factor beta receptor 1																						
-TMEM127	gene	TMEM127	TCGA_PANCAN_2018				Other	Pheochromocytoma					transmembrane protein 127																						
-TP53	gene	TP53	TCGA_PANCAN_2018				Other	Li-Fraumeni syndrome 1					tumor protein p53																						
-TRIM37	gene	TRIM37	TCGA_PANCAN_2018				Other	NA					tripartite motif containing 37																						
-TSC1	gene	TSC1	TCGA_PANCAN_2018				Other	Tuberous sclerosis 1					TSC complex subunit 1																						
-TSC2	gene	TSC2	TCGA_PANCAN_2018				Other	Tuberous sclerosis 2					TSC complex subunit 2																						
-TSHR	gene	TSHR	TCGA_PANCAN_2018				Other	Hyperthyroidism, nonautoimmune					thyroid stimulating hormone receptor																						
-UROD	gene	UROD	TCGA_PANCAN_2018				Other	Familial porphyria cutanea tarda					uroporphyrinogen decarboxylase																						
-VHL	gene	VHL	TCGA_PANCAN_2018				Other	Von Hippel-Lindau syndrome					von Hippel-Lindau tumor suppressor																						
-WAS	gene	WAS	TCGA_PANCAN_2018				Other	Thrombocytopenia, X-linked					Wiskott-Aldrich syndrome																						
-WRN	gene	WRN	TCGA_PANCAN_2018				Other	Werner syndrome					Werner syndrome RecQ like helicase																						
-WT1	gene	WT1	TCGA_PANCAN_2018				Other	Wilms tumor 1					Wilms tumor 1																						
-XPA	gene	XPA	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, type 1					XPA, DNA damage recognition and repair factor																						
-XPC	gene	XPC	TCGA_PANCAN_2018				Other	Xeroderma pigmentosum, group C					XPC complex subunit, DNA damage recognition and repair factor																						
+ABCB11	gene	ABCB11	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Crigler-Najjar syndrome, type II					ATP binding cassette subfamily B member 11																						
+ALK	gene	ALK	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Neuroblastoma					ALK receptor tyrosine kinase																						
+APC	gene	APC	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Familial adenomatous polyposis 1					APC, WNT signaling pathway regulator																						
+ATM	gene	ATM	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Ataxia-telangiectasia syndrome					ATM serine/threonine kinase																						
+ATR	gene	ATR	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Seckel syndrome; Cutaneous telangiectasia and cancer syndrome, familial					ATR serine/threonine kinase																						
+AXIN2	gene	AXIN2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Oligodontia-colorectal cancer syndrome					axin 2																						
+BAP1	gene	BAP1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Tumor susceptibility linked to germline BAP1 mutations; BAP1 Cancer Syndrome					BRCA1 associated protein 1																						
+BLM	gene	BLM	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Bloom syndrome					Bloom syndrome RecQ like helicase																						
+BMPR1A	gene	BMPR1A	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Juvenile polyposis syndrome					bone morphogenetic protein receptor type 1A																						
+BRAF	gene	BRAF	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Noonan syndrome 7; LEOPARD syndrome 3					B-Raf proto-oncogene, serine/threonine kinase																						
+BRCA1	gene	BRCA1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary breast and ovarian cancer syndrome					BRCA1, DNA repair associated																						
+BRCA2	gene	BRCA2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary breast and ovarian cancer syndrome; Fanconi anemia, complementation group D1					BRCA2, DNA repair associated																						
+BRIP1	gene	BRIP1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group J					BRCA1 interacting protein C-terminal helicase 1																						
+BUB1B	gene	BUB1B	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Mosaic variegated aneuploidy syndrome					BUB1 mitotic checkpoint serine/threonine kinase B																						
+CBL	gene	CBL	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Noonan syndrome					Cbl proto-oncogene																						
+CDC73	gene	CDC73	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hyperparathyroidism 2					cell division cycle 73																						
+CDH1	gene	CDH1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary diffuse gastric cancer					cadherin 1																						
+CDK4	gene	CDK4	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary cutaneous melanoma; Cutaneous malignant melanoma 3					cyclin dependent kinase 4																						
+CDKN1B	gene	CDKN1B	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Multiple endocrine neoplasia, type 4					cyclin dependent kinase inhibitor 1B																						
+CDKN1C	gene	CDKN1C	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Beckwith-Wiedemann syndrome					cyclin dependent kinase inhibitor 1C																						
+CDKN2A	gene	CDKN2A	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary cutaneous melanoma					cyclin dependent kinase inhibitor 2A																						
+CEBPA	gene	CEBPA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Acute myeloid leukemia					CCAAT enhancer binding protein alpha																						
+CHEK2	gene	CHEK2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Familial cancer of breast					checkpoint kinase 2																						
+COL7A1	gene	COL7A1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Epidermolysis bullosa					collagen type VII alpha 1 chain																						
+CTR9	gene	CTR9	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					CTR9 homolog, Paf1/RNA polymerase II complex component																						
+CYLD	gene	CYLD	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Spiegler-Brooke syndrome					CYLD lysine 63 deubiquitinase																						
+DDB2	gene	DDB2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, group E					damage specific DNA binding protein 2																						
+DICER1	gene	DICER1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Pleuropulmonary blastoma; DICER1 syndrome					dicer 1, ribonuclease III																						
+DIS3L2	gene	DIS3L2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Renal hamartomas nephroblastomatosis and fetal gigantism					DIS3 like 3'-5' exoribonuclease 2																						
+DKC1	gene	DKC1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Dyskeratosis congenita X-linked					dyskerin pseudouridine synthase 1																						
+DOCK8	gene	DOCK8	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hyperimmunoglobulin E recurrent infection syndrome, autosomal recessive					dedicator of cytokinesis 8																						
+DROSHA	gene	DROSHA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					drosha ribonuclease III																						
+EGFR	gene	EGFR	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					epidermal growth factor receptor																						
+ELANE	gene	ELANE	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Severe congenital neutropenia autosomal dominant					elastase, neutrophil expressed																						
+EPCAM	gene	EPCAM	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary nonpolyposis colorectal cancer type 8					epithelial cell adhesion molecule																						
+ERCC1	gene	ERCC1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Cerebrooculofacioskeletal syndrome 4					ERCC excision repair 1, endonuclease non-catalytic subunit																						
+ERCC2	gene	ERCC2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, group D					ERCC excision repair 2, TFIIH core complex helicase subunit																						
+ERCC3	gene	ERCC3	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma Pigmentosum, Complementation Group B					ERCC excision repair 3, TFIIH core complex helicase subunit																						
+ERCC4	gene	ERCC4	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, group F; Fanconi anemia, complementation group Q					ERCC excision repair 4, endonuclease catalytic subunit																						
+ERCC5	gene	ERCC5	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, group G					ERCC excision repair 5, endonuclease																						
+ETV6	gene	ETV6	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Thrombocytopenia 5					ETS variant 6																						
+EXT1	gene	EXT1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Chondrosarcoma					exostosin glycosyltransferase 1																						
+EXT2	gene	EXT2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Multiple exostoses type 2					exostosin glycosyltransferase 2																						
+FAH	gene	FAH	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					fumarylacetoacetate hydrolase																						
+FANCA	gene	FANCA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group A					Fanconi anemia complementation group A																						
+FANCC	gene	FANCC	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group C					Fanconi anemia complementation group C																						
+FANCD2	gene	FANCD2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group D2					Fanconi anemia complementation group D2																						
+FANCE	gene	FANCE	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group E					Fanconi anemia complementation group E																						
+FANCF	gene	FANCF	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group F					Fanconi anemia complementation group F																						
+FANCG	gene	FANCG	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group G					Fanconi anemia complementation group G																						
+FANCI	gene	FANCI	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group I					Fanconi anemia complementation group I																						
+FANCL	gene	FANCL	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group L					Fanconi anemia complementation group L																						
+FANCM	gene	FANCM	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					Fanconi anemia complementation group M																						
+FAS	gene	FAS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Autoimmune lymphoproliferative syndrome					Fas cell surface death receptor																						
+FH	gene	FH	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Multiple cutaneous leiomyomas					fumarate hydratase																						
+FLCN	gene	FLCN	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Birt-Hogg-Dub syndrome					folliculin																						
+GATA2	gene	GATA2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Dendritic cell, monocyte, B lymphocyte, and natural killer lymphocyte deficiency					GATA binding protein 2																						
+GBA	gene	GBA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					glucosylceramidase beta																						
+GJB2	gene	GJB2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					gap junction protein beta 2																						
+GPC3	gene	GPC3	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Simpson-Golabi-Behmel syndrome					glypican 3																						
+HFE	gene	HFE	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary hemochromatosis					homeostatic iron regulator																						
+HMBS	gene	HMBS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					hydroxymethylbilane synthase																						
+HNF1A	gene	HNF1A	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hepatic adenomas, familial					HNF1 homeobox A																						
+HRAS	gene	HRAS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Costello syndrome					HRas proto-oncogene, GTPase																						
+ITK	gene	ITK	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Lymphoproliferative syndrome 1					IL2 inducible T cell kinase																						
+JMJD1C	gene	JMJD1C	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					jumonji domain containing 1C																						
+KIT	gene	KIT	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Gastrointestinal stroma tumor					KIT proto-oncogene receptor tyrosine kinase																						
+KRAS	gene	KRAS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Noonan syndrome 3; RAS-associated autoimmune leukoproliferative disorder					KRAS proto-oncogene, GTPase																						
+LMO1	gene	LMO1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Neuroblastoma, susceptibility to, 7					LIM domain only 1																						
+MAP2K1	gene	MAP2K1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					mitogen-activated protein kinase kinase 1																						
+MAP2K2	gene	MAP2K2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					mitogen-activated protein kinase kinase 2																						
+MAX	gene	MAX	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					MYC associated factor X																						
+MEN1	gene	MEN1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Multiple endocrine neoplasia, type 1					menin 1																						
+MET	gene	MET	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Renal cell carcinoma, papillary, 1					MET proto-oncogene, receptor tyrosine kinase																						
+MITF	gene	MITF	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary cutaneous melanoma					melanogenesis associated transcription factor																						
+MLH1	gene	MLH1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutL homolog 1																						
+MPL	gene	MPL	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Inherited predisposition to essential thrombocythemia					MPL proto-oncogene, thrombopoietin receptor																						
+MSH2	gene	MSH2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 2																						
+MSH6	gene	MSH6	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 6																						
+MTAP	gene	MTAP	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Diaphyseal medullary stenosis with malignant fibrous histiocytoma					methylthioadenosine phosphorylase																						
+MUTYH	gene	MUTYH	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	MYH-associated polyposis					mutY DNA glycosylase																						
+NBN	gene	NBN	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Microcephaly, normal intelligence and immunodeficiency					nibrin																						
+NF1	gene	NF1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Neurofibromatosis, type 1					neurofibromin 1																						
+NF2	gene	NF2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Neurofibromatosis, type 2					neurofibromin 2																						
+NHP2	gene	NHP2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Dyskeratosis congenita, autosomal recessive 2					NHP2 ribonucleoprotein																						
+NOP10	gene	NOP10	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Dyskeratosis congenita autosomal recessive 1					NOP10 ribonucleoprotein																						
+NRAS	gene	NRAS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA; Epidermal nevus; Congenital giant melanocytic nevus; RAS-associated autoimmune leukoproliferative disorder; Noonan syndrome 6; Rasopathy					NRAS proto-oncogene, GTPase																						
+NTHL1	gene	NTHL1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Familial adenomatous polyposis 3					nth like DNA glycosylase 1																						
+PALB2	gene	PALB2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group N					partner and localizer of BRCA2																						
+PAX5	gene	PAX5	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Leukemia, acute lymphoblastic, susceptibility to, 3					paired box 5																						
+PDGFRA	gene	PDGFRA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Gastrointestinal stroma tumor					platelet derived growth factor receptor alpha																						
+PHOX2B	gene	PHOX2B	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Neuroblastoma 2					paired like homeobox 2b																						
+PMS1	gene	PMS1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Familial colorectal cancer					PMS1 homolog 1, mismatch repair system component																						
+PMS2	gene	PMS2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					PMS1 homolog 2, mismatch repair system component																						
+POLD1	gene	POLD1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase delta 1, catalytic subunit																						
+POLE	gene	POLE	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase epsilon, catalytic subunit																						
+POLH	gene	POLH	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, variant type					DNA polymerase eta																						
+POT1	gene	POT1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Melanoma, cutaneous malignant, susceptibility to, 10					protection of telomeres 1																						
+PRDM9	gene	PRDM9	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					PR/SET domain 9																						
+PRF1	gene	PRF1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hemophagocytic lymphohistiocytosis, familial, 2					perforin 1																						
+PRKAR1A	gene	PRKAR1A	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Carney complex					protein kinase cAMP-dependent type I regulatory subunit alpha																						
+PRSS1	gene	PRSS1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary pancreatitis					serine protease 1																						
+PTCH1	gene	PTCH1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Gorlin syndrome					patched 1																						
+PTEN	gene	PTEN	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	PTEN hamartoma tumor syndrome; Cowden syndrome 1					phosphatase and tensin homolog																						
+PTPN11	gene	PTPN11	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Noonan syndrome					protein tyrosine phosphatase, non-receptor type 11																						
+RAD51C	gene	RAD51C	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Fanconi anemia, complementation group O					RAD51 paralog C																						
+RAD51D	gene	RAD51D	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Breast-ovarian cancer, familial 4					RAD51 paralog D																						
+RAF1	gene	RAF1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	LEOPARD syndrome 2; Noonan syndrome 5					Raf-1 proto-oncogene, serine/threonine kinase																						
+RB1	gene	RB1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Osteosarcoma; Retinoblastoma					RB transcriptional corepressor 1																						
+RECQL	gene	RECQL	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					RecQ like helicase																						
+RECQL4	gene	RECQL4	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Rothmund-Thomson syndrome					RecQ like helicase 4																						
+RET	gene	RET	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Multiple endocrine neoplasia, type 2a; Multiple endocrine neoplasia, type 2b; Familial medullary thyroid carcinoma					ret proto-oncogene																						
+RHBDF2	gene	RHBDF2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Howel-Evans syndrome					rhomboid 5 homolog 2																						
+RMRP	gene	RMRP	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Metaphyseal chondrodysplasia, McKusick type					RNA component of mitochondrial RNA processing endoribonuclease																						
+RUNX1	gene	RUNX1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Familial platelet disorder with associated myeloid malignancy					runt related transcription factor 1																						
+SBDS	gene	SBDS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Shwachman syndrome					SBDS, ribosome maturation factor																						
+SDHA	gene	SDHA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Paragangliomas 5					succinate dehydrogenase complex flavoprotein subunit A																						
+SDHAF2	gene	SDHAF2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					succinate dehydrogenase complex assembly factor 2																						
+SDHB	gene	SDHB	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex iron sulfur subunit B																						
+SDHC	gene	SDHC	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit C																						
+SDHD	gene	SDHD	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit D																						
+SERPINA1	gene	SERPINA1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Alpha-1-antitrypsin deficiency					serpin family A member 1																						
+SETBP1	gene	SETBP1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Schinzel-Giedion syndrome					SET binding protein 1																						
+SH2B3	gene	SH2B3	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					SH2B adaptor protein 3																						
+SH2D1A	gene	SH2D1A	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Lymphoproliferative syndrome 1, X-linked					SH2 domain containing 1A																						
+SHOC2	gene	SHOC2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Noonan syndrome-like disorder with loose anagen hair 1					SHOC2, leucine rich repeat scaffold protein																						
+SLC25A13	gene	SLC25A13	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					solute carrier family 25 member 13																						
+SMAD4	gene	SMAD4	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Juvenile polyposis syndrome					SMAD family member 4																						
+SMARCA4	gene	SMARCA4	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Rhabdoid tumor predisposition syndrome 2					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4																						
+SMARCB1	gene	SMARCB1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Rhabdoid tumor predisposition syndrome 1					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1																						
+SMARCE1	gene	SMARCE1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Meningioma, familial					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily e, member 1																						
+SOS1	gene	SOS1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Noonan syndrome					SOS Ras/Rac guanine nucleotide exchange factor 1																						
+SPRTN	gene	SPRTN	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Ruijs-Aalfs syndrome					SprT-like N-terminal domain																						
+SRY	gene	SRY	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Gonadoblastoma					sex determining region Y																						
+STAT3	gene	STAT3	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hyper IgE Syndrome, Autosomal Dominant					signal transducer and activator of transcription 3																						
+STK11	gene	STK11	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Peutz-Jeghers syndrome					serine/threonine kinase 11																						
+SUFU	gene	SUFU	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Medulloblastoma; Meningioma, familial					SUFU negative regulator of hedgehog signaling																						
+TERT	gene	TERT	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Dyskeratosis congenita autosomal dominant					telomerase reverse transcriptase																						
+TGFBR1	gene	TGFBR1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Multiple self healing squamous epithelioma					transforming growth factor beta receptor 1																						
+TMEM127	gene	TMEM127	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Pheochromocytoma					transmembrane protein 127																						
+TP53	gene	TP53	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Li-Fraumeni syndrome 1					tumor protein p53																						
+TRIM37	gene	TRIM37	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	NA					tripartite motif containing 37																						
+TSC1	gene	TSC1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Tuberous sclerosis 1					TSC complex subunit 1																						
+TSC2	gene	TSC2	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Tuberous sclerosis 2					TSC complex subunit 2																						
+TSHR	gene	TSHR	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Hyperthyroidism, nonautoimmune					thyroid stimulating hormone receptor																						
+UROD	gene	UROD	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Familial porphyria cutanea tarda					uroporphyrinogen decarboxylase																						
+VHL	gene	VHL	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Von Hippel-Lindau syndrome					von Hippel-Lindau tumor suppressor																						
+WAS	gene	WAS	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Thrombocytopenia, X-linked					Wiskott-Aldrich syndrome																						
+WRN	gene	WRN	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Werner syndrome					Werner syndrome RecQ like helicase																						
+WT1	gene	WT1	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Wilms tumor 1					Wilms tumor 1																						
+XPA	gene	XPA	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, type 1					XPA, DNA damage recognition and repair factor																						
+XPC	gene	XPC	TCGA_PANCAN_2018	TCGA_PANCAN_2018			Other	Xeroderma pigmentosum, group C					XPC complex subunit, DNA damage recognition and repair factor																						

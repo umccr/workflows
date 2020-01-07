@@ -43,7 +43,7 @@ cpsr_sources <- read_tsv(cpsr) %>%
          'Entity type' = 'gene',
          'Gene Symbol' = symbol,
          'Sources' = source,
-         'Level4' = '' ,
+         'Level4' = source ,
          'Level3' = '',
          'Level2' = '',
          'Model_Of_Inheritance' = '',

@@ -1,149 +1,149 @@
 Entity Name	Entity type	Gene Symbol	Sources	Level4	Level3	Level2	Model_Of_Inheritance	Phenotypes	Omim	Orphanet	HPO	Publications	Description	Flagged	GEL_Status	UserRatings_Green_amber_red	version	ready	Mode of pathogenicity	EnsemblId(GRch37)	EnsemblId(GRch38)	HGNC	Position Chromosome	Position GRCh37 Start	Position GRCh37 End	Position GRCh38 Start	Position GRCh38 End	STR Repeated Sequence	STR Normal Repeats	STR Pathogenic Repeats	Region Haploinsufficiency Score	Region Triplosensitivity Score	Region Required Overlap Percentage	Region Variant Type	Region Verbose Name
-ABRAXAS1	gene	ABRAXAS1	NCGC				Other	NA					abraxas 1, BRCA1 A complex subunit																						
-ACD	gene	ACD	NCGC				Other	NA					ACD, shelterin complex subunit and telomerase recruitment factor																						
-AIP	gene	AIP	NCGC				Other	NA					aryl hydrocarbon receptor interacting protein																						
-AKT1	gene	AKT1	NCGC				Other	NA					AKT serine/threonine kinase 1																						
-ALK	gene	ALK	NCGC				Other	Neuroblastoma					ALK receptor tyrosine kinase																						
-APC	gene	APC	NCGC				Other	Familial adenomatous polyposis 1					APC, WNT signaling pathway regulator																						
-ATM	gene	ATM	NCGC				Other	Ataxia-telangiectasia syndrome					ATM serine/threonine kinase																						
-AXIN1	gene	AXIN1	NCGC				Other	NA					axin 1																						
-AXIN2	gene	AXIN2	NCGC				Other	Oligodontia-colorectal cancer syndrome					axin 2																						
-BAP1	gene	BAP1	NCGC				Other	Tumor susceptibility linked to germline BAP1 mutations; BAP1 Cancer Syndrome					BRCA1 associated protein 1																						
-BARD1	gene	BARD1	NCGC				Other	NA					BRCA1 associated RING domain 1																						
-BLM	gene	BLM	NCGC				Other	Bloom syndrome					Bloom syndrome RecQ like helicase																						
-BMPR1A	gene	BMPR1A	NCGC				Other	Juvenile polyposis syndrome					bone morphogenetic protein receptor type 1A																						
-BRCA1	gene	BRCA1	NCGC				Other	Hereditary breast and ovarian cancer syndrome					BRCA1, DNA repair associated																						
-BRCA2	gene	BRCA2	NCGC				Other	Hereditary breast and ovarian cancer syndrome; Fanconi anemia, complementation group D1					BRCA2, DNA repair associated																						
-BRIP1	gene	BRIP1	NCGC				Other	Fanconi anemia, complementation group J					BRCA1 interacting protein C-terminal helicase 1																						
-BUB1B	gene	BUB1B	NCGC				Other	Mosaic variegated aneuploidy syndrome					BUB1 mitotic checkpoint serine/threonine kinase B																						
-CASR	gene	CASR	NCGC				Other	NA					calcium sensing receptor																						
-CDC73	gene	CDC73	NCGC				Other	Hyperparathyroidism 2					cell division cycle 73																						
-CDH1	gene	CDH1	NCGC				Other	Hereditary diffuse gastric cancer					cadherin 1																						
-CDK4	gene	CDK4	NCGC				Other	Hereditary cutaneous melanoma; Cutaneous malignant melanoma 3					cyclin dependent kinase 4																						
-CDKN1B	gene	CDKN1B	NCGC				Other	Multiple endocrine neoplasia, type 4					cyclin dependent kinase inhibitor 1B																						
-CDKN1C	gene	CDKN1C	NCGC				Other	Beckwith-Wiedemann syndrome					cyclin dependent kinase inhibitor 1C																						
-CDKN2A	gene	CDKN2A	NCGC				Other	Hereditary cutaneous melanoma					cyclin dependent kinase inhibitor 2A																						
-CEBPA	gene	CEBPA	NCGC				Other	Acute myeloid leukemia					CCAAT enhancer binding protein alpha																						
-CEP57	gene	CEP57	NCGC				Other	NA					centrosomal protein 57																						
-CHEK2	gene	CHEK2	NCGC				Other	Familial cancer of breast					checkpoint kinase 2																						
-CTNNA1	gene	CTNNA1	NCGC				Other	NA					catenin alpha 1																						
-CTNNB1	gene	CTNNB1	NCGC				Other	NA					catenin beta 1																						
-CTRC	gene	CTRC	NCGC				Other	NA					chymotrypsin C																						
-CYLD	gene	CYLD	NCGC				Other	Spiegler-Brooke syndrome					CYLD lysine 63 deubiquitinase																						
-DDB2	gene	DDB2	NCGC				Other	Xeroderma pigmentosum, group E					damage specific DNA binding protein 2																						
-DICER1	gene	DICER1	NCGC				Other	Pleuropulmonary blastoma; DICER1 syndrome					dicer 1, ribonuclease III																						
-DIRAS3	gene	DIRAS3	NCGC				Other	NA					DIRAS family GTPase 3																						
-DIS3L2	gene	DIS3L2	NCGC				Other	Renal hamartomas nephroblastomatosis and fetal gigantism					DIS3 like 3'-5' exoribonuclease 2																						
-DTX3L	gene	DTX3L	NCGC				Other	NA					deltex E3 ubiquitin ligase 3L																						
-EGFR	gene	EGFR	NCGC				Other	NA					epidermal growth factor receptor																						
-ENG	gene	ENG	NCGC				Other	NA					endoglin																						
-EPCAM	gene	EPCAM	NCGC				Other	Hereditary nonpolyposis colorectal cancer type 8					epithelial cell adhesion molecule																						
-ERCC1	gene	ERCC1	NCGC				Other	Cerebrooculofacioskeletal syndrome 4					ERCC excision repair 1, endonuclease non-catalytic subunit																						
-ERCC2	gene	ERCC2	NCGC				Other	Xeroderma pigmentosum, group D					ERCC excision repair 2, TFIIH core complex helicase subunit																						
-ERCC3	gene	ERCC3	NCGC				Other	Xeroderma Pigmentosum, Complementation Group B					ERCC excision repair 3, TFIIH core complex helicase subunit																						
-ERCC4	gene	ERCC4	NCGC				Other	Xeroderma pigmentosum, group F; Fanconi anemia, complementation group Q					ERCC excision repair 4, endonuclease catalytic subunit																						
-ERCC5	gene	ERCC5	NCGC				Other	Xeroderma pigmentosum, group G					ERCC excision repair 5, endonuclease																						
-ETV6	gene	ETV6	NCGC				Other	Thrombocytopenia 5					ETS variant 6																						
-EXT1	gene	EXT1	NCGC				Other	Chondrosarcoma					exostosin glycosyltransferase 1																						
-EXT2	gene	EXT2	NCGC				Other	Multiple exostoses type 2					exostosin glycosyltransferase 2																						
-EZH2	gene	EZH2	NCGC				Other	NA					enhancer of zeste 2 polycomb repressive complex 2 subunit																						
-FANCA	gene	FANCA	NCGC				Other	Fanconi anemia, complementation group A					Fanconi anemia complementation group A																						
-FANCB	gene	FANCB	NCGC				Other	NA					Fanconi anemia complementation group B																						
-FANCC	gene	FANCC	NCGC				Other	Fanconi anemia, complementation group C					Fanconi anemia complementation group C																						
-FANCD2	gene	FANCD2	NCGC				Other	Fanconi anemia, complementation group D2					Fanconi anemia complementation group D2																						
-FANCE	gene	FANCE	NCGC				Other	Fanconi anemia, complementation group E					Fanconi anemia complementation group E																						
-FANCF	gene	FANCF	NCGC				Other	Fanconi anemia, complementation group F					Fanconi anemia complementation group F																						
-FANCG	gene	FANCG	NCGC				Other	Fanconi anemia, complementation group G					Fanconi anemia complementation group G																						
-FANCI	gene	FANCI	NCGC				Other	Fanconi anemia, complementation group I					Fanconi anemia complementation group I																						
-FANCL	gene	FANCL	NCGC				Other	Fanconi anemia, complementation group L					Fanconi anemia complementation group L																						
-FANCM	gene	FANCM	NCGC				Other	NA					Fanconi anemia complementation group M																						
-FH	gene	FH	NCGC				Other	Multiple cutaneous leiomyomas					fumarate hydratase																						
-FLCN	gene	FLCN	NCGC				Other	Birt-Hogg-Dub syndrome					folliculin																						
-GALNT12	gene	GALNT12	NCGC				Other	NA					polypeptide N-acetylgalactosaminyltransferase 12																						
-GATA2	gene	GATA2	NCGC				Other	Dendritic cell, monocyte, B lymphocyte, and natural killer lymphocyte deficiency					GATA binding protein 2																						
-GPC3	gene	GPC3	NCGC				Other	Simpson-Golabi-Behmel syndrome					glypican 3																						
-GREM1	gene	GREM1	NCGC				Other	NA					gremlin 1, DAN family BMP antagonist																						
-HABP2	gene	HABP2	NCGC				Other	NA					hyaluronan binding protein 2																						
-HNF1A	gene	HNF1A	NCGC				Other	Hepatic adenomas, familial					HNF1 homeobox A																						
-HNF1B	gene	HNF1B	NCGC				Other	NA					HNF1 homeobox B																						
-HOXB13	gene	HOXB13	NCGC				Other	NA					homeobox B13																						
-HRAS	gene	HRAS	NCGC				Other	Costello syndrome					HRas proto-oncogene, GTPase																						
-KIF1B	gene	KIF1B	NCGC				Other	NA					kinesin family member 1B																						
-KIT	gene	KIT	NCGC				Other	Gastrointestinal stroma tumor					KIT proto-oncogene receptor tyrosine kinase																						
-LZTR1	gene	LZTR1	NCGC				Other	NA					leucine zipper like transcription regulator 1																						
-MAX	gene	MAX	NCGC				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					MYC associated factor X																						
-MEN1	gene	MEN1	NCGC				Other	Multiple endocrine neoplasia, type 1					menin 1																						
-MET	gene	MET	NCGC				Other	Renal cell carcinoma, papillary, 1					MET proto-oncogene, receptor tyrosine kinase																						
-MITF	gene	MITF	NCGC				Other	Hereditary cutaneous melanoma					melanogenesis associated transcription factor																						
-MLH1	gene	MLH1	NCGC				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutL homolog 1																						
-MLH3	gene	MLH3	NCGC				Other	NA					mutL homolog 3																						
-MRE11	gene	MRE11	NCGC				Other	NA					MRE11 homolog, double strand break repair nuclease																						
-MSH2	gene	MSH2	NCGC				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 2																						
-MSH3	gene	MSH3	NCGC				Other	NA					mutS homolog 3																						
-MSH6	gene	MSH6	NCGC				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 6																						
-MUTYH	gene	MUTYH	NCGC				Other	MYH-associated polyposis					mutY DNA glycosylase																						
-NBN	gene	NBN	NCGC				Other	Microcephaly, normal intelligence and immunodeficiency					nibrin																						
-NF1	gene	NF1	NCGC				Other	Neurofibromatosis, type 1					neurofibromin 1																						
-NF2	gene	NF2	NCGC				Other	Neurofibromatosis, type 2					neurofibromin 2																						
-NSD1	gene	NSD1	NCGC				Other	NA					nuclear receptor binding SET domain protein 1																						
-NTHL1	gene	NTHL1	NCGC				Other	Familial adenomatous polyposis 3					nth like DNA glycosylase 1																						
-OGG1	gene	OGG1	NCGC				Other	NA					8-oxoguanine DNA glycosylase																						
-PALB2	gene	PALB2	NCGC				Other	Fanconi anemia, complementation group N					partner and localizer of BRCA2																						
-PAX5	gene	PAX5	NCGC				Other	Leukemia, acute lymphoblastic, susceptibility to, 3					paired box 5																						
-PDGFRA	gene	PDGFRA	NCGC				Other	Gastrointestinal stroma tumor					platelet derived growth factor receptor alpha																						
-PHOX2B	gene	PHOX2B	NCGC				Other	Neuroblastoma 2					paired like homeobox 2b																						
-PIK3CA	gene	PIK3CA	NCGC				Other	NA					phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha																						
-PINK1	gene	PINK1	NCGC				Other	NA					PTEN induced putative kinase 1																						
-PMS1	gene	PMS1	NCGC				Other	Familial colorectal cancer					PMS1 homolog 1, mismatch repair system component																						
-PMS2	gene	PMS2	NCGC				Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					PMS1 homolog 2, mismatch repair system component																						
-POLD1	gene	POLD1	NCGC				Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase delta 1, catalytic subunit																						
-POLE	gene	POLE	NCGC				Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase epsilon, catalytic subunit																						
-POT1	gene	POT1	NCGC				Other	Melanoma, cutaneous malignant, susceptibility to, 10					protection of telomeres 1																						
-PPM1D	gene	PPM1D	NCGC				Other	NA					protein phosphatase, Mg2+/Mn2+ dependent 1D																						
-PRF1	gene	PRF1	NCGC				Other	Hemophagocytic lymphohistiocytosis, familial, 2					perforin 1																						
-PRKAR1A	gene	PRKAR1A	NCGC				Other	Carney complex					protein kinase cAMP-dependent type I regulatory subunit alpha																						
-PRSS1	gene	PRSS1	NCGC				Other	Hereditary pancreatitis					serine protease 1																						
-PTCH1	gene	PTCH1	NCGC				Other	Gorlin syndrome					patched 1																						
-PTEN	gene	PTEN	NCGC				Other	PTEN hamartoma tumor syndrome; Cowden syndrome 1					phosphatase and tensin homolog																						
-PTPN11	gene	PTPN11	NCGC				Other	Noonan syndrome					protein tyrosine phosphatase, non-receptor type 11																						
-RAD50	gene	RAD50	NCGC				Other	NA					RAD50 double strand break repair protein																						
-RAD51	gene	RAD51	NCGC				Other	NA					RAD51 recombinase																						
-RAD51B	gene	RAD51B	NCGC				Other	NA					RAD51 paralog B																						
-RAD51C	gene	RAD51C	NCGC				Other	Fanconi anemia, complementation group O					RAD51 paralog C																						
-RAD51D	gene	RAD51D	NCGC				Other	Breast-ovarian cancer, familial 4					RAD51 paralog D																						
-RB1	gene	RB1	NCGC				Other	Osteosarcoma; Retinoblastoma					RB transcriptional corepressor 1																						
-RCC2	gene	RCC2	NCGC				Other	NA					regulator of chromosome condensation 2																						
-RECQL4	gene	RECQL4	NCGC				Other	Rothmund-Thomson syndrome					RecQ like helicase 4																						
-RET	gene	RET	NCGC				Other	Multiple endocrine neoplasia, type 2a; Multiple endocrine neoplasia, type 2b; Familial medullary thyroid carcinoma					ret proto-oncogene																						
-RHBDF2	gene	RHBDF2	NCGC				Other	Howel-Evans syndrome					rhomboid 5 homolog 2																						
-RING1	gene	RING1	NCGC				Other	NA					ring finger protein 1																						
-RINT1	gene	RINT1	NCGC				Other	NA					RAD50 interactor 1																						
-RUNX1	gene	RUNX1	NCGC				Other	Familial platelet disorder with associated myeloid malignancy					runt related transcription factor 1																						
-SBDS	gene	SBDS	NCGC				Other	Shwachman syndrome					SBDS, ribosome maturation factor																						
-SCG5	gene	SCG5	NCGC				Other	NA					secretogranin V																						
-SDHA	gene	SDHA	NCGC				Other	Paragangliomas 5					succinate dehydrogenase complex flavoprotein subunit A																						
-SDHAF2	gene	SDHAF2	NCGC				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					succinate dehydrogenase complex assembly factor 2																						
-SDHB	gene	SDHB	NCGC				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex iron sulfur subunit B																						
-SDHC	gene	SDHC	NCGC				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit C																						
-SDHD	gene	SDHD	NCGC				Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit D																						
-SLX4	gene	SLX4	NCGC				Other	NA					SLX4 structure-specific endonuclease subunit																						
-SMAD4	gene	SMAD4	NCGC				Other	Juvenile polyposis syndrome					SMAD family member 4																						
-SMARCA4	gene	SMARCA4	NCGC				Other	Rhabdoid tumor predisposition syndrome 2					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4																						
-SMARCB1	gene	SMARCB1	NCGC				Other	Rhabdoid tumor predisposition syndrome 1					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1																						
-SMARCE1	gene	SMARCE1	NCGC				Other	Meningioma, familial					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily e, member 1																						
-SPINK1	gene	SPINK1	NCGC				Other	NA					serine peptidase inhibitor, Kazal type 1																						
-SPRED1	gene	SPRED1	NCGC				Other	NA					sprouty related EVH1 domain containing 1																						
-STK11	gene	STK11	NCGC				Other	Peutz-Jeghers syndrome					serine/threonine kinase 11																						
-SUFU	gene	SUFU	NCGC				Other	Medulloblastoma; Meningioma, familial					SUFU negative regulator of hedgehog signaling																						
-TERF2IP	gene	TERF2IP	NCGC				Other	NA					TERF2 interacting protein																						
-TERT	gene	TERT	NCGC				Other	Dyskeratosis congenita autosomal dominant					telomerase reverse transcriptase																						
-TMEM127	gene	TMEM127	NCGC				Other	Pheochromocytoma					transmembrane protein 127																						
-TP53	gene	TP53	NCGC				Other	Li-Fraumeni syndrome 1					tumor protein p53																						
-TSC1	gene	TSC1	NCGC				Other	Tuberous sclerosis 1					TSC complex subunit 1																						
-TSC2	gene	TSC2	NCGC				Other	Tuberous sclerosis 2					TSC complex subunit 2																						
-VHL	gene	VHL	NCGC				Other	Von Hippel-Lindau syndrome					von Hippel-Lindau tumor suppressor																						
-WRN	gene	WRN	NCGC				Other	Werner syndrome					Werner syndrome RecQ like helicase																						
-WT1	gene	WT1	NCGC				Other	Wilms tumor 1					Wilms tumor 1																						
-XPA	gene	XPA	NCGC				Other	Xeroderma pigmentosum, type 1					XPA, DNA damage recognition and repair factor																						
-XPC	gene	XPC	NCGC				Other	Xeroderma pigmentosum, group C					XPC complex subunit, DNA damage recognition and repair factor																						
-XRCC2	gene	XRCC2	NCGC				Other	NA					X-ray repair cross complementing 2																						
+ABRAXAS1	gene	ABRAXAS1	NCGC	NCGC			Other	NA					abraxas 1, BRCA1 A complex subunit																						
+ACD	gene	ACD	NCGC	NCGC			Other	NA					ACD, shelterin complex subunit and telomerase recruitment factor																						
+AIP	gene	AIP	NCGC	NCGC			Other	NA					aryl hydrocarbon receptor interacting protein																						
+AKT1	gene	AKT1	NCGC	NCGC			Other	NA					AKT serine/threonine kinase 1																						
+ALK	gene	ALK	NCGC	NCGC			Other	Neuroblastoma					ALK receptor tyrosine kinase																						
+APC	gene	APC	NCGC	NCGC			Other	Familial adenomatous polyposis 1					APC, WNT signaling pathway regulator																						
+ATM	gene	ATM	NCGC	NCGC			Other	Ataxia-telangiectasia syndrome					ATM serine/threonine kinase																						
+AXIN1	gene	AXIN1	NCGC	NCGC			Other	NA					axin 1																						
+AXIN2	gene	AXIN2	NCGC	NCGC			Other	Oligodontia-colorectal cancer syndrome					axin 2																						
+BAP1	gene	BAP1	NCGC	NCGC			Other	Tumor susceptibility linked to germline BAP1 mutations; BAP1 Cancer Syndrome					BRCA1 associated protein 1																						
+BARD1	gene	BARD1	NCGC	NCGC			Other	NA					BRCA1 associated RING domain 1																						
+BLM	gene	BLM	NCGC	NCGC			Other	Bloom syndrome					Bloom syndrome RecQ like helicase																						
+BMPR1A	gene	BMPR1A	NCGC	NCGC			Other	Juvenile polyposis syndrome					bone morphogenetic protein receptor type 1A																						
+BRCA1	gene	BRCA1	NCGC	NCGC			Other	Hereditary breast and ovarian cancer syndrome					BRCA1, DNA repair associated																						
+BRCA2	gene	BRCA2	NCGC	NCGC			Other	Hereditary breast and ovarian cancer syndrome; Fanconi anemia, complementation group D1					BRCA2, DNA repair associated																						
+BRIP1	gene	BRIP1	NCGC	NCGC			Other	Fanconi anemia, complementation group J					BRCA1 interacting protein C-terminal helicase 1																						
+BUB1B	gene	BUB1B	NCGC	NCGC			Other	Mosaic variegated aneuploidy syndrome					BUB1 mitotic checkpoint serine/threonine kinase B																						
+CASR	gene	CASR	NCGC	NCGC			Other	NA					calcium sensing receptor																						
+CDC73	gene	CDC73	NCGC	NCGC			Other	Hyperparathyroidism 2					cell division cycle 73																						
+CDH1	gene	CDH1	NCGC	NCGC			Other	Hereditary diffuse gastric cancer					cadherin 1																						
+CDK4	gene	CDK4	NCGC	NCGC			Other	Hereditary cutaneous melanoma; Cutaneous malignant melanoma 3					cyclin dependent kinase 4																						
+CDKN1B	gene	CDKN1B	NCGC	NCGC			Other	Multiple endocrine neoplasia, type 4					cyclin dependent kinase inhibitor 1B																						
+CDKN1C	gene	CDKN1C	NCGC	NCGC			Other	Beckwith-Wiedemann syndrome					cyclin dependent kinase inhibitor 1C																						
+CDKN2A	gene	CDKN2A	NCGC	NCGC			Other	Hereditary cutaneous melanoma					cyclin dependent kinase inhibitor 2A																						
+CEBPA	gene	CEBPA	NCGC	NCGC			Other	Acute myeloid leukemia					CCAAT enhancer binding protein alpha																						
+CEP57	gene	CEP57	NCGC	NCGC			Other	NA					centrosomal protein 57																						
+CHEK2	gene	CHEK2	NCGC	NCGC			Other	Familial cancer of breast					checkpoint kinase 2																						
+CTNNA1	gene	CTNNA1	NCGC	NCGC			Other	NA					catenin alpha 1																						
+CTNNB1	gene	CTNNB1	NCGC	NCGC			Other	NA					catenin beta 1																						
+CTRC	gene	CTRC	NCGC	NCGC			Other	NA					chymotrypsin C																						
+CYLD	gene	CYLD	NCGC	NCGC			Other	Spiegler-Brooke syndrome					CYLD lysine 63 deubiquitinase																						
+DDB2	gene	DDB2	NCGC	NCGC			Other	Xeroderma pigmentosum, group E					damage specific DNA binding protein 2																						
+DICER1	gene	DICER1	NCGC	NCGC			Other	Pleuropulmonary blastoma; DICER1 syndrome					dicer 1, ribonuclease III																						
+DIRAS3	gene	DIRAS3	NCGC	NCGC			Other	NA					DIRAS family GTPase 3																						
+DIS3L2	gene	DIS3L2	NCGC	NCGC			Other	Renal hamartomas nephroblastomatosis and fetal gigantism					DIS3 like 3'-5' exoribonuclease 2																						
+DTX3L	gene	DTX3L	NCGC	NCGC			Other	NA					deltex E3 ubiquitin ligase 3L																						
+EGFR	gene	EGFR	NCGC	NCGC			Other	NA					epidermal growth factor receptor																						
+ENG	gene	ENG	NCGC	NCGC			Other	NA					endoglin																						
+EPCAM	gene	EPCAM	NCGC	NCGC			Other	Hereditary nonpolyposis colorectal cancer type 8					epithelial cell adhesion molecule																						
+ERCC1	gene	ERCC1	NCGC	NCGC			Other	Cerebrooculofacioskeletal syndrome 4					ERCC excision repair 1, endonuclease non-catalytic subunit																						
+ERCC2	gene	ERCC2	NCGC	NCGC			Other	Xeroderma pigmentosum, group D					ERCC excision repair 2, TFIIH core complex helicase subunit																						
+ERCC3	gene	ERCC3	NCGC	NCGC			Other	Xeroderma Pigmentosum, Complementation Group B					ERCC excision repair 3, TFIIH core complex helicase subunit																						
+ERCC4	gene	ERCC4	NCGC	NCGC			Other	Xeroderma pigmentosum, group F; Fanconi anemia, complementation group Q					ERCC excision repair 4, endonuclease catalytic subunit																						
+ERCC5	gene	ERCC5	NCGC	NCGC			Other	Xeroderma pigmentosum, group G					ERCC excision repair 5, endonuclease																						
+ETV6	gene	ETV6	NCGC	NCGC			Other	Thrombocytopenia 5					ETS variant 6																						
+EXT1	gene	EXT1	NCGC	NCGC			Other	Chondrosarcoma					exostosin glycosyltransferase 1																						
+EXT2	gene	EXT2	NCGC	NCGC			Other	Multiple exostoses type 2					exostosin glycosyltransferase 2																						
+EZH2	gene	EZH2	NCGC	NCGC			Other	NA					enhancer of zeste 2 polycomb repressive complex 2 subunit																						
+FANCA	gene	FANCA	NCGC	NCGC			Other	Fanconi anemia, complementation group A					Fanconi anemia complementation group A																						
+FANCB	gene	FANCB	NCGC	NCGC			Other	NA					Fanconi anemia complementation group B																						
+FANCC	gene	FANCC	NCGC	NCGC			Other	Fanconi anemia, complementation group C					Fanconi anemia complementation group C																						
+FANCD2	gene	FANCD2	NCGC	NCGC			Other	Fanconi anemia, complementation group D2					Fanconi anemia complementation group D2																						
+FANCE	gene	FANCE	NCGC	NCGC			Other	Fanconi anemia, complementation group E					Fanconi anemia complementation group E																						
+FANCF	gene	FANCF	NCGC	NCGC			Other	Fanconi anemia, complementation group F					Fanconi anemia complementation group F																						
+FANCG	gene	FANCG	NCGC	NCGC			Other	Fanconi anemia, complementation group G					Fanconi anemia complementation group G																						
+FANCI	gene	FANCI	NCGC	NCGC			Other	Fanconi anemia, complementation group I					Fanconi anemia complementation group I																						
+FANCL	gene	FANCL	NCGC	NCGC			Other	Fanconi anemia, complementation group L					Fanconi anemia complementation group L																						
+FANCM	gene	FANCM	NCGC	NCGC			Other	NA					Fanconi anemia complementation group M																						
+FH	gene	FH	NCGC	NCGC			Other	Multiple cutaneous leiomyomas					fumarate hydratase																						
+FLCN	gene	FLCN	NCGC	NCGC			Other	Birt-Hogg-Dub syndrome					folliculin																						
+GALNT12	gene	GALNT12	NCGC	NCGC			Other	NA					polypeptide N-acetylgalactosaminyltransferase 12																						
+GATA2	gene	GATA2	NCGC	NCGC			Other	Dendritic cell, monocyte, B lymphocyte, and natural killer lymphocyte deficiency					GATA binding protein 2																						
+GPC3	gene	GPC3	NCGC	NCGC			Other	Simpson-Golabi-Behmel syndrome					glypican 3																						
+GREM1	gene	GREM1	NCGC	NCGC			Other	NA					gremlin 1, DAN family BMP antagonist																						
+HABP2	gene	HABP2	NCGC	NCGC			Other	NA					hyaluronan binding protein 2																						
+HNF1A	gene	HNF1A	NCGC	NCGC			Other	Hepatic adenomas, familial					HNF1 homeobox A																						
+HNF1B	gene	HNF1B	NCGC	NCGC			Other	NA					HNF1 homeobox B																						
+HOXB13	gene	HOXB13	NCGC	NCGC			Other	NA					homeobox B13																						
+HRAS	gene	HRAS	NCGC	NCGC			Other	Costello syndrome					HRas proto-oncogene, GTPase																						
+KIF1B	gene	KIF1B	NCGC	NCGC			Other	NA					kinesin family member 1B																						
+KIT	gene	KIT	NCGC	NCGC			Other	Gastrointestinal stroma tumor					KIT proto-oncogene receptor tyrosine kinase																						
+LZTR1	gene	LZTR1	NCGC	NCGC			Other	NA					leucine zipper like transcription regulator 1																						
+MAX	gene	MAX	NCGC	NCGC			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					MYC associated factor X																						
+MEN1	gene	MEN1	NCGC	NCGC			Other	Multiple endocrine neoplasia, type 1					menin 1																						
+MET	gene	MET	NCGC	NCGC			Other	Renal cell carcinoma, papillary, 1					MET proto-oncogene, receptor tyrosine kinase																						
+MITF	gene	MITF	NCGC	NCGC			Other	Hereditary cutaneous melanoma					melanogenesis associated transcription factor																						
+MLH1	gene	MLH1	NCGC	NCGC			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutL homolog 1																						
+MLH3	gene	MLH3	NCGC	NCGC			Other	NA					mutL homolog 3																						
+MRE11	gene	MRE11	NCGC	NCGC			Other	NA					MRE11 homolog, double strand break repair nuclease																						
+MSH2	gene	MSH2	NCGC	NCGC			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 2																						
+MSH3	gene	MSH3	NCGC	NCGC			Other	NA					mutS homolog 3																						
+MSH6	gene	MSH6	NCGC	NCGC			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					mutS homolog 6																						
+MUTYH	gene	MUTYH	NCGC	NCGC			Other	MYH-associated polyposis					mutY DNA glycosylase																						
+NBN	gene	NBN	NCGC	NCGC			Other	Microcephaly, normal intelligence and immunodeficiency					nibrin																						
+NF1	gene	NF1	NCGC	NCGC			Other	Neurofibromatosis, type 1					neurofibromin 1																						
+NF2	gene	NF2	NCGC	NCGC			Other	Neurofibromatosis, type 2					neurofibromin 2																						
+NSD1	gene	NSD1	NCGC	NCGC			Other	NA					nuclear receptor binding SET domain protein 1																						
+NTHL1	gene	NTHL1	NCGC	NCGC			Other	Familial adenomatous polyposis 3					nth like DNA glycosylase 1																						
+OGG1	gene	OGG1	NCGC	NCGC			Other	NA					8-oxoguanine DNA glycosylase																						
+PALB2	gene	PALB2	NCGC	NCGC			Other	Fanconi anemia, complementation group N					partner and localizer of BRCA2																						
+PAX5	gene	PAX5	NCGC	NCGC			Other	Leukemia, acute lymphoblastic, susceptibility to, 3					paired box 5																						
+PDGFRA	gene	PDGFRA	NCGC	NCGC			Other	Gastrointestinal stroma tumor					platelet derived growth factor receptor alpha																						
+PHOX2B	gene	PHOX2B	NCGC	NCGC			Other	Neuroblastoma 2					paired like homeobox 2b																						
+PIK3CA	gene	PIK3CA	NCGC	NCGC			Other	NA					phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha																						
+PINK1	gene	PINK1	NCGC	NCGC			Other	NA					PTEN induced putative kinase 1																						
+PMS1	gene	PMS1	NCGC	NCGC			Other	Familial colorectal cancer					PMS1 homolog 1, mismatch repair system component																						
+PMS2	gene	PMS2	NCGC	NCGC			Other	Hereditary nonpolyposis colon cancer; Turcot syndrome; Lynch syndrome					PMS1 homolog 2, mismatch repair system component																						
+POLD1	gene	POLD1	NCGC	NCGC			Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase delta 1, catalytic subunit																						
+POLE	gene	POLE	NCGC	NCGC			Other	Polymerase proofreading-related adenomatous polyposis					DNA polymerase epsilon, catalytic subunit																						
+POT1	gene	POT1	NCGC	NCGC			Other	Melanoma, cutaneous malignant, susceptibility to, 10					protection of telomeres 1																						
+PPM1D	gene	PPM1D	NCGC	NCGC			Other	NA					protein phosphatase, Mg2+/Mn2+ dependent 1D																						
+PRF1	gene	PRF1	NCGC	NCGC			Other	Hemophagocytic lymphohistiocytosis, familial, 2					perforin 1																						
+PRKAR1A	gene	PRKAR1A	NCGC	NCGC			Other	Carney complex					protein kinase cAMP-dependent type I regulatory subunit alpha																						
+PRSS1	gene	PRSS1	NCGC	NCGC			Other	Hereditary pancreatitis					serine protease 1																						
+PTCH1	gene	PTCH1	NCGC	NCGC			Other	Gorlin syndrome					patched 1																						
+PTEN	gene	PTEN	NCGC	NCGC			Other	PTEN hamartoma tumor syndrome; Cowden syndrome 1					phosphatase and tensin homolog																						
+PTPN11	gene	PTPN11	NCGC	NCGC			Other	Noonan syndrome					protein tyrosine phosphatase, non-receptor type 11																						
+RAD50	gene	RAD50	NCGC	NCGC			Other	NA					RAD50 double strand break repair protein																						
+RAD51	gene	RAD51	NCGC	NCGC			Other	NA					RAD51 recombinase																						
+RAD51B	gene	RAD51B	NCGC	NCGC			Other	NA					RAD51 paralog B																						
+RAD51C	gene	RAD51C	NCGC	NCGC			Other	Fanconi anemia, complementation group O					RAD51 paralog C																						
+RAD51D	gene	RAD51D	NCGC	NCGC			Other	Breast-ovarian cancer, familial 4					RAD51 paralog D																						
+RB1	gene	RB1	NCGC	NCGC			Other	Osteosarcoma; Retinoblastoma					RB transcriptional corepressor 1																						
+RCC2	gene	RCC2	NCGC	NCGC			Other	NA					regulator of chromosome condensation 2																						
+RECQL4	gene	RECQL4	NCGC	NCGC			Other	Rothmund-Thomson syndrome					RecQ like helicase 4																						
+RET	gene	RET	NCGC	NCGC			Other	Multiple endocrine neoplasia, type 2a; Multiple endocrine neoplasia, type 2b; Familial medullary thyroid carcinoma					ret proto-oncogene																						
+RHBDF2	gene	RHBDF2	NCGC	NCGC			Other	Howel-Evans syndrome					rhomboid 5 homolog 2																						
+RING1	gene	RING1	NCGC	NCGC			Other	NA					ring finger protein 1																						
+RINT1	gene	RINT1	NCGC	NCGC			Other	NA					RAD50 interactor 1																						
+RUNX1	gene	RUNX1	NCGC	NCGC			Other	Familial platelet disorder with associated myeloid malignancy					runt related transcription factor 1																						
+SBDS	gene	SBDS	NCGC	NCGC			Other	Shwachman syndrome					SBDS, ribosome maturation factor																						
+SCG5	gene	SCG5	NCGC	NCGC			Other	NA					secretogranin V																						
+SDHA	gene	SDHA	NCGC	NCGC			Other	Paragangliomas 5					succinate dehydrogenase complex flavoprotein subunit A																						
+SDHAF2	gene	SDHAF2	NCGC	NCGC			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes					succinate dehydrogenase complex assembly factor 2																						
+SDHB	gene	SDHB	NCGC	NCGC			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex iron sulfur subunit B																						
+SDHC	gene	SDHC	NCGC	NCGC			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit C																						
+SDHD	gene	SDHD	NCGC	NCGC			Other	Hereditary Paraganglioma-Pheochromocytoma Syndromes; Paraganglioma and gastric stromal sarcoma					succinate dehydrogenase complex subunit D																						
+SLX4	gene	SLX4	NCGC	NCGC			Other	NA					SLX4 structure-specific endonuclease subunit																						
+SMAD4	gene	SMAD4	NCGC	NCGC			Other	Juvenile polyposis syndrome					SMAD family member 4																						
+SMARCA4	gene	SMARCA4	NCGC	NCGC			Other	Rhabdoid tumor predisposition syndrome 2					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4																						
+SMARCB1	gene	SMARCB1	NCGC	NCGC			Other	Rhabdoid tumor predisposition syndrome 1					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1																						
+SMARCE1	gene	SMARCE1	NCGC	NCGC			Other	Meningioma, familial					SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily e, member 1																						
+SPINK1	gene	SPINK1	NCGC	NCGC			Other	NA					serine peptidase inhibitor, Kazal type 1																						
+SPRED1	gene	SPRED1	NCGC	NCGC			Other	NA					sprouty related EVH1 domain containing 1																						
+STK11	gene	STK11	NCGC	NCGC			Other	Peutz-Jeghers syndrome					serine/threonine kinase 11																						
+SUFU	gene	SUFU	NCGC	NCGC			Other	Medulloblastoma; Meningioma, familial					SUFU negative regulator of hedgehog signaling																						
+TERF2IP	gene	TERF2IP	NCGC	NCGC			Other	NA					TERF2 interacting protein																						
+TERT	gene	TERT	NCGC	NCGC			Other	Dyskeratosis congenita autosomal dominant					telomerase reverse transcriptase																						
+TMEM127	gene	TMEM127	NCGC	NCGC			Other	Pheochromocytoma					transmembrane protein 127																						
+TP53	gene	TP53	NCGC	NCGC			Other	Li-Fraumeni syndrome 1					tumor protein p53																						
+TSC1	gene	TSC1	NCGC	NCGC			Other	Tuberous sclerosis 1					TSC complex subunit 1																						
+TSC2	gene	TSC2	NCGC	NCGC			Other	Tuberous sclerosis 2					TSC complex subunit 2																						
+VHL	gene	VHL	NCGC	NCGC			Other	Von Hippel-Lindau syndrome					von Hippel-Lindau tumor suppressor																						
+WRN	gene	WRN	NCGC	NCGC			Other	Werner syndrome					Werner syndrome RecQ like helicase																						
+WT1	gene	WT1	NCGC	NCGC			Other	Wilms tumor 1					Wilms tumor 1																						
+XPA	gene	XPA	NCGC	NCGC			Other	Xeroderma pigmentosum, type 1					XPA, DNA damage recognition and repair factor																						
+XPC	gene	XPC	NCGC	NCGC			Other	Xeroderma pigmentosum, group C					XPC complex subunit, DNA damage recognition and repair factor																						
+XRCC2	gene	XRCC2	NCGC	NCGC			Other	NA					X-ray repair cross complementing 2																						

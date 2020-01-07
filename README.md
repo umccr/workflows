@@ -143,6 +143,9 @@ This not only improves overall precision of our calls but also speeds up the var
 
 * [ ] Remove sections not applicable given our config?
 
+## Changes to primary processing for FFPE samples
+
+TBA
 
 
 ## WGS Postprocessing with umccrise
