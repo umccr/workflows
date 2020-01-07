@@ -1,0 +1,113 @@
+---
+title: "Converting CPSR predisposition gene list for PanelApp"
+author: "Oliver Hofmann"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: readable
+    toc: false
+    toc_float: false
+    code_folding: hide
+---
+
+```{r custom, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyr)
+library(rmarkdown)
+library(dplyr)
+library(DT)
+library(readr)
+library(forcats)
+library(stringr)
+library(janitor)
+library(here)
+library(purrr)
+library(readr)
+```
+
+## Background
+
+We are using CPSR's list of known cancer predisposition genes (retrieved from <https://github.com/sigven/cpsr/blob/master/predisposition.md>) as part of our cancer report. This scripts takes the tabular format from CPSR, splits it by original source and generates `TSV` files for import into [PanelApp](https://panelapp.agha.umccr.org/).
+
+```{r import_cpsr}
+# Point to the original CPSR predisposition genes retrieved from https://github.com/sigven/cpsr/blob/master/predisposition.md
+cpsr <- here('genelists', 'cpsr.tsv')
+
+# Split into data frames by source and adjust column to a PanelApp 
+# template (GEL, private communication)
+cpsr_sources <- read_tsv(cpsr) %>%
+  clean_names() %>%
+  separate_rows('source', sep=',') %>%
+  remove_empty(c('rows', 'cols')) %>%
+  mutate('Entity Name' = symbol,
+         'Entity type' = 'gene',
+         'Gene Symbol' = symbol,
+         'Sources' = source,
+         'Level4' = '' ,
+         'Level3' = '',
+         'Level2' = '',
+         'Model_Of_Inheritance' = '',
+         'Phenotypes' = phenotype_syndrome_term,
+         'Omim' = '',
+         'Orphanet' = '',
+         'HPO' = '',
+         'Publications' = '',
+         'Description' = gene_name,
+         'Flagged' = '',
+         'GEL_Status' = '',
+         'UserRatings_Green_amber_red' = '',
+         'version' = '',
+         'ready' = '',
+         'Mode of pathogenicity' = '',
+         'EnsemblId(GRch37)' = '',
+         'EnsemblId(GRch38)' = '',
+         'HGNC' = '',
+         'Position Chromosome' = '',
+         'Position GRCh37 Start' = '',
+         'Position GRCh37 End' = '',
+         'Position GRCh38 Start' = '',
+         'Position GRCh38 End' = '',
+         'STR Repeated Sequence' = '',
+         'STR Normal Repeats' = '',
+         'STR Pathogenic Repeats' = '',
+         'Region Haploinsufficiency Score' = '',
+         'Region Triplosensitivity Score' = '',
+         'Region Required Overlap Percentage' = '',
+         'Region Variant Type' = '',
+         'Region Verbose Name' = '') %>%
+  select(-symbol, -entrez_id, -moi, -lo_f, -gene_name, -phenotype_syndrome_cui, 
+         -phenotype_syndrome_term)
+
+# How many sources do we have?
+cpsr_sources %>% count(source)
+```
+
+PanelApp knows the following models of inheritance (MOI):
+
+> MONOALLELIC, autosomal or pseudoautosomal, NOT imprinted
+> MONOALLELIC, autosomal or pseudoautosomal, maternally imprinted (paternal allele expressed)
+> MONOALLELIC, autosomal or pseudoautosomal, paternally imprinted (maternal allele expressed)
+> MONOALLELIC, autosomal or pseudoautosomal, imprinted status unknown
+> BIALLELIC, autosomal or pseudoautosomal
+> BOTH monoallelic and biallelic, autosomal or pseudoautosomal
+> BOTH monoallelic and biallelic (but BIALLELIC mutations cause a more SEVERE disease form), autosomal or pseudoautosomal
+> X-LINKED: hemizygous mutation in males, biallelic mutations in females
+> X-LINKED: hemizygous mutation in males, monoallelic mutations in females may cause disease (may be less severe, later onset than males)
+> MITOCHONDRIAL
+> Unknown
+> Other
+
+CPSR uses AR / AD which does not map to any of these MOIs. Setting to `other` for now.
+
+```{r convert_inheritance}
+cpsr_sources <- cpsr_sources %>%
+  mutate(Model_Of_Inheritance = 'Other')
+```
+
+```{r export_panelapp}
+# Group by source and export to CSV
+cpsr_sources %>%
+  nest(-source) %>%
+  pwalk(~write_tsv(x = .y, path = here('genelists', paste0(.x, '.tsv'))))
+```
+
