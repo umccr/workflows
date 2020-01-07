@@ -176,6 +176,59 @@ all_genes = genes_hmf
 all_genes %>% count(sources)
 ```
 
+```{r export_panelapp}
+# Adjust gene information for PanelApp import
+cancer_sources <- all_genes %>%
+  select(symbol, sources) %>%
+  clean_names() %>%
+  remove_empty(c('rows', 'cols')) %>%
+  mutate('Entity Name' = symbol,
+         'Entity type' = 'gene',
+         'Gene Symbol' = symbol,
+         'Sources' = sources,
+         'Level4' = sources,
+         'Level3' = '',
+         'Level2' = '',
+         'Model_Of_Inheritance' = 'Other',
+         'Phenotypes' = '',
+         'Omim' = '',
+         'Orphanet' = '',
+         'HPO' = '',
+         'Publications' = '',
+         'Description' = '',
+         'Flagged' = '',
+         'GEL_Status' = '',
+         'UserRatings_Green_amber_red' = '',
+         'version' = '',
+         'ready' = '',
+         'Mode of pathogenicity' = '',
+         'EnsemblId(GRch37)' = '',
+         'EnsemblId(GRch38)' = '',
+         'HGNC' = '',
+         'Position Chromosome' = '',
+         'Position GRCh37 Start' = '',
+         'Position GRCh37 End' = '',
+         'Position GRCh38 Start' = '',
+         'Position GRCh38 End' = '',
+         'STR Repeated Sequence' = '',
+         'STR Normal Repeats' = '',
+         'STR Pathogenic Repeats' = '',
+         'Region Haploinsufficiency Score' = '',
+         'Region Triplosensitivity Score' = '',
+         'Region Required Overlap Percentage' = '',
+         'Region Variant Type' = '',
+         'Region Verbose Name' = '') %>%
+  select(-symbol)
+
+# How many sources do we have?
+cancer_sources %>% count(Sources)
+
+# Group by source and export to CSV
+cancer_sources %>%
+  nest(-sources) %>%
+  pwalk(~write_tsv(x = .y, path = here('genes', 'cancer_genes', 'panelapp', paste0(.x, '.tsv'))))
+```
+
 ```{r summarise}
 genes_sum <- all_genes %>%
   group_by(symbol) %>%
