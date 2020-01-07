@@ -60,30 +60,9 @@ This not only improves overall precision of our calls but also speeds up the var
 * Determine the callable regions, starting with the `variant_regions` file provided (in this case excluding the ALT regions of the reference genome), cleaning the BED file and creating merged, indexed regions (`bedtools`, `tabix` and Co).
 * Repeat the same process for the `coverage` regions, and set `svregions` to `variant_regions` if not defined otherwise.
 * Run `mosdepth` to determine which of the `variant_regions` have `NO COVERAGE` (0 reads), `LOW_COVERAGE` (1-3 reads) or are `CALLABLE` (4 reads or more). We are excluding reads with SAM FLAG `1804` (unmapped reads, mate unmapped, not primary alignment, fails QC check, marked duplicate) and **require a non-zero mapping quality** (note the impact on ALT regions, [segmental duplications](#UMCCR-Cancer-Gene-List-and-Segmental-Duplications)). The result is a quantitized BED file with regions of the same coverage level merged into single regions.
-* If no `variant_regions` have been provided use the `CALLABLE` regions as `variant_regions` proxy
+* If no `variant_regions` have been provided use the `CALLABLE` regions as `variant_regions` proxy.
 * Repeat for SV regions; also repeat for the coverage regions but write, for each region, the number of bases covered at 1, 5, 10, 20, 50, 100, 250, 500, 1000, 5000, 10000 or 50000 reads.
 * Intersect all non-callable (`nblock)` regions from all samples in a batch, producing a global set of callable regions (`batch-analysis_blocks.bed`).
-
-**Todo:**
-
-* [ ] Remove sections not applicable given our config?
-
-### Alignment post-processing
-
-* Generate `samtools stats` for the final BAMs
-* Prepare a BED file for 'baited' regions for `cnvkit`. This does not really apply, but we still generate target and anti target regions for WGS CNV calls. The average size for the targets is set to 250 nucleotides based on variant_regions.
-* Antitargets uses the `batch-analysis_blocks.bed` merged file that includes all samples from the cohort
-
-> _Still not sure how I feel about this. I'd like to generate reproducible results regardless of whether I call a sample alone or together with other samples. In our use case the batch equals the person so all samples are related, further confounding the issue?_
-
-* Create new `mosdepth` coverage statistics for both target and anti-target regions using the same SAM FLAG settings as before
-* Target/antitarget regions are also annotated with `ref-transcripts`, sorted and cleaned up
-* Finally, generate a copy-number reference using `cnvkit reference`, calculating GC-content and repeat-masked proportion of each region
-* We do the `cnvkit` segmentation and prep upstream of SV so that it can feed into multiple SV callers and we don't need to keep recalculating.
-
-**Todo:**
-
-* [ ] Remove pretty much everything? Is there anything left in the post-processing stage for cases where we do not call CNVs with bcbio?
 
 ### Variant calling
 
@@ -154,6 +133,16 @@ This not only improves overall precision of our calls but also speeds up the var
 #### Manta
 
 #### BPI
+
+**Questions:**
+
+* [ ] Where do the `mosdepth` coverage statistics come from? bcbio or umccrise?
+* [ ] Where is `peddy` being run?
+
+**Todo:**
+
+* [ ] Remove sections not applicable given our config?
+
 
 
 ## WGS Postprocessing with umccrise
@@ -259,29 +248,21 @@ We are considering a switch to the more specific virtual panels from Genomics En
 
 #### 3.1 Known Fusion Pairs
 
-Known [fusion pairs](https://github.com/umccr/workflows/blob/master/genes/fusions/knownFusionPairs.csv) 
-provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
+Known [fusion pairs](https://github.com/umccr/workflows/blob/master/genes/fusions/knownFusionPairs.csv) provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
 
 #### 3.2 Known Promiscuous Fusion Genes
 
-Known promiscuous fusion genes ([5' list](https://github.com/umccr/workflows/blob/master/genes/fusions/knownPromiscuousFive.csv), 
-[3' list](https://github.com/umccr/workflows/blob/master/genes/fusions/knownPromiscuousThree.csv)) 
-provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
+Known promiscuous fusion genes ([5' list](https://github.com/umccr/workflows/blob/master/genes/fusions/knownPromiscuousFive.csv), [3' list](https://github.com/umccr/workflows/blob/master/genes/fusions/knownPromiscuousThree.csv)) provided by [Hartwig Medical Foundation](https://github.com/hartwigmedical/).
 
 #### 3.3 FusionCatcher Known Pairs
 
-Additional [known fusions from FusionCatcher](https://github.com/umccr/workflows/blob/master/genes/fusions/fusioncatcher_pairs.txt) generated from a 
-[host of databases](https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md#23---genomic-databases).
+Additional [known fusions](https://github.com/umccr/workflows/blob/master/genes/fusions/fusioncatcher_pairs.txt) from [FusionCatcher](https://github.com/ndaniel/fusioncatcher) generated from a [host of databases](https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md#23---genomic-databases).
 
 
 **Questions:**
 
 * [ ] How is https://github.com/umccr/workflows/blob/master/genes/fusions/compare.R being used?
-
-**Todo:**
-
-* [ ] Provide sources for all fusion lists. One source is https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX but it's not stable and there seems to be no way to retrieve older lists
-* [ ] Version fusion lists
+* [ ] Where in the workflow are these fusion lists used? Provide pointers and reference; add basic intro to 3 above
 
 ### 4. SAGE Hotspots
 
@@ -293,7 +274,7 @@ A list of genomic coordinates to rescue low AF somatic variant calls in well-kno
 
 **Todo:**
 
-* [ ] Generate a list of genes (and ideally hotspot coordinates, protein impact) for 4.1 
+* [ ] Generate a list of genes (and ideally hotspot coordinates, protein impact) for 4
 
 ### 5. Low Quality Sites
 
@@ -362,6 +343,7 @@ We are not calling variants for regions contained in the [blocklist](#variant-bl
 **Todo:**
 
 * [ ] Check for overlap between this blocklist table and the [SAGE Hotspots](#4-SAGE-Hotspots)
+* [ ] Are the coordinates above gene coordinates or the blocklist overlap?
 
 #### UMCCR Cancer Gene List and Segmental Duplications
 
@@ -371,7 +353,7 @@ The overlap between the retrieved segmental duplication regions and APPRIS canno
 
 > ABRAXAS1, ACTB, ACTG1, AFF3, ANKRD11, APOBEC3B, ARHGAP5, ARID3B, BCL2L12, BCLAF1, BCR, BMPR1A, BRAF, BRCA1, BTG1, CDC42, CDK8, CHEK2, CTNND1, CUX1, CYP2C8, CYP2D6, DCUN1D1, DICER1, DIS3L2, DNAJB1, E2F3, EIF1AX, EIF4E, EP400, FAM47C, FANCD2, FCGR2B, FEN1, FGF7, FKBP9, FLG, FLT1, FOXO3, GBA, GNAQ, GPC5, GTF2I, H3F3B, H3F3C, HIST2H3A, HIST2H3C, HIST2H3D, HLA-A, HMGA1, IGF2BP2, IL6ST, KAT7, KMT2C, KRAS, MAP2K4, MGAM, MKI67, MLLT10, MLLT6, MSN, MST1, MUC4, NBEA, NCOA4, NCOR1, NF1, NFE2L3, NOTCH2, NUTM2A, NUTM2B, PAFAH1B2, PCBP1, PDE4DIP, PDPK1, PIGA, PIK3CA, PIK3CD, PLAGL2, PMS2, POLH, PPFIBP1, PPP4R2, PRDM9, PRKCI, PRSS1, PTEN, PTP4A1, RAD21, RANBP2, RCC2, RECQL, RGPD3, RPL22, RPS6KB1, RRAS2, S100A7, SBDS, SDHA, SET, SHQ1, SIN3A, SIRPA, SMG1, SNX29, SOX2, SP140, SPECC1, SRSF3, SSX1, SSX2, SSX4, STAT5A, STAT5B, STK19, STRN, SUZ12, TAF15, TBL1XR1, TCEA1, TERF2IP, THRAP3, TOP1, TPM3, TPM4, TPMT, TRIP11, USP6, USP8, WRN, XIAP, YES1, ZNF479, ICOSLG, KMT5A, MUC1, ROBO2, U2AF1, UHRF1
 
-### ALT Handling
+#### ALT Handling
 
 Write up chr6 issue, CLIC1 example, https://www.biorxiv.org/content/10.1101/868570v1.full.pdf, Heng Li, GATK post
 
