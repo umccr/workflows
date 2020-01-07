@@ -185,75 +185,73 @@ Mutational signatures (by the MutationalPatterns R package),
 
 ### 1. UMCCR Cancer Gene List
 
-UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. 
-The [core list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv) 
-is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
+UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. This [core list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv) (latest version) is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
 
-* [Cancermine](http://bionlp.bcgsc.ca/cancermine/) with at least 2 publications with at least 3 citations - 280 genes
-* [NCG known cancer genes](http://ncg.kcl.ac.uk/cancer_genes.php#known) - 711 genes
+* [Cancermine](http://bionlp.bcgsc.ca/cancermine/) with at least 2 publications with at least 3 citations - [280 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cancermine_collated.tsv)
+* [NCG known cancer genes](http://ncg.kcl.ac.uk/cancer_genes.php#known) - [711 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/NCG6_cancergenes.tsv)
 * [Tier 1 COSMIC Cancer Gene Census](https://cancer.sanger.ac.uk/cosmic/census?tier=1) (CGC) - 576 genes
-* [UMCCR internal manually added genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/umccr.txt) - 1 gene
-* Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release), [CiViC](https://civicdb.org/) (data obtained May 3rd 2019), [cancerhotspots](https://www.cancerhotspots.org/) (v2)) - 1 gene
-* At least 2 matches in the following five databases and eight clinical panels (xx which is which):
-  * Cancer predisposition genes, [CPSR panel0](https://github.com/sigven/cpsr) - 216 genes, which consists of:
-    * A list of 152 genes that were curated and established within TCGA’s pan-cancer study ([Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
-    * A list of 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census),
-    * A list of 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium ([http://cancergenomics.no](http://cancergenomics.no/))
-  * Hartwig Medical Foundation [list of known fusions](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX) - 439 genes
-  * AZ300 (AstraZeneca cancer genes list) - 300 genes
-  * PMCC-CCP - 404 genes (xx Received via.. Andrew Fellows?)
-  * COSMIC Cancer Gene Census ([tier 2](https://cancer.sanger.ac.uk/cosmic/census?tier=2)) - 147 genes
-  * Familial Cancer - 126 genes (xx do we have a source for this?)
-  * [Illumina-TS500](https://emea.illumina.com/content/dam/illumina-marketing/documents/products/datasheets/trusight-oncology-500-data-sheet-1170-2018-010.pdf) - 523 genes
-  * [TEMPUS](https://www.tempus.com/wp-content/uploads/2018/12/xT-Gene-List_120618.pdf) - 594 genes
-  * [OncoKB annotated](https://www.oncokb.org/cancerGenes) - 579 genes
-  * MSKC-IMPACT (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 468 genes
-  * MSKC-Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 400 genes
-  * Foundation One (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 322 genes 
-  * Foundation Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 592 genes
-  * Vogelstein (from [oncoKb](https://www.oncokb.org/cancerGenes)) - 125 genes
+* UMCCR internal manually added genes - [1 gene](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/umccr.txt)
+* Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release), [CiViC](https://civicdb.org/) (data obtained May 3rd 2019), [cancerhotspots](https://www.cancerhotspots.org/) (v2)) - [1 gene](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.txt)
+* At least 2 matches in the following five databases and eight clinical panels:
+    * Cancer predisposition genes, [CPSR panel0](https://github.com/sigven/cpsr#cancer-predisposition-genes) - [216 genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) obtained from:
+        * A list of 152 genes that were curated and established within TCGA’s pan-cancer study ([Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
+        * A list of 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census),
+        * A list of 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium ([http://cancergenomics.no](http://cancergenomics.no/))
+    * Hartwig Medical Foundation [list of known fusions](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX) - 439 genes
+    * AZ300 (AstraZeneca cancer genes list) - [300 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/az_key_genes.300.txt)
+    * Peter MacCallum Cancer Centre gene panel - [404 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/PMCC.genes)
+    * COSMIC Cancer Gene Census ([tier 2](https://cancer.sanger.ac.uk/cosmic/census?tier=2)) - [147 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/CancerGeneCensus_Tier2.tsv)
+    * Familial Cancer - [126 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/familial_cancer.genes)
+    * [Illumina-TS500](https://emea.illumina.com/content/dam/illumina-marketing/documents/products/datasheets/trusight-oncology-500-data-sheet-1170-2018-010.pdf) - [523 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/TS500.genes)
+    * [TEMPUS xt Gene Panel](https://www.tempus.com/wp-content/uploads/2018/12/xT-Gene-List_120618.pdf) - [594 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/TEMPUS.genes)
+    * [OncoKB annotated](https://www.oncokb.org/cancerGenes) - [579 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
+    * MSKC-IMPACT (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [468 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
+    * MSKC-Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [400 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
+    * Foundation One (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [322 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
+    * Foundation Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [592 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
+    * Vogelstein (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [125 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
 
-Gene lists for all (xx most) of these sources can be found in the [sources](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources) folder. 
-The combined list contains [1250 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv). 
-A BED file with transcript and coding regions coordinates is [generated from the latest gene list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/Snakefile) 
-using coordinates from ENSEMBL. 
-Transcript IDs for coordinate choice are selected using principal transcript annotations in [APPRIS](http://appris.bioinfo.cnio.es/#/). 
-The APPRIS transcript IDs are downloaded from the APPRIS website, and stored in [this repo](https://github.com/umccr/workflows/blob/master/transcripts/). 
-Chosen principal transcripts for each cancer gene are also added into the final generated gene table under the columns PRINCIPAL_hg19 and PRINCIPAL_hg38.
+Gene lists for all of these sources can be found in the [sources](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources) folder. The combined list contains [1250 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv). 
 
-All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/).
+A BED file with transcript and coding regions coordinates is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/Snakefile) from the latest gene list 
+using coordinates from ENSEMBL. Transcript IDs for coordinate choices are selected using principal transcript annotations in [APPRIS](http://appris.bioinfo.cnio.es/#/). The APPRIS transcript IDs are downloaded from the APPRIS website and stored for versioning in [Github](https://github.com/umccr/workflows/blob/master/transcripts/). Chosen principal transcripts for each cancer gene are also added into the final generated gene table under the columns `PRINCIPAL_hg19` and `PRINCIPAL_hg38`.
 
+**Note:** _All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/)._
 
-> Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
+**Questions:**
+
+* [ ] CACAO Hotspot file only lists 1 gene - how so?
+* [ ] Do we have a source for the `Familiar Cancer` gene list?
+* [ ] Which file from https://github.com/umccr/workflows/tree/master/genes/fusions is the source for the Hartwig fusions above?
+* [ ] Version / source for the PMCC gene list?
 
 **Todo:**
 
-* [ ] Provide more details for `sources` folder; some information at https://trello.com/c/7j3KFMiL/184-umccr-cancer-genes?menu=filter&filter=member:oliverhofmann (eventually: versions or download date)
-* [ ] Add various BED files to repo (transcripts, cancer list, etc.)
-* [ ] Move cancer gene list code to UMCCR / workflow repos
-* [ ] Make sure `latest` [gene pointer](https://github.com/vladsaveliev/NGS_Utils/blob/master/ngs_utils/reference_data/key_genes/umccr_cancer_genes.latest.genes) is correct
 * [ ] Add links to PanelApp for each gene list, joint panel
+* [ ] Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
+
 
 ### 2. Custom Cancer Predisposition Gene List
 
-To assess predisposition to cancer we use CPSR's [Cancer Predisposition Genes](https://github.com/sigven/cpsr#cancer-predisposition-genes), a virtual panel based on the union of:
+To assess predisposition to cancer we use CPSR's [Cancer Predisposition Genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) (Panel 0), a virtual panel of 216 genes based on the union of:
 
 * 152 genes that were curated and established within TCGA’s pan-cancer study (TCGA_PANCAN_18 [Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
 * 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v90](https://cancer.sanger.ac.uk/census) (CGC_86),
 * 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium (NCGC, <http://cancergenomics.no>)
 
-The combination of the three sources resulted in a non-redundant set of [209 protein-coding genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) of relevance for predisposition to tumor development (gene list accurate as of 2019-Dec-20). We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future.
-
 UMCCR have included the following 8 genes to this list, bringing the total to 209 + 8 = 217 genes:
-TNFRSF6, KLLN, MAP3K6, NEK1, NTRK1, RAD54L, RHNO1, RTEL1 (gene list accurate as of 2019-Dec-20).
+
+* `TNFRSF6, KLLN, MAP3K6, NEK1, NTRK1, RAD54L, RHNO1, RTEL1`
+
+We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future.
+
 
 **Todo:**
 
+* [ ] Check final gene count
 * [ ] Version predisposition gene list (via PanelApp if possible)
 * [ ] Split / highlight manually added genes
-* [ ] Add PMCC Mol Path germline list to PanelApp:
-
-> ALK, APC, ASXL1, ATM, BAP1, BCORL1, BLM, BRCA1, BRCA2, BRIP1, CBL, CDC73, CDH1, CDK4, CDKN1B, CDKN2A, CEBPA, CHEK2, CYLD, DICER1, DNMT3A, EGFR, ERCC2, FANCA, FANCC, FANCG, FH, FLCN, FUBP1, GATA2, GNAS, HRAS, IDH1, JAK2, KIT, LZTR1, MEN1, MET, MLH1, MRE11A, MSH2, MSH6, MUTYH, NF1, NF2, PALB2, PDGFRA, PMS2, POLD1, POLE, PRKAR1A, PTCH1, PTEN, PTPN11, RB1, RET, RUNX1, SDHA, SDHB, SDHC, SDHD, SF3B1, SMAD4, SMARCA4, SMARCB1, STAT3, STK11, SUFU, TERT, TET2, TP53, TSC1, TSC2, U2AF1, VHL, WT1.
+* [ ] Add PMCC Mol Path germline list to PanelApp: `ALK, APC, ASXL1, ATM, BAP1, BCORL1, BLM, BRCA1, BRCA2, BRIP1, CBL, CDC73, CDH1, CDK4, CDKN1B, CDKN2A, CEBPA, CHEK2, CYLD, DICER1, DNMT3A, EGFR, ERCC2, FANCA, FANCC, FANCG, FH, FLCN, FUBP1, GATA2, GNAS, HRAS, IDH1, JAK2, KIT, LZTR1, MEN1, MET, MLH1, MRE11A, MSH2, MSH6, MUTYH, NF1, NF2, PALB2, PDGFRA, PMS2, POLD1, POLE, PRKAR1A, PTCH1, PTEN, PTPN11, RB1, RET, RUNX1, SDHA, SDHB, SDHC, SDHD, SF3B1, SMAD4, SMARCA4, SMARCB1, STAT3, STK11, SUFU, TERT, TET2, TP53, TSC1, TSC2, U2AF1, VHL, WT1`
 
 
 ### 3. Fusion Gene lists
