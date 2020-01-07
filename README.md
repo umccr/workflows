@@ -175,15 +175,17 @@ Mutational signatures (by the MutationalPatterns R package),
 
 ## Gene Lists
 
+The UMCCR workflows make extensive use of gene lists throughout the different processing and reporting steps. Gene lists are updated twice a year automatically prior to manual curation before being used in the production setting. Below we outline the gene lists currently in use. 
+
 ### 1. UMCCR Cancer Gene List
 
-UMCCR uses a gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. This [core list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv) (latest version) is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
+UMCCR uses a core gene list ("UMCCR Cancer Gene List") to assess coverage of key genes, rescue low allelic frequency variants and to prioritize SV calls. This [core list](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv) (latest version) is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd) from a number of different sources:
 
 * [Cancermine](http://bionlp.bcgsc.ca/cancermine/) with at least 2 publications with at least 3 citations - [280 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cancermine_collated.tsv)
 * [NCG known cancer genes](http://ncg.kcl.ac.uk/cancer_genes.php#known) - [711 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/NCG6_cancergenes.tsv)
 * [Tier 1 COSMIC Cancer Gene Census](https://cancer.sanger.ac.uk/cosmic/census?tier=1) (CGC) - 576 genes
 * UMCCR internal manually added genes - [1 gene](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/umccr.txt)
-* Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release), [CiViC](https://civicdb.org/) (data obtained May 3rd 2019), [cancerhotspots](https://www.cancerhotspots.org/) (v2)) - [1 gene](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.txt)
+* Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release, [data](https://github.com/sigven/cacao/blob/master/data/cacao.clinvar_path.grch38.tsv)), [CiViC](https://civicdb.org/) (May 3rd 2019 retrieval, [data](https://github.com/sigven/cacao/blob/master/data/cacao.civic.grch38.tsv)) and [cancerhotspots](https://www.cancerhotspots.org/) (v2 release, [data](https://github.com/sigven/cacao/blob/master/data/cacao.hotspot.grch38.tsv))) - [1557 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.grch38.genes.txt) extracted from [full release](https://github.com/sigven/cacao/blob/master/data/cacao.grch38.bed) (BED)
 * At least 2 matches in the following five databases and eight clinical panels:
     * Cancer predisposition genes, [CPSR panel0](https://github.com/sigven/cpsr#cancer-predisposition-genes) - [216 genes](https://github.com/sigven/cpsr/blob/master/predisposition.md) obtained from:
         * A list of 152 genes that were curated and established within TCGA’s pan-cancer study ([Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
@@ -208,17 +210,28 @@ Gene lists for all of these sources can be found in the [sources](https://github
 A BED file with transcript and coding regions coordinates is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/Snakefile) from the latest gene list 
 using coordinates from ENSEMBL. Transcript IDs for coordinate choices are selected using principal transcript annotations in [APPRIS](http://appris.bioinfo.cnio.es/#/). The APPRIS transcript IDs are downloaded from the APPRIS website and stored for versioning in [Github](https://github.com/umccr/workflows/blob/master/transcripts/). Chosen principal transcripts for each cancer gene are also added into the final generated gene table under the columns `PRINCIPAL_hg19` and `PRINCIPAL_hg38`.
 
+**Gene List Usage:**
+
+* bcbio SV prioritization: (xx Clarify interaction with umccrise)
+* MultiQC for coverage assessment (General Statistics table) (xx canonical transcripts only?)
+* Cancer Report: CDS of included genes for SNV Allelic Frequencies in Key Genes CDS
+* Cancer Report: UMCCR Gene CNV Calls table
+* Cancer Report (xx Anywhere else?)
+
 **Note:** _All gene lists are in the process of being migrated to the [Australian PanelApp instance](https://panelapp.agha.umccr.org/)._
 
 **Questions:**
 
-* [ ] CACAO Hotspot file only lists 1 gene - how so?
 * [ ] Do we have a source for the `Familiar Cancer` gene list?
 * [ ] Which file from https://github.com/umccr/workflows/tree/master/genes/fusions is the source for the Hartwig fusions above?
 * [ ] Version / source for the PMCC gene list?
+* [ ] Cancer Report: Structural Variants table references oncogene, tsgene annotation. From which gene list is this coming from?
+* [ ] Confirm coverage is based on `umccr_cancer_genes.hg38.transcript.bed`
+* [ ] Clarify bcbio's `svprioritize` vs umccrise handling; which genes are we using here?
 
 **Todo:**
 
+* [ ] Switch from <https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.txt> to <https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.grch38.bed> within <https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd>
 * [ ] Add links to PanelApp for each gene list, joint panel
 * [ ] Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
 
@@ -236,6 +249,10 @@ UMCCR have included the following 8 genes to this list, bringing the total to 20
 * `TNFRSF6, KLLN, MAP3K6, NEK1, NTRK1, RAD54L, RHNO1, RTEL1`
 
 We are considering a switch to the more specific virtual panels from Genomics England (see [panels 1-38](https://github.com/sigven/cpsr#cancer-predisposition-genes)) in the future.
+
+**Gene List Usage:**
+
+* CPSR: Variant tier assessment
 
 **Questions:**
 
@@ -261,11 +278,16 @@ Known promiscuous fusion genes ([5' list](https://github.com/umccr/workflows/blo
 
 Additional [known fusions](https://github.com/umccr/workflows/blob/master/genes/fusions/fusioncatcher_pairs.txt) from [FusionCatcher](https://github.com/ndaniel/fusioncatcher) generated from a [host of databases](https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md#23---genomic-databases).
 
+**Gene List Usage:**
+
+TBA
 
 **Questions:**
 
 * [ ] How is https://github.com/umccr/workflows/blob/master/genes/fusions/compare.R being used?
-* [ ] Where in the workflow are these fusion lists used? Provide pointers and reference; add basic intro to 3 above
+* [ ] Where in the workflow are these fusion lists used? Provide pointers and reference; add basic intro to 3 above.  _Not_ used for bcbio's svprioritize step. 
+* [ ] Used anywhere in Cancer Report: (known fusion pairs?)
+
 
 ### 4. SAGE Hotspots
 
@@ -274,6 +296,10 @@ A list of genomic coordinates to rescue low AF somatic variant calls in well-kno
 * Cancer Genome Interpreter 
 * CIViC - Clinical interpretations of variants in cancer
 * OncoKB - Precision Oncology Knowledge Base
+
+**Gene List Usage:**
+
+* SAGE: to rescue low allelic frequency somatic calls in key sites
 
 **Todo:**
 
@@ -291,31 +317,14 @@ Variants are flagged if they overlap with a list of low-quality sites / regions 
 * Segmental duplication regions (UCSC),
 * UMCCR panel of normals, build from tumor-only mutect2 calls from ~200 normal samples
 
+**Gene List Usage:**
+
+* SAGE: (xx is this really during the SAGE step? How are low quality site annotations used (check workflow doc)?)
+
 **Todo:**
 
 * [ ] Add source links (hosted if needed), versions for all lists above
 * [ ] Generate overlap of 5. vs 1., then add to [section below](#Cancer-Genes-with-incomplete-coverage-in-hg38)
-
-### Gene List Usage
-
-* bcbio SV prioritization: `umccr_cancer_genes.latest.genes` (xx Clarify interaction with umccrise)
-* MultiQC: _UMCCR Cancer Gene List_ (1) for coverage assessment (General Statistics table) (xx canonical transcripts only?)
-* CPSR: _Custom Cancer Predisposition Gene List_ (2) for tier assessment
-* Cancer Report: _UMCCR Cancer Gene List_ (1) (xx for which tables, sets?)
-* Cancer Report: CDS of _UMCCR Cancer Gene List_ (1) for SNV Allelic Frequencies in Key Genes CDS
-* Cancer Report: _UMCCR Cancer Gene List_ (1) for UMCCR Gene CNV Calls table
-* Cancer Report: (xx known fusion pairs?)
-* SAGE: _SAGE Hotspots_ (4) to rescue low allelic frequency somatic calls in key sites
-* SAGE: _Low Quality Sites_ (5) (xx is this really during the SAGE step? How are low quality site annotations used (check workflow doc)?)
-
-**Todo:**
-
-* [ ] Confirm coverage is based on `umccr_cancer_genes.hg38.transcript.bed`
-* [ ] Clarify bcbio's `svprioritize` vs umccrise handling
-* [ ] Where are we using 3.1 - 3.3 precisely? _Not_ used for bcbio's svprioritize step
-* [ ] Cancer Report: Structural Variants table references oncogene, tsgene annotation. From which gene list is this coming from?
-* [ ] Harmonize gene list naming in reports, add gene list versions
-* [ ] Check for overlap with [Hartwig key gene list](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FPatient-Reporting)
 
 ### Cancer Genes with incomplete coverage in hg38
 
@@ -372,6 +381,11 @@ https://github.com/lh3/bwa/blob/master/README-alt.md
 
 * [ ] Restrict overlap to APPRIS canonical transcripts to harmonize across document (if not already the case)
 * [ ] Looking at IGV I am not sure that https://github.com/umccr/genes/blob/master/superdups/hg38_cod_dup.tsv is really just coding; most regions seem to be intronic? Need to grab BED file to confirm
+
+
+**Todo:**
+
+* [ ] Harmonize gene list naming in reports, add gene list versions
 
 
 
