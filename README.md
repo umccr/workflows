@@ -16,29 +16,7 @@ UMCCR production workflows
 
 ### bcbio default hg38 config
 
-* link to YAML
-* Links to the exact hg38 build used; in particular explore ALT contig issue
-* Explain umccr_cancer_genes.hg38.transcript.bed
-* Explain umccr_cancer_genes.latest.genes
-
-#### Standard Chromosomes only
-
-Variants are being called for [chr1-22/X/Y/MT only](https://bcbio-nextgen.readthedocs.io/en/latest/contents/configuration.html#analysis-regions), i.e., limited to the standard chromosomes:
-
-> `      exclude_regions: [altcontigs]`
-
- We avoid [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions.
-
-#### Variant Blocklist
-
-We also avoid regions in the [ENCODE 'blocklist'](https://github.com/Boyle-Lab/Blacklist) [hg38-blacklist.v2.bed.gz](https://github.com/Boyle-Lab/Blacklist/tree/master/lists) for SNV calling only:
-
-> `      variant_regions: hg38_noalt_noBlacklist.bed`
-
-This not only improves overall precision of our calls but also speeds up the variant calling process.
-
-> hg38_noalt_noBlacklist.bed was supposed to be the result of bedtools subtract of hg38_noalt and the corresponding file in https://github.com/Boyle-Lab/Blacklist/tree/master/lists
-
+The bcbio `YAML` configuration is kept [under version control](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_hg38.yaml) and follows standard bcbio guidelines. The documentation below references the configuration as needed. 
 
 ### Organize samples
 
@@ -49,11 +27,28 @@ This not only improves overall precision of our calls but also speeds up the var
 * Trim reads with `atropos`: remove polyX sequences at the 3' end (`-a`) in both read pairs (`-A`); also enabled NextSeq polyG filtering (`--nextseq-trim`) for good measure. Remove low quality bases (cutoff quality 5), and drop reads now shorter than 25 bases. See [Brad's blog post](https://github.com/bcbio/bcbio_validations/tree/master/somatic_trim) for more details and overall motivation.
 * Pipe into a `bgzip` FASTQ file and index with `grabix`.
 
+```
+      # Poly-G filtering
+      trim_reads: atropos
+      adapters: polyx
+```
+
 ### Alignment
 
 * Taking blocks of reads from the (indexed) FASTQ files and aligning with `bwa-mem`. We are **discarding** reads with >250 MEMs (maximal exact matches) in the genome, mark shorter split hits as secondary and set the RG. Other parameters left to default. This means reads will be soft-clipped.
 * Aligned blocks are sorted with `samtools sort` by _read name_ and checked for consistency with `samtools quickcheck`.
 * Tested blocks are merged with biobambam2's `bamcat`, and duplicate reads are marked with `bamsormadup`; the latter step also creates a BAM index (`.bai`).
+
+```
+    genome_build: hg38
+    algorithm:
+      # Alignment parameters
+      aligner: bwa
+      recalibrate: false
+      realign: false
+      mark_duplicates: true
+      remove_lcr: false
+```
 
 ### Callable regions
 
@@ -68,6 +63,38 @@ This not only improves overall precision of our calls but also speeds up the var
 
 * Variant calls are limited to `CALLABLE` regions (i.e., **exclude** `LOW_COVERAGE`). 
 * Use `bedtools subtract` to remove low-complexity regions (if `remove_lcr` is set to `true`) from the callable regions.
+
+```
+      # Variant calling, 2-out-of-3. All callers handle InDels
+      variantcaller:
+        germline: [vardict, strelka2, gatk-haplotype]
+        somatic: [vardict, strelka2, mutect2] 
+      ensemble:
+        numpass: 2
+
+      # Call down to 1% allelic frequency
+      min_allele_fraction: 1
+```
+
+**Standard Chromosomes only:**
+
+Variants are being called for [chr1-22/X/Y/MT only](https://bcbio-nextgen.readthedocs.io/en/latest/contents/configuration.html#analysis-regions), i.e., limited to the standard chromosomes:
+
+> `      exclude_regions: [altcontigs]`
+
+We avoid calling variants in [alternative and unplaced contigs](https://github.com/lh3/bwa/blob/master/README-alt.md) completely to avoid slowdowns on those additional regions. This has implications for variants only found in non-reference haplotypes (see section on [ALT regions](#alt-handling)).
+
+**Variant Blocklist:**
+
+We also avoid regions in the [ENCODE 'blocklist'](https://github.com/Boyle-Lab/Blacklist) [hg38-blacklist.v2.bed.gz](https://github.com/Boyle-Lab/Blacklist/tree/master/lists) for SNV calling only:
+
+> `      variant_regions: hg38_noalt_noBlacklist.bed`
+
+This not only improves overall precision of our calls but also speeds up the variant calling process.
+
+> hg38_noalt_noBlacklist.bed was supposed to be the result of bedtools subtract of hg38_noalt and the corresponding file in https://github.com/Boyle-Lab/Blacklist/tree/master/lists
+
+
 
 #### Vardict: Germline
 
@@ -128,11 +155,33 @@ This not only improves overall precision of our calls but also speeds up the var
 
 ### Variant Ensemble calling
 
+TBA
+
 ### Structural Variant calling
 
 #### Manta
 
+TBA
+
+```
+      svcaller: [manta]
+      svprioritize: umccr_cancer_genes.latest.genes
+      
+resources:
+  manta:
+    options:
+    - --generateEvidenceBam 
+    - --outputContig
+```
+
 #### BPI
+
+TBA
+
+```
+      # Extras
+      tools_on: [break-point-inspector]
+```
 
 **Questions:**
 
@@ -142,10 +191,22 @@ This not only improves overall precision of our calls but also speeds up the var
 **Todo:**
 
 * [ ] Remove sections not applicable given our config?
+* [ ] Quote / describe bcbio YAML configs
+
+### QC
+
+TBA (or move to umccrise section)
+
+```
+      # QC and coverage assessent
+      coverage: umccr_cancer_genes.hg38.transcript.bed
+```
+
+
 
 ## Changes to primary processing for FFPE samples
 
-TBA
+Low quality sampes -- particulalry FFPE -- use a slightly [modified bcbio configuration](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_ffpe.yaml) to prevent the workflow from stalling in highly fragmented read regions. 
 
 
 ## WGS Postprocessing with umccrise
