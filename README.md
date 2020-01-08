@@ -203,7 +203,6 @@ TBA (or move to umccrise section)
 ```
 
 
-
 ## Changes to primary processing for FFPE samples
 
 Low quality sampes -- particulalry FFPE -- use a slightly [modified bcbio configuration](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_ffpe.yaml) to prevent the workflow from stalling in highly fragmented read regions. 
@@ -211,7 +210,30 @@ Low quality sampes -- particulalry FFPE -- use a slightly [modified bcbio config
 
 ## WGS Postprocessing with umccrise
 
-* Move https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit over here
+We develop and use the `umccrise` workflow to post-processes outputs from our bcbio-nextgen cancer variant calling analysis pipeline. In brief, umccrise steps include:
+
+* Filter artefacts and germline leakage from somatic calls
+* Run PCGR to annotate, prioritize and report somatic variants
+* Run CPSR to annotate, prioritize and report germline variants
+* Filter, annotate, prioritize and report SV
+* Run PURPLE to call CNV, purity, ploidy, and recover SV
+* Run Conpair to tumor/normal concordance and sample contamination
+
+The workflow generates a number of different reports:
+
+1. MultiQC report comparing QC to "reference" samples
+2. Cancer Report with mutational signatures, strand bias analysis, PURPLE results, and prioritized SVs
+3. CACAO to calculate coverage in common hotspots, as well as goleft to estimate coverage problems (germline, somatic)
+4. CPSR for germline variant in predisposition gene prioritisation
+5. PCGR for somatic variant prioritisation
+
+The post-processing workflow is available on [Github](https://github.com/umccr/umccrise) and comes with [extensive documentation](https://github.com/umccr/umccrise/blob/master/workflow.md) of the workflow steps and a [version history](https://github.com/umccr/umccrise/blob/master/HISTORY.md). We summarize the different steps and outputs below but recommend referencing the main documentation as well.
+
+**Todo:**
+
+* [ ] Migrate [Google Doc](https://docs.google.com/document/d/1yBaSExF50pXk3P6Kl1SnIa_IQagD_Vu_-YOkxkHMB1Q/edit#) over to [Vlad's repo](https://github.com/umccr/umccrise/blob/master/workflow.md)
+* [ ] Summarize workflow steps
+
 
 ## Reporting structure
 
@@ -244,7 +266,7 @@ UMCCR uses a core gene list ("UMCCR Cancer Gene List") to assess coverage of key
 
 * [Cancermine](http://bionlp.bcgsc.ca/cancermine/) with at least 2 publications with at least 3 citations - [280 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cancermine_collated.tsv)
 * [NCG known cancer genes](http://ncg.kcl.ac.uk/cancer_genes.php#known) - [711 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/NCG6_cancergenes.tsv)
-* [Tier 1 COSMIC Cancer Gene Census](https://cancer.sanger.ac.uk/cosmic/census?tier=1) (CGC) - 576 genes
+* [Tier 1 COSMIC Cancer Gene Census](https://cancer.sanger.ac.uk/cosmic/census?tier=1) (CGC) - [576 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/CancerGeneCensus_Tier1.tsv)
 * UMCCR internal manually added genes - [1 gene](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/umccr.txt)
 * Internally added genes based on presence in [CACAO hotspot genes](https://github.com/sigven/cacao) (curated from [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar) (May 3rd 2019 release, [data](https://github.com/sigven/cacao/blob/master/data/cacao.clinvar_path.grch38.tsv)), [CiViC](https://civicdb.org/) (May 3rd 2019 retrieval, [data](https://github.com/sigven/cacao/blob/master/data/cacao.civic.grch38.tsv)) and [cancerhotspots](https://www.cancerhotspots.org/) (v2 release, [data](https://github.com/sigven/cacao/blob/master/data/cacao.hotspot.grch38.tsv))) - [1557 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.grch38.genes.txt) extracted from [full release](https://github.com/sigven/cacao/blob/master/data/cacao.grch38.bed) (BED)
 * At least 2 matches in the following five databases and eight clinical panels:
@@ -252,7 +274,7 @@ UMCCR uses a core gene list ("UMCCR Cancer Gene List") to assess coverage of key
         * A list of 152 genes that were curated and established within TCGA’s pan-cancer study ([Huang et al., Cell, 2018](https://www.ncbi.nlm.nih.gov/pubmed/29625052))
         * A list of 107 protein-coding genes that has been manually curated in COSMIC’s [Cancer Gene Census v86](https://cancer.sanger.ac.uk/census) (all genes annotated as Hallmark and Germline),
         * A list of 148 protein-coding genes established by experts within the Norwegian Cancer Genomics Consortium ([http://cancergenomics.no](http://cancergenomics.no/))
-    * Hartwig Medical Foundation [list of known fusions](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX) - 439 genes
+    * Hartwig Medical Foundation [list of known fusions](https://nc.hartwigmedicalfoundation.nl/index.php/s/a8lgLsUrZI5gndd?path=%2FHMFTools-Resources%2FLINX) - [439 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/panelapp/HMF_fusions.tsv)
     * AZ300 (AstraZeneca cancer genes list) - [300 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/az_key_genes.300.txt)
     * Peter MacCallum Cancer Centre gene panel - [404 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/PMCC.genes)
     * COSMIC Cancer Gene Census ([tier 2](https://cancer.sanger.ac.uk/cosmic/census?tier=2)) - [147 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/CancerGeneCensus_Tier2.tsv)
