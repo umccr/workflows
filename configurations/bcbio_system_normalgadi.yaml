@@ -1,0 +1,23 @@
+# Reference genomes and pointer to samples
+local:
+  ref: /g/data3/gx8/local/production/bcbio/genomes/Hsapiens
+  inputs:
+    - INPUTDIR
+    - /g/data/gx8/extras
+    - /g/data3/gx8/extras/cancer_genes/
+
+# Define resources to be used for individual programs on multicore machines.
+resources:
+  machine:
+    cores: 24
+    memory: 96
+  # default options, used if other items below are not present
+  default:
+    memory: 3G
+    cores: 24
+    jvm_opts: ["-Xms750m", "-Xmx3000m"]
+  star:
+    memory: 6G
+
+
+
