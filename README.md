@@ -205,7 +205,7 @@ TBA (or move to umccrise section)
 
 ## Changes to primary processing for FFPE samples
 
-Low quality sampes -- particulalry FFPE -- use a slightly [modified bcbio configuration](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_ffpe.yaml) to prevent the workflow from stalling in highly fragmented read regions. 
+Low quality sampes -- particulalry FFPE -- use a slightly [modified bcbio configuration](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_ffpe_hg38.yaml) to prevent the workflow from stalling in highly fragmented read regions. 
 
 
 ## WGS Postprocessing with umccrise
