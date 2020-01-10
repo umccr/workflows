@@ -16,7 +16,7 @@ UMCCR production workflows
 
 ### bcbio default hg38 config
 
-The bcbio `YAML` configuration is kept [under version control](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_hg38.yaml) and follows standard bcbio guidelines. The documentation below references the configuration as needed. 
+The bcbio `YAML` configuration is kept [under version control](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_hg38.yaml) and follows standard bcbio guidelines. The documentation below references the configuration as needed.
 
 ### Organize samples
 
@@ -61,14 +61,14 @@ The bcbio `YAML` configuration is kept [under version control](https://github.co
 
 ### Variant calling
 
-* Variant calls are limited to `CALLABLE` regions (i.e., **exclude** `LOW_COVERAGE`). 
+* Variant calls are limited to `CALLABLE` regions (i.e., **exclude** `LOW_COVERAGE`).
 * Use `bedtools subtract` to remove low-complexity regions (if `remove_lcr` is set to `true`) from the callable regions.
 
 ```
       # Variant calling, 2-out-of-3. All callers handle InDels
       variantcaller:
         germline: [vardict, strelka2, gatk-haplotype]
-        somatic: [vardict, strelka2, mutect2] 
+        somatic: [vardict, strelka2, mutect2]
       ensemble:
         numpass: 2
 
@@ -136,17 +136,17 @@ This not only improves overall precision of our calls but also speeds up the var
 #### Vardict caller: Somatic
 
 * Also uses `vardict-java` with a AF cutoff of 10% (`-f 0.1`), ignoring reads with a mapping quality less than 10 (`-Q 10`), SAM FLAG x700 (`-F 0x700`, alignment is not primary, read is a duplicate, or fails vendor QC checks).
-* Instead of piping results into a strand bias check they get passed to `testsomatic.R`. 
+* Instead of piping results into a strand bias check they get passed to `testsomatic.R`.
 
 > _Unclear what that actually does? Does that include a strand bias test?_
 
-* Convert from VarDict's format to VCF (`var2vcf_paired.pl`) using lenient calls (p-value 0.9, 4.25 mismatches allowed, somatic calls only). 
+* Convert from VarDict's format to VCF (`var2vcf_paired.pl`) using lenient calls (p-value 0.9, 4.25 mismatches allowed, somatic calls only).
 
 > _Why do we filter for AF again? And why remove QUAL 0 variant calls instead of setting the filter flag?_
 
 #### Strelka2 Caller: Somatic
 
-* Merge overlapping regions in target file 
+* Merge overlapping regions in target file
 
 > _Why is this only required here, but not for other callers?_
 
@@ -161,22 +161,28 @@ TBA
 
 #### Manta
 
-TBA
+* Configure Manta to run in Tumor/Normal mode.
+  Options include generating a BAM file containing reads that support SVs
+  (`--generateEvidenceBam`), and including assembled contig sequences in the
+  final VCF file (`--outputContig`).
+* Calling regions are specified as whole chromosomes (1-22, X, Y, M).
 
 ```
       svcaller: [manta]
       svprioritize: umccr_cancer_genes.latest.genes
-      
+
 resources:
   manta:
     options:
-    - --generateEvidenceBam 
+    - --generateEvidenceBam
     - --outputContig
 ```
 
 #### BPI
 
-TBA
+* [BreakPointInspector](https://github.com/hartwigmedical/hmftools/tree/b8e9c3b32a3a3fa6bc1d88c7ced1e1ebaf715e4c/break-point-inspector)
+is used to readjust the SV coordinates and apply soft filters for potential false positives inferred by Manta.
+We also use its Allele Frequency calculations to apply additional filters.
 
 ```
       # Extras
@@ -206,7 +212,6 @@ TBA (or move to umccrise section)
 ## Changes to primary processing for FFPE samples
 
 Low quality sampes -- particulalry FFPE -- use a slightly [modified bcbio configuration](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_ffpe_hg38.yaml) to prevent the workflow from stalling in highly fragmented read regions. 
-
 
 ## WGS Postprocessing with umccrise
 
@@ -258,7 +263,7 @@ Mutational signatures (by the MutationalPatterns R package),
 
 ## Gene Lists
 
-The UMCCR workflows make extensive use of gene lists throughout the different processing and reporting steps. Gene lists are updated twice a year automatically prior to manual curation before being used in the production setting. Below we outline the gene lists currently in use. 
+The UMCCR workflows make extensive use of gene lists throughout the different processing and reporting steps. Gene lists are updated twice a year automatically prior to manual curation before being used in the production setting. Below we outline the gene lists currently in use.
 
 ### 1. UMCCR Cancer Gene List
 
@@ -288,9 +293,9 @@ UMCCR uses a core gene list ("UMCCR Cancer Gene List") to assess coverage of key
     * Foundation Heme (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [592 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
     * Vogelstein (from [oncoKb](https://www.oncokb.org/cancerGenes)) - [125 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/oncoKB_cancerGeneList.txt)
 
-Gene lists for all of these sources can be found in the [sources](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources) folder. The combined list contains [1250 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv). 
+Gene lists for all of these sources can be found in the [sources](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources) folder. The combined list contains [1250 genes](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/umccr_cancer_genes.latest.tsv).
 
-A BED file with transcript and coding regions coordinates is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/Snakefile) from the latest gene list 
+A BED file with transcript and coding regions coordinates is [automatically generated](https://github.com/umccr/workflows/blob/master/genes/cancer_genes/Snakefile) from the latest gene list
 using coordinates from ENSEMBL. Transcript IDs for coordinate choices are selected using principal transcript annotations in [APPRIS](http://appris.bioinfo.cnio.es/#/). The APPRIS transcript IDs are downloaded from the APPRIS website and stored for versioning in [Github](https://github.com/umccr/workflows/blob/master/transcripts/). Chosen principal transcripts for each cancer gene are also added into the final generated gene table under the columns `PRINCIPAL_hg19` and `PRINCIPAL_hg38`.
 
 **Gene List Usage:**
@@ -316,7 +321,7 @@ using coordinates from ENSEMBL. Transcript IDs for coordinate choices are select
 
 * [ ] Switch from <https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.txt> to <https://github.com/umccr/workflows/blob/master/genes/cancer_genes/sources/cacao.grch38.bed> within <https://github.com/umccr/workflows/blob/master/genes/cancer_genes/make_umccr_cancer_genes.Rmd>
 * [ ] Add links to PanelApp for each gene list, joint panel
-* [ ] Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible. 
+* [ ] Lavinia, Georgie and I [Joep] did some comparisons of transcripts selected by APPRIS, MANE and PeterMac and found many differences. For consistency of reporting, alignment with PeterMac, and working with Pierian, we need to work out what is the best approach. From a curation efficiency point of view, it is also important to align with OncoKB and Cosmic as much as possible.
 
 
 ### 2. Custom Cancer Predisposition Gene List
@@ -339,8 +344,8 @@ We are considering a switch to the more specific virtual panels from Genomics En
 
 **Questions:**
 
-* [ ] Numbers don't add up - what's the final count _with_ the UMCCR additions? 
-* [ ] Where are UMCCR additions coming from? Can curate in PanelApp. 
+* [ ] Numbers don't add up - what's the final count _with_ the UMCCR additions?
+* [ ] Where are UMCCR additions coming from? Can curate in PanelApp.
 
 **Todo:**
 
@@ -368,7 +373,7 @@ TBA
 **Questions:**
 
 * [ ] How is https://github.com/umccr/workflows/blob/master/genes/fusions/compare.R being used?
-* [ ] Where in the workflow are these fusion lists used? Provide pointers and reference; add basic intro to 3 above.  _Not_ used for bcbio's svprioritize step. 
+* [ ] Where in the workflow are these fusion lists used? Provide pointers and reference; add basic intro to 3 above.  _Not_ used for bcbio's svprioritize step.
 * [ ] Used anywhere in Cancer Report: (known fusion pairs?)
 
 
@@ -376,7 +381,7 @@ TBA
 
 A list of genomic coordinates to rescue low AF somatic variant calls in well-known key sites of cancer genes based on:
 
-* Cancer Genome Interpreter 
+* Cancer Genome Interpreter
 * CIViC - Clinical interpretations of variants in cancer
 * OncoKB - Precision Oncology Knowledge Base
 
