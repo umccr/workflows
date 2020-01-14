@@ -8,6 +8,8 @@ local:
 
 # Define resources to be used for individual programs on multicore machines.
 resources:
+#  tmp:
+#    dir: /scratch/gx8
   machine:
     cores: 24
     memory: 96
@@ -18,6 +20,3 @@ resources:
     jvm_opts: ["-Xms750m", "-Xmx3000m"]
   star:
     memory: 6G
-
-
-
