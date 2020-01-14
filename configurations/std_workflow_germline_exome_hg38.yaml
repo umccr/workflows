@@ -1,0 +1,38 @@
+details:
+  - analysis: variant2
+    genome_build: hg38
+    algorithm:
+      # Alignment parameters
+      aligner: bwa
+      recalibrate: false
+      realign: false
+      mark_duplicates: true
+      remove_lcr: false
+
+      # Exome-related definitions
+      umi_type: fastq_name
+      variant_regions: S30409818_Padded.bed
+      
+      # Poly-G filtering
+      trim_reads: atropos
+      adapters: polyx
+
+      # QC and coverage assessent
+      coverage: S30409818_Covered.bed
+      mixup_check: qsignature
+
+      # Variant calling, 2-out-of-3. All callers handle InDels
+      variantcaller: [vardict, strelka2, gatk-haplotype]
+
+      ensemble:
+        numpass: 2
+
+      # Structural variation. Disabled for now, not accredited
+#      svcaller: [cnvkit, manta]
+
+      # Extras
+      tools_on: [noalt_calling]
+      tools_off: [contamination, gemini]
+
+upload:
+  dir: ../final
