@@ -1,6 +1,7 @@
 # DRAGEN Workflows
 
 * [hg38 Reference Hash Tables](#hg38-reference-hash-tables)
+* [Alignment and Fastq Input](#alignment-and-fastq-input)
 
 ## hg38 Reference Hash Tables
 
@@ -57,3 +58,15 @@ iap files upload hg38_dragen_ht.tar gds://umccr-refdata-dev/dragen/genomes/hg38/
   ├── streaming_log.csv
   └── str_table.bin
 ```
+
+## Alignment and FASTQ Input
+
+* For a single run, only one BAM and VCF output file are produced because all input read groups are
+expected to belong to the same sample. To process multiple samples from one BCL conversion run, run the
+DRAGEN secondary analysis multiple times using different values for the `--fastq-list-sample-id` option for normal samples and `--tumor-fastq-list-sample-id` for tumour samples. For example:
+
+```
+dragen -r <ref_dir> --tumor-fastq-list <csv_file> --tumor-fastq-list-sample-id <Sample_ID> --output-directory <out_dir> --output-file-prefix <out_prefix> --fastq-list <csv_file_2> --fastq-list-sample-id <Sample_ID_2> 
+```
+
+* Additional summary on different Dragen parameters can be found in [Illumination](https://github.com/umccr/illumination/blob/master/docs/colo829/preparation.Rmd#L73).
