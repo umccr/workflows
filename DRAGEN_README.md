@@ -61,12 +61,23 @@ iap files upload hg38_dragen_ht.tar gds://umccr-refdata-dev/dragen/genomes/hg38/
 
 ## Alignment and FASTQ Input
 
-* For a single run, only one BAM and VCF output file are produced because all input read groups are
+* For a single run, only one BAM and VCF output files are produced because all input read groups are
 expected to belong to the same sample. To process multiple samples from one BCL conversion run, run the
 DRAGEN secondary analysis multiple times using different values for the `--fastq-list-sample-id` option for normal samples and `--tumor-fastq-list-sample-id` for tumour samples. For example:
 
 ```
-dragen -r <ref_dir> --tumor-fastq-list <csv_file> --tumor-fastq-list-sample-id <Sample_ID> --output-directory <out_dir> --output-file-prefix <out_prefix> --fastq-list <csv_file_2> --fastq-list-sample-id <Sample_ID_2> 
+/opt/edico/bin/dragen --partial-reconfig DNA-MAPPER --ignore-version-check true; \
+mkdir -p /ephemeral/ref; \
+tar -C /ephemeral/ref -xvf /mount/index/hg38/hg38_dragen_ht.tar; \
+/opt/edico/bin/dragen \
+--lic-instance-id-location /opt/instance-identity \
+-f -r /ephemeral/ref \
+--tumor-fastq-list /mount/fastqs/tumorFastqList.csv \
+--fastq-list /mount/fastqs/normalFastqList.csv \
+--output-directory /output/alignmentTest \
+--output-file-prefix PM3062337
 ```
+
+* The link to a complete TES task definition using above Dragen command is [here](https://github.com/umccr-illumina/stratus/blob/master/TES/dragen_alignment_on_bclConvert_output.json) 
 
 * Additional summary on different Dragen parameters can be found in [Illumination](https://github.com/umccr/illumination/blob/master/docs/colo829/preparation.Rmd#L73).
