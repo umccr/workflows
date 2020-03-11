@@ -1,9 +1,14 @@
 # DRAGEN Workflows
 
-* [hg38 Reference Hash Tables](#hg38-reference-hash-tables)
-* [Alignment and Fastq Input](#alignment-and-fastq-input)
+- [DRAGEN Workflows](#dragen-workflows)
+  - [Reference Hash Tables](#reference-hash-tables)
+    - [hg38](#hg38)
+    - [GRCh37](#grch37)
+  - [Alignment and FASTQ Input](#alignment-and-fastq-input)
 
-## hg38 Reference Hash Tables
+## Reference Hash Tables
+
+### hg38
 
 - hg38 FASTA downloaded from [1000 Genomes](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/)
   (see [this DRAGEN issue](https://github.com/umccr-illumina/dragen/issues/8)).
@@ -59,6 +64,27 @@ iap files upload hg38_dragen_ht.tar gds://umccr-refdata-dev/dragen/genomes/hg38/
   └── str_table.bin
 ```
 
+### GRCh37
+
+- GRCh37 FASTA downloaded from link in Hartwig [GRIDSS-PURPLE-LINX](https://github.com/hartwigmedical/gridss-purple-linx/blob/47e274459ee8ac760196f6c2ed753c2a83d230fb/README.md) repo.
+  - md5sum: `be672f01428605881b2ec450d8089a62  Homo_sapiens.GRCh37.GATK.illumina.fasta`
+  - Contains chromosomes 1-22, X, Y, MT. Their md5sums are identical to the
+    main chromosomes in the `human_g1k_v37.fasta.gz`
+    [reference](ftp://gsapubftp-anonymous:none@ftp.broadinstitute.org/bundle/b37/) used in bcbio (except chr3 for some reason). The GL contigs are also
+    discarded.
+  - Built using command below (via [this json body](https://github.com/umccr-illumina/stratus/blob/d9c29df06bcdbbc8abd74c2108f12d150ab3ccc8/TES/dragen_GRCh37_indexing.json)):
+
+```bash
+/opt/edico/bin/dragen \
+  --build-hash-table true \
+  --ht-reference /mount/index/GRCh37.fa \
+  --output-directory /mount/index/ht
+```
+
+Note that RNA/CNV hash tables were not built for this, since it's purely for
+testing purposes for the GRIDSS SV caller.
+
+
 ## Alignment and FASTQ Input
 
 * For a single run, only one BAM and VCF output files are produced because all input read groups are
@@ -78,6 +104,6 @@ tar -C /ephemeral/ref -xvf /mount/index/hg38/hg38_dragen_ht.tar; \
 --output-file-prefix PM3062337
 ```
 
-* The link to a complete TES task definition using above Dragen command is [here](https://github.com/umccr-illumina/stratus/blob/master/TES/dragen_alignment_on_bclConvert_output.json) 
+* The link to a complete TES task definition using above Dragen command is [here](https://github.com/umccr-illumina/stratus/blob/master/TES/dragen_alignment_on_bclConvert_output.json)
 
 * Additional summary on different Dragen parameters can be found in [Illumination](https://github.com/umccr/illumination/blob/master/docs/colo829/preparation.Rmd#L73).
