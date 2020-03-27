@@ -30,6 +30,9 @@ if [ ! -n "${S3_RESULT_BUCKET+1}" ]; then
     S3_RESULT_BUCKET="$S3_DATA_BUCKET"
 fi
 
+# Get rid of the trailing slash if exists in the input path
+S3_INPUT_DIR=${S3_INPUT_DIR%/}
+
 # NOTE: this setup is NOT setup for multiple jobs per instance. With multiple jobs running in parallel
 # on the same instance there could be issues related to shared volume/disk space, shared memeory space, etc
 
@@ -90,7 +93,7 @@ timer aws s3 sync --only-show-errors s3://${S3_REFDATA_BUCKET}/genomes/ /work/ge
 publish S3PullRefGenome $duration
 
 echo "PULL input (bcbio results) from S3 bucket"
-timer aws s3 sync --only-show-errors --exclude=* --include=final/* --include=config/* s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR} /work/bcbio_project/${S3_INPUT_DIR}/
+timer aws s3 sync --only-show-errors --exclude=* --include=final/* --include=config/* s3://${S3_DATA_BUCKET}/${S3_INPUT_DIR}/ /work/bcbio_project/${S3_INPUT_DIR}/
 publish S3PullInput $duration
 
 echo "umccrise version:"
