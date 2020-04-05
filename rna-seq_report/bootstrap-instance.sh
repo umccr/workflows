@@ -34,7 +34,7 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
 
     # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
     PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
-    PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.gene.cnv | awk '{print $4}')
+    PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')
     STRUCTURAL=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/ | grep manta.tsv | awk '{print $4}')
     echo "PCGR: ${PCGR} PURPLE: ${PURPLE} STRUCTURAL: ${STRUCTURAL}"
 
