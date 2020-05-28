@@ -1,0 +1,8 @@
+7bd504feefb33fcfc9be0517439a423c  cytobands_hg38_GRCh38_2018-02-23.tsv
+bcf3ed35e4c6190d4d5ae419cd3dd7cb  hg38_noalt_noBlacklist.bed
+fb51cd9fd5822aeb26d16106b5295284  protein_domains_hg38_GRCh38_2018-03-06.gff3
+e9a50812cc56cb5af520e0070a7b45f3  protein_domains_hg38_GRCh38_2018-03-06.gff3.idx
+99567e2c04d7236e9b1dcb1e78bedff8  umccr_cancer_genes.hg38.coding.bed
+775fc073a48f3f6e7dc8d87a274c765a  umccr_cancer_genes.hg38.transcript.bed
+dbacfe7a6df8946ce87acdb9d184904a  umccr_cancer_genes.latest.genes
+bde05b433d561c36d02464f884f51a95  umccr_cancer_genes.latest.tsv
