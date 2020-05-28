@@ -1,4 +1,4 @@
-1## bcbio configuration settings and driver scripts for NCI's Gadi
+## bcbio configuration settings and driver scripts for NCI's Gadi
 
 * bcbio_system_normalgadi.yaml: resource configuration defining cores, memory and file paths
 
