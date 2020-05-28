@@ -14,18 +14,18 @@ export PATH=/g/data/gx8/local/production/bin:/g/data3/gx8/local/production/bcbio
 bcbio_prepare_samples.py --out merged --csv TEMPLATE.csv -n 2 -m 4 -q express -t local
 
 # Generate the bcbio config from a standard workflow template
-bcbio_vm.py template --systemconfig bcbio_system_normalgadi.yaml /g/data/gx8/projects/std_workflow/std_workflow_cancer_hg38.yaml BATCH-merged.csv 
+bcbio_vm.py template --systemconfig bcbio_system_normalgadi.yaml /g/data/gx8/projects/std_workflow/std_workflow_germline_GRCh37.yaml BATCH-merged.csv 
 
 # Also generate CWL version
-#bcbio_vm.py cwl --systemconfig bcbio_system_normalgadi.yaml CLEAN-merged/config/CONFIG-merged.yaml
+bcbio_vm.py cwl --systemconfig bcbio_system_normalgadi.yaml CLEAN-merged/config/CONFIG-merged.yaml
 
 # Set up run scripts
 sed "s|WORKFLOW|CONFIG-merged|" /g/data/gx8/projects/std_workflow/run_gadi.sh > CLEAN-merged/work/run.sh
 
-#mkdir CLEAN-merged/work-cromwell
-#sed "s|WORKFLOW|CONFIG-merged|" /g/data/gx8/projects/std_workflow/run_cromwell.sh > CLEAN-merged/work-cromwell/run_cromwell.sh
+mkdir CLEAN-merged/work-cromwell
+sed "s|WORKFLOW|CONFIG-merged|" /g/data/gx8/projects/std_workflow/run_cromwell.sh > CLEAN-merged/work-cromwell/run_cromwell.sh
 
 # Move to parent directory to separate from input data
 cp -rv CLEAN-merged/* ..
-#cp -rv CLEAN-merged-workflow/ ../config/
+cp -rv CLEAN-merged-workflow/ ../config/
 cp -rv bcbio_system_normalgadi.yaml ../config/ 

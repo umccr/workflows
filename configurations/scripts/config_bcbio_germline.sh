@@ -6,7 +6,7 @@ do
   SAMPLES="$DIRECTORY"data/$BATCH
 
   # Copy and replace-in-place (rather than one step replace) for more flexibility
-  cp -v /g/data/gx8/projects/std_workflow/merge_ffpe.sh $DATADIR/merge.sh
+  cp -v /g/data/gx8/projects/std_workflow/merge_germline.sh $DATADIR/merge.sh
   cp -v /g/data/gx8/projects/std_workflow/bcbio_system_normalgadi.yaml $DATADIR
 
   sed -i "s|TEMPLATE|$SAMPLES|g" $DATADIR/merge.sh

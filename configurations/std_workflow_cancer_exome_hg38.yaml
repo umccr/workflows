@@ -9,12 +9,16 @@ details:
       mark_duplicates: true
       remove_lcr: false
 
+      # Exome-related definitions
+      umi_type: fastq_name
+      variant_regions: /g/data3/gx8/extras/agilent/hg38/S30409818_Covered.bed
+      
       # Poly-G filtering
       trim_reads: atropos
       adapters: polyx
 
       # QC and coverage assessent
-      coverage: umccr_cancer_genes.hg38.transcript.bed
+      coverage: /g/data3/gx8/extras/agilent/hg38/S30409818_Covered.bed
 
       # Variant calling, 2-out-of-3. All callers handle InDels
       variantcaller:
@@ -26,26 +30,10 @@ details:
       # Call down to 1% allelic frequency
       min_allele_fraction: 1
 
-      # Exclude difficult regions
-      variant_regions: hg38_noalt_noBlacklist.bed
-      exclude_regions: [altcontigs]
-
-      # Structural variation. No ensemble calling option here
-      svcaller: [manta]
-#      svprioritize: umccr_cancer_genes.latest.genes
-
-      # Add HLA
-#      hlacaller: optitype
-
       # Extras
-      tools_on: [break-point-inspector]
-      tools_off: [contamination]
+      tools_on: [noalt_calling]
+      tools_off: [contamination, gemini]
       save_diskspace: true
      
 upload:
   dir: ../final
-resources:
-  manta:
-    options:
-    - --generateEvidenceBam 
-    - --outputContig
