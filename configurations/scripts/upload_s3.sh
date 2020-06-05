@@ -12,7 +12,7 @@ do
   echo $PROJECT
 
   # Check if project folder exists, warn otherwise and move to next project
-  aws s3 ls s3://umccr-primary-data-prod/$PROJECT/ > /dev/null 2>&1
+  aws s3 ls --profile prod s3://umccr-primary-data-prod/$PROJECT/ > /dev/null 2>&1
 
   if [[ $? -ne 0 ]]; then
     echo "Project does not exist, please check manually."
@@ -27,30 +27,30 @@ do
           echo $TIMESTAMP
           S3PATH=$PROJECT/$(basename $SUBJECT)/$(basename $TYPE)/$(basename $TIMESTAMP)
           echo " $S3PATH"
-          aws s3 ls s3://umccr-primary-data-prod/$S3PATH/
+          aws s3 ls --profile prod s3://umccr-primary-data-prod/$S3PATH/
 
           if [[ $? -eq 0 ]]; then
             echo "  Subject has already been synched. Skipping upload. "
           else
             # Start sync and capture stdout in a log file
             echo "  Synching to $S3PATH"
-            aws s3 sync --no-progress $TIMESTAMP s3://umccr-primary-data-prod/$S3PATH/ 1>> s3.log
+            aws s3 sync --profile prod --no-progress $TIMESTAMP s3://umccr-primary-data-prod/$S3PATH/ 1>> s3.log
 
             # Create sentinel file to flag upload has completed
             echo "  Upload complete"
             touch /tmp/upload_complete 
-            aws s3 cp /tmp/upload_complete s3://umccr-primary-data-prod/$S3PATH/upload_complete
+            aws s3 cp --profile prod /tmp/upload_complete s3://umccr-primary-data-prod/$S3PATH/upload_complete
           fi
 
           # Test for umccrise flag that signals post-processing was done
-          aws s3 ls s3://umccr-primary-data-prod/$S3PATH/umccrised/all.done          
+          aws s3 ls --profile prod s3://umccr-primary-data-prod/$S3PATH/umccrised/all.done          
 
           if [[ $? -eq 0 ]]; then
             echo '  Post-processing has finished for subject.'
           else
             # API call to start umccrise for uploaded sample
             echo "  Starting umccrise"
-            aws lambda invoke --function-name umccrise_lambda_prod --cli-binary-format raw-in-base64-out --payload '{ "inputDir": "'$S3PATH'", "vcpus": "16", "inputBucket" : "umccr-primary-data-prod"}' /tmp/lambda.output
+            aws lambda invoke --profile prod --cli-binary-format raw-in-base64-out --function-name umccrise_lambda_prod --payload '{ "inputDir": "'$S3PATH'", "imageVersion": "0.17.10-ceae1d1d0b", "vcpus": "16", "inputBucket" : "umccr-primary-data-prod"}' /tmp/lambda.output
           fi
         done
       echo "* Synced $SUBJECT to s3://umccr-primary-data-prod/$S3PATH/"
