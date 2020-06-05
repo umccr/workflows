@@ -100,7 +100,7 @@ echo "umccrise version:"
 umccrise --version
 
 echo "RUN umccrise"
-timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --no-igv --genomes /work/genomes
+timer umccrise /work/bcbio_project/${S3_INPUT_DIR} -j ${avail_cpus} -o ${job_output_dir} --genomes /work/genomes
 publish RunUMCCRISE $duration
 
 echo "PUSH results"
