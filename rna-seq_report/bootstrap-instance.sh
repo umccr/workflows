@@ -33,10 +33,10 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     SAMPLE_WGS_BASE=${S3_WGS_INPUT_DIR##*/}
 
     # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
-    #PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
+    PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/small_variants/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
     #temporary fix - until pcgr output is moved to small_variants folder
-    PCGR_TMP=${S3_WGS_INPUT_DIR%/*}
-    PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${PCGR_TMP}/work/${SAMPLE_WGS_BASE}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
+    #PCGR_TMP=${S3_WGS_INPUT_DIR%/*}
+    #PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${PCGR_TMP}/work/${SAMPLE_WGS_BASE}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
     #PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')
     if [ ! -z "$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')" ]; then
         PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')
