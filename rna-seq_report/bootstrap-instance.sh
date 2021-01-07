@@ -34,10 +34,6 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
 
     # Preparing umccrise data variables - awk command is to strip off date-time details from the s3 ls and grep result
     PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/small_variants/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
-    #temporary fix - until pcgr output is moved to small_variants folder
-    #PCGR_TMP=${S3_WGS_INPUT_DIR%/*}
-    #PCGR=$(aws s3 ls s3://${S3_DATA_BUCKET}/${PCGR_TMP}/work/${SAMPLE_WGS_BASE}/pcgr/ | grep somatic.pcgr.snvs_indels.tiers.tsv | awk '{print $4}')
-    #PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')
     if [ ! -z "$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')" ]; then
         PURPLE=$(aws s3 ls s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/ | grep purple.cnv.gene.tsv | awk '{print $4}')
     else
@@ -48,8 +44,6 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
 
     echo "PULL umccrise data from S3 bucket"
     aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/small_variants/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
-    #temporary fix - until pcgr output is moved to small_variants folder
-    #aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${PCGR_TMP}/work/${SAMPLE_WGS_BASE}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
     aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple/
     aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural/                                                          
 
