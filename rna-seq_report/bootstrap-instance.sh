@@ -47,9 +47,9 @@ if [ ! -z "$S3_WGS_INPUT_DIR" ]; then
     echo "PCGR: ${PCGR} PURPLE: ${PURPLE} STRUCTURAL: ${STRUCTURAL}"
 
     echo "PULL umccrise data from S3 bucket"
-    #aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
+    aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/small_variants/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
     #temporary fix - until pcgr output is moved to small_variants folder
-    aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${PCGR_TMP}/work/${SAMPLE_WGS_BASE}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
+    #aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${PCGR_TMP}/work/${SAMPLE_WGS_BASE}/pcgr/${PCGR} /work/umccrise/${SAMPLE_WGS_BASE}/pcgr/
     aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/purple/${PURPLE} /work/umccrise/${SAMPLE_WGS_BASE}/purple/
     aws s3 cp --only-show-errors s3://${S3_DATA_BUCKET}/${S3_WGS_INPUT_DIR}/structural/${STRUCTURAL} /work/umccrise/${SAMPLE_WGS_BASE}/structural/                                                          
 
