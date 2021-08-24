@@ -1,0 +1,52 @@
+details:
+  - analysis: variant2
+    genome_build: GRCh37
+    algorithm:
+      # Alignment parameters
+      aligner: bwa
+      recalibrate: false
+      realign: false
+      mark_duplicates: true
+      remove_lcr: false
+
+      # Poly-G filtering
+      trim_reads: atropos
+      adapters: polyx
+
+      # QC and coverage assessent
+      coverage: umccr_cancer_genes.GRCh37.transcript.bed 
+
+      # Variant calling, 2-out-of-3. All callers handle InDels
+#      variantcaller:
+#        germline: [vardict, strelka2, gatk-haplotype]
+#        somatic: [vardict, strelka2, mutect2] 
+#      ensemble:
+#        numpass: 2
+
+      # Call down to 1% allelic frequency
+#      min_allele_fraction: 1
+
+      # Exclude difficult regions
+#      variant_regions: GRCh37_noalt_noBlacklist.bed
+#      exclude_regions: [altcontigs]
+#      effects: false
+
+      # Structural variation. No ensemble calling option here
+#      svcaller: [manta]
+#      svprioritize: umccr_cancer_genes.latest.genes
+
+      # Add HLA
+#      hlacaller: optitype
+
+      # Extras
+#      tools_on: [break-point-inspector]
+      tools_off: [contamination]
+      save_diskspace: true
+     
+upload:
+  dir: ../final
+resources:
+  manta:
+    options:
+    - --generateEvidenceBam 
+    - --outputContig

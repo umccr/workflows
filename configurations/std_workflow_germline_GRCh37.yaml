@@ -13,11 +13,11 @@ details:
       trim_reads: atropos
       adapters: polyx
 
-#      # Variant calling, 2-out-of-3. All callers handle InDels
-#      variantcaller: [vardict, strelka2, gatk-haplotype]
+      # Variant calling, 2-out-of-3. All callers handle InDels
+      variantcaller: [vardict, strelka2, gatk-haplotype]
 
-#      ensemble:
-#        numpass: 2
+      ensemble:
+        numpass: 2
 
       # Extras
       tools_on: [noalt_calling]

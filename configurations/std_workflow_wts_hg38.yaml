@@ -6,6 +6,7 @@ details:
       quality_format: standard
       trim_reads: false
       expression_caller: [kallisto]
+#      spikein_fasta: SIRV_ERCCs_multi-fasta_200709a.fasta
       fusion_caller: [pizzly, arriba]
       tools_off: [gemini]
 upload:
