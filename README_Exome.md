@@ -1,24 +1,30 @@
 ## UMCCR Exome-Seq workflow information
 
+The bcbio workflow system provides many different options, e.g. in terms of aligners, variant callers or trimming steps. The following steps specifically discuss the UMCCR workflow used to process ### (Add exact assay names) for germline and somatic samples with somatic samples limited to tumor / normal analysis (i.e., no support for tumor-only variant calling). 
 
+Please see the extensive [bcbio documentation](https://bcbio-nextgen.readthedocs.io/en/latest/) for additional details and relevant files listed in `Key Outputs` below for commands run. Production runs are limited to the `hg38` reference genome and expect sequencing runs with Unique Molecular Identifier tags (UMIs).  The bcbio `YAML` configuration is kept and follows standard bcbio guidelines. The documentation below references the configuration as needed:
 
-UMCCR bcbio pipeline
-The bcbio workflow provides many options, e.g. in terms of aligners, variant callers or trimming steps. The following steps specifically discuss the UMCCR workflow.
+* [Germline exome](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_germline_exome_hg38.yaml)
+* [Somatic exome](https://github.com/umccr/workflows/blob/master/configurations/std_workflow_cancer_exome_hg38.yaml)
 
-Analysis steps
-Alignment preparation
-Reads are trimmed with atropos:
-polyX sequences at the 3’ end in both read pairs are removed
-Reads are filtered for polyG
-Low quality bases (< 5) are removed, and reads shorter than 25 bases are dropped
-Resulting reads are piped into a bgzip FASTQ file and indexed with grabix
-Alignment
+* _Add ref genome details_
+
+### Analysis steps
+
+**Alignment Preparation:** Reads from paired-end FASTQ files are trimmed with `atropos`. During this process polyX sequences at the 3’ end in both read pairs are removed, reads are filtered for polyG (default parameters) and low quality bases (< 5) are removed. Reads shorter than 25 bases after trimming are removed from further analysis. The remaining reads are written. Resulting reads are piped back into a `bgzip`-compressed FASTQ file and indexed with `grabix`.
+
+**Alignment:**
+
 Blocks of reads are taken from the indexed FASTQ files and aligned with bwa-mem.  All reads > 250 maximal exact matches are discarded. Shorter split hits are marked as secondary. Reads are soft-clipped as per the default parameters.
 Aligned blocks are sorted by read name with samtools, and checked for consistency with samtools quickcheck.
 Tested blocks are merged with biobambam2’s bamcat, and duplicate reads are marked with bamsormadup and a BAM index (.bai) file is created.
-Callable regions
+
+**Determining Callable Regions**
+
 Callable regions are defined using the variant_regions 
-Variant calling
+
+**Variant Calling**
+
 Variant calls are limited to callable regions, and only chromosomes 1-22, X, Y and MT (i.e. the standard chromosomes).
 Vardict: germline
 Variants are called with an AF threshold of 10%, and reads with a mapping quality of less than 10 are ignored
@@ -28,14 +34,21 @@ Strelka2: germline
 Run as default
 HaplotypeCaller : germline
 Runs with default parameters.
+
+**Variant Ensemble Calling**
+
 Variant representation is normalized between caller outputs. Normalization consists of three steps:
 Split multi-allelic variants into separate single-allelic calls
 Decompose biallelic block substitutions
 Left-align and normalize indels
 Bcbio supports majority voting ensemble approach to combining calls from multiple SNP and indel callers, leading to improved sensitivity. Specifically, for 3 variant callers, bcbio will keep only variants supported by at least 2 out of the 3 callers.
+
+**Quality Control**
+
 Post-processing of bcbio results.
 Run MultiQC across the qc folders for each sample, to produce a single HTML report summarising multiple QC parameters
 
+### Workflow organisation
 
 The pipeline produces a defined folder and file structure, as shown below. This defined standard structure ensures reproducibility of runs. Raw data (FASTQ files) are kept distinct from intermediate and final analysis results, enabling the pipeline to be re-run on demand without impacting on the raw data.
 
@@ -46,6 +59,7 @@ final - the final output of a bcbio run
 
 The folder structure is detailed below:
 
+```
 bcbio_run/
     |-- config/
         |-- samples.csv
@@ -71,7 +85,9 @@ bcbio_run/
     |-- final/
         |-- normal_sample/
         |-- year-month-daytimestamp_bcbio_run/
-Key outputs
+```
+
+### Key outputs
 Alf files are labelled with the prefix:
 
 Subject_SampleID_LibraryID
@@ -83,4 +99,5 @@ Prefix.bam.bai - an index file for the BAM, required for visualization within IG
 Prefix.vcf.gz - a variant call format file, with VEP annotated variants.
 Prefix.gaps.csv - a per sample file that specifies all regions below a predefined coverage threshold (default 20x). The gap analysis is created by scanning the diagnostic target region and identifying all contiguous stretches of bases that are covered with less than the threshold number of reads. For each such stretch (or “block”) of low coverage bases, a row is written to a comma separated text file, containing the length, the gene, the transcript information, the phenotype information and any known pathogenic variants in that region
 Prefix.coverage.csv - a per sample file  that reports the observed mean and median coverage for the entire assay. Mean and median coverage levels that are not above expected thresholds are flagged, where median coverage should be > 50x and mean coverage should be > 80x.
-TBA
+
+Add ###QC

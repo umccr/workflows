@@ -249,7 +249,7 @@ The post-processing workflow is available on [Github](https://github.com/umccr/u
 * MultiQC report with QC stats and plots
 * UMCCR cancer report containing:
   * Somatic mutation profile (global and in umccr genes),
-Mutational signatures (by the MutationalPatterns R package),
+  Mutational signatures (by the MutationalPatterns R package),
   * Structural variants,
   * Copy number variants,
   * PURPLE QC status,
