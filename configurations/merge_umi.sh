@@ -14,7 +14,7 @@ bcbio_fastq_umi_prep.py autopair -c 12 *.gz
 bcbio_prepare_samples.py --out merged --csv TEMPLATE.csv -n 2 -m 4 -q express -t local
 
 # Generate the bcbio config from a standard workflow template
-bcbio_vm.py template --systemconfig bcbio_system_normalgadi.yaml /g/data/gx8/projects/std_workflow/std_workflow_cancer_exome_hg38.yaml BATCH-merged.csv 
+bcbio_vm.py template --systemconfig bcbio_system_normalgadi.yaml /g/data/gx8/projects/std_workflow/std_workflow_cancer_hg38_umi.yaml BATCH-merged.csv 
 
 # Set up run scripts
 sed "s|WORKFLOW|CONFIG-merged|" /g/data/gx8/projects/std_workflow/run_gadi.sh > CLEAN-merged/work/run.sh
