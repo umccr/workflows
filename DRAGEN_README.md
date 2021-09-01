@@ -10,14 +10,15 @@
 
 ### hg38
 
-- hg38 FASTA downloaded from [1000 Genomes][1000Genomes].  
+- hg38 FASTA matches that from [1000 Genomes][1000Genomes].  
   * One can also download the reference from [this s3 bucket][public_dragen_bucket]
   (see [this DRAGEN issue][genome_match_confirmation_issue].
-- Parameters derived from [recommendations for mammalian genomes][dragen_tutorial].
-- Built using command below in the "development" workgroup
-  * wfl id: `wfl.704f1efddc864f88befdb1c9a6e42cf7`
-  * wfl version: `3.7.5`
-  * wfl run id: `wfr.348f44b92c834e51908c5c0e0e3274b2`  
+- We take the hashtable from [the public dragen references list][public_dragen_references] (hg38 / altaware / cnv / anchored / v8)
+- We then extract the tarbomb and place it in a compressed tar with the folder of the same name using a CWLTool  
+- Built using command below in the "development" project
+  * wfl id: `wfl.2e690932bedc4204b2bcb697bb249207`
+  * wfl version: `1.0.0`
+  * wfl run id: `wfr.3bf2bc688d0d442489cadfcdb2bf9842`  
   * Input body:
     
     <details>
@@ -26,23 +27,16 @@
 
     ```json
     {
-        "name": "build-reference-tarball-3.7.5",
+        "name": "create-dragen-v8-hg38-altaware-cnv-anchored-reference",
         "input": {
-            "ht_reference": {
-                "class": "File",
-                "location": "gds://umccr-refdata-dev/dragen/genomes/hg38/hg38.fa"
-            },
-            "output_directory": "hg38_alt_ht_3_7_5",
-            "ht_alt_liftover": "bwa-kit_hs38DH_liftover.sam",
-            "ht_max_seed_freq": 16,
-            "ht_seed_len": 27,
-            "ht_num_threads": 40,
-            "ht_methylated": true,
-            "enable_cnv": true,
-            "ht_build_rna_hashtable": true
+          "output_directory": "hg38-v8-altaware-cnv-anchored",
+          "reference_tar": {
+            "class": "File",
+            "location": "https://s3.amazonaws.com/use1-prd-seq-hub-appdata/Edico_v8/hg38_altaware-cnv-anchored.v8.tar"
+          }
         },
         "engineParameters": {
-            "outputDirectory": "gds://umccr-refdata-dev/dragen/genomes/hg38/3.7.5/"
+            "outputDirectory": "gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/"
         }
     }
     ```
@@ -55,57 +49,54 @@
     <summary>Click to expand!</summary>
     
     ```json
-    { 
-        "dragen_reference_tar": {
-            "basename": "hg38_alt_ht_3_7_5.tar.gz",
-            "class": "File",
-            "http://commonwl.org/cwltool#generation": 0,
-            "location": "gds://umccr-refdata-dev/dragen/genomes/hg38/3.7.5/hg38_alt_ht_3_7_5.tar.gz",
-            "nameext": ".gz",
-            "nameroot": "hg38_alt_ht_3_7_5.tar",
-            "size": 15070552340
-        }
+    {
+      "output_compressed_reference_tar": {
+        "basename": "hg38-v8-altaware-cnv-anchored.tar.gz",
+        "class": "File",
+        "http://commonwl.org/cwltool#generation": 0,
+        "location": "gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/hg38-v8-altaware-cnv-anchored.tar.gz",
+        "nameext": ".gz",
+        "nameroot": "hg38-v8-altaware-cnv-anchored.tar",
+        "size": 7664401964
+      }
     }
     ```
   
     </details>
 
-  * Tarball entries: `gds://umccr-refdata-dev/dragen/genomes/hg38/3.7.5/hg38_alt_ht_3_7_5.tar.gz`
+  * Tarball entries: `gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/hg38-v8-altaware-cnv-anchored.tar.gz`
+    
+    ```
+    $ gds-view --gds-path gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/hg38-v8-altaware-cnv-anchored.tar.gz --to-stdout | tar -tzf -
+    ```  
+  
     <details>
     <summary>Click to expand!</summary>
     
     ```text
-    hg38_alt_ht_3_7_5
-    ├── CT_converted
-    │   ├── hash_table.cfg
-    │   ├── hash_table.cfg.bin
-    │   ├── hash_table.cmp
-    │   ├── hash_table_stats.txt
-    │   ├── reference.bin
-    │   ├── ref_index.bin
-    │   ├── repeat_mask.bin
-    │   └── str_table.bin
-    ├── dragen-replay.json
-    ├── dragen.time_metrics.csv
-    ├── GA_converted
-    │   ├── hash_table.cfg
-    │   ├── hash_table.cfg.bin
-    │   ├── hash_table.cmp
-    │   ├── hash_table_stats.txt
-    │   ├── reference.bin
-    │   ├── ref_index.bin
-    │   ├── repeat_mask.bin
-    │   └── str_table.bin
-    ├── hash_table.cfg
-    ├── hash_table.cfg.bin
-    ├── hash_table.cmp
-    ├── hash_table_stats.txt
-    ├── kmer_cnv.bin
-    ├── reference.bin
-    ├── ref_index.bin
-    ├── repeat_mask.bin
-    ├── streaming_log_none(29178).csv
-    └── str_table.bin
+    hg38-v8-altaware-cnv-anchored/
+    ├──appVersion.log
+    ├──streaming_log.csv
+    ├──reference.bin
+    ├──ref_index.bin
+    ├──repeat_mask.bin
+    ├──str_table.bin
+    ├──hash_table.cmp
+    ├──hash_table_stats.txt
+    ├──hash_table.cfg.bin
+    ├──hash_table.cfg
+    ├──kmer_cnv.bin
+    ├──.time_metrics.csv
+    ├──replay.json
+    └──anchored_rna/
+       ├──reference.bin
+       ├──ref_index.bin
+       ├──repeat_mask.bin
+       ├──str_table.bin
+       ├──hash_table.cmp
+       ├──hash_table_stats.txt
+       ├──hash_table.cfg.bin
+       └──hash_table.cfg
     ```
     </details>
 
@@ -113,10 +104,10 @@
 
 ### GRCh37
 
-- Built using command below in the "development" workgroup
-  * wfl id: `wfl.704f1efddc864f88befdb1c9a6e42cf7`
-  * wfl version: `3.7.5`
-  * wfl run id: `wfr.cb954ef8b3784d2f93a5878b9b697010`  
+- Built using command below in the "development" project
+  * wfl id: `wfl.2e690932bedc4204b2bcb697bb249207`
+  * wfl version: `1.0.0`
+  * wfl run id: `wfr.f0f2f6f602e54d3ebcbc1837d1fc7074`  
   * Input body:
     
     <details>
@@ -125,22 +116,16 @@
     
     ```json
     {
-        "name": "build-reference-tarball-3.7.5",
+        "name": "create-dragen-v8-GRCh37-cnv-anchored-reference",
         "input": {
-            "ht_reference": {
-                "class": "File",
-                "location": "gds://umccr-refdata-dev/dragen/hsapiens/GRCh37/GRCh37.fa"
-            },
-            "output_directory": "GRCh37_ht_3_7_5",
-            "ht_max_seed_freq": 16,
-            "ht_seed_len": 27,
-            "ht_num_threads": 40,
-            "ht_methylated": true,
-            "enable_cnv": true,
-            "ht_build_rna_hashtable": true
+          "output_directory": "GRCh37-v8-cnv-anchored",
+          "reference_tar": {
+            "class": "File",
+            "location": "https://s3.amazonaws.com/use1-prd-seq-hub-appdata/Edico_v8/GRCh37-cnv-anchored.v8.tar"
+          }
         },
         "engineParameters": {
-            "outputDirectory": "gds://umccr-refdata-dev/dragen/genomes/GRCh37/3.7.5/"
+            "outputDirectory": "gds://development/reference-data/dragen_hash_tables/v8/GRCh37/GRCh37-cnv-anchored/"
         }
     }
     ```
@@ -155,63 +140,59 @@
 
     ```json
     {
-        "dragen_reference_tar": {
-            "basename": "GRCh37_ht_3_7_5.tar.gz",
-            "class": "File",
-            "http://commonwl.org/cwltool#generation": 0,
-            "location": "gds://umccr-refdata-dev/dragen/genomes/GRCh37/3.7.5/GRCh37_ht_3_7_5.tar.gz",
-            "nameext": ".gz",
-            "nameroot": "GRCh37_ht_3_7_5.tar",
-            "size": 13378092328
-        }
+      "output_compressed_reference_tar": {
+        "basename": "GRCh37-v8-cnv-anchored.tar.gz",
+        "class": "File",
+        "http://commonwl.org/cwltool#generation": 0,
+        "location": "gds://development/reference-data/dragen_hash_tables/v8/GRCh37/GRCh37-cnv-anchored/GRCh37-v8-cnv-anchored.tar.gz",
+        "nameext": ".gz",
+        "nameroot": "GRCh37-v8-cnv-anchored.tar",
+        "size": 7016023117
+      }
     }
     ```
 
     </details>    
 
   * Tarball entries:
-    
+  
+    ```
+    $ gds-view --gds-path gds://development/reference-data/dragen_hash_tables/v8/GRCh37/GRCh37-cnv-anchored/GRCh37-v8-cnv-anchored.tar.gz --to-stdout | tar -tzf -
+    ```
+  
     <details>
   
     <summary>Click to expand!</summary>
   
     ```text
-    GRCh37_ht_3_7_5/
-    ├── CT_converted
-    │   ├── hash_table.cfg
-    │   ├── hash_table.cfg.bin
-    │   ├── hash_table.cmp
-    │   ├── hash_table_stats.txt
-    │   ├── reference.bin
-    │   ├── ref_index.bin
-    │   ├── repeat_mask.bin
-    │   └── str_table.bin
-    ├── dragen-replay.json
-    ├── dragen.time_metrics.csv
-    ├── GA_converted
-    │   ├── hash_table.cfg
-    │   ├── hash_table.cfg.bin
-    │   ├── hash_table.cmp
-    │   ├── hash_table_stats.txt
-    │   ├── reference.bin
-    │   ├── ref_index.bin
-    │   ├── repeat_mask.bin
-    │   └── str_table.bin
-    ├── hash_table.cfg
-    ├── hash_table.cfg.bin
-    ├── hash_table.cmp
-    ├── hash_table_stats.txt
-    ├── kmer_cnv.bin
+    GRCh37-v8-cnv-anchored/
+    ├── appVersion.log
+    ├── streaming_log.csv
     ├── reference.bin
     ├── ref_index.bin
     ├── repeat_mask.bin
-    ├── streaming_log_none(31111).csv
-    └── str_table.bin
+    ├── str_table.bin
+    ├── hash_table.cmp
+    ├── hash_table_stats.txt
+    ├── hash_table.cfg.bin
+    ├── hash_table.cfg
+    ├── kmer_cnv.bin
+    ├── .time_metrics.csv
+    ├── replay.json
+    └── anchored_rna/
+        ├── reference.bin
+        ├── ref_index.bin
+        ├── repeat_mask.bin
+        ├── str_table.bin
+        ├── hash_table.cmp
+        ├── hash_table_stats.txt
+        ├── hash_table.cfg.bin
+        └── hash_table.cfg
     ```
   
     </details>    
 
-
+\# TODO - check GRCh37 download link
 - GRCh37 FASTA downloaded from link in Hartwig [GRIDSS-PURPLE-LINX](https://github.com/hartwigmedical/gridss-purple-linx/blob/47e274459ee8ac760196f6c2ed753c2a83d230fb/README.md) repo.
   - md5sum: `be672f01428605881b2ec450d8089a62  Homo_sapiens.GRCh37.GATK.illumina.fasta`
   - Contains chromosomes 1-22, X, Y, MT. Their md5sums are identical to the
@@ -222,10 +203,10 @@
 
 ## Alignment and FASTQ Input
 
-The alignment and germline calling must be done 'per-sample'.  
-This means that the output folder includes a single bam and germline vcf call. 
+The alignment and wgs qc must be done 'per-sample'.  
+This means that the output folder includes a single bam and somalier barcode call. 
 
-Here is an example run input / output of a germline workflow:  
+Here is an example run input / output of the dragen wgs qc workflow:  
 
 ### Input json
 
@@ -235,7 +216,7 @@ Here is an example run input / output of a germline workflow:
 
 ```json
 {
-    "name": "dragen-germline-test-run",
+    "name": "dragen-wgs-test-run",
     "input": {
         "fastq_list_rows": [
             {
@@ -297,8 +278,6 @@ Here is an example run input / output of a germline workflow:
         ],
         "output_file_prefix": "MDX200237_L2100008",
         "output_directory": "MDX200237_L2100008",
-        "enable_map_align_output": true,
-        "enable_duplicate_marking": true,
         "reference_tar": {
             "class": "File",
             "location": "gds://umccr-refdata-dev/dragen/genomes/hg38/3.7.5/hg38_alt_ht_3_7_5.tar.gz"
@@ -312,7 +291,7 @@ Here is an example run input / output of a germline workflow:
 
 </details>
 
-### Output json \# TODO
+### Output json
 
 <details>
 
