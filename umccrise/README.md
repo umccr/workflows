@@ -1,6 +1,8 @@
-# Umccrise workflow
+# umccrise workflow
 
-Umccrise is designed to post-processess outputs from [bcbio-nextgen](https://github.com/chapmanb/bcbio-nextgen) cancer variant calling analysis pipeline.
+umccrise is designed to post-processess outputs from [bcbio-nextgen](https://github.com/chapmanb/bcbio-nextgen) and
+[DRAGEN](https://sapac.illumina.com/products/by-type/informatics-products/dragen-bio-it-platform.html) tumor/normal
+variant calling analysis pipelines.
 
-* GitHub: [https://github.com/umccr/umccrise](https://github.com/umccr/umccrise)
-* Detailed description of the workflow: [https://github.com/umccr/umccrise/blob/master/workflow.md](https://github.com/umccr/umccrise/blob/master/workflow.md)
+* GitHub repository: <https://github.com/umccr/umccrise>
+* Detailed description of the workflow: <https://github.com/umccr/umccrise/blob/master/workflow.md>
