@@ -70,26 +70,63 @@ The DRAGEN germline SNV calls match bcbio ensemble calls and are significantly b
 
 Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated against the [SEQC-II test data](https://www.biorxiv.org/content/10.1101/625624v1) (SRA ID `SRP162370`, benchmark sets available via [FTP](ftp://ftp-trace.ncbi.nlm.nih.gov/seqc/ftp/Somatic_Mutation_WG/)). A dilution series of DNA from the SEQC-II triple-negative breast cancer (TNBC) cell line (HCC1395) and a B lymphocyte-derived normal cell line (HCC1395BL) was sequenced on an Illumina NovaSeq at the Melbourne Clinical Genomics Platform and again compared with `vcf_eval`.
 
-TBA
+DILUTION SERIES description
 
+SNVs:
+
+| sample                                 | label  | Truth | TP    | FP   | FN    | Recall | Precision | f1    |
+|----------------------------------------|--------|-------|-------|------|-------|--------|-----------|-------|
+| SBJ00480-Mix-cell-line-HCC1395-40      | bcbio  | 39447 | 31116 | 3529 |  8331 |  0.789 |     0.898 | 0.840 |
+| SBJ00480-Mix-cell-line-HCC1395-40_PASS | DRAGEN | 39447 | 31179 | 1080 |  8268 |  0.790 |     0.967 | 0.870 |
+| SBJ00480-Mix-cell-line-HCC1395-30      | bcbio  | 39447 | 30227 | 4228 |  9220 |  0.766 |     0.877 | 0.818 |
+| SBJ00480-Mix-cell-line-HCC1395-30_PASS | DRAGEN | 39447 | 29750 |  991 |  9697 |  0.754 |     0.968 | 0.848 |
+| SBJ00480-Mix-cell-line-HCC1395-20      | bcbio  | 39447 | 27345 | 3559 | 12102 |  0.693 |     0.885 | 0.777 |
+| SBJ00480-Mix-cell-line-HCC1395-20_PASS | DRAGEN | 39447 | 26286 |  677 | 13161 |  0.666 |     0.975 | 0.792 |
+| SBJ00480-Mix-cell-line-HCC1395-10      | bcbio  | 39447 | 15393 | 3543 | 24054 |  0.390 |     0.813 | 0.527 |
+| SBJ00480-Mix-cell-line-HCC1395-10_PASS | DRAGEN | 39447 | 26286 |  677 | 13161 |  0.666 |     0.975 | 0.792 |
+
+We see a slight loss of sensitivity for DRAGEN with a large improvement in precision, a trade-off we found to be acceptable particularly since we rescue potentially missed variants in cancer hotspots at a later stage in `umccrise`. The difference at 10% cellularity is expected as bcbio filters out variants with an allelic frequency <10% in our setting.
+
+
+InDels:
+
+| sample                                 | label  | Truth | TP   | FP   | FN   | Recall | Precision | f1    |
+|----------------------------------------|--------|-------|------|------|------|--------|-----------|-------|
+| SBJ00480-Mix-cell-line-HCC1395-40      | bcbio  |  1625 | 1169 | 1609 |  456 |  0.719 |     0.421 | 0.531 |
+| SBJ00480-Mix-cell-line-HCC1395-40_PASS | DRAGEN |  1625 | 1193 |  591 |  432 |  0.734 |     0.669 | 0.700 |
+| SBJ00480-Mix-cell-line-HCC1395-30      | bcbio  |  1625 | 1120 | 1539 |  505 |  0.689 |     0.421 | 0.523 |
+| SBJ00480-Mix-cell-line-HCC1395-30_PASS | DRAGEN |  1625 | 1106 |  522 |  519 |  0.681 |     0.679 | 0.680 |
+| SBJ00480-Mix-cell-line-HCC1395-20      | bcbio  |  1625 |  998 | 1410 |  627 |  0.614 |     0.414 | 0.495 |
+| SBJ00480-Mix-cell-line-HCC1395-20_PASS | DRAGEN |  1625 |  933 |  360 |  692 |  0.574 |     0.722 | 0.639 |
+| SBJ00480-Mix-cell-line-HCC1395-10      | bcbio  |  1625 |  503 | 1196 | 1122 |  0.310 |     0.296 | 0.303 |
+| SBJ00480-Mix-cell-line-HCC1395-10_PASS | DRAGEN |  1625 |  933 |  360 |  692 |  0.574 |     0.722 | 0.639 |
+
+As with the germline variant calls we see a marked improvement in both sensitivity and specificity for DRAGEN calls over the existing bcbio ensemble calls.
+
+ToDo: Add baseline for SEQC-II (100%). 
 
 ### Comparison of validation samples
 
-Sample summary
 
-Name | Subject Identifier | Sample Note
 
-2016.249.17.MH.P033
-2016.249.18.WH.P025
-CUP-Pairs8
-SFRC01073
-B_ALL_Case_10
-SEQC_SEQC50
-DiploidNeverResponder
-SBJ00303
-SBJ00480
+| Sample Name           | SubjectID | Sample Notes |
+|-----------------------|-----------|--------------|
+| 2016.249.17.MH.P033   | tba       | tba          |
+| 2016.249.18.WH.P025   | tba       | tba          |
+| CUP-Pairs8            | tba       | tba          |
+| SFRC01073             | tba       | tba          |
+| B_ALL_Case_10         | tba       | tba          |
+| SEQC_SEQC50           | tba       | tba          |
+| DiploidNeverResponder | tba       | tba          |
+| SBJ00303              | SBJ00303  | tba          |
+| SBJ00480              | SBJ00480  | tba          |
 
 Noted changes
+
+Homozyguous runs
+
+Pointer to Woof results from https://drive.google.com/drive/u/1/folders/168qAOe0EmKMsRThzIyTHYXRYV5hq6-5x, report sets
+tba
 
 
 ### RNA comparison
