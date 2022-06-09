@@ -111,7 +111,7 @@ Setting up a bcbio analysis involves [manual and potentially error prone steps](
 Sequencing data moves from our NovaSeq sequencers directly to ICA and is analyzed in the same environment, further reducing the turnaround time. We can now also deprecate our computational environment at the National Computational Infrastructure (NCI) which reduces cost and improves overall reliability of our workflows. 
 
 
-Workflow management: https://github.com/umccr-illumina/cwl-iap
+Workflow management: https://github.com/umccr/cwl-ica
 
 
 ## Upcoming changes
