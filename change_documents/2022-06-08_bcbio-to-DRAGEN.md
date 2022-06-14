@@ -40,10 +40,10 @@ Germline comparisons are based on four replicates of NA12878 sequenced on an Ill
 
 | IlluminaID                    | Run | Timestamp  | SubjectID | SampleID | LibraryID | ExternalSubjectID | ExternalSampleID |
 |-------------------------------|-----|------------|-----------|----------|-----------|-------------------|------------------|
-| 170802_A00130_0016_AH2JGGDMXX |  16 | 2017-08-02 | SBJ00027  | -        | -         | NA12878           | NA12878-1VD      |
-| 170802_A00130_0016_AH2JGGDMXX |  16 | 2017-08-02 | SBJ00027  | -        | -         | NA12878           | NA12878-2VD      |
-| 170823_A00130_0019_AH2N2FDMXX |  19 | 2017-08-23 | SBJ00027  | -        | -         | NA12878           | NA12878-3VD_S1   |
-| 170829_A00130_0020_AH2MKTDMXX |  20 | 2017-08-29 | SBJ00027  | -        | -         | NA12878           | NA12878-4KC_S7   |
+| 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-1VD      |
+| 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-2VD      |
+| 170823_A00130_0019_AH2N2FDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-3VD_S1   |
+| 170829_A00130_0020_AH2MKTDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-4KC_S7   |
 
 **SNVs:**
 
@@ -81,13 +81,13 @@ Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated ag
 
 **Sample information in the LIMS:**
 
-| IlluminaID                    | Run | Timestamp  | SubjectID | SampleID       | LibraryID      | ExternalSubjectID | ExternalSampleID         |
+| IlluminaID                    | SubjectID | SampleID       | LibraryID      | ExternalSubjectID | ExternalSampleID         |
 |-------------------------------|-----|------------|-----------|----------------|----------------|-------------------|--------------------------|
-| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_30 | L2000433_rerun | HCC1395           | Mix-cell-line-HCC1395-30 |
-| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_10 | L2000435_rerun | HCC1395           | Mix-cell-line-HCC1395-10 |
-| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_40 | L2000432_rerun | HCC1395           | Mix-cell-line-HCC1395-40 |
-| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_20 | L2000434_rerun | HCC1395           | Mix-cell-line-HCC1395-20 |
-| 210331_A01052_0041_BHYMHFDSXY | 41  | 2021-03-31 | SBJ00480  | PTC_TsqN200511 | L2000437_rerun | HCC1395           | HCC1395BL-01             |
+| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_30 | L2000433_rerun | HCC1395           | Mix-cell-line-HCC1395-30 |
+| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_10 | L2000435_rerun | HCC1395           | Mix-cell-line-HCC1395-10 |
+| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_40 | L2000432_rerun | HCC1395           | Mix-cell-line-HCC1395-40 |
+| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_20 | L2000434_rerun | HCC1395           | Mix-cell-line-HCC1395-20 |
+| 210331_A01052_0041_BHYMHFDSXY | SBJ00480  | PTC_TsqN200511 | L2000437_rerun | HCC1395           | HCC1395BL-01             |
 
 **SNVs:**
 
@@ -125,7 +125,6 @@ ToDo: Add baseline for SEQC-II (100%).
 ### Comparison of validation samples
 
 
-
 | Sample Name           | SubjectID | Sample Notes |
 |-----------------------|-----------|--------------|
 | 2016.249.17.MH.P033   | tba       | tba          |
@@ -138,9 +137,33 @@ ToDo: Add baseline for SEQC-II (100%).
 | SBJ00303              | SBJ00303  | tba          |
 | SBJ00480              | SBJ00480  | tba          |
 
+
+One FFPE (Pairs8), one viral integration (Diploid), one blood cancer (B_ALL), the reference sample (SEQC).
+
+
+
+
+
+17:45
+I think one was because of the BRCA signature and germline mutation (2016.249.17.MH.P033).
+17:46
+2016.249.18.WH.P025 was a low quality sample, also with a BRCA signature.
+17:47
+303 was:
+ATRX frameshift, MED12 exon 2 mutations. Signature 3. BRCA2 SV but likely still wt alleles present.
+17:48
+Ah, 480 is HCC1395, our cell line - https://www.atcc.org/products/crl-2324
+
+atcc.orgatcc.org
+HCC1395  | ATCC
+The tumor was classified as TNM stage I, grade 3, invasive ductal carcinoma with 0 out of 34 lymph node metastasis. The cells are poorly differentiated and vacuolated.  The cells are negative for expression of Her2-neu but positive for expression of p53. HCC1395 is positive for the epithelial cell specific marker Epithelial Glycoprotein 2 (EGP2) and for cytokeratin 19. The cells are negative for expression of estrogen receptors (ER -) according to depositor and negative for expression of progesterone receptors (PR -). An EBV transformed lymphoblastoid cell line (HCC1395BL) from the same patient is available as ATCC CRL-2325.
+
 Noted changes
 
 Homozyguous runs
+
+https://github.com/umccr-illumina/dragen/issues/37
+
 
 Pointer to Woof results from https://drive.google.com/drive/u/1/folders/168qAOe0EmKMsRThzIyTHYXRYV5hq6-5x, report sets
 tba
