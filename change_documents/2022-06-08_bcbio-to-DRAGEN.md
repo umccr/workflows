@@ -36,7 +36,7 @@ All comparisons are based on bcbio 1.1.6a with umccrise 1.2.4 compared to DRAGEN
 
 Germline comparisons are based on four replicates of NA12878 sequenced on an Illumina NovaSeq at the Melbourne Clinical Genomics Platform. Germline variant calls were compared between bcbio and DRAGEN production workflows using [vcf_eval](https://github.com/umccr/biodaily/tree/vcf_eval/vcf_eval) and are based on the [Genome in a Bottle V4.2.1 benchmark set](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/) and high confidence regions (`HG001_GRCh38_1_22_v4.2.1_benchmark.bed`).
 
-**Sample information in the LIMS:**
+_Sample information in the LIMS:_
 
 | IlluminaID                    | SubjectID | SampleID | LibraryID | ExternalSubjectID | ExternalSampleID |
 |-------------------------------|-----------|----------|-----------|-------------------|------------------|
@@ -44,14 +44,9 @@ Germline comparisons are based on four replicates of NA12878 sequenced on an Ill
 | 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-2VD      |
 | 170823_A00130_0019_AH2N2FDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-3VD_S1   |
 | 170829_A00130_0020_AH2MKTDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-4KC_S7   |
-| 181026_A00130_0080_BHCL55DMXX | SBJ00027  | -        | L1800121  | NA12878           | L1800121_S11     |
-| 181026_A00130_0080_BHCL55DMXX | SBJ00027  | -        | L1800122  | NA12878           | L1800122_S12     |
-| 181026_A00130_0080_BHCL55DMXX | SBJ00027  | -        | L1800126  | NA12878           | L1800126_S14     |
-| 181123_A00130_0082_BHCYL3DSXX | SBJ00027  | -        | L1800171  | NA12878           | L1800171_S1      |
-| 181123_A00130_0082_BHCYL3DSXX | SBJ00027  | -        | L1800175  | NA12878           | L1800175_S5      |
 
 
-**SNVs:**
+_SNVs:_
 
 | sample      | workflow | Truth     | TP        | FP     | FN     | Recall | Precision | f1    |
 |-------------|----------|-----------|-----------|--------|--------|--------|-----------|-------|
@@ -65,7 +60,7 @@ Germline comparisons are based on four replicates of NA12878 sequenced on an Ill
 | NA12878-4KC | DRAGEN   | 3,253,394 | 3,242,203 |  7,523 | 11,191 |  0.997 |     0.998 | 0.997 |
 
 
-**InDels:**
+_InDels:_
 
 | sample      | workflow | Truth   | TP      | FP     | FN     | Recall | Precision | f1    |
 |-------------|----------|---------|---------|--------|--------|--------|-----------|-------|
@@ -143,7 +138,8 @@ We routinely assess the impact of any major workflow change on the primary/secon
 | DiploidNeverResponder | n/a       | HPV integration          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/DiploidNeverResponder) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/DiploidNeverResponder) |
 | SBJ00303              | SBJ00303  | ATRX frameshift          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/SBJ00303)| [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/SBJ00303) |
 
-Key features -- particularly those highlighted in the sample notes -- are conserved for all samples in the DRAGEN results. 
+Key features -- particularly those highlighted in the sample notes -- are conserved for all samples in the DRAGEN results. Please see the [February 2022 comparison page](https://github.com/umccr/workflows/tree/master/umccrise/comparisons#2022-feb) for sample specific details.
+
 
 #### Data comparison
 
@@ -151,46 +147,16 @@ Woof placeholder
 
 #### Report comparison
 
-**MultiQC:**
+_MultiQC:_ The MultiQC report layout and tables have changed slightly as our main source of information now comes from the DRAGEN QC metrics. Slight differences in mapping statistics are expected as we now align against ALT regions and no longer mask parts of the reference genome. We also see an overall lower SNV filtering rate; DRAGEN's variant caller is slightly less noisy for most samples (but see below for an exception).
 
-QC Lower SNP filtering rate? Hard to tell - the old report was % filtered, this is %SNP and %InDel. Interesting to see that DRAGEN filters more in some of the reference samples (Bob, Chen) and less in others. Higher MapQ0 rate which is expected since we align to the whole genome; bcbio blocked out ALTs, repeats
+_Coverage:_ Coverage of germline and tumor samples is all but identical. Previously difficult to map regions like HLA now have improved coverage.
 
-QC Lower filtering rate again (despite identical filtered variants); looks like DRAGEN is generating less noise for some of these samples. WGD event recognized by Purple.
+_CPSR:_ Identical across all samples with a slight increase of reported VUS from InDels. DRAGEN's false negative-rate for InDels is lower so this is expected.
 
-**Coverage:**
-Coverage Looks identical
+_PCGR:_ Any changes between PCGR reports are limited to Tier 4 events with a individual tier 3 events changing for low allelic frequency calls (i.e., those around 10% AF). The SEQC-II reference sample exhibits a shift in MSI status, likely due to the shift in InDel to SNV calls.
 
-(tumor) HLA-A a bit better in Dragen
-(normal) CDKN1C a bit better in Dragen
+The one exception to this is `2016.249.18.WH.P025`. DRAGEN reports a significant number of likely false positive, low allelic frequency mutations that do not have an impact on Tier 1/2 variants but do shift the TMB from 9 to 21. These variants were filtered in DRAGEN 3.6 due to being phased and clustered, but a [change in Illumina's approach to variant filtering](https://github.com/umccr-illumina/dragen/issues/35#issuecomment-1078567272) means they are now included. Illumina feel that the previous filtering apporoach resulted in a reduced sensitivity. This makes sense, but we are exploring options of annotating these clustered variants and flagging samples with a higher than expected number of clustered variants to indicate that TMB might be inflated. 
 
-
-**CPSR:**
-CPSR Identical
-Identical (3 more VUS, expected)
-2 extra VUS in Dragen
-extra MSH2 VUS Indel in Dragen (Non-ClinVar)
-
-**PCGR:**
-
-PCGR Lost NDRG1 (Tier 3, 10% AF)
-
-3 Tier4 diff between bcbio/Dragen
-
-SEQC: MSI status flipped (from high to stable); likely due to the shift in InDel to SNV calls. There's an MSH6 mutation to support it, could be worth running past the curation team to see if they would be okay with that change; Tier 3 TTN lost which is a good thing; otherwise identical
-
-PCGR Few extra tier 4 calls; nothing notable
-
-NeverResponder: ost 3 inter-chromosomal SVs, going from 18 BND events to 2. I'd check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered. Some CN shifts (lower CN difference only, can be ignored). HLA differences (!). Nice - going to trust DRAGEN on those.
-
-Pairs8 FFPE PCGR Mostly identical. Difference in SNVs, expected (FFPE), nothing on the higher tiers.
-
-B-All: TMB higher in Dragen (0.85 -> 0.97)
-6 Tier4 extra indels in Dragen
-
-P25: TMB 9 -> 31
-VUS 10 -> 20
-big diffs in somatic calls as discussed, but no diffs in Tiers 1/2
-funny that both bcbio and dragen PCGR results show kataegis. See https://github.com/umccr-illumina/dragen/issues/35
 
 **Cancer Reporter:**
 SFRC01073: Reporter Looks good to me; biggest change in the SV/CNV space, everything else looks stable. Slight decrease in the number of CN segments (somatic), increase in germline; SV seems to be missing some relevant events (e.g., CREB1 BidFusG with >25 SR/PR support, NTRK1 deletions) - we need to check those. NTRK1 deletion is present in Del/Dup/Ins but not in BND - change of representation in Manta?
@@ -206,6 +172,7 @@ SNVs: few extra Tier4 indels detected in Dragen
 CNVs: HEATR4/chr16/chr17 min CN diff is 2
 SVs: Tier3 chr6 DEL detected in Dragen (chr6:162,198,360)
 
+NeverResponder: ost 3 inter-chromosomal SVs, going from 18 BND events to 2. I'd check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered. Some CN shifts (lower CN difference only, can be ignored). HLA differences (!). Nice - going to trust DRAGEN on those.
 
 P25: Messy. TMB: increase (1.34 -> 2.24)
 SVs: decrease (81 -> 24)
