@@ -153,32 +153,19 @@ _Coverage:_ Coverage of germline and tumor samples is all but identical. Previou
 
 _CPSR:_ Identical across all samples with a slight increase of reported VUS from InDels. DRAGEN's false negative-rate for InDels is lower so this is expected.
 
-_PCGR:_ Any changes between PCGR reports are limited to Tier 4 events with a individual tier 3 events changing for low allelic frequency calls (i.e., those around 10% AF). The SEQC-II reference sample exhibits a shift in MSI status, likely due to the shift in InDel to SNV calls.
+_PCGR:_ Any changes between PCGR reports are limited to Tier 4 events with a individual tier 3 events changing for low allelic frequency calls (i.e., those around 10% AF). The SEQC-II reference sample exhibits a shift in MSI status, likely due to the shift in InDel to SNV calls; this change is limited to PCGR and the Cancer Reporter still has both versions listed as 'stable' due to a higher threshold.
 
 The one exception to this is `2016.249.18.WH.P025`. DRAGEN reports a significant number of likely false positive, low allelic frequency mutations that do not have an impact on Tier 1/2 variants but do shift the TMB from 9 to 21. These variants were filtered in DRAGEN 3.6 due to being phased and clustered, but a [change in Illumina's approach to variant filtering](https://github.com/umccr-illumina/dragen/issues/35#issuecomment-1078567272) means they are now included. Illumina feel that the previous filtering apporoach resulted in a reduced sensitivity. This makes sense, but we are exploring options of annotating these clustered variants and flagging samples with a higher than expected number of clustered variants to indicate that TMB might be inflated. 
 
+**Cancer Reporter:** Overall, the biggest change across all samples is the reduced noise in SV calls and a reduction of somatic copy number segments, also likely due to reduced noise in the SV calls which seed copy number boundaries. Calls remain stable for SVs with more than 5-10 reads in support.
 
-**Cancer Reporter:**
-SFRC01073: Reporter Looks good to me; biggest change in the SV/CNV space, everything else looks stable. Slight decrease in the number of CN segments (somatic), increase in germline; SV seems to be missing some relevant events (e.g., CREB1 BidFusG with >25 SR/PR support, NTRK1 deletions) - we need to check those. NTRK1 deletion is present in Del/Dup/Ins but not in BND - change of representation in Manta?
+Signatures change scores slightly due to the different variant calling approach, but overall ranking is maintained for all samples except for lower tier signatures with overall poor support. 
 
-SEQC: Contamination detected in both reports (!); unlike PCGR the reporter has both as MSS (Stable). Another likely point in favor of the Dragen data. Very similar high HRDetect/CHORD scores, reduced number of SV calls - some with high levels of support in old data included (e.g., RNGTT deletion); CN changes again in HLA (expected), general shift of 2 CN for large chunk of chr1 (from 2 to 4). I can see some of that in the Circos plot but given the CN Noise warning I'm happy to ignore
 
-303: Slight shift in lower tier signatures (2020); extra PTPRD BND call; Del/Dup/Ins identical for key genes with >10 reads support; sizeable # of genes with large CN differences (check LCE1D, MTX1, GBAP1, NTAN1)
+**To Check:**
 
-Pairs 8 FFPE: Reporter Pretty much identical. More confident CHORD score (likely driven by additinal SNVs), sig 3 still there; there is no way I am going to compare SV/CNVs for an FFPE sample.
-
-B-all: Signatures: same-ish
-SNVs: few extra Tier4 indels detected in Dragen
-CNVs: HEATR4/chr16/chr17 min CN diff is 2
-SVs: Tier3 chr6 DEL detected in Dragen (chr6:162,198,360)
-
-NeverResponder: ost 3 inter-chromosomal SVs, going from 18 BND events to 2. I'd check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered. Some CN shifts (lower CN difference only, can be ignored). HLA differences (!). Nice - going to trust DRAGEN on those.
-
-P25: Messy. TMB: increase (1.34 -> 2.24)
-SVs: decrease (81 -> 24)
-BNDs have.. completely vanished
-CNVs: decrease (168 -> 88)
-Kataegis detected in Dragen
+* SFRC01073: SV - CREB1 BidFusG with >25 SR/PR support
+* NeverResponder: SV - check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered.
 
 **Additional notes:**
 
