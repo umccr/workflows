@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+2016.249.17.MH.P033	0.9176279447603575	0.9530880863989201	0.7847593582887701	0.7693315858453473	5926	6155	5648	278	507	763	748	587	176	161

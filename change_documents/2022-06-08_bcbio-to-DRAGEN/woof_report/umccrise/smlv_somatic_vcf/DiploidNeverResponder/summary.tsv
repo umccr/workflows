@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+DiploidNeverResponder	0.9286332179930796	0.9487406098099868	0.7570498915401301	0.9232804232804233	6789	6936	6441	348	495	378	461	349	29	112

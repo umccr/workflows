@@ -1,0 +1,2 @@
+/data/woof/output/umccrise/sv_manta_vcf/B_ALL_Case_10/B_ALL_Case_10__MDX190025_B_ALL_Case_10T-manta__run_1.vcf
+/data/woof/output/umccrise/sv_manta_vcf/B_ALL_Case_10/B_ALL_Case_10__MDX190025-manta__run_2.vcf

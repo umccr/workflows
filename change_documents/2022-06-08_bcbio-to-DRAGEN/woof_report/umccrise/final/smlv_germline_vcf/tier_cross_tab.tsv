@@ -1,0 +1,10 @@
+sample_name	Pathogenic	Likely_Pathogenic	VUS	Likely_Benign	Benign	Not available
+2016.249.17.MH.P033	0	0	1	944	14	128
+2016.249.18.WH.P025	0	0	0	934	7	113
+B_ALL_Case_10	0	0	2	1012	6	102
+CUP-Pairs8	0	0	1	700	10	144
+DiploidNeverResponder	0	0	1	987	15	116
+SBJ00303	0	0	1	974	5	84
+SEQC50	0	0	0	908	9	79
+SFRC01073	0	0	0	942	14	127
+Total	0	0	6	7401	80	893

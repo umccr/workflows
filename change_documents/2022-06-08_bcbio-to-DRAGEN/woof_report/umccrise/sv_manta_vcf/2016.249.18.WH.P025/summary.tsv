@@ -1,0 +1,2 @@
+sample_name	sv_count_1	sv_count_2	precision	recall	shared	missing	extra
+2016.249.18.WH.P025	81	24	0.7916666666666666	0.2345679012345679	19	62	5

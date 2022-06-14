@@ -1,0 +1,2 @@
+sample_name	sv_count_1	sv_count_2	precision	recall	shared	missing	extra
+B_ALL_Case_10	88	91	0.8131868131868132	0.8409090909090909	74	14	17

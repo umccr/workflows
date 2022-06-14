@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+CUP-Pairs8	0.9414316702819957	0.9643183897529735	0.8096654275092937	0.8090638930163447	15302	15674	14756	546	918	1346	1345	1089	257	256

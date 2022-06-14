@@ -1,0 +1,2 @@
+/data/woof/output/umccrise/sv_manta_vcf/SEQC50/SEQC-II-50pc__SEQC-II_Tumor_50pc-manta__run_1.vcf
+/data/woof/output/umccrise/sv_manta_vcf/SEQC50/SEQC50__SEQC-II_tumour-manta__run_2.vcf

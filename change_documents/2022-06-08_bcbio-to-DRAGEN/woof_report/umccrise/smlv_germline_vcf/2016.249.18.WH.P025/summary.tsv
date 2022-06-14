@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+2016.249.18.WH.P025	0.9831606217616581	0.990699951052374	0.6923076923076923	0.8065512978986403	6129	6174	6072	57	104	1618	1736	1305	313	580

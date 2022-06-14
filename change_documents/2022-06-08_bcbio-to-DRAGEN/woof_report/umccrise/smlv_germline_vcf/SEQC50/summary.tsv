@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+SEQC50	0.9858786610878661	0.9907147862648914	0.6501880709296077	0.8515130190007038	5708	5736	5655	53	81	1421	1729	1210	211	651

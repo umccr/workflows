@@ -1,0 +1,2 @@
+sample_name	sv_count_1	sv_count_2	precision	recall	shared	missing	extra
+SFRC01073	601	593	0.8128161888701517	0.8019966722129783	482	119	111

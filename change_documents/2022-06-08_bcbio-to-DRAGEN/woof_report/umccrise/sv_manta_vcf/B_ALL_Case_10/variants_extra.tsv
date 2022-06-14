@@ -1,0 +1,17 @@
+svtype	sv_tier	start_id	start_chrom	start_pos	start_cipos	end_id	end_chrom	end_pos	end_cipos	sv_merge_id
+DEL	3	MantaDEL:109645:0:0:0:0:0	chr6	162198360	 (0,8)	-	chr6	162198762	-	49
+BND	4	MantaBND:132017:0:2:0:0:0:1	chr20	23987861	 (-311,311)	MantaBND:132017:0:2:0:0:0:0	chr22	24659889	-	21
+DEL	4	MantaDEL:51805:0:0:0:0:0	chr1	149887265	 (0,8)	-	chr1	149887601	-	24
+INS	4	MantaINS:52302:1:1:0:2:0	chr1	154892867	-	-	chr1	154892881	-	25
+DEL	4	MantaDEL:68225:0:1:0:0:0	chr2	89986705	-	-	chr2	90005644	-	33
+DEL	4	MantaDEL:33711:0:1:0:0:0	chr4	109693421	 (0,12)	-	chr4	109694021	-	42
+INS	4	MantaINS:81563:0:0:0:3:0	chr7	6446180	-	-	chr7	6446186	-	50
+DEL	4	MantaDEL:188960:0:0:0:0:0	chr8	70918651	 (0,7)	-	chr8	70918850	-	61
+DEL	4	MantaDEL:173240:0:0:0:0:0	chr10	26674345	 (0,8)	-	chr10	26674835	-	66
+DEL	4	MantaDEL:178193:0:0:0:0:0	chr10	82578260	 (0,15)	-	chr10	82578341	-	67
+DEL	4	MantaDEL:120477:0:1:0:0:0	chr11	113883358	 (0,19)	-	chr11	113883861	-	70
+BND	4	purple_1	chr14	106075001	 (-500,500)	-	-	-	-	79
+DEL	4	MantaDEL:24273:1:3:0:0:0	chr14	106674669	-	-	chr14	106714701	-	81
+DEL	4	MantaDEL:249304:0:0:0:1:0	chr22	47896171	 (0,11)	-	chr22	47896438	-	88
+INS	4	MantaINS:24154:1:1:2:4:0	chrX	1228510	-	-	chrX	1228511	-	89
+BND	4	purple_2	chrX	1735001	 (-500,500)	-	-	-	-	90

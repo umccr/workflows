@@ -1,0 +1,2 @@
+/data/woof/output/umccrise/sv_manta_vcf/DiploidNeverResponder/DiploidNeverResponder__DiploidNeverResponder_PRJ170218_Missing-manta__run_1.vcf
+/data/woof/output/umccrise/sv_manta_vcf/DiploidNeverResponder/DiploidNeverResponder__PRJ170218-manta__run_2.vcf

@@ -1,0 +1,11 @@
+svtype	sv_tier	start_id	start_chrom	start_pos	start_cipos	end_id	end_chrom	end_pos	end_cipos	sv_merge_id
+BND	4	MantaBND:141568:0:1:0:0:0:1	chr10	79659946	 (-289,289)	MantaBND:141568:0:1:0:0:0:0	chr10	79815389	-	1
+BND	4	MantaBND:150489:0:2:0:0:0:1	chr11	49630719	 (-496,496)	MantaBND:150489:0:2:0:0:0:0	chr11	88994685	-	2
+BND	4	MantaBND:183667:2:2:5:0:0:0	chr14	105864460	 (-745,746)	MantaBND:183667:2:2:5:0:0:1	chr14	105864539	-	3
+BND	4	MantaBND:222590:0:5:0:0:0:1	chr20	23988051	 (-507,507)	MantaBND:222590:0:5:0:0:0:0	chr22	24659893	-	4
+DEL	4	MantaDEL:27831:0:1:0:0:0	chr2	89117328	-	-	chr2	89142571	-	5
+DEL	4	MantaDEL:123739:0:0:0:0:0	chr8	139001827	 (0,27)	-	chr8	139001944	-	6
+INS	4	MantaINS:182560:0:0:2:1:0	chr14	94518999	 (0,16)	-	chr14	94518999	-	7
+BND	4	purple_1	chr14	106074001	 (-500,500)	-	-	-	-	8
+BND	4	purple_2	chr14	106673000	 (-500,5000)	-	-	-	-	9
+BND	4	purple_3	chrX	1587001	 (-500,500)	-	-	-	-	10

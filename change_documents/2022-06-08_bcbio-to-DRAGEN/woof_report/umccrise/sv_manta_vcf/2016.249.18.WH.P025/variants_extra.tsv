@@ -1,0 +1,6 @@
+svtype	sv_tier	start_id	start_chrom	start_pos	start_cipos	end_id	end_chrom	end_pos	end_cipos	sv_merge_id
+DEL	3	MantaDEL:3:50978:50978:12:0:0	chr4	143546062	 (-505,506)	-	chr4	143547430	 (-550,551)	53
+DEL	3	MantaDEL:149665:0:2:0:0:0	chr19	3976951	 (-297,297)	-	chr19	3982028	 (-313,313)	66
+INS	4	MantaINS:3:142145:142145:2:4:0	chr6	13621542	 (0,60)	-	chr6	13621542	 (0,60)	56
+INS	4	MantaINS:120044:0:0:0:3:0	chr6	26571858	 (0,78)	-	chr6	26571858	 (0,78)	57
+INS	4	MantaINS:262871:0:0:0:4:0	chr9	17395592	 (0,8)	-	chr9	17395592	 (0,8)	60

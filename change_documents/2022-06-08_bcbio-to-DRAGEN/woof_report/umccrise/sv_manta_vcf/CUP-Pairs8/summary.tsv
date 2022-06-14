@@ -1,0 +1,2 @@
+sample_name	sv_count_1	sv_count_2	precision	recall	shared	missing	extra
+CUP-Pairs8	1283	2351	0.4202467035304126	0.7700701480904131	988	295	1363

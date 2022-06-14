@@ -1,0 +1,2 @@
+sample_name	sv_count_1	sv_count_2	precision	recall	shared	missing	extra
+SBJ00303	328	327	0.9021406727828746	0.899390243902439	295	33	32

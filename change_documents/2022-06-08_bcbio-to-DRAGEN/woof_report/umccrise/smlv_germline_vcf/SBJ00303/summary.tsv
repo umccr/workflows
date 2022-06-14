@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+SBJ00303	0.9879017695919105	0.9891520520701501	0.6586280814576635	0.8037933289731851	5531	5537	5471	60	67	1529	1696	1229	300	637

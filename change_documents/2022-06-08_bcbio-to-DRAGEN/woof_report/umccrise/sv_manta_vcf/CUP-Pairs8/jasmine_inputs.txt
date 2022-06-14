@@ -1,0 +1,2 @@
+/data/woof/output/umccrise/sv_manta_vcf/CUP-Pairs8/CUP-Pairs8__PRJ180660_8_DNA009529_FFPE-manta__run_1.vcf
+/data/woof/output/umccrise/sv_manta_vcf/CUP-Pairs8/CUP-Pairs8__PRJ180660-manta__run_2.vcf

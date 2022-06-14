@@ -1,0 +1,2 @@
+/data/woof/output/umccrise/sv_manta_vcf/SFRC01073/SFRC01073__PRJ180598_SFRC01073-S2T-manta__run_1.vcf
+/data/woof/output/umccrise/sv_manta_vcf/SFRC01073/SFRC01073__PRJ180598-manta__run_2.vcf

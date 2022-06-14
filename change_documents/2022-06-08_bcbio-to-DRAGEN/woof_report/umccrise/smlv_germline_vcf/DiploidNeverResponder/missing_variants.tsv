@@ -1,0 +1,418 @@
+variant_type	chromosome	pos	ref	alt	cpsr_tier
+snp	chr1	10236306	A	C	Likely_Benign
+indel	chr13	32359222	G	GA	Likely_Benign
+indel	chr13	32344166	GAA	G	Likely_Benign
+indel	chr13	32342270	CA	C	Likely_Benign
+indel	chr13	32323151	AT	A	Likely_Benign
+indel	chr12	132671262	CAA	C	Likely_Benign
+indel	chr12	132645800	CCACACA	C	Likely_Benign
+indel	chr12	132645800	CCA	C	Likely_Benign
+indel	chr12	11888395	TTTC	T	Likely_Benign
+indel	chr12	11874438	GTA	G	Likely_Benign
+indel	chr13	32359222	GA	G	Likely_Benign
+indel	chr12	11818531	C	CA	Likely_Benign
+indel	chr12	11749288	TACACACACACACACACACACACACACAC	T	Likely_Benign
+indel	chr12	11749288	TACACACACACACACACAC	T	Likely_Benign
+indel	chr12	11746790	CTTT	C	Likely_Benign
+indel	chr12	11746790	CTTTT	C	Likely_Benign
+indel	chr12	11738307	CTTTTTTT	C	Likely_Benign
+indel	chr12	11738307	CTTTTTT	C	Likely_Benign
+indel	chr12	11733407	CAAAAAAAAAAA	C	Likely_Benign
+indel	chr12	11690886	C	CTAAATAAATAAATAAA	Likely_Benign
+indel	chr12	11690886	C	CTAAATAAATAAA	Likely_Benign
+indel	chr12	11796779	T	TTG	Likely_Benign
+indel	chr13	32372996	CTT	C	Likely_Benign
+indel	chr13	32388666	C	CTTT	Likely_Benign
+indel	chr13	32392589	CAA	C	Likely_Benign
+indel	chr16	68757967	C	CT	Likely_Benign
+indel	chr16	68757967	CT	C	Likely_Benign
+indel	chr16	68755282	CAA	C	Likely_Benign
+indel	chr15	40216547	CTA	C	Likely_Benign
+indel	chr15	40177792	CT	C	Likely_Benign
+indel	chr15	32738121	A	ACC	Likely_Benign
+indel	chr15	32737928	C	CAAAAA	Likely_Benign
+indel	chr15	32726710	GTTTT	G	Likely_Benign
+indel	chr15	32726710	GTT	G	Likely_Benign
+indel	chr15	32680194	CTT	C	Likely_Benign
+indel	chr15	32673527	C	CGTGTGTGTGTGT	Likely_Benign
+indel	chr15	32673527	C	CGTGTGTGTGTGTGT	Likely_Benign
+indel	chr15	32672931	AAAGAG	A	Likely_Benign
+indel	chr15	32667677	C	CTT	Likely_Benign
+indel	chr15	32667677	C	CT	Likely_Benign
+indel	chr13	48459959	C	CT	Likely_Benign
+indel	chr13	48402379	C	CTTTTTTTTT	Likely_Benign
+indel	chr13	48402379	C	CTTTTTTTT	Likely_Benign
+indel	chr13	48346370	ATG	A	Likely_Benign
+indel	chr13	48316719	TCACACACACACACACA	T	Likely_Benign
+indel	chr13	48316719	TCACACACACACA	T	Likely_Benign
+indel	chr12	11689809	TCC	T	Likely_Benign
+indel	chr16	68760087	T	TATATA	Likely_Benign
+indel	chr12	11667696	A	ATT	Likely_Benign
+indel	chr11	108354058	T	TAC	Likely_Benign
+indel	chr10	86837243	G	GTGTGTGTCTGTGTGTGTGTGTGTC	Likely_Benign
+indel	chr10	86791687	T	TCCTTCCTCCCTCCCTCCCTCCCTTCCTC	Likely_Benign
+indel	chr10	86760188	GT	G	Likely_Benign
+indel	chr10	86760188	GTT	G	Likely_Benign
+indel	chr10	43107559	TCA	T	Likely_Benign
+indel	chr10	43107559	T	TCACA	Likely_Benign
+indel	chr9	95452328	GAC	G	Likely_Benign
+indel	chr9	95452328	G	GACACACACACACAC	Likely_Benign
+indel	chr9	37001827	T	TTTC	Likely_Benign
+indel	chr10	102518515	G	GTCTATCTATCTA	Likely_Benign
+indel	chr9	36916057	GAA	G	Likely_Benign
+indel	chr9	36870007	AATGG	A	Likely_Benign
+indel	chr9	36870007	A	AATGGATGG	Likely_Benign
+indel	chr9	36869975	GATGGATAA	G	Likely_Benign
+indel	chr9	21993799	CTGTG	C	Likely_Benign
+indel	chr9	21993799	C	CTG	Likely_Benign
+indel	chr8	118093268	CAA	C	Likely_Benign
+indel	chr8	118073632	AAGAAGAGAAG	A	Likely_Benign
+indel	chr8	118070226	CTGTGTGTGTG	C	Likely_Benign
+indel	chr8	118070226	CTGTGTG	C	Likely_Benign
+indel	chr22	29640768	CGTGT	C	Likely_Benign
+indel	chr10	102518515	G	GTCTATCTA	Likely_Benign
+indel	chr10	102519137	C	CAA	Likely_Benign
+indel	chr10	102541405	TTC	T	Likely_Benign
+indel	chr11	108317615	TTA	T	Likely_Benign
+indel	chr11	108314454	ATT	A	Likely_Benign
+indel	chr11	108293894	A	AT	Likely_Benign
+indel	chr11	108293892	A	AT	Likely_Benign
+indel	chr11	108285321	CTT	C	Likely_Benign
+indel	chr11	67485723	CTTT	C	Likely_Benign
+indel	chr11	44186982	TTTCC	T	Likely_Benign
+indel	chr11	44170810	TCACACACACA	T	Likely_Benign
+indel	chr11	44170810	TCACACA	T	Likely_Benign
+indel	chr11	44147775	C	CTTTTT	Likely_Benign
+indel	chr11	44147775	C	CTTTT	Likely_Benign
+indel	chr11	44139120	C	CTT	Likely_Benign
+indel	chr11	44139120	C	CT	Likely_Benign
+indel	chr11	44124444	T	TACAC	Likely_Benign
+indel	chr11	44124444	T	TAC	Likely_Benign
+indel	chr11	44097761	AAAATAAAT	A	Likely_Benign
+indel	chr11	44097761	AAAAT	A	Likely_Benign
+indel	chr10	102618931	C	CGTGTGT	Likely_Benign
+indel	chr10	102618931	C	CGT	Likely_Benign
+indel	chr10	102604920	CTTT	C	Likely_Benign
+indel	chr10	102604920	CTT	C	Likely_Benign
+indel	chr12	11650503	CA	C	Likely_Benign
+indel	chr8	118027313	TCACACA	T	Likely_Benign
+indel	chr16	68760266	A	AT	Likely_Benign
+indel	chr16	68771750	C	CA	Likely_Benign
+indel	chr21	34978937	T	TAC	Likely_Benign
+indel	chr21	34971504	GCCAT	G	Likely_Benign
+indel	chr21	34971504	G	GCCATCCAT	Likely_Benign
+indel	chr21	34937320	C	CA	Likely_Benign
+indel	chr21	34928961	T	TG	Likely_Benign
+indel	chr21	34928961	TG	T	Likely_Benign
+indel	chr21	34842492	CAAAAAA	C	Likely_Benign
+indel	chr19	50398570	C	CA	Likely_Benign
+indel	chr19	11049485	GT	G	Likely_Benign
+indel	chr21	34982397	G	GGTGTGTGT	Likely_Benign
+indel	chr19	11004253	A	AT	Likely_Benign
+indel	chr19	10997026	G	GT	Likely_Benign
+indel	chr19	10973109	CA	C	Likely_Benign
+indel	chr17	65553847	CG	C	Likely_Benign
+indel	chr17	65531194	T	TAA	Likely_Benign
+indel	chr17	65531194	T	TA	Likely_Benign
+indel	chr17	61833670	C	CA	Likely_Benign
+indel	chr17	61804954	CTGTGTGTG	C	Likely_Benign
+indel	chr17	61804954	CTGTG	C	Likely_Benign
+indel	chr17	61804446	G	GTA	Likely_Benign
+indel	chr19	11004253	AT	A	Likely_Benign
+indel	chr21	34982397	G	GGTGTGTGTGT	Likely_Benign
+indel	chr21	35001308	T	TTATATATA	Likely_Benign
+indel	chr21	35001308	TTATATATATA	T	Likely_Benign
+indel	chr22	29605151	AT	A	Likely_Benign
+indel	chr22	28720092	AT	A	Likely_Benign
+indel	chr22	28720092	A	ATT	Likely_Benign
+indel	chr22	28706298	TCACACA	T	Likely_Benign
+indel	chr22	28706298	TCA	T	Likely_Benign
+indel	chr22	28705968	A	AAAACTAAACT	Likely_Benign
+indel	chr22	28705968	A	AAAACTAAACTAAACT	Likely_Benign
+indel	chr22	28704121	GAC	G	Likely_Benign
+indel	chr22	28704121	GACAC	G	Likely_Benign
+indel	chr22	28702135	C	CTGTGTGTGTGTGTG	Likely_Benign
+indel	chr22	28702135	C	CTGTGTGTGTGTG	Likely_Benign
+indel	chr22	28701954	A	ATT	Likely_Benign
+indel	chr22	28701954	A	AT	Likely_Benign
+indel	chr22	23830649	CTTTTTTTTTTTTTTTTTT	C	Likely_Benign
+indel	chr22	23830649	CTTTTTTTTTTTTTTTTT	C	Likely_Benign
+indel	chr21	35041660	CTT	C	Likely_Benign
+indel	chr21	35041660	CT	C	Likely_Benign
+indel	chr21	35022895	G	GAATAATAAT	Likely_Benign
+indel	chr21	35022895	G	GAATAATAATAATAATAAT	Likely_Benign
+indel	chr21	35002382	TTTTATTTA	T	Likely_Benign
+indel	chr21	35002382	TTTTA	T	Likely_Benign
+indel	chr17	61765829	G	GCACACACACA	Likely_Benign
+indel	chr16	68771750	CA	C	Likely_Benign
+indel	chr17	61765829	G	GCACA	Likely_Benign
+indel	chr17	61759005	C	CATAA	Likely_Benign
+indel	chr17	31263031	ATAGATAGG	A	Likely_Benign
+indel	chr17	31236055	T	TTG	Likely_Benign
+indel	chr17	31226318	G	GAC	Likely_Benign
+indel	chr17	31226318	G	GACACACAC	Likely_Benign
+indel	chr17	31217939	CA	C	Likely_Benign
+indel	chr17	31175345	CTTT	C	Likely_Benign
+indel	chr17	31175345	CTT	C	Likely_Benign
+indel	chr17	31172331	GTCTGTCTC	G	Likely_Benign
+indel	chr17	31157795	TA	T	Likely_Benign
+indel	chr17	31293178	CAAAAAAAAAAAAA	C	Likely_Benign
+indel	chr17	31157795	T	TA	Likely_Benign
+indel	chr17	31146409	G	GTCCA	Likely_Benign
+indel	chr17	17222039	TA	T	Likely_Benign
+indel	chr17	17222039	T	TA	Likely_Benign
+indel	chr17	17218386	C	CT	Likely_Benign
+indel	chr17	7681170	CTT	C	Likely_Benign
+indel	chr17	7679288	TTTTTA	T	Likely_Benign
+indel	chr17	7679288	T	TTTTTA	Likely_Benign
+indel	chr16	68806122	ATATTTATTTATT	A	Likely_Benign
+indel	chr16	68806122	A	ATATT	Likely_Benign
+indel	chr17	31146409	GTCCA	G	Likely_Benign
+indel	chr17	31313722	ATGTGTGTG	A	Likely_Benign
+indel	chr17	31313722	ATGTG	A	Likely_Benign
+indel	chr17	31317368	A	AAC	Likely_Benign
+indel	chr17	61712902	CAA	C	Likely_Benign
+indel	chr17	61712902	CA	C	Likely_Benign
+indel	chr17	61689026	C	CTGTTATGTTATGTTA	Likely_Benign
+indel	chr17	61689026	C	CTGTTATGTTATGTTATGTTA	Likely_Benign
+indel	chr17	58702001	G	GTT	Likely_Benign
+indel	chr17	58696071	GA	G	Likely_Benign
+indel	chr17	48728875	TTC	T	Likely_Benign
+indel	chr17	48728875	T	TTCTCTCTC	Likely_Benign
+indel	chr17	43111100	C	CA	Likely_Benign
+indel	chr17	43085359	C	CA	Likely_Benign
+indel	chr17	43067890	T	TAA	Likely_Benign
+indel	chr17	43066812	C	CT	Likely_Benign
+indel	chr17	43064827	AT	A	Likely_Benign
+indel	chr17	35115956	GGAAAGAAA	G	Likely_Benign
+indel	chr17	35115956	G	GGAAAGAAA	Likely_Benign
+indel	chr17	31365278	CAAA	C	Likely_Benign
+indel	chr17	31341617	G	GTGTGTGTGTGTGTA	Likely_Benign
+indel	chr17	31341617	G	GTGTA	Likely_Benign
+indel	chr17	31322094	TACACAC	T	Likely_Benign
+indel	chr17	31322094	T	TACACACACACAC	Likely_Benign
+indel	chr17	31317368	AACACACAC	A	Likely_Benign
+indel	chr17	61759005	C	CATAAATAA	Likely_Benign
+indel	chr8	118027313	TCA	T	Likely_Benign
+indel	chr9	36870115	A	AATGG	Likely_Benign
+indel	chr8	117998015	C	CT	Likely_Benign
+indel	chr1	10235862	CAA	C	Likely_Benign
+indel	chr1	10227032	CTT	C	Likely_Benign
+indel	chr1	10227032	CTTTTTT	C	Likely_Benign
+snp	chr22	28691054	A	T	Likely_Benign
+snp	chr22	28691008	G	A	Likely_Benign
+snp	chr22	28690770	G	A	Likely_Benign
+snp	chr22	23809612	T	C	Likely_Benign
+snp	chr22	23808410	G	T	Likely_Benign
+snp	chr21	34926617	T	C	Likely_Benign
+indel	chr1	10236273	A	AAACAAC	Likely_Benign
+snp	chr19	50397142	A	T	Likely_Benign
+snp	chr17	65561364	A	C	Likely_Benign
+snp	chr17	65561293	G	T	Likely_Benign
+snp	chr17	61804446	G	A	Likely_Benign
+snp	chr17	58697559	C	A	Likely_Benign
+snp	chr17	43098484	A	G	Likely_Benign
+snp	chr17	43098483	C	T	Likely_Benign
+snp	chr17	31347642	T	C	Likely_Benign
+snp	chr17	31172373	T	C	Likely_Benign
+snp	chr17	7682243	A	T	Likely_Benign
+snp	chr19	11049485	G	T	Likely_Benign
+indel	chr1	10238381	CA	C	Likely_Benign
+indel	chr1	10240721	AT	A	Likely_Benign
+indel	chr1	10251331	CT	C	Likely_Benign
+indel	chr1	193193780	AGTGT	A	Likely_Benign
+indel	chr1	193187102	T	TCCCC	Likely_Benign
+indel	chr1	193144112	C	CAAAAAAAAA	Likely_Benign
+indel	chr1	193127289	A	ATGTGTG	Likely_Benign
+indel	chr1	193127289	A	ATGTG	Likely_Benign
+indel	chr1	45330228	CAA	C	Likely_Benign
+indel	chr1	17051693	C	CG	Likely_Benign
+indel	chr8	117998015	CT	C	Likely_Benign
+indel	chr1	10365005	C	CAA	Likely_Benign
+indel	chr1	10362503	G	GA	Likely_Benign
+indel	chr1	10351073	C	CAA	Likely_Benign
+indel	chr1	10351073	C	CA	Likely_Benign
+indel	chr1	10331094	C	CA	Likely_Benign
+indel	chr1	10331094	CA	C	Likely_Benign
+indel	chr1	10293393	ATT	A	Likely_Benign
+indel	chr1	10293393	AT	A	Likely_Benign
+indel	chr1	10279689	CTTTTTTTT	C	Likely_Benign
+indel	chr1	10265200	TTTTA	T	Likely_Benign
+indel	chr1	10265200	TTTTATTTATTTATTTA	T	Likely_Benign
+indel	chr1	10259491	T	TA	Likely_Benign
+indel	chr1	10251331	CTT	C	Likely_Benign
+snp	chr16	68745611	A	G	Likely_Benign
+snp	chr15	40216571	A	T	Likely_Benign
+snp	chr15	32672938	C	G	Likely_Benign
+snp	chr15	32663078	T	A	Likely_Benign
+snp	chr7	5985640	A	G	Likely_Benign
+snp	chr7	5980453	G	A	Likely_Benign
+snp	chr7	5980435	T	C	Likely_Benign
+snp	chr5	252690	T	C	Likely_Benign
+snp	chr5	252589	T	C	Likely_Benign
+snp	chr5	252475	C	T	Likely_Benign
+snp	chr5	246303	C	T	Likely_Benign
+snp	chr5	239179	A	G	Likely_Benign
+snp	chr5	239096	C	A	Likely_Benign
+snp	chr5	238447	A	T	Likely_Benign
+snp	chr5	237898	G	C	Likely_Benign
+snp	chr5	237668	T	A	Likely_Benign
+snp	chr5	229876	C	T	Likely_Benign
+snp	chr5	229820	T	C	Likely_Benign
+snp	chr2	47383697	C	T	Likely_Benign
+snp	chr1	193204227	G	A	Likely_Benign
+snp	chr1	193204226	T	C	Likely_Benign
+snp	chr1	193161693	A	T	Likely_Benign
+snp	chr1	17051693	C	G	Likely_Benign
+snp	chr1	10283239	T	A	Likely_Benign
+snp	chr1	10259504	A	T	Likely_Benign
+snp	chr7	5985647	G	A	Likely_Benign
+indel	chr1	193193780	AGTGTGT	A	Likely_Benign
+snp	chr7	5985657	A	G	Likely_Benign
+snp	chr7	124824864	A	G	Likely_Benign
+snp	chr13	48428421	G	T	Likely_Benign
+snp	chr12	132683984	A	G	Likely_Benign
+snp	chr12	132645128	G	T	Likely_Benign
+snp	chr12	11874473	C	T	Likely_Benign
+snp	chr12	11874471	C	T	Likely_Benign
+snp	chr12	11650503	C	A	Likely_Benign
+snp	chr11	108360848	T	A	Likely_Benign
+snp	chr11	108360762	A	T	Likely_Benign
+snp	chr11	108354070	A	C	Likely_Benign
+snp	chr11	108317646	T	C	Likely_Benign
+snp	chr11	108290625	G	A	Likely_Benign
+snp	chr10	86837247	C	G	Likely_Benign
+snp	chr10	86809613	C	T	Likely_Benign
+snp	chr9	95489839	C	T	Likely_Benign
+snp	chr9	36973135	A	G	Likely_Benign
+snp	chr8	118073705	A	G	Likely_Benign
+snp	chr8	118057314	T	A	Likely_Benign
+snp	chr8	118057311	A	G	Likely_Benign
+snp	chr8	117986195	T	C	Likely_Benign
+snp	chr8	117979379	C	A	Likely_Benign
+snp	chr8	117973886	G	A	Likely_Benign
+snp	chr7	124824863	C	T	Likely_Benign
+indel	chr1	193204205	GTGTATATATA	G	Likely_Benign
+indel	chr1	10365005	C	CA	Likely_Benign
+indel	chr22	29679865	CAA	C	Likely_Benign
+indel	chr2	47461966	T	TCTTTTCTTTC	Likely_Benign
+indel	chr2	47468953	CT	C	Likely_Benign
+indel	chr7	124844732	CAA	C	Likely_Benign
+indel	chr7	124846162	G	GACACACACAC	Likely_Benign
+indel	chr3	10147373	T	TA	Likely_Benign
+indel	chr3	10147373	T	TTA	Likely_Benign
+indel	chr7	124846162	G	GACACACACACAC	Likely_Benign
+indel	chr1	193234175	TCACACACACA	T	Likely_Benign
+indel	chr8	117799567	C	CT	Likely_Benign
+indel	chr3	37029827	CT	C	Likely_Benign
+indel	chr3	52410175	GCGGGA	G	Likely_Benign
+indel	chr2	47461966	T	TCTTTCCTTTC	Likely_Benign
+indel	chr5	234435	A	AAC	Likely_Benign
+indel	chr5	112745548	T	TTTA	Likely_Benign
+indel	chr8	117799567	CT	C	Likely_Benign
+indel	chr5	112745548	T	TTTATTA	Likely_Benign
+indel	chr5	112820182	G	GAC	Likely_Benign
+indel	chr5	112820182	GAC	G	Likely_Benign
+indel	chr5	112833029	GTT	G	Likely_Benign
+indel	chr8	117863411	G	GT	Likely_Benign
+indel	chr8	117858712	AGAAGGAAGGAAGGAAGGAAG	A	Likely_Benign
+indel	chr8	117851616	GACACACAC	G	Likely_Benign
+indel	chr8	117845556	TA	T	Likely_Benign
+indel	chr8	117845556	TAA	T	Likely_Benign
+indel	chr5	238447	A	AT	Likely_Benign
+indel	chr2	47461737	ATTTTTTTTTTTTTTT	A	Likely_Benign
+indel	chr8	117863411	G	GTT	Likely_Benign
+indel	chr2	47429325	CT	C	Likely_Benign
+indel	chr7	124826871	AAAAC	A	Likely_Benign
+indel	chr7	124826871	A	AAAAC	Likely_Benign
+indel	chr8	117989061	C	CAA	Likely_Benign
+indel	chr8	117979379	CA	C	Likely_Benign
+indel	chr8	117977391	T	TAA	Likely_Benign
+indel	chr8	117977391	T	TA	Likely_Benign
+indel	chr8	117939571	G	GA	Likely_Benign
+indel	chr8	117939571	GA	G	Likely_Benign
+indel	chr7	124824855	CTAGT	C	Likely_Benign
+indel	chr7	116754983	G	GGAAAGAAA	Likely_Benign
+indel	chr7	116754893	GAGAAAGAAAGAAAGAA	G	Likely_Benign
+indel	chr8	117851616	G	GACACACAC	Likely_Benign
+indel	chr1	241509778	AAC	A	Likely_Benign
+indel	chr1	241509778	AACAC	A	Likely_Benign
+indel	chr8	117935321	CTT	C	Likely_Benign
+indel	chr7	124844126	G	GT	Likely_Benign
+indel	chr7	116716284	GGAGAGAGA	G	Likely_Benign
+indel	chr8	117935321	CT	C	Likely_Benign
+indel	chr7	124844126	GT	G	Likely_Benign
+indel	chr8	117915855	C	CAAACAAAACA	Likely_Benign
+indel	chr8	117915855	C	CAAACA	Likely_Benign
+indel	chr8	117897591	C	CTT	Likely_Benign
+indel	chr8	117891805	C	CTT	Likely_Benign
+indel	chr8	117891805	C	CT	Likely_Benign
+indel	chr7	116754893	GAGAAAGAA	G	Likely_Benign
+indel	chr7	5982022	C	CT	Likely_Benign
+indel	chr7	124835242	T	TAAACA	Benign
+snp	chr21	35038607	C	G	Benign
+snp	chr17	31336606	T	A	Benign
+indel	chr14	95099731	TACAC	T	Benign
+indel	chr14	95099731	TAC	T	Benign
+snp	chr17	31236067	T	G	Benign
+indel	chr7	124835242	TAAACA	T	Benign
+indel	chr17	31336606	T	TA	Benign
+indel	chr10	102530447	CTTTT	C	Not available
+indel	chr10	27061559	A	AT	Not available
+indel	chr10	27047719	CTACTAATAA	C	Not available
+indel	chr8	117925705	CAAA	C	Not available
+indel	chr9	36848350	C	CCACACACACA	Not available
+indel	chr10	27082068	AAAAAAAGG	A	Not available
+snp	chr1	231416436	A	T	Not available
+snp	chr1	231387257	C	A	Not available
+snp	chr1	231373704	A	G	Not available
+snp	chr10	27047701	A	C	Not available
+snp	chr1	231373695	T	C	Not available
+snp	chr10	27047742	T	A	Not available
+indel	chr22	29640194	T	TAA	Not available
+indel	chr21	34985867	CTTTT	C	Not available
+snp	chr3	37025608	A	T	Not available
+indel	chr1	231373669	CGTGTGTGCGTGTGTGT	C	Not available
+indel	chr11	44135390	CTTTT	C	Not available
+indel	chr13	32344166	GA	G	Not available
+indel	chr2	46332288	ATACGTG	A	Not available
+indel	chr2	46302118	CTG	C	Not available
+indel	chr2	46302118	C	CTG	Not available
+indel	chr1	10317830	C	CAA	Not available
+indel	chr2	46301578	G	GA	Not available
+indel	chr13	32388666	C	CT	Not available
+indel	chr13	32392589	CA	C	Not available
+indel	chr13	32342270	CAA	C	Not available
+indel	chr1	241500602	T	TGAGA	Not available
+indel	chr1	17025410	CTT	C	Not available
+indel	chr16	68739608	ATTT	A	Not available
+indel	chr1	231416436	A	AAT	Not available
+indel	chr1	231406165	CA	C	Not available
+indel	chr1	231391083	GTTTTTTTT	G	Not available
+indel	chr13	48433682	A	AT	Not available
+indel	chr1	231391083	G	GTT	Not available
+indel	chr1	231387236	T	TACAC	Not available
+indel	chr1	241500602	T	TGAGAGAGAGA	Not available
+indel	chr17	65529344	G	GA	Not available
+indel	chr2	46362977	AGTGGTGGTG	A	Not available
+indel	chr2	47429325	CTT	C	Not available
+indel	chr7	116725465	C	CAT	Not available
+indel	chr7	76052430	CAAAAAAAA	C	Not available
+indel	chr7	50339215	T	TTG	Not available
+indel	chr17	58712344	CAAA	C	Not available
+snp	chr14	95099771	C	A	Not available
+indel	chr7	50339215	T	TTGTG	Not available
+indel	chr7	50335447	G	GTA	Not available
+indel	chr11	108288501	C	CTT	Not available
+indel	chr2	46362977	A	AGTG	Not available
+indel	chr17	43104083	AAAG	A	Not available
+indel	chr5	112836009	CTTTTTTTTT	C	Not available
+indel	chr17	43044804	CT	C	Not available
+indel	chr17	43044804	CTT	C	Not available
+indel	chr5	112835572	ATT	A	Not available
+indel	chr3	10152060	CAA	C	Not available
+indel	chr3	10152060	CA	C	Not available
+indel	chr2	208245789	CA	C	Not available
+indel	chr2	208245789	CAA	C	Not available
+indel	chr17	43098983	AT	A	Not available
+indel	chr11	108229378	G	GTT	Not available

@@ -1,0 +1,8 @@
+This file was produced by vcfisec.
+The command line was:	bcftools isec  -Oz -p output/umccrise/smlv_somatic_vcf/DiploidNeverResponder/isec_results data/bcbio/DiploidNeverResponder/small_variants/DiploidNeverResponder__DiploidNeverResponder_PRJ170218_Missing-somatic-PASS.vcf.gz data/dragen/DiploidNeverResponder/small_variants/DiploidNeverResponder__PRJ170218-somatic-PASS.vcf.gz
+
+Using the following file names:
+output/umccrise/smlv_somatic_vcf/DiploidNeverResponder/isec_results/0000.vcf.gz	for records private to	data/bcbio/DiploidNeverResponder/small_variants/DiploidNeverResponder__DiploidNeverResponder_PRJ170218_Missing-somatic-PASS.vcf.gz
+output/umccrise/smlv_somatic_vcf/DiploidNeverResponder/isec_results/0001.vcf.gz	for records private to	data/dragen/DiploidNeverResponder/small_variants/DiploidNeverResponder__PRJ170218-somatic-PASS.vcf.gz
+output/umccrise/smlv_somatic_vcf/DiploidNeverResponder/isec_results/0002.vcf.gz	for records from data/bcbio/DiploidNeverResponder/small_variants/DiploidNeverResponder__DiploidNeverResponder_PRJ170218_Missing-somatic-PASS.vcf.gz shared by both	data/bcbio/DiploidNeverResponder/small_variants/DiploidNeverResponder__DiploidNeverResponder_PRJ170218_Missing-somatic-PASS.vcf.gz data/dragen/DiploidNeverResponder/small_variants/DiploidNeverResponder__PRJ170218-somatic-PASS.vcf.gz
+output/umccrise/smlv_somatic_vcf/DiploidNeverResponder/isec_results/0003.vcf.gz	for records from data/dragen/DiploidNeverResponder/small_variants/DiploidNeverResponder__PRJ170218-somatic-PASS.vcf.gz shared by both	data/bcbio/DiploidNeverResponder/small_variants/DiploidNeverResponder__DiploidNeverResponder_PRJ170218_Missing-somatic-PASS.vcf.gz data/dragen/DiploidNeverResponder/small_variants/DiploidNeverResponder__PRJ170218-somatic-PASS.vcf.gz

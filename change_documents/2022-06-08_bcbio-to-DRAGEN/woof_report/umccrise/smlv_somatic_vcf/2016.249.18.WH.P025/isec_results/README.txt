@@ -1,0 +1,8 @@
+This file was produced by vcfisec.
+The command line was:	bcftools isec  -Oz -p output/umccrise/smlv_somatic_vcf/2016.249.18.WH.P025/isec_results data/bcbio/2016.249.18.WH.P025/small_variants/2016_249_18_WH_P025__CCR180149_VPT-WH025-E-somatic-PASS.vcf.gz data/dragen/2016.249.18.WH.P025/small_variants/2016.249.18.WH.P025__CCR180149-somatic-PASS.vcf.gz
+
+Using the following file names:
+output/umccrise/smlv_somatic_vcf/2016.249.18.WH.P025/isec_results/0000.vcf.gz	for records private to	data/bcbio/2016.249.18.WH.P025/small_variants/2016_249_18_WH_P025__CCR180149_VPT-WH025-E-somatic-PASS.vcf.gz
+output/umccrise/smlv_somatic_vcf/2016.249.18.WH.P025/isec_results/0001.vcf.gz	for records private to	data/dragen/2016.249.18.WH.P025/small_variants/2016.249.18.WH.P025__CCR180149-somatic-PASS.vcf.gz
+output/umccrise/smlv_somatic_vcf/2016.249.18.WH.P025/isec_results/0002.vcf.gz	for records from data/bcbio/2016.249.18.WH.P025/small_variants/2016_249_18_WH_P025__CCR180149_VPT-WH025-E-somatic-PASS.vcf.gz shared by both	data/bcbio/2016.249.18.WH.P025/small_variants/2016_249_18_WH_P025__CCR180149_VPT-WH025-E-somatic-PASS.vcf.gz data/dragen/2016.249.18.WH.P025/small_variants/2016.249.18.WH.P025__CCR180149-somatic-PASS.vcf.gz
+output/umccrise/smlv_somatic_vcf/2016.249.18.WH.P025/isec_results/0003.vcf.gz	for records from data/dragen/2016.249.18.WH.P025/small_variants/2016.249.18.WH.P025__CCR180149-somatic-PASS.vcf.gz shared by both	data/bcbio/2016.249.18.WH.P025/small_variants/2016_249_18_WH_P025__CCR180149_VPT-WH025-E-somatic-PASS.vcf.gz data/dragen/2016.249.18.WH.P025/small_variants/2016.249.18.WH.P025__CCR180149-somatic-PASS.vcf.gz

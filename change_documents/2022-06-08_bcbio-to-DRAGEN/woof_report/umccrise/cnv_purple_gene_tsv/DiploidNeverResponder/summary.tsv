@@ -1,0 +1,2 @@
+genes_cn_diff	genes_min_cn_diff	genes_max_cn_diff	min_cn_diff_mean	max_cn_diff_mean	min_cn_diff_mean_ex	max_cn_diff_mean_ex	sample_name
+273	270	265	0.007989742475708987	0.007557220159570272	0.2017792592592593	0.1657894339622642	DiploidNeverResponder

@@ -1,0 +1,287 @@
+{
+    "smlv_somatic_vcf": {
+        "display_type": "smlv_table",
+        "filepaths": {
+            "pcgr_tiers": "/data/woof/output/umccrise/final/smlv_somatic_vcf/tier_cross_tab.tsv",
+            "extra_variants": "/data/woof/output/umccrise/final/smlv_somatic_vcf/extra_variants.tsv.subset",
+            "missing_variants": "/data/woof/output/umccrise/final/smlv_somatic_vcf/missing_variants.tsv.subset",
+            "summary": "/data/woof/output/umccrise/final/smlv_somatic_vcf/summary.tsv"
+        },
+        "data_subset": {
+            "extra_variants": {
+                "B_ALL_Case_10": {
+                    "total": 189,
+                    "subset": 62
+                },
+                "SBJ00303": {
+                    "total": 288,
+                    "subset": 62
+                },
+                "SFRC01073": {
+                    "total": 414,
+                    "subset": 62
+                },
+                "DiploidNeverResponder": {
+                    "total": 607,
+                    "subset": 62
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 668,
+                    "subset": 62
+                },
+                "CUP-Pairs8": {
+                    "total": 1174,
+                    "subset": 62
+                },
+                "SEQC50": {
+                    "total": 1361,
+                    "subset": 62
+                },
+                "2016.249.18.WH.P025": {
+                    "total": 4201,
+                    "subset": 62
+                }
+            },
+            "missing_variants": {
+                "B_ALL_Case_10": {
+                    "total": 154,
+                    "subset": 62
+                },
+                "SBJ00303": {
+                    "total": 259,
+                    "subset": 62
+                },
+                "SFRC01073": {
+                    "total": 289,
+                    "subset": 62
+                },
+                "DiploidNeverResponder": {
+                    "total": 377,
+                    "subset": 62
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 454,
+                    "subset": 62
+                },
+                "CUP-Pairs8": {
+                    "total": 803,
+                    "subset": 62
+                },
+                "SEQC50": {
+                    "total": 1216,
+                    "subset": 62
+                },
+                "2016.249.18.WH.P025": {
+                    "total": 1647,
+                    "subset": 62
+                }
+            }
+        }
+    },
+    "smlv_germline_vcf": {
+        "display_type": "smlv_table",
+        "filepaths": {
+            "extra_variants": "/data/woof/output/umccrise/final/smlv_germline_vcf/extra_variants.tsv.subset",
+            "missing_variants": "/data/woof/output/umccrise/final/smlv_germline_vcf/missing_variants.tsv.subset",
+            "cpsr_tiers": "/data/woof/output/umccrise/final/smlv_germline_vcf/tier_cross_tab.tsv",
+            "summary": "/data/woof/output/umccrise/final/smlv_germline_vcf/summary.tsv"
+        },
+        "data_subset": {
+            "extra_variants": {
+                "CUP-Pairs8": {
+                    "total": 556,
+                    "subset": 62
+                },
+                "2016.249.18.WH.P025": {
+                    "total": 684,
+                    "subset": 62
+                },
+                "SFRC01073": {
+                    "total": 686,
+                    "subset": 62
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 691,
+                    "subset": 62
+                },
+                "DiploidNeverResponder": {
+                    "total": 702,
+                    "subset": 62
+                },
+                "SBJ00303": {
+                    "total": 704,
+                    "subset": 62
+                },
+                "B_ALL_Case_10": {
+                    "total": 717,
+                    "subset": 62
+                },
+                "SEQC50": {
+                    "total": 732,
+                    "subset": 62
+                }
+            },
+            "missing_variants": {
+                "SEQC50": {
+                    "total": 264,
+                    "subset": 62
+                },
+                "CUP-Pairs8": {
+                    "total": 299,
+                    "subset": 62
+                },
+                "SBJ00303": {
+                    "total": 360,
+                    "subset": 62
+                },
+                "2016.249.18.WH.P025": {
+                    "total": 370,
+                    "subset": 62
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 396,
+                    "subset": 62
+                },
+                "SFRC01073": {
+                    "total": 397,
+                    "subset": 62
+                },
+                "B_ALL_Case_10": {
+                    "total": 405,
+                    "subset": 62
+                },
+                "DiploidNeverResponder": {
+                    "total": 417,
+                    "subset": 62
+                }
+            }
+        }
+    },
+    "sv_manta_vcf": {
+        "display_type": "sv_table",
+        "filepaths": {
+            "variants_shared": "/data/woof/output/umccrise/final/sv_manta_vcf/variants_shared.tsv.subset",
+            "sv_tiers": "/data/woof/output/umccrise/final/sv_manta_vcf/tier_cross_tab.tsv",
+            "variants_missing": "/data/woof/output/umccrise/final/sv_manta_vcf/variants_missing.tsv.subset",
+            "summary": "/data/woof/output/umccrise/final/sv_manta_vcf/summary.tsv",
+            "variants_extra": "/data/woof/output/umccrise/final/sv_manta_vcf/variants_extra.tsv.subset"
+        },
+        "data_subset": {
+            "variants_shared": {
+                "2016.249.18.WH.P025": {
+                    "total": 19,
+                    "subset": 19
+                },
+                "B_ALL_Case_10": {
+                    "total": 64,
+                    "subset": 64
+                },
+                "DiploidNeverResponder": {
+                    "total": 86,
+                    "subset": 68
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 173,
+                    "subset": 68
+                },
+                "SBJ00303": {
+                    "total": 220,
+                    "subset": 68
+                },
+                "SFRC01073": {
+                    "total": 413,
+                    "subset": 68
+                },
+                "SEQC50": {
+                    "total": 676,
+                    "subset": 68
+                },
+                "CUP-Pairs8": {
+                    "total": 800,
+                    "subset": 68
+                }
+            },
+            "variants_missing": {
+                "B_ALL_Case_10": {
+                    "total": 10,
+                    "subset": 10
+                },
+                "SBJ00303": {
+                    "total": 26,
+                    "subset": 26
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 27,
+                    "subset": 27
+                },
+                "DiploidNeverResponder": {
+                    "total": 28,
+                    "subset": 28
+                },
+                "2016.249.18.WH.P025": {
+                    "total": 46,
+                    "subset": 46
+                },
+                "SFRC01073": {
+                    "total": 75,
+                    "subset": 75
+                },
+                "SEQC50": {
+                    "total": 126,
+                    "subset": 126
+                },
+                "CUP-Pairs8": {
+                    "total": 166,
+                    "subset": 146
+                }
+            },
+            "variants_extra": {
+                "2016.249.18.WH.P025": {
+                    "total": 5,
+                    "subset": 5
+                },
+                "B_ALL_Case_10": {
+                    "total": 16,
+                    "subset": 16
+                },
+                "2016.249.17.MH.P033": {
+                    "total": 25,
+                    "subset": 25
+                },
+                "SBJ00303": {
+                    "total": 30,
+                    "subset": 30
+                },
+                "DiploidNeverResponder": {
+                    "total": 33,
+                    "subset": 33
+                },
+                "SFRC01073": {
+                    "total": 109,
+                    "subset": 109
+                },
+                "SEQC50": {
+                    "total": 125,
+                    "subset": 125
+                },
+                "CUP-Pairs8": {
+                    "total": 1344,
+                    "subset": 143
+                }
+            }
+        }
+    },
+    "cnv_purple_gene_tsv": {
+        "display_type": "cnv_table",
+        "filepaths": {
+            "genes": "/data/woof/output/umccrise/final/cnv_purple_gene_tsv/genes.tsv",
+            "summary": "/data/woof/output/umccrise/final/cnv_purple_gene_tsv/summary.tsv"
+        }
+    },
+    "allele_frequency_tsv": {
+        "display_type": "af_table",
+        "filepaths": {
+            "summary": "/data/woof/output/umccrise/final/allele_frequency_tsv/summary.tsv"
+        }
+    }
+}

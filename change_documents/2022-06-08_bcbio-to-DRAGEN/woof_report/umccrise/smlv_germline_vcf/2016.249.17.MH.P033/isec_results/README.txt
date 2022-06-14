@@ -1,0 +1,8 @@
+This file was produced by vcfisec.
+The command line was:	bcftools isec  -Oz -p output/umccrise/smlv_germline_vcf/2016.249.17.MH.P033/isec_results data/bcbio/2016.249.17.MH.P033/small_variants/2016_249_17_MH_P033__CCR170105_MH17B001P033-germline.predispose_genes.vcf.gz data/dragen/2016.249.17.MH.P033/small_variants/2016.249.17.MH.P033__CCR170105-germline.predispose_genes.vcf.gz
+
+Using the following file names:
+output/umccrise/smlv_germline_vcf/2016.249.17.MH.P033/isec_results/0000.vcf.gz	for records private to	data/bcbio/2016.249.17.MH.P033/small_variants/2016_249_17_MH_P033__CCR170105_MH17B001P033-germline.predispose_genes.vcf.gz
+output/umccrise/smlv_germline_vcf/2016.249.17.MH.P033/isec_results/0001.vcf.gz	for records private to	data/dragen/2016.249.17.MH.P033/small_variants/2016.249.17.MH.P033__CCR170105-germline.predispose_genes.vcf.gz
+output/umccrise/smlv_germline_vcf/2016.249.17.MH.P033/isec_results/0002.vcf.gz	for records from data/bcbio/2016.249.17.MH.P033/small_variants/2016_249_17_MH_P033__CCR170105_MH17B001P033-germline.predispose_genes.vcf.gz shared by both	data/bcbio/2016.249.17.MH.P033/small_variants/2016_249_17_MH_P033__CCR170105_MH17B001P033-germline.predispose_genes.vcf.gz data/dragen/2016.249.17.MH.P033/small_variants/2016.249.17.MH.P033__CCR170105-germline.predispose_genes.vcf.gz
+output/umccrise/smlv_germline_vcf/2016.249.17.MH.P033/isec_results/0003.vcf.gz	for records from data/dragen/2016.249.17.MH.P033/small_variants/2016.249.17.MH.P033__CCR170105-germline.predispose_genes.vcf.gz shared by both	data/bcbio/2016.249.17.MH.P033/small_variants/2016_249_17_MH_P033__CCR170105_MH17B001P033-germline.predispose_genes.vcf.gz data/dragen/2016.249.17.MH.P033/small_variants/2016.249.17.MH.P033__CCR170105-germline.predispose_genes.vcf.gz

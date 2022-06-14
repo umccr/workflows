@@ -1,0 +1,2 @@
+/data/woof/output/umccrise/sv_manta_vcf/2016.249.17.MH.P033/2016_249_17_MH_P033__CCR170115b_MH17T002P033-manta__run_1.vcf
+/data/woof/output/umccrise/sv_manta_vcf/2016.249.17.MH.P033/2016.249.17.MH.P033__CCR170115-manta__run_2.vcf

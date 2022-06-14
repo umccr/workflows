@@ -1,0 +1,2 @@
+sample_name	sv_count_1	sv_count_2	precision	recall	shared	missing	extra
+2016.249.17.MH.P033	232	223	0.874439461883408	0.8405172413793104	195	37	28

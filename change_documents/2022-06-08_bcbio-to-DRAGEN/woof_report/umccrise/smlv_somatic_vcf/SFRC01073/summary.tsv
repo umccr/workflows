@@ -1,0 +1,2 @@
+sample_name	snp_precision	snp_recall	indel_precision	indel_recall	snp_count_1	snp_count_2	snp_shared	snp_missing	snp_extra	indel_count_1	indel_count_2	indel_shared	indel_missing	indel_extra
+SFRC01073	0.9799936988027725	0.9830910240202275	0.8522622345337026	0.9248496993987976	12656	12696	12442	214	254	998	1083	923	75	160
