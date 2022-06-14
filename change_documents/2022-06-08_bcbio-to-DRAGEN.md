@@ -36,7 +36,16 @@ All comparisons are based on bcbio 1.1.6a with umccrise 1.2.4 compared to DRAGEN
 
 Germline comparisons are based on four replicates of NA12878 sequenced on an Illumina NovaSeq at the Melbourne Clinical Genomics Platform. Germline variant calls were compared between bcbio and DRAGEN production workflows using [vcf_eval](https://github.com/umccr/biodaily/tree/vcf_eval/vcf_eval) and are based on the [Genome in a Bottle V4.2.1 benchmark set](https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/) and high confidence regions (`HG001_GRCh38_1_22_v4.2.1_benchmark.bed`).
 
-SNVs:
+**Sample information in the LIMS:**
+
+| IlluminaID                    | Run | Timestamp  | SubjectID | SampleID | LibraryID | ExternalSubjectID | ExternalSampleID |
+|-------------------------------|-----|------------|-----------|----------|-----------|-------------------|------------------|
+| 170802_A00130_0016_AH2JGGDMXX |  16 | 2017-08-02 | SBJ00027  | -        | -         | NA12878           | NA12878-1VD      |
+| 170802_A00130_0016_AH2JGGDMXX |  16 | 2017-08-02 | SBJ00027  | -        | -         | NA12878           | NA12878-2VD      |
+| 170823_A00130_0019_AH2N2FDMXX |  19 | 2017-08-23 | SBJ00027  | -        | -         | NA12878           | NA12878-3VD_S1   |
+| 170829_A00130_0020_AH2MKTDMXX |  20 | 2017-08-29 | SBJ00027  | -        | -         | NA12878           | NA12878-4KC_S7   |
+
+**SNVs:**
 
 | sample      | workflow | Truth     | TP        | FP     | FN     | Recall | Precision | f1    |
 |-------------|----------|-----------|-----------|--------|--------|--------|-----------|-------|
@@ -50,7 +59,7 @@ SNVs:
 | NA12878-4KC | DRAGEN   | 3,253,394 | 3,242,203 |  7,523 | 11,191 |  0.997 |     0.998 | 0.997 |
 
 
-InDels:
+**InDels:**
 
 | sample      | workflow | Truth   | TP      | FP     | FN     | Recall | Precision | f1    |
 |-------------|----------|---------|---------|--------|--------|--------|-----------|-------|
@@ -68,13 +77,21 @@ The DRAGEN germline SNV calls match bcbio ensemble calls and are significantly b
 
 #### Somatic benchmark comparison
 
-Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated against the [SEQC-II test data](https://www.biorxiv.org/content/10.1101/625624v1) (SRA ID `SRP162370`, benchmark sets available via [FTP](ftp://ftp-trace.ncbi.nlm.nih.gov/seqc/ftp/Somatic_Mutation_WG/)). A dilution series of DNA from the SEQC-II triple-negative breast cancer (TNBC) cell line (HCC1395) and a B lymphocyte-derived normal cell line (HCC1395BL) was sequenced on an Illumina NovaSeq at the Melbourne Clinical Genomics Platform and again compared with `vcf_eval`.
+Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated against the [SEQC-II test data](https://www.biorxiv.org/content/10.1101/625624v1) (SRA ID `SRP162370`, benchmark sets available via [FTP](ftp://ftp-trace.ncbi.nlm.nih.gov/seqc/ftp/Somatic_Mutation_WG/)). A dilution series of DNA from the SEQC-II triple-negative breast cancer (TNBC) cell line (HCC1395) and a B lymphocyte-derived normal cell line (HCC1395BL) was sequenced on an Illumina NovaSeq at the Melbourne Clinical Genomics Platform and again compared with `vcf_eval`. From the in-silico tests we noticed no differences in overall performance between 100% sample down to 50%; accordingly the dilution series sequencing was limited to the 10-40% range as we expect any problems to show up in this range.
 
-DILUTION SERIES description
+**Sample information in the LIMS:**
 
-SNVs:
+| IlluminaID                    | Run | Timestamp  | SubjectID | SampleID       | LibraryID      | ExternalSubjectID | ExternalSampleID         |
+|-------------------------------|-----|------------|-----------|----------------|----------------|-------------------|--------------------------|
+| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_30 | L2000433_rerun | HCC1395           | Mix-cell-line-HCC1395-30 |
+| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_10 | L2000435_rerun | HCC1395           | Mix-cell-line-HCC1395-10 |
+| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_40 | L2000432_rerun | HCC1395           | Mix-cell-line-HCC1395-40 |
+| 210223_A01052_0033_AHVHWGDMXX | 33  | 2021-02-23 | SBJ00480  | PTC_HCC1395_20 | L2000434_rerun | HCC1395           | Mix-cell-line-HCC1395-20 |
+| 210331_A01052_0041_BHYMHFDSXY | 41  | 2021-03-31 | SBJ00480  | PTC_TsqN200511 | L2000437_rerun | HCC1395           | HCC1395BL-01             |
 
-| sample                                 | label  | Truth | TP    | FP   | FN    | Recall | Precision | f1    |
+**SNVs:**
+
+| sample                                 | workflow  | Truth | TP    | FP   | FN    | Recall | Precision | f1    |
 |----------------------------------------|--------|-------|-------|------|-------|--------|-----------|-------|
 | SBJ00480-Mix-cell-line-HCC1395-40      | bcbio  | 39447 | 31116 | 3529 |  8331 |  0.789 |     0.898 | 0.840 |
 | SBJ00480-Mix-cell-line-HCC1395-40_PASS | DRAGEN | 39447 | 31179 | 1080 |  8268 |  0.790 |     0.967 | 0.870 |
@@ -88,9 +105,9 @@ SNVs:
 We see a slight loss of sensitivity for DRAGEN with a large improvement in precision, a trade-off we found to be acceptable particularly since we rescue potentially missed variants in cancer hotspots at a later stage in `umccrise`. The difference at 10% cellularity is expected as bcbio filters out variants with an allelic frequency <10% in our setting.
 
 
-InDels:
+**InDels:**
 
-| sample                                 | label  | Truth | TP   | FP   | FN   | Recall | Precision | f1    |
+| sample                                 | workflow  | Truth | TP   | FP   | FN   | Recall | Precision | f1    |
 |----------------------------------------|--------|-------|------|------|------|--------|-----------|-------|
 | SBJ00480-Mix-cell-line-HCC1395-40      | bcbio  |  1625 | 1169 | 1609 |  456 |  0.719 |     0.421 | 0.531 |
 | SBJ00480-Mix-cell-line-HCC1395-40_PASS | DRAGEN |  1625 | 1193 |  591 |  432 |  0.734 |     0.669 | 0.700 |
