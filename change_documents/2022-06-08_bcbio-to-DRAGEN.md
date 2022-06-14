@@ -38,8 +38,8 @@ Germline comparisons are based on four replicates of NA12878 sequenced on an Ill
 
 **Sample information in the LIMS:**
 
-| IlluminaID                    | Run | Timestamp  | SubjectID | SampleID | LibraryID | ExternalSubjectID | ExternalSampleID |
-|-------------------------------|-----|------------|-----------|----------|-----------|-------------------|------------------|
+| IlluminaID                    | Run | Timestamp  | SubjectID | SampleID | LibraryID | 
+|-------------------------------|-----|------------|-----------|----------|-----------|
 | 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-1VD      |
 | 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-2VD      |
 | 170823_A00130_0019_AH2N2FDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-3VD_S1   |
