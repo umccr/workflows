@@ -123,55 +123,96 @@ ToDo: @mhlunimelb Can you please add baseline results for SEQC-II (100%)?
 
 ### Comparison of validation samples
 
+We routinely assess the impact of any major workflow change on the primary/secondary data as well as the generated HTML reports for a number of manually selected validation samples. Samples where chosen to reflect our usual clinical sample quality, diversity of ethnicity, gender and interesting events:
 
-| Sample Name           | SubjectID | Sample Notes |
-|-----------------------|-----------|--------------|
-| 2016.249.17.MH.P033   | tba       | BRCA signature, BRCA2 SV      |
-| 2016.249.18.WH.P025   | tba       | Poor quality, SV40 integration, BRCA2 germline |
-| CUP-Pairs8            | tba       | FFPE       |
-| SFRC01073             | tba       | BRCA signature          |
-| B_ALL_Case_10         | tba       | Blood cancer          |
-| SEQC_SEQC50           | tba       | Reference sample          |
-| DiploidNeverResponder | tba       | HPV integration          |
-| SBJ00303              | SBJ00303  | ATRX frameshift          |
-| SBJ00480              | SBJ00480  | HCC1395 control cell line         |
+| Sample Name           | SubjectID | Sample Notes | bcbio URL | DRAGEN URL |
+|-----------------------|-----------|--------------|-----------|----|
+| 2016.249.17.MH.P033   | SBJ00471       | BRCA signature, BRCA2 SV      | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/2016.249.17.MH.P033) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/2016.249.17.MH.P033) |
+| 2016.249.18.WH.P025   | SBJ00031       | Poor quality, SV40 integration, BRCA2 germline | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/2016.249.18.WH.P025) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/2016.249.18.WH.P025) |
+| CUP-Pairs8            | n/a       | FFPE       | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/CUP-Pairs8) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/CUP-Pairs8) |
+| SFRC01073             | SBJ00204 | BRCA signature          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/SFRC01073) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/SFRC01073) |
+| B_ALL_Case_10         | SBJ00040 | Blood cancer          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/B_ALL_Case_10) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/B_ALL_Case_10) |
+| SEQC_SEQC50           | SBJ00481 | Reference sample          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/SEQC50) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/SEQC50) |
+| DiploidNeverResponder | n/a       | HPV integration          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/DiploidNeverResponder) | [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/DiploidNeverResponder) |
+| SBJ00303              | SBJ00303  | ATRX frameshift          | [bcbio](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/bcbio/SBJ00303)| [DRAGEN](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/umccrise_reports/dragen/SBJ00303) |
 
+Key features -- particularly those highlighted in the sample notes -- are conserved for all samples in the DRAGEN results. 
 
-MultiQC
+#### Data comparison
 
-CPSR
+Woof placeholder
 
-PCGR
+#### Report comparison
 
-Cancer Reporter
-
-
-
-SFRC1073
+**MultiQC:**
 
 QC Lower SNP filtering rate? Hard to tell - the old report was % filtered, this is %SNP and %InDel. Interesting to see that DRAGEN filters more in some of the reference samples (Bob, Chen) and less in others. Higher MapQ0 rate which is expected since we align to the whole genome; bcbio blocked out ALTs, repeats
 
-bcftools somatic is showing zero hom changes - likely a parsing error? They are present in bcftool stats germline
+QC Lower filtering rate again (despite identical filtered variants); looks like DRAGEN is generating less noise for some of these samples. WGD event recognized by Purple.
 
+**Coverage:**
 Coverage Looks identical
 
+(tumor) HLA-A a bit better in Dragen
+(normal) CDKN1C a bit better in Dragen
+
+
+**CPSR:**
 CPSR Identical
+Identical (3 more VUS, expected)
+2 extra VUS in Dragen
+extra MSH2 VUS Indel in Dragen (Non-ClinVar)
+
+**PCGR:**
 
 PCGR Lost NDRG1 (Tier 3, 10% AF)
 
-Reporter Looks good to me; biggest change in the SV/CNV space, everything else looks stable. Slight decrease in the number of CN segments (somatic), increase in germline; SV seems to be missing some relevant events (e.g., CREB1 BidFusG with >25 SR/PR support, NTRK1 deletions) - we need to check those. NTRK1 deletion is present in Del/Dup/Ins but not in BND - change of representation in Manta?
+3 Tier4 diff between bcbio/Dragen
+
+SEQC: MSI status flipped (from high to stable); likely due to the shift in InDel to SNV calls. There's an MSH6 mutation to support it, could be worth running past the curation team to see if they would be okay with that change; Tier 3 TTN lost which is a good thing; otherwise identical
+
+PCGR Few extra tier 4 calls; nothing notable
+
+NeverResponder: ost 3 inter-chromosomal SVs, going from 18 BND events to 2. I'd check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered. Some CN shifts (lower CN difference only, can be ignored). HLA differences (!). Nice - going to trust DRAGEN on those.
+
+Pairs8 FFPE PCGR Mostly identical. Difference in SNVs, expected (FFPE), nothing on the higher tiers.
+
+B-All: TMB higher in Dragen (0.85 -> 0.97)
+6 Tier4 extra indels in Dragen
+
+P25: TMB 9 -> 31
+VUS 10 -> 20
+big diffs in somatic calls as discussed, but no diffs in Tiers 1/2
+funny that both bcbio and dragen PCGR results show kataegis. See https://github.com/umccr-illumina/dragen/issues/35
+
+**Cancer Reporter:**
+SFRC01073: Reporter Looks good to me; biggest change in the SV/CNV space, everything else looks stable. Slight decrease in the number of CN segments (somatic), increase in germline; SV seems to be missing some relevant events (e.g., CREB1 BidFusG with >25 SR/PR support, NTRK1 deletions) - we need to check those. NTRK1 deletion is present in Del/Dup/Ins but not in BND - change of representation in Manta?
+
+SEQC: Contamination detected in both reports (!); unlike PCGR the reporter has both as MSS (Stable). Another likely point in favor of the Dragen data. Very similar high HRDetect/CHORD scores, reduced number of SV calls - some with high levels of support in old data included (e.g., RNGTT deletion); CN changes again in HLA (expected), general shift of 2 CN for large chunk of chr1 (from 2 to 4). I can see some of that in the Circos plot but given the CN Noise warning I'm happy to ignore
+
+303: Slight shift in lower tier signatures (2020); extra PTPRD BND call; Del/Dup/Ins identical for key genes with >10 reads support; sizeable # of genes with large CN differences (check LCE1D, MTX1, GBAP1, NTAN1)
+
+Pairs 8 FFPE: Reporter Pretty much identical. More confident CHORD score (likely driven by additinal SNVs), sig 3 still there; there is no way I am going to compare SV/CNVs for an FFPE sample.
+
+B-all: Signatures: same-ish
+SNVs: few extra Tier4 indels detected in Dragen
+CNVs: HEATR4/chr16/chr17 min CN diff is 2
+SVs: Tier3 chr6 DEL detected in Dragen (chr6:162,198,360)
 
 
+P25: Messy. TMB: increase (1.34 -> 2.24)
+SVs: decrease (81 -> 24)
+BNDs have.. completely vanished
+CNVs: decrease (168 -> 88)
+Kataegis detected in Dragen
 
-
-
-
-Noted changes
+**Additional notes:**
 
 Homozyguous runs
 
 https://github.com/umccr-illumina/dragen/issues/37
 
+bcftools somatic is showing zero hom changes - likely a parsing error? They are present in bcftool stats germline
 
 
 ### RNA comparison
