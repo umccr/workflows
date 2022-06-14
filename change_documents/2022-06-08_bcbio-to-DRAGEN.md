@@ -38,12 +38,18 @@ Germline comparisons are based on four replicates of NA12878 sequenced on an Ill
 
 **Sample information in the LIMS:**
 
-| IlluminaID                    | Run | Timestamp  | SubjectID | SampleID | LibraryID | 
-|-------------------------------|-----|------------|-----------|----------|-----------|
+| IlluminaID                    | SubjectID | SampleID | LibraryID | ExternalSubjectID | ExternalSampleID |
+|-------------------------------|-----------|----------|-----------|-------------------|------------------|
 | 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-1VD      |
 | 170802_A00130_0016_AH2JGGDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-2VD      |
 | 170823_A00130_0019_AH2N2FDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-3VD_S1   |
 | 170829_A00130_0020_AH2MKTDMXX | SBJ00027  | -        | -         | NA12878           | NA12878-4KC_S7   |
+| 181026_A00130_0080_BHCL55DMXX | SBJ00027  | -        | L1800121  | NA12878           | L1800121_S11     |
+| 181026_A00130_0080_BHCL55DMXX | SBJ00027  | -        | L1800122  | NA12878           | L1800122_S12     |
+| 181026_A00130_0080_BHCL55DMXX | SBJ00027  | -        | L1800126  | NA12878           | L1800126_S14     |
+| 181123_A00130_0082_BHCYL3DSXX | SBJ00027  | -        | L1800171  | NA12878           | L1800171_S1      |
+| 181123_A00130_0082_BHCYL3DSXX | SBJ00027  | -        | L1800175  | NA12878           | L1800175_S5      |
+
 
 **SNVs:**
 
@@ -82,12 +88,13 @@ Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated ag
 **Sample information in the LIMS:**
 
 | IlluminaID                    | SubjectID | SampleID       | LibraryID      | ExternalSubjectID | ExternalSampleID         |
-|-------------------------------|-----|------------|-----------|----------------|----------------|-------------------|--------------------------|
+|-------------------------------|-----------|----------------|----------------|-------------------|--------------------------|
 | 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_30 | L2000433_rerun | HCC1395           | Mix-cell-line-HCC1395-30 |
 | 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_10 | L2000435_rerun | HCC1395           | Mix-cell-line-HCC1395-10 |
 | 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_40 | L2000432_rerun | HCC1395           | Mix-cell-line-HCC1395-40 |
 | 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_20 | L2000434_rerun | HCC1395           | Mix-cell-line-HCC1395-20 |
 | 210331_A01052_0041_BHYMHFDSXY | SBJ00480  | PTC_TsqN200511 | L2000437_rerun | HCC1395           | HCC1395BL-01             |
+
 
 **SNVs:**
 
