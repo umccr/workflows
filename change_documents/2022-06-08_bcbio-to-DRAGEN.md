@@ -104,7 +104,6 @@ Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated ag
 
 We see a slight loss of sensitivity for DRAGEN with a large improvement in precision, a trade-off we found to be acceptable particularly since we rescue potentially missed variants in cancer hotspots at a later stage in `umccrise`. The difference at 10% cellularity is expected as bcbio filters out variants with an allelic frequency <10% in our setting.
 
-
 **InDels:**
 
 | sample                                 | workflow  | Truth | TP   | FP   | FN   | Recall | Precision | f1    |
@@ -120,43 +119,52 @@ We see a slight loss of sensitivity for DRAGEN with a large improvement in preci
 
 As with the germline variant calls we see a marked improvement in both sensitivity and specificity for DRAGEN calls over the existing bcbio ensemble calls.
 
-ToDo: Add baseline for SEQC-II (100%). 
+ToDo: @mhlunimelb Can you please add baseline results for SEQC-II (100%)?
 
 ### Comparison of validation samples
 
 
 | Sample Name           | SubjectID | Sample Notes |
 |-----------------------|-----------|--------------|
-| 2016.249.17.MH.P033   | tba       | tba          |
-| 2016.249.18.WH.P025   | tba       | tba          |
-| CUP-Pairs8            | tba       | tba          |
-| SFRC01073             | tba       | tba          |
-| B_ALL_Case_10         | tba       | tba          |
-| SEQC_SEQC50           | tba       | tba          |
-| DiploidNeverResponder | tba       | tba          |
-| SBJ00303              | SBJ00303  | tba          |
-| SBJ00480              | SBJ00480  | tba          |
+| 2016.249.17.MH.P033   | tba       | BRCA signature, BRCA2 SV      |
+| 2016.249.18.WH.P025   | tba       | Poor quality, SV40 integration, BRCA2 germline |
+| CUP-Pairs8            | tba       | FFPE       |
+| SFRC01073             | tba       | BRCA signature          |
+| B_ALL_Case_10         | tba       | Blood cancer          |
+| SEQC_SEQC50           | tba       | Reference sample          |
+| DiploidNeverResponder | tba       | HPV integration          |
+| SBJ00303              | SBJ00303  | ATRX frameshift          |
+| SBJ00480              | SBJ00480  | HCC1395 control cell line         |
 
 
-One FFPE (Pairs8), one viral integration (Diploid), one blood cancer (B_ALL), the reference sample (SEQC).
+MultiQC
+
+CPSR
+
+PCGR
+
+Cancer Reporter
+
+
+
+SFRC1073
+
+QC Lower SNP filtering rate? Hard to tell - the old report was % filtered, this is %SNP and %InDel. Interesting to see that DRAGEN filters more in some of the reference samples (Bob, Chen) and less in others. Higher MapQ0 rate which is expected since we align to the whole genome; bcbio blocked out ALTs, repeats
+
+bcftools somatic is showing zero hom changes - likely a parsing error? They are present in bcftool stats germline
+
+Coverage Looks identical
+
+CPSR Identical
+
+PCGR Lost NDRG1 (Tier 3, 10% AF)
+
+Reporter Looks good to me; biggest change in the SV/CNV space, everything else looks stable. Slight decrease in the number of CN segments (somatic), increase in germline; SV seems to be missing some relevant events (e.g., CREB1 BidFusG with >25 SR/PR support, NTRK1 deletions) - we need to check those. NTRK1 deletion is present in Del/Dup/Ins but not in BND - change of representation in Manta?
 
 
 
 
 
-17:45
-I think one was because of the BRCA signature and germline mutation (2016.249.17.MH.P033).
-17:46
-2016.249.18.WH.P025 was a low quality sample, also with a BRCA signature.
-17:47
-303 was:
-ATRX frameshift, MED12 exon 2 mutations. Signature 3. BRCA2 SV but likely still wt alleles present.
-17:48
-Ah, 480 is HCC1395, our cell line - https://www.atcc.org/products/crl-2324
-
-atcc.orgatcc.org
-HCC1395  | ATCC
-The tumor was classified as TNM stage I, grade 3, invasive ductal carcinoma with 0 out of 34 lymph node metastasis. The cells are poorly differentiated and vacuolated.  The cells are negative for expression of Her2-neu but positive for expression of p53. HCC1395 is positive for the epithelial cell specific marker Epithelial Glycoprotein 2 (EGP2) and for cytokeratin 19. The cells are negative for expression of estrogen receptors (ER -) according to depositor and negative for expression of progesterone receptors (PR -). An EBV transformed lymphoblastoid cell line (HCC1395BL) from the same patient is available as ATCC CRL-2325.
 
 Noted changes
 
@@ -164,9 +172,6 @@ Homozyguous runs
 
 https://github.com/umccr-illumina/dragen/issues/37
 
-
-Pointer to Woof results from https://drive.google.com/drive/u/1/folders/168qAOe0EmKMsRThzIyTHYXRYV5hq6-5x, report sets
-tba
 
 
 ### RNA comparison
