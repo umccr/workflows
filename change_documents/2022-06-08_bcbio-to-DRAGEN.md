@@ -149,6 +149,8 @@ Woof placeholder
 
 _MultiQC:_ The MultiQC report layout and tables have changed slightly as our main source of information now comes from the DRAGEN QC metrics. Slight differences in mapping statistics are expected as we now align against ALT regions and no longer mask parts of the reference genome. We also see an overall lower SNV filtering rate; DRAGEN's variant caller is slightly less noisy for most samples (but see below for an exception).
 
+In addition, MultiQC will report fewer (or no) homozyguous somatic mutations. DRAGEN does not use the VCF's `GT` field to report zygosity which follows the old MuTect2 model - se the [Github discussion](https://github.com/umccr-illumina/dragen/issues/37#issuecomment-1122231632). This has no impact on the variants called.
+
 _Coverage:_ Coverage of germline and tumor samples is all but identical. Previously difficult to map regions like HLA now have improved coverage.
 
 _CPSR:_ Identical across all samples with a slight increase of reported VUS from InDels. DRAGEN's false negative-rate for InDels is lower so this is expected.
@@ -157,7 +159,7 @@ _PCGR:_ Any changes between PCGR reports are limited to Tier 4 events with a ind
 
 The one exception to this is `2016.249.18.WH.P025`. DRAGEN reports a significant number of likely false positive, low allelic frequency mutations that do not have an impact on Tier 1/2 variants but do shift the TMB from 9 to 21. These variants were filtered in DRAGEN 3.6 due to being phased and clustered, but a [change in Illumina's approach to variant filtering](https://github.com/umccr-illumina/dragen/issues/35#issuecomment-1078567272) means they are now included. Illumina feel that the previous filtering apporoach resulted in a reduced sensitivity. This makes sense, but we are exploring options of annotating these clustered variants and flagging samples with a higher than expected number of clustered variants to indicate that TMB might be inflated. 
 
-**Cancer Reporter:** Overall, the biggest change across all samples is the reduced noise in SV calls and a reduction of somatic copy number segments, also likely due to reduced noise in the SV calls which seed copy number boundaries. Calls remain stable for SVs with more than 5-10 reads in support.
+_Cancer Reporter:_ Overall, the biggest change across all samples is the reduced noise in SV calls and a reduction of somatic copy number segments, also likely due to reduced noise in the SV calls which seed copy number boundaries. Calls remain stable for SVs with more than 5-10 reads in support.
 
 Signatures change scores slightly due to the different variant calling approach, but overall ranking is maintained for all samples except for lower tier signatures with overall poor support. 
 
@@ -166,14 +168,6 @@ Signatures change scores slightly due to the different variant calling approach,
 
 * SFRC01073: SV - CREB1 BidFusG with >25 SR/PR support
 * NeverResponder: SV - check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered.
-
-**Additional notes:**
-
-Homozyguous runs
-
-https://github.com/umccr-illumina/dragen/issues/37
-
-bcftools somatic is showing zero hom changes - likely a parsing error? They are present in bcftool stats germline
 
 
 ### RNA comparison
@@ -199,6 +193,5 @@ Workflow management: https://github.com/umccr-illumina/cwl-iap
 
 ## Upcoming changes
 
-* PoN
-* FFPE filter
-* Soft-trimming
+With the migration to DRAGEN we can resume our workflow development. Future changes include a migration of the panel-of-normal filter to a DRAGEN-based one and experimental support for improved filtering of FFPE artefacts. 
+
