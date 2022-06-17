@@ -184,7 +184,7 @@ Count data shows good correlation overall and improves between a transcript-base
 
 * [ ] Re-generate scatterplots in [comparision report](https://github.com/umccr/WTS_workflow_results_comparison) limited to [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) only
 
-![Per transcript scatterplot](./2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_transcript.png | width=960 | height=1344)
+![Per transcript scatterplot](./2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_transcript.png)
 
 ![Per gene scatterplot](./2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_gene.png)
 
