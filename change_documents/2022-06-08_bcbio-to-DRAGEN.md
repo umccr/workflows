@@ -124,7 +124,7 @@ We see a slight loss of sensitivity for DRAGEN with a large improvement in preci
 
 As with the germline variant calls we see a marked improvement in both sensitivity and specificity for DRAGEN calls over the existing bcbio ensemble calls.
 
-ToDo: @mhlunimelb Can you please add baseline results for SEQC-II (100%)?
+* [ ] @mhlunimelb Can you please add baseline results for SEQC-II (100%)?
 
 ### Comparison of validation samples
 
@@ -170,32 +170,34 @@ _Cancer Reporter:_ Overall, the biggest change across all samples is the reduced
 
 Signatures change scores slightly due to the different variant calling approach, but overall ranking is maintained for all samples except for lower tier signatures with overall poor support. 
 
-
-**To Check:**
-
-* SFRC01073: SV - CREB1 BidFusG with >25 SR/PR support
-* NeverResponder: SV - check the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered.
+* [ ] @pdiakumis is checking a NeverResponder: SV - the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered.
+* [ ] @pdiakumis is checking a SFRC01073: SV - the CREB1 BidFusG with >25 SR/PR support
 
 
 ### RNA comparison
 
 The DRAGEN WTS processing methods are similar to the approach we have taken with bcbio but the change still has an impact on primary/secondary results.
 
+_Global comparison:_
 
+Count data shows good correlation overall and improves between a transcript-based comparison (Spearman correlation = 0.76) to a gene-based comparison (Spearman correlation = 0.99). The impact of these changes for the RNAsum reference cohort comparison is expected to be minimal. 
 
-Changes to the WTS workflow are less 
+* [ ] Re-generate scatterplots in [comparision report](https://github.com/umccr/WTS_workflow_results_comparison) limited to [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) only
 
-Scatterplots, selected fusions, test samples?
+![Per transcript scatterplot](./2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_transcript.png)
 
+![Per gene scatterplot](./2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_gene.png)
 
-We also compared 
+_Fusion calling validation:_
 
-_ToDo:_ 
+We do not use DRAGEN's built-in fusion detection methods but continue to rely on Arriba. The main source of difference stems from the improved DRAGEN alignment (BAM) files that serve as Arriba input.
 
 * [ ] @sehrishk is re-running the fusion comparison, see [Trello](https://trello.com/c/OMKmnoQ5/1197-arriba-error-139-sbj02057-apr12-2022)
 * [ ] @sehrishk to re-process [samples with known fusion calls](https://docs.google.com/spreadsheets/d/13fdPjgg33sPKUrVcr-5JTPTGEZ3Vzb6_7y3ru5j8Auc/edit#gid=0) to check for consistency of, well, fusion calls
+
+_RNAsum report validation:_
+
 * [ ] @ohofmann to review final RNAsum report and merge results into this report, see [Trello](https://trello.com/c/njRAaG6C/1212-rnasum-reports-comparison)
-* [ ] Re-generate scatterplots in [comparision report](https://github.com/umccr/WTS_workflow_results_comparison) limited to [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) only
 
 ## Summary
 
