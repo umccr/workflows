@@ -195,6 +195,36 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 * [ ] @sehrishk is re-running the fusion comparison, see [Trello](https://trello.com/c/OMKmnoQ5/1197-arriba-error-139-sbj02057-apr12-2022)
 * [ ] @sehrishk to re-process [samples with known fusion calls](https://docs.google.com/spreadsheets/d/13fdPjgg33sPKUrVcr-5JTPTGEZ3Vzb6_7y3ru5j8Auc/edit#gid=0) to check for consistency of, well, fusion calls
 
++----------+----------------+------------------------+--------------+---------------+
+| Library  |      Event     | Note                   | bcbio-arriba | dragen-arriba |
++----------+----------------+------------------------+--------------+---------------+
+| L1900433 | IGH-CRLF2      | May not be seen in RNA | Missed       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900435 | JAK2-PAX5      |                        | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900436 | IGH-ZEB2       | May not be seen in RNA | Called       | Missed        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900438 | KMT2A-AFF1     |                        | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900439 | MEF2D-HNRNPUL1 |                        | Called       |               |
++----------+----------------+------------------------+--------------+---------------+
+| L1900440 | BCR-ABL1       |                        | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900441 | BCR-ABL1       |                        | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900434 | KMT2A-FOXO3    |                        | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900432 | IGH-CRLF2      | May not be seen in RNA | Missed       | Missed        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900432 | PAX5 #1        | Subclonal              | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900444 | TRA/TRD-TLX1   | May not be seen in RNA | Missed       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900443 | TRB-HOXA       | May not be seen in RNA | Missed       | Missed        |
++----------+----------------+------------------------+--------------+---------------+
+| L1900446 | DDX3X-MLLT10   |                        | Called       | Called        |
++----------+----------------+------------------------+--------------+---------------+
+
 _RNAsum report validation:_
 
 * [ ] @ohofmann to review final RNAsum report and merge results into this report, see [Trello](https://trello.com/c/njRAaG6C/1212-rnasum-reports-comparison)
