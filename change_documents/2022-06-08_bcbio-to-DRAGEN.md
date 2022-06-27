@@ -201,7 +201,7 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 | L1900435 | JAK2-PAX5      |                        | Called       | Called        |
 | L1900436 | IGH-ZEB2       | May not be seen in RNA | Called       | Missed        |
 | L1900438 | KMT2A-AFF1     |                        | Called       | Called        |
-| L1900439 | MEF2D-HNRNPUL1 |                        | Called       |               |
+| L1900439 | MEF2D-HNRNPUL1 |                        | Called       | Called        |
 | L1900440 | BCR-ABL1       |                        | Called       | Called        |
 | L1900441 | BCR-ABL1       |                        | Called       | Called        |
 | L1900434 | KMT2A-FOXO3    |                        | Called       | Called        |
