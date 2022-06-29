@@ -176,7 +176,7 @@ Signatures change scores slightly due to the different variant calling approach,
 
 ### RNA comparison
 
-The DRAGEN WTS processing methods are similar to the approach we have taken with bcbio but the change still has an impact on primary/secondary results.
+The DRAGEN WTS processing methods are similar to the approach we have taken with bcbio but the change still has an impact on primary/secondary results. DRAGEN MultiQC reports now also include a set of reference samples, similar to the WGS MultiQC reports, alongside more in-depth metrics.
 
 _Global comparison:_
 
@@ -197,7 +197,12 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 
 _RNAsum report validation:_
 
+SBJ02097 (Oliver)
+SBJ02244 (Helen)
+SBJ02091 (Sehrish)
+
 * [ ] @ohofmann to review final RNAsum report and merge results into this report, see [Trello](https://trello.com/c/njRAaG6C/1212-rnasum-reports-comparison)
+* [ ] Add missing QC, RNAsum reports for SBJ02244 (Helen), SBJ02091 (Sehrish) to repo
 
 ## Summary
 
