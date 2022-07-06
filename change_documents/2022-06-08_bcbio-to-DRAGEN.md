@@ -197,9 +197,9 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 
 | Library  |      Event     | Note                   | bcbio-arriba | dragen-arriba |
 |----------|:--------------:|------------------------|:------------:|:-------------:|
-| L1900433 | IGH-CRLF2      | May not be seen in RNA | Missed       | Called        |
+| L1900433 | IGH-CRLF2      | May not be seen in RNA | **Missed**       | **Called**        |
 | L1900435 | JAK2-PAX5      |                        | Called       | Called        |
-| L1900436 | IGH-ZEB2       | May not be seen in RNA | Called       | Missed        |
+| L1900436 | IGH-ZEB2       | May not be seen in RNA | **Called**       | **Missed**        |
 | L1900438 | KMT2A-AFF1     |                        | Called       | Called        |
 | L1900439 | MEF2D-HNRNPUL1 |                        | Called       | Called        |
 | L1900440 | BCR-ABL1       |                        | Called       | Called        |
@@ -207,7 +207,7 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 | L1900434 | KMT2A-FOXO3    |                        | Called       | Called        |
 | L1900432 | IGH-CRLF2      | May not be seen in RNA | Missed       | Missed        |
 | L1900432 | PAX5 #1        | Subclonal              | Called       | Called        |
-| L1900444 | TRA/TRD-TLX1   | May not be seen in RNA | Missed       | Called        |
+| L1900444 | TRA/TRD-TLX1   | May not be seen in RNA | **Missed**       | **Called**        |
 | L1900443 | TRB-HOXA       | May not be seen in RNA | Missed       | Missed        |
 | L1900446 | DDX3X-MLLT10   |                        | Called       | Called        |
 
