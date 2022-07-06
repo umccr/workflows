@@ -178,12 +178,17 @@ The DRAGEN WTS processing methods are similar to the approach we have taken with
 
 _Global comparison:_
 
-Count data shows good correlation overall and improves between a transcript-based comparison (Spearman correlation = 0.76) to a gene-based comparison (Spearman correlation = 0.99). The impact of these changes for the RNAsum reference cohort comparison is expected to be minimal.
+Count data shows good correlation overall and improves between a transcript-based comparison (Spearman correlation = 0.76) to a gene-based comparison (Spearman correlation = 0.8). The impact of these changes for the RNAsum reference cohort comparison is expected to be minimal. 
 
-* [ ] Re-generate scatterplots in [comparision report](https://github.com/umccr/WTS_workflow_results_comparison) limited to [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) only
+<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_transcript.png" alt="Per transcript scatterplot" height="250" />
+<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_gene.png" alt="Per gene scatterplot" height="250" />
 
-<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_transcript.png" alt="Per transcript scatterplot" height="330" />
-<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_gene.png" alt="Per gene scatterplot" height="330" />
+
+However, we did not notice a subset of genes with medium to high levels of expression counts in bcbio's Kallisto that are absent from DRAGEN's gene list. 
+
+<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/cancer_genes.png" alt="Density plots for cancer genes with percentage-differences above the third quantile" height="250" />
+
+We are exploring the reason for these differences with Illumina. 
 
 
 _Fusion calling validation:_
