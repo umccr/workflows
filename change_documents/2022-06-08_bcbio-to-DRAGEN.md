@@ -87,10 +87,10 @@ Somatic SNV comparisons between DRAGEN and bcbio ensemble calls are evaluated ag
 
 | IlluminaID                    | SubjectID | SampleID       | LibraryID      | ExternalSubjectID | ExternalSampleID         |
 |-------------------------------|-----------|----------------|----------------|-------------------|--------------------------|
-| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_30 | L2000433_rerun | HCC1395           | Mix-cell-line-HCC1395-30 |
-| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_10 | L2000435_rerun | HCC1395           | Mix-cell-line-HCC1395-10 |
 | 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_40 | L2000432_rerun | HCC1395           | Mix-cell-line-HCC1395-40 |
+| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_30 | L2000433_rerun | HCC1395           | Mix-cell-line-HCC1395-30 |
 | 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_20 | L2000434_rerun | HCC1395           | Mix-cell-line-HCC1395-20 |
+| 210223_A01052_0033_AHVHWGDMXX | SBJ00480  | PTC_HCC1395_10 | L2000435_rerun | HCC1395           | Mix-cell-line-HCC1395-10 |
 | 210331_A01052_0041_BHYMHFDSXY | SBJ00480  | PTC_TsqN200511 | L2000437_rerun | HCC1395           | HCC1395BL-01             |
 
 
@@ -123,9 +123,6 @@ We see a slight loss of sensitivity for DRAGEN with a large improvement in preci
 | SBJ00480-Mix-cell-line-HCC1395-10_PASS | DRAGEN |  1625 |  933 |  360 |  692 |  0.574 |     0.722 | 0.639 |
 
 As with the germline variant calls we see a marked improvement in both sensitivity and specificity for DRAGEN calls over the existing bcbio ensemble calls.
-
-* [ ] @mhlunimelb Can you please add baseline results for SEQC-II (100%)?
-* [ ] @mhlunimelb Might have to redo the comparison within each chemistry (i.e., with the appropriate normal)
 
 ### Comparison of validation samples
 
