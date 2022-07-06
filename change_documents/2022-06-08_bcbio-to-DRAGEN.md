@@ -125,6 +125,7 @@ We see a slight loss of sensitivity for DRAGEN with a large improvement in preci
 As with the germline variant calls we see a marked improvement in both sensitivity and specificity for DRAGEN calls over the existing bcbio ensemble calls.
 
 * [ ] @mhlunimelb Can you please add baseline results for SEQC-II (100%)?
+* [ ] @mhlunimelb Might have to redo the comparison within each chemistry (i.e., with the appropriate normal)
 
 ### Comparison of validation samples
 

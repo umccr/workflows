@@ -1,6 +1,7 @@
 # Bcbio commands trace
 
 ## Organize samples
+
 n/a
 
 ## Alignment preparation
@@ -58,7 +59,6 @@ n/a
 
 ### Strelka2 Caller: Somatic
 * Merge overlapping regions in target file 
-* ?Why is this only required here, but not for other callers?
 * Set up and run workflow (configureStrelkaSomaticWorkflow.py) using default parameters
 * Fix header with Picard
 
