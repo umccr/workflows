@@ -164,18 +164,12 @@ _PCGR:_ Any changes between PCGR reports are limited to Tier 4 events with a ind
 
 The one exception to this is `2016.249.18.WH.P025`. DRAGEN reports a significant number of likely false positive, low allelic frequency mutations that do not have an impact on Tier 1/2 variants but do shift the TMB from 9 to 21. These variants were filtered in DRAGEN 3.6 due to being phased and clustered, but a [change in Illumina's approach to variant filtering](https://github.com/umccr-illumina/dragen/issues/35#issuecomment-1078567272) means they are now included. Illumina feel that the previous filtering apporoach resulted in a reduced sensitivity. This makes sense, but we are exploring options of annotating these clustered variants and flagging samples with a higher than expected number of clustered variants to indicate that TMB might be inflated.
 
-_Cancer Reporter:_ Overall, the biggest change across all samples is the reduced noise in SV calls and a reduction of somatic copy number segments, also likely due to reduced noise in the SV calls which seed copy number boundaries. Calls remain stable for SVs with more than 5-10 reads in support.
+_Cancer Reporter:_ Overall, the biggest change across all samples is the reduced noise in SV calls and a reduction of somatic copy number segments, also likely due to reduced noise in the SV calls which seed copy number boundaries. Calls remain stable for SVs with more than 5-10 reads in support with some exceptions - please see the [comparison page](https://github.com/umccr/workflows/tree/master/umccrise/comparisons#2022-feb) for details; in brief:
 
-Signatures change scores slightly due to the different variant calling approach, but overall ranking is maintained for all samples except for lower tier signatures with overall poor support.
+* A PUM2-CASC8 fusion in the NeverResponder disappeared through multiple Dup/Del events involving these genes
+* A CREB1 fusion in SFRC01073 was filtered out due to the DRAGEN alignment shifting the split-read vs paired-read support over the fitering threshold; this approach is scheduled for a review
 
-* [x] @pdiakumis is checking a NeverResponder: SV - the PUM2, CASC8 fusion event (2:20,251,798 to 8:127,306,881) as it has >80 reads in support in the old version to see why those have gotten filtered.
-* [x] @pdiakumis is checking a SFRC01073: SV - the CREB1 BidFusG with >25 SR/PR support
-* See Slack thread: https://umccr.slack.com/archives/C025TLC7D/p1655248131116649
-  * The `PUM2<->CASC8` fusion event got caught in a Dup/Del event in the Dragen results.
-    * `chr2:20,191,903, MantaDEL:116580:0:1:0:0:0, END=20,253,451 PR:SR = 209,11:143,6`
-    * chr8:127M onwards has multiple DEL/DUP events
-  * SFRC01073 CREB1 fusion was missed since SR > PR…
-    * `chr2:205,497,837, MantaBND:82093:0:1:0:2:0:0, -> chr2:207,551,294, PR:SR = 247,24:260,27`
+Somatic signatures scores also differ slightly between reports due to the different variant calling approach, but overall ranking is maintained for all samples except for lower tier signatures with overall poor support.
 
 
 ### RNA comparison
