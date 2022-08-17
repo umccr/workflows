@@ -183,33 +183,30 @@ Count data shows good correlation overall and improves between a transcript-base
 <img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_transcript.png" alt="Per transcript scatterplot" height="250" />
 <img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_gene.png" alt="Per gene scatterplot" height="250" />
 
-
-However, we did not notice difference in expression for few of [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) between bcbio Kallisto and Dragen Salmon expression when converted to gene level counts. 
+However, we did notice differences in expression for a number of [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) between bcbio (Kallisto-based counts) and DRAGEN (Salmon-based counts) at the gene level. 
 
 <img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/cancer_genes.png" alt="Density plots for cancer genes expression with percentage-differences above the third quantile" height="250" />
 
-Focusing at the outliers, `GATA3 ENSG00000107485` is the only exception that has higher expression value in bcbio derived gene level estimation that is absent in Dragen derived expression results. The coverage of GATA3 is also high in the BAM file from both bcbio and Dragen pipelines, indicating the gene is indeed expressed. The other outlier genes have either low expression value or minimal coverage in BAM files. 
+Genes with noticeable expression changes generally have low count values supported by minimal coverage in BAM files. `GATA3` (`ENSG00000107485`) is the only cancer gene with a high expression value in bcbio missing from the DRAGEN-derived expression results; a review of the BAM files indicates the gene is indeed expressed. 
+GATA3 has five [transcripts](https://asia.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000107485;r=10:8045378-8075198) of which two have low level expression as recorded in the DRAGEN:
 
-GATA3 has 5 [transcripts](https://asia.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000107485;r=10:8045378-8075198), out of which 2 trancripts have low level expression as recorded in the Dragen salmon output.
+| Name            | Length | EffectiveLength | TPM      | NumReads |
+|-----------------|--------|-----------------|----------|----------|
+| ENST00000461472 | 895    | 697.789         | 0.000000 | 0.000    |
+| ENST00000643001 | 748    | 552.571         | 0.843052 | 45.424   |
 
-```
-Name	Length	EffectiveLength	TPM	NumReads
-ENST00000461472	895	697.789	0.000000	0.000
-ENST00000643001	748	552.571	0.843052	45.424
-```
 
-In contrast, all 5 transcripts are recorded as having relatively high expression in bcbio kallisto output.
+In contrast, all five transcripts have high expression counts in bcbio:
 
-```
-Name	Length	EffectiveLength	TPM	NumReads
-ENST00000481743	975	756.105	279.595	3.89687
-ENST00000379328	3123	2904.1	1055.27	3.8293
-ENST00000346208	2650	2431.1	927.259	4.01944
-ENST00000461472	895	676.105	196.8	3.06747
-ENST00000643001	748	529.389	82.3487	1.63927
-```
+| Name            | Length | EffectiveLength | TPM     | NumReads |
+|-----------------|--------|-----------------|---------|----------|
+| ENST00000481743 | 975    | 756.105         | 279.595 | 3.89687  |
+| ENST00000379328 | 3123   | 2904.1          | 1055.27 | 3.8293   |
+| ENST00000346208 | 2650   | 2431.1          | 927.259 | 4.01944  |
+| ENST00000461472 | 895    | 676.105         | 196.8   | 3.06747  |
+| ENST00000643001 | 748    | 529.389         | 82.3487 | 1.63927  |
 
-In summary, this comes down to differences in tool level estimation (kallisto VS salmon). The correlation between these two tools is very high but not 100%, as discussed above. Hence, there are one off chances for such cases. 
+These differences are rooted in the underlying counting and normalisation approaches. For now we consider the Salmon-based count approach in DRAGEN to be acceptable.
 
 _Fusion calling validation:_
 
