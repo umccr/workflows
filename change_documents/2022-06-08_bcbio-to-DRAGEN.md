@@ -211,14 +211,16 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 | L1900443 | TRB-HOXA       | May not be seen in RNA | Missed       | Missed        |
 | L1900446 | DDX3X-MLLT10   |                        | Called       | Called        |
 
+
 _RNAsum report validation:_
 
-SBJ02097 (Oliver)
-SBJ02244 (Helen)
-SBJ02091 (Sehrish)
+Following the WGS validation approach we compared a number of RNASum reports manually - in this case for three recent patient samples: SBJ02097, SBJ02244 and SBJ02091. Reports show a high level of consistency between the workflows:
 
-* [ ] @ohofmann to review final RNAsum report and merge results into this report, see [Trello](https://trello.com/c/njRAaG6C/1212-rnasum-reports-comparison)
-* [ ] Add missing QC, RNAsum reports for SBJ02244 (Helen), SBJ02091 (Sehrish) to repo
+* general agreement in the number of genes with somatic tier 1-4 variants and reliably measured expression levels
+* 'top 5 mutated genes' (demonstrating the greatest difference in mRNA expression (percentile) values between patient’s sample and the average mRNA expression in samples from cancer patients) can be found in the first ~10 genes of the matching report
+* fusion reports differ due to the more conservative reporting of structural variants in the WGS workflow but show otherwise good agreement
+* the same holds true for copy number changes and their impact on the estimated expression levels; general overlap between the two workflows is high
+
 
 ## Summary
 
