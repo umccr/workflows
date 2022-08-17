@@ -214,7 +214,7 @@ We do not use DRAGEN's built-in fusion detection methods but continue to rely on
 
 _RNAsum report validation:_
 
-Following the WGS validation approach we compared a number of RNASum reports manually - in this case for three recent patient samples: SBJ02097, SBJ02244 and SBJ02091. Reports show a high level of consistency between the workflows:
+Following the WGS validation approach we compared a number of RNASum reports manually - in this case for three recent patient samples: SBJ02097, SBJ02244 and SBJ02091. [Reports](https://github.com/umccr/workflows/tree/master/change_documents/2022-06-08_bcbio-to-DRAGEN/rnasum/reports) show a high level of consistency between the workflows:
 
 * general agreement in the number of genes with somatic tier 1-4 variants and reliably measured expression levels
 * 'top 5 mutated genes' (demonstrating the greatest difference in mRNA expression (percentile) values between patient’s sample and the average mRNA expression in samples from cancer patients) can be found in the first ~10 genes of the matching report
