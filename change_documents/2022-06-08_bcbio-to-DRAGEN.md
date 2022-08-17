@@ -184,12 +184,32 @@ Count data shows good correlation overall and improves between a transcript-base
 <img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/per_gene.png" alt="Per gene scatterplot" height="250" />
 
 
-However, we did not notice a subset of genes with medium to high levels of expression counts in bcbio's Kallisto that are absent from DRAGEN's gene list. 
+However, we did not notice difference in expression for few of [cancer genes](https://github.com/umccr/workflows/blob/master/configurations/resources/hg38/umccr_cancer_genes.latest.tsv) between bcbio Kallisto and Dragen Salmon expression when converted to gene level counts. 
 
-<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/cancer_genes.png" alt="Density plots for cancer genes with percentage-differences above the third quantile" height="250" />
+<img src="2022-06-08_bcbio-to-DRAGEN/rnasum/images/cancer_genes.png" alt="Density plots for cancer genes expression with percentage-differences above the third quantile" height="250" />
 
-We are exploring the reason for these differences with Illumina. 
+Focusing at the outliers, `GATA3 ENSG00000107485` is the only exception that has higher expression value in bcbio derived gene level estimation that is absent in Dragen derived expression results. The coverage of GATA3 is also high in the BAM file from both bcbio and Dragen pipelines, indicating the gene is indeed expressed. The other outlier genes have either low expression value or minimal coverage in BAM files. 
 
+GATA3 has 5 [transcripts](https://asia.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000107485;r=10:8045378-8075198), out of which 2 trancripts have low level expression as recorded in the Dragen salmon output.
+
+```
+Name	Length	EffectiveLength	TPM	NumReads
+ENST00000461472	895	697.789	0.000000	0.000
+ENST00000643001	748	552.571	0.843052	45.424
+```
+
+In contrast, all 5 transcripts are recorded as having relatively high expression in bcbio kallisto output.
+
+```
+Name	Length	EffectiveLength	TPM	NumReads
+ENST00000481743	975	756.105	279.595	3.89687
+ENST00000379328	3123	2904.1	1055.27	3.8293
+ENST00000346208	2650	2431.1	927.259	4.01944
+ENST00000461472	895	676.105	196.8	3.06747
+ENST00000643001	748	529.389	82.3487	1.63927
+```
+
+In summary, this comes down to differences in tool level estimation (kallisto VS salmon). The correlation between these two tools is very high but not 100%, as discussed above. Hence, there are one off chances for such cases. 
 
 _Fusion calling validation:_
 
@@ -233,4 +253,6 @@ Sequencing data moves from our NovaSeq sequencers directly to ICA and is analyze
 ## Upcoming changes
 
 With the migration to DRAGEN we can resume our workflow development. Future changes include a migration of the panel-of-normal filter to a DRAGEN-based one and experimental support for improved filtering of FFPE artefacts.
+
+In WTS workflow, Dragen produces gene level count information natively. We are planning to leverage this functionality and import it directly to RNAsum, which will remove the additonal step of converting from transcript level counts to gene level counts with in RNAsum. 
 
