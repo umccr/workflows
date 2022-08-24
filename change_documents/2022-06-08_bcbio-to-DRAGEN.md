@@ -241,7 +241,7 @@ Following the WGS validation approach we compared a number of RNASum reports man
 
 ## Summary
 
-From the Genomics Platform Team perspectice the migration to DRAGEN makes sense and we have not identified any major issues. Differences are present, as expected for a major change in analytical strategies, but these changes mostly result in an improvements.
+From the Genomics Platform Team's perspectice the migration to DRAGEN makes sense and we have not identified any major issues. Differences are present, as expected for a major change in analytical strategies, but these changes mostly result in an improvements.
 
 Setting up a bcbio analysis involves [manual and potentially error prone steps](https://github.com/umccr/google_lims/blob/master/docs/a_z_setting_up_bcbio_run.md) which have been replaced with full automation of both DRAGEN and umccrise on ICA. This results in improved audit trails, error notifications and a faster turnaround time. All workflows and configurations are under version control and [catalogued](https://github.com/umccr/cwl-ica), allowing us to move towards NATA accreditation.
 
@@ -251,5 +251,5 @@ Sequencing data moves from our NovaSeq sequencers directly to ICA and is analyze
 
 With the migration to DRAGEN we can resume our workflow development. Future changes include a migration of the panel-of-normal filter to a DRAGEN-based one and experimental support for improved filtering of FFPE artefacts.
 
-In WTS workflow, Dragen produces gene level count information natively. We are planning to leverage this functionality and import it directly to RNAsum, which will remove the additonal step of converting from transcript level counts to gene level counts with in RNAsum. 
+For WTS workflows DRAGEN produces gene-level count information natively. We are planning to leverage this functionality and import it directly to RNAsum which will remove the additonal step of converting from transcript-level counts to gene-level counts within RNAsum. 
 
