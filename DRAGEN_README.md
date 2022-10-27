@@ -10,100 +10,487 @@
 
 ### hg38
 
-- hg38 FASTA downloaded from [1000 Genomes](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/)
-  (see [this DRAGEN issue](https://github.com/umccr-illumina/dragen/issues/8)).
-- Built using command below (via
-  [this json body](https://github.com/umccr-illumina/stratus/blob/3de09e3fe63b076031c3e5a83013e0f91a6af7b7/TES/dragen_hg38_indexing.json)).
+- hg38 FASTA matches that from [1000 Genomes][1000Genomes].  
+  * One can also download the reference from [this s3 bucket][public_dragen_bucket]
+  (see [this DRAGEN issue][genome_match_confirmation_issue].
+- We take the hashtable from [the public dragen references list][public_dragen_references] (hg38 / altaware / cnv / anchored / v8)
+- We then extract the tarbomb and place it in a compressed tar with the folder of the same name using a CWLTool  
+- Built using command below in the "development" project
+  * wfl id: `wfl.2e690932bedc4204b2bcb697bb249207`
+  * wfl version: `1.0.0`
+  * wfl run id: `wfr.3bf2bc688d0d442489cadfcdb2bf9842`  
+  * Input body:
+    
+    <details>
+    
+    <summary>Click to expand!</summary>    
 
-```bash
-/opt/edico/bin/dragen \
-  --build-hash-table true \
-  --ht-reference /mount/index/hg38.fa \
-  --ht-alt-liftover /opt/edico/liftover/bwa-kit_hs38DH_liftover.sam \
-  --ht-build-rna-hashtable true \
-  --enable-cnv true \
-  --output-directory /mount/index/dragen
-```
+    ```json
+    {
+        "name": "create-dragen-v8-hg38-altaware-cnv-anchored-reference",
+        "input": {
+          "output_directory": "hg38-v8-altaware-cnv-anchored",
+          "reference_tar": {
+            "class": "File",
+            "location": "https://s3.amazonaws.com/use1-prd-seq-hub-appdata/Edico_v8/hg38_altaware-cnv-anchored.v8.tar"
+          }
+        },
+        "engineParameters": {
+            "outputDirectory": "gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/"
+        }
+    }
+    ```
+    
+    </details>
+  
+  * Outputs body:
+    <details>
+    
+    <summary>Click to expand!</summary>
+    
+    ```json
+    {
+      "output_compressed_reference_tar": {
+        "basename": "hg38-v8-altaware-cnv-anchored.tar.gz",
+        "class": "File",
+        "http://commonwl.org/cwltool#generation": 0,
+        "location": "gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/hg38-v8-altaware-cnv-anchored.tar.gz",
+        "nameext": ".gz",
+        "nameroot": "hg38-v8-altaware-cnv-anchored.tar",
+        "size": 7664401964
+      }
+    }
+    ```
+  
+    </details>
 
-- Includes hash tables for RNAseq analysis and CNV analysis
-- Hash table directory was then downloaded to Spartan, tar-archived, and uploaded to GDS using:
+  * Tarball entries: `gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/hg38-v8-altaware-cnv-anchored.tar.gz`
+    
+    ```
+    $ gds-view --gds-path gds://development/reference-data/dragen_hash_tables/v8/hg38/altaware-cnv-anchored/hg38-v8-altaware-cnv-anchored.tar.gz --to-stdout | tar -tzf -
+    ```  
+  
+    <details>
+    <summary>Click to expand!</summary>
+    
+    ```text
+    hg38-v8-altaware-cnv-anchored/
+    ├──appVersion.log
+    ├──streaming_log.csv
+    ├──reference.bin
+    ├──ref_index.bin
+    ├──repeat_mask.bin
+    ├──str_table.bin
+    ├──hash_table.cmp
+    ├──hash_table_stats.txt
+    ├──hash_table.cfg.bin
+    ├──hash_table.cfg
+    ├──kmer_cnv.bin
+    ├──.time_metrics.csv
+    ├──replay.json
+    └──anchored_rna/
+       ├──reference.bin
+       ├──ref_index.bin
+       ├──repeat_mask.bin
+       ├──str_table.bin
+       ├──hash_table.cmp
+       ├──hash_table_stats.txt
+       ├──hash_table.cfg.bin
+       └──hash_table.cfg
+    ```
+    </details>
 
-```bash
-cd dir_with_ht_contents
-tar -cvf hg38_dragen_ht.tar ./*
-iap files upload hg38_dragen_ht.tar gds://umccr-refdata-dev/dragen/genomes/hg38/
-```
-
-- Contents of `gds://umccr-refdata-dev/dragen/genomes/hg38/`:
-
-```
-
-├ hg38.fa
-├ hg38.fa.fai
-├ ht/
-  ├── anchored_rna
-  │   ├── hash_table.cfg
-  │   ├── hash_table.cfg.bin
-  │   ├── hash_table.cmp
-  │   ├── hash_table_stats.txt
-  │   ├── reference.bin
-  │   ├── ref_index.bin
-  │   ├── repeat_mask.bin
-  │   └── str_table.bin
-  ├── hash_table.cfg
-  ├── hash_table.cfg.bin
-  ├── hash_table.cmp
-  ├── hash_table_stats.txt
-  ├── hg38_dragen_ht.tar
-  ├── kmer_cnv.bin
-  ├── reference.bin
-  ├── ref_index.bin
-  ├── repeat_mask.bin
-  ├── replay.json
-  ├── streaming_log.csv
-  └── str_table.bin
-```
+    
 
 ### GRCh37
 
+- Built using command below in the "development" project
+  * wfl id: `wfl.2e690932bedc4204b2bcb697bb249207`
+  * wfl version: `1.0.0`
+  * wfl run id: `wfr.f0f2f6f602e54d3ebcbc1837d1fc7074`  
+  * Input body:
+    
+    <details>
+    
+    <summary>Click to expand!</summary>    
+    
+    ```json
+    {
+        "name": "create-dragen-v8-GRCh37-cnv-anchored-reference",
+        "input": {
+          "output_directory": "GRCh37-v8-cnv-anchored",
+          "reference_tar": {
+            "class": "File",
+            "location": "https://s3.amazonaws.com/use1-prd-seq-hub-appdata/Edico_v8/GRCh37-cnv-anchored.v8.tar"
+          }
+        },
+        "engineParameters": {
+            "outputDirectory": "gds://development/reference-data/dragen_hash_tables/v8/GRCh37/GRCh37-cnv-anchored/"
+        }
+    }
+    ```
+    
+    </details>    
+
+  * Outputs body:
+    
+    <details>
+    
+    <summary>Click to expand!</summary>    
+
+    ```json
+    {
+      "output_compressed_reference_tar": {
+        "basename": "GRCh37-v8-cnv-anchored.tar.gz",
+        "class": "File",
+        "http://commonwl.org/cwltool#generation": 0,
+        "location": "gds://development/reference-data/dragen_hash_tables/v8/GRCh37/GRCh37-cnv-anchored/GRCh37-v8-cnv-anchored.tar.gz",
+        "nameext": ".gz",
+        "nameroot": "GRCh37-v8-cnv-anchored.tar",
+        "size": 7016023117
+      }
+    }
+    ```
+
+    </details>    
+
+  * Tarball entries:
+  
+    ```
+    $ gds-view --gds-path gds://development/reference-data/dragen_hash_tables/v8/GRCh37/GRCh37-cnv-anchored/GRCh37-v8-cnv-anchored.tar.gz --to-stdout | tar -tzf -
+    ```
+  
+    <details>
+  
+    <summary>Click to expand!</summary>
+  
+    ```text
+    GRCh37-v8-cnv-anchored/
+    ├── appVersion.log
+    ├── streaming_log.csv
+    ├── reference.bin
+    ├── ref_index.bin
+    ├── repeat_mask.bin
+    ├── str_table.bin
+    ├── hash_table.cmp
+    ├── hash_table_stats.txt
+    ├── hash_table.cfg.bin
+    ├── hash_table.cfg
+    ├── kmer_cnv.bin
+    ├── .time_metrics.csv
+    ├── replay.json
+    └── anchored_rna/
+        ├── reference.bin
+        ├── ref_index.bin
+        ├── repeat_mask.bin
+        ├── str_table.bin
+        ├── hash_table.cmp
+        ├── hash_table_stats.txt
+        ├── hash_table.cfg.bin
+        └── hash_table.cfg
+    ```
+  
+    </details>    
+
+\# TODO - check GRCh37 download link
 - GRCh37 FASTA downloaded from link in Hartwig [GRIDSS-PURPLE-LINX](https://github.com/hartwigmedical/gridss-purple-linx/blob/47e274459ee8ac760196f6c2ed753c2a83d230fb/README.md) repo.
   - md5sum: `be672f01428605881b2ec450d8089a62  Homo_sapiens.GRCh37.GATK.illumina.fasta`
   - Contains chromosomes 1-22, X, Y, MT. Their md5sums are identical to the
     main chromosomes in the `human_g1k_v37.fasta.gz`
     [reference](ftp://gsapubftp-anonymous:none@ftp.broadinstitute.org/bundle/b37/) used in bcbio (except chr3 for some reason). The GL contigs are also
     discarded.
-  - Built using command below (via [this json body](https://github.com/umccr-illumina/stratus/blob/d9c29df06bcdbbc8abd74c2108f12d150ab3ccc8/TES/dragen_GRCh37_indexing.json)):
-
-```bash
-/opt/edico/bin/dragen \
-  --build-hash-table true \
-  --ht-reference /mount/index/GRCh37.fa \
-  --output-directory /mount/index/ht
-```
-
-Note that RNA/CNV hash tables were not built for this, since it's purely for
-testing purposes for the GRIDSS SV caller.
-
+  
 
 ## Alignment and FASTQ Input
 
-* For a single run, only one BAM and VCF output files are produced because all input read groups are
-expected to belong to the same sample. To process multiple samples from one BCL conversion run, run the
-DRAGEN secondary analysis multiple times using different values for the `--fastq-list-sample-id` option for normal samples and `--tumor-fastq-list-sample-id` for tumour samples. For example:
+The alignment and wgs qc must be done 'per-sample'.  
+This means that the output folder includes a single bam and somalier barcode call. 
+
+Here is an example run input / output of the dragen wgs qc workflow:  
+
+### Input json
+
+<details>
+
+<summary>Click to expand!</summary>
+
+```json
+{
+    "name": "dragen-wgs-test-run",
+    "input": {
+        "fastq_list_rows": [
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.1",
+                "rglb": "MDX200237_L2100008",
+                "rgsm": "UnknownLibrary",
+                "lane": 1,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L001_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L001_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.2",
+                "rglb": "MDX200237_L2100008",
+                "rgsm": "UnknownLibrary",
+                "lane": 2,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L002_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L002_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.3",
+                "rglb": "MDX200237_L2100008",
+                "rgsm": "UnknownLibrary",
+                "lane": 3,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L003_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L003_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.4",
+                "rglb": "MDX200237_L2100008",
+                "rgsm": "UnknownLibrary",
+                "lane": 4,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L004_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L004_R2_001.fastq.gz"
+                }
+            }
+        ],
+        "output_file_prefix": "MDX200237_L2100008",
+        "output_directory": "MDX200237_L2100008",
+        "reference_tar": {
+            "class": "File",
+            "location": "gds://umccr-refdata-dev/dragen/genomes/hg38/3.7.5/hg38_alt_ht_3_7_5.tar.gz"
+        }
+    },
+    "engineParameters": {
+        "outputSetting": "leave"
+    }
+}
+```
+
+</details>
+
+### Output json
+
+<details>
+
+<summary>Click to expand! </summary>
+
+\# TODO
+```json
 
 ```
-/opt/edico/bin/dragen --partial-reconfig DNA-MAPPER --ignore-version-check true; \
-mkdir -p /ephemeral/ref; \
-tar -C /ephemeral/ref -xvf /mount/index/hg38/hg38_dragen_ht.tar; \
-/opt/edico/bin/dragen \
---lic-instance-id-location /opt/instance-identity \
--f -r /ephemeral/ref \
---tumor-fastq-list /mount/fastqs/tumorFastqList.csv \
---fastq-list /mount/fastqs/normalFastqList.csv \
---output-directory /output/alignmentTest \
---output-file-prefix PM3062337
+
+</details>
+
+## Somatic Calling
+
+Uses similar schema to the germline caller with the additional parameter `tumor_fastq_list_rows`,  
+while `fastq_list_rows` represents the 'normal' sample.  
+
+Here's an example input json:
+
+### Input json
+
+<details>
+
+<summary>Click to expand!</summary>
+
+```json
+{
+    "name": "dragen-somatic-test-run",
+    "input": {
+        "fastq_list_rows": [
+            {
+                "rgid": "ACACTAAG.ATCCATAT.1",
+                "rgsm": "MDX200236_L2100007",
+                "rglb": "UnknownLibrary",
+                "lane": 1,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L001_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L001_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "ACACTAAG.ATCCATAT.2",
+                "rgsm": "MDX200236_L2100007",
+                "rglb": "UnknownLibrary",
+                "lane": 2,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L002_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L002_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "ACACTAAG.ATCCATAT.3",
+                "rgsm": "MDX200236_L2100007",
+                "rglb": "UnknownLibrary",
+                "lane": 3,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L003_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L003_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "ACACTAAG.ATCCATAT.4",
+                "rgsm": "MDX200236_L2100007",
+                "rglb": "UnknownLibrary",
+                "lane": 4,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L004_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200236_L2100007_S1_L004_R2_001.fastq.gz"
+                }
+            }
+        ],
+        "tumor_fastq_list_rows": [
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.1",
+                "rgsm": "MDX200237_L2100008",
+                "rglb": "UnknownLibrary",
+                "lane": 1,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L001_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L001_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.2",
+                "rgsm": "MDX200237_L2100008",
+                "rglb": "UnknownLibrary",
+                "lane": 2,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L002_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L002_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.3",
+                "rgsm": "MDX200237_L2100008",
+                "rglb": "UnknownLibrary",
+                "lane": 3,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L003_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L003_R2_001.fastq.gz"
+                }
+            },
+            {
+                "rgid": "GTGTCGGA.GCTTGCGC.4",
+                "rgsm": "MDX200237_L2100008",
+                "rglb": "UnknownLibrary",
+                "lane": 4,
+                "read_1": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L004_R1_001.fastq.gz"
+                },
+                "read_2": {
+                    "class": "File",
+                    "location": "gds://umccr-fastq-data-prod/210108_A01052_0030_AHMKMCDSXY/Y151_I8_I8_Y151/PO/MDX200237_L2100008_S2_L004_R2_001.fastq.gz"
+                }
+            }
+        ],
+        "output_file_prefix": "MDX200237_L2100008",
+        "output_directory": "MDX200237_L2100008",
+        "enable_map_align_output": true,
+        "enable_duplicate_marking": true,
+        "enable_sv": true,
+        "reference_tar": {
+            "class": "File",
+            "location": "gds://umccr-refdata-dev/dragen/genomes/hg38/3.7.5/hg38_alt_ht_3_7_5.tar.gz"
+        }
+    },
+    "engineParameters": {
+        "outputSetting": "leave"
+    }
+}
 ```
 
-* The link to a complete TES task definition using above Dragen command is [here](https://github.com/umccr-illumina/stratus/blob/master/TES/dragen_alignment_on_bclConvert_output.json)
+</details>
 
-* Additional summary on different Dragen parameters can be found in [Illumination](https://github.com/umccr/illumination/blob/master/docs/colo829/preparation.Rmd#L73).
+### Output json \# TODO
+
+<details>
+
+<summary>Click to expand!</summary>
+
+```json
+```
+
+</details>
+
+## Other useful links
+
+### Hash table builder (v3.7.5) \# TODO
+
+* CWL tool definition
+* CWL tool documentation
+
+### Germline workflow (v3.7.5) \# TODO
+
+* CWL tool definition
+* CWL tool documentation
+
+* CWL workflow definition
+* CWL workflow documentation
+
+### Somatic workflow (v3.7.5) \# TODO
+
+* CWL tool definition
+* CWL tool documentation
+
+* CWL workflow definition
+* CWL workflow documentation
+
+
+[1000Genomes]: http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/
+[dragen_tutorial]: https://sapac.support.illumina.com/content/dam/illumina-support/help/Illumina_DRAGEN_Bio_IT_Platform_v3_7_1000000141465/Content/SW/FrontPages/DRAGENBioITPlatform.htm
+[public_dragen_bucket]: https://s3.amazonaws.com/stratus-documentation-us-east-1-public/dragen/reference/Homo_sapiens/hg38.fa
+[genome_match_confirmation_issue]: https://github.com/umccr-illumina/dragen/issues/8
